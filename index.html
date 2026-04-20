@@ -1333,6 +1333,7 @@ function pgGoals(){
       '<span style="font-size:.72rem;color:var(--text2);font-weight:500">\u{1F4B0} Surplus: <b style="color:var(--green)">'+fmt(surplus)+'/mo</b> \u00B7 60% = <b style="color:var(--blue)">'+fmt(defMonthly)+'/mo</b></span>'+
     '</div>';
     h+='<div class="inv-grid">';
+    const isEmergency=/emergency|rainy.?day|safety.?net|contingency/i.test(g.name);
     let fastestKey='';let fastestMonths=Infinity;
     INV_TYPES.forEach(t=>{const tc=sipMonths(defMonthly,t.rate,gap>0?gap:1,0);if(tc.months<fastestMonths){fastestMonths=tc.months;fastestKey=t.key}});
     INV_TYPES.forEach(t=>{
@@ -1340,7 +1341,7 @@ function pgGoals(){
       const tCalc=sipMonths(defMonthly,t.rate,gap>0?gap:1,0);
       const timeStr=defMonthly>0&&tCalc.months<600?fmtTime(tCalc.months):'\u2014';
       const timeHuman=defMonthly>0&&tCalc.months<600?fmtTimeHuman(tCalc.months):'';
-      const isRec=age>0&&((age<35&&t.key==='mf')||(age>=35&&age<45&&t.key==='hybrid')||(age>=45&&t.key==='debt'));
+      const isRec=isEmergency?(t.key==='fd'):(age>0&&((age<35&&t.key==='mf')||(age>=35&&age<45&&t.key==='hybrid')||(age>=45&&t.key==='debt')));
       const isFastest=t.key===fastestKey&&defMonthly>0;
       let badgeHtml='';
       if(isRec)badgeHtml='<div style="position:absolute;top:-7px;right:8px;font-size:.5rem;padding:1px 6px;border-radius:3px;background:var(--blue);color:#fff;font-weight:700">\u2728 RECOMMENDED</div>';
