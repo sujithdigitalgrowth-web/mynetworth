@@ -778,35 +778,110 @@ function pgOverview(){
   if(S.meta.sp){
     const hasJoint2=aOf('joint')>0||lOf('joint')>0||iOf('joint')>0||eOf('joint')>0||emiOf('joint')>0;
     const oCols=hasJoint2?['self','spouse','joint']:['self','spouse'];
+
+    // Family comparison bar
+    const sNW=nwOf('self'),spNW=nwOf('spouse'),totalNW=tNW();
+    const sPct=totalNW>0?Math.round(Math.abs(sNW)/Math.max(Math.abs(sNW)+Math.abs(spNW),1)*100):50;
+    h+='<div class="fam-compare" style="margin-bottom:20px">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+    h+='<span style="font-size:.78rem;font-weight:600;color:var(--blue)">'+esc(gn('self'))+' \u2014 '+sPct+'%</span>';
+    h+='<span style="font-size:.72rem;color:var(--muted);font-weight:500">Net Worth Split</span>';
+    h+='<span style="font-size:.78rem;font-weight:600;color:var(--pink)">'+esc(gn('spouse'))+' \u2014 '+(100-sPct)+'%</span>';
+    h+='</div>';
+    h+='<div style="height:8px;border-radius:6px;background:var(--border);overflow:hidden;display:flex">';
+    h+='<div style="width:'+sPct+'%;background:linear-gradient(90deg,var(--blue),#60a5fa);border-radius:6px 0 0 6px;transition:width .5s"></div>';
+    h+='<div style="width:'+(100-sPct)+'%;background:linear-gradient(90deg,#f472b6,var(--pink));border-radius:0 6px 6px 0;transition:width .5s"></div>';
+    h+='</div></div>';
+
     h+='<div class="split '+(hasJoint2?'tri':'duo')+'">';
     oCols.forEach(o=>{
       const cls=o==='self'?'h-self':o==='spouse'?'h-spouse':'h-joint';
+      const accent=o==='self'?'var(--blue)':o==='spouse'?'var(--pink)':'var(--purple)';
+      const accentBg=o==='self'?'var(--blue-bg)':o==='spouse'?'var(--pink-bg)':'var(--purple-bg)';
       const a=aOf(o),l=lOf(o),nw=nwOf(o),inc=iOf(o),exp=eOf(o),emi=emiOf(o),sur=inc-exp-emi;
+      const aPct=a+l>0?Math.round(a/(a+l)*100):100;
+      const savRate=inc>0?Math.round(sur/inc*100):0;
       const topA=S.assets.filter(x=>x.owner===o).sort((a,b)=>(b.currentValue||0)-(a.currentValue||0)).slice(0,3);
       const topL=S.liabilities.filter(x=>x.owner===o).sort((a,b)=>(b.outstanding||0)-(a.outstanding||0)).slice(0,3);
       const incSrc=S.income.filter(x=>x.owner===o);
-      h+='<div><div class="col-hdr '+cls+'">'+(o==='joint'?'\u{1F3E0}':'\u{1F464}')+' '+esc(gn(o))+'</div>'+
-        '<div class="card"><div class="card-hdr"><h4>Net Worth</h4></div><div class="card-rows">'+
-          '<div class="cr"><span class="cl">Assets</span><span class="cv pos">'+fmt(a)+'</span></div>'+
-          '<div class="cr"><span class="cl">Liabilities</span><span class="cv neg">'+fmt(l)+'</span></div>'+
-          '<div class="cr"><span class="cl">Net Worth</span><span class="cv '+(nw>=0?'pos':'neg')+'">'+fmt(nw)+'</span></div>'+
-        '</div></div>'+
-        '<div class="card" style="margin-top:12px"><div class="card-hdr"><h4>\u{1F4B8} Cash Flow</h4></div><div class="card-rows">'+
-          '<div class="cr"><span class="cl">Income</span><span class="cv pos">'+fmt(inc)+'</span></div>'+
-          '<div class="cr"><span class="cl">Expenses</span><span class="cv">'+fmt(exp)+'</span></div>'+
-          '<div class="cr"><span class="cl">EMIs</span><span class="cv neg">'+fmt(emi)+'</span></div>'+
-          '<div class="cr" style="border-top:1px solid var(--border);padding-top:6px;margin-top:4px"><span class="cl" style="font-weight:600">Surplus</span><span class="cv '+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'</span></div>'+
-        '</div></div>'+
-        '<div class="card" style="margin-top:12px"><div class="card-hdr"><h4>\u{1F4B0} Earnings</h4></div>'+
-          '<div class="items">'+(incSrc.length?incSrc.map(i=>'<div class="it"><div class="it-l"><div class="it-dot" style="background:var(--green)"></div><span class="it-name">'+esc(i.name)+'</span><span class="it-meta">'+esc(i.type)+'</span></div><div class="it-r"><span class="it-val">'+fmt(i.amount)+'/mo</span></div></div>').join(''):'<div class="it-empty">No income</div>')+'</div>'+
-        '</div>'+
-        '<div class="card" style="margin-top:12px"><div class="card-hdr"><h4>Top Assets</h4></div>'+
-          '<div class="items">'+(topA.length?topA.map(a=>'<div class="it"><div class="it-l"><div class="it-dot" style="background:var(--green)"></div><span class="it-name">'+esc(a.name)+'</span></div><div class="it-r"><span class="it-val">'+fmt(a.currentValue)+'</span></div></div>').join(''):'<div class="it-empty">No assets</div>')+'</div>'+
-        '</div>'+
-        '<div class="card" style="margin-top:12px"><div class="card-hdr"><h4>Top Liabilities</h4></div>'+
-          '<div class="items">'+(topL.length?topL.map(l=>'<div class="it"><div class="it-l"><div class="it-dot" style="background:var(--red)"></div><span class="it-name">'+esc(l.name)+'</span></div><div class="it-r"><span class="it-val neg">'+fmt(l.outstanding)+'</span></div></div>').join(''):'<div class="it-empty">No liabilities</div>')+'</div>'+
-        '</div>'+
-      '</div>';
+
+      h+='<div>';
+      // Column header
+      h+='<div class="col-hdr '+cls+'" style="font-size:.85rem;padding:12px 16px">'+(o==='joint'?'\u{1F3E0}':'\u{1F464}')+' '+esc(gn(o))+'</div>';
+
+      // Net Worth hero card with visual bar
+      h+='<div class="card ov-hero" style="border-left:3px solid '+accent+'">';
+      h+='<div style="display:flex;justify-content:space-between;align-items:flex-start">';
+      h+='<div><div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600;margin-bottom:4px">Net Worth</div>';
+      h+='<div style="font-size:1.4rem;font-weight:800;color:'+(nw>=0?'var(--green)':'var(--red)')+'">'+fmt(nw)+'</div></div>';
+      h+='<div style="text-align:right"><div style="font-size:.65rem;color:var(--muted)">Assets / Liabilities</div>';
+      h+='<div style="font-size:.78rem;font-weight:600"><span class="pos">'+fmt(a)+'</span> <span style="color:var(--muted)">/</span> <span class="neg">'+fmt(l)+'</span></div></div>';
+      h+='</div>';
+      // Asset vs liability visual bar
+      h+='<div style="margin-top:10px;height:6px;border-radius:4px;background:var(--red-bg);overflow:hidden">';
+      h+='<div style="height:100%;width:'+aPct+'%;background:var(--green);border-radius:4px;transition:width .4s"></div>';
+      h+='</div>';
+      h+='<div style="display:flex;justify-content:space-between;margin-top:4px;font-size:.6rem;color:var(--muted)">';
+      h+='<span>\u{1F4C8} '+aPct+'% assets</span><span>\u{1F4C9} '+(100-aPct)+'% liabilities</span></div>';
+      h+='</div>';
+
+      // Cash Flow card with visual breakdown
+      h+='<div class="card" style="margin-top:10px">';
+      h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">';
+      h+='<h4 style="font-size:.82rem;font-weight:600;margin:0">\u{1F4B8} Cash Flow</h4>';
+      if(inc>0)h+='<span style="font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:6px;background:'+(savRate>=30?'var(--green-bg)':savRate>=10?'var(--orange-bg)':'var(--red-bg)')+';color:'+(savRate>=30?'var(--green)':savRate>=10?'var(--orange)':'var(--red)')+'">'+savRate+'% saved</span>';
+      h+='</div>';
+      // Stacked bar
+      if(inc>0){
+        const expPct=Math.round(exp/inc*100),emiPct=Math.round(emi/inc*100),surPct=Math.max(0,100-expPct-emiPct);
+        h+='<div style="display:flex;height:10px;border-radius:6px;overflow:hidden;margin-bottom:8px;gap:1px">';
+        if(expPct>0)h+='<div style="width:'+expPct+'%;background:var(--orange)" title="Expenses '+expPct+'%"></div>';
+        if(emiPct>0)h+='<div style="width:'+emiPct+'%;background:var(--red)" title="EMIs '+emiPct+'%"></div>';
+        if(surPct>0)h+='<div style="width:'+surPct+'%;background:var(--green)" title="Surplus '+surPct+'%"></div>';
+        h+='</div>';
+        h+='<div style="display:flex;gap:10px;flex-wrap:wrap;font-size:.6rem;color:var(--muted);margin-bottom:8px">';
+        h+='<span>\u{1F7E0} Exp '+expPct+'%</span><span>\u{1F534} EMI '+emiPct+'%</span><span>\u{1F7E2} Save '+surPct+'%</span>';
+        h+='</div>';
+      }
+      h+='<div class="card-rows" style="gap:4px">';
+      h+='<div class="cr"><span class="cl">Income</span><span class="cv pos">'+fmt(inc)+'</span></div>';
+      h+='<div class="cr"><span class="cl">Expenses</span><span class="cv">'+fmt(exp)+'</span></div>';
+      h+='<div class="cr"><span class="cl">EMIs</span><span class="cv neg">'+fmt(emi)+'</span></div>';
+      h+='<div class="cr" style="border-top:1px solid var(--border);padding-top:6px;margin-top:4px"><span class="cl" style="font-weight:700">Surplus</span><span class="cv" style="font-weight:800;font-size:.9rem;color:'+(sur>=0?'var(--green)':'var(--red)')+'">'+fmt(sur)+'</span></div>';
+      h+='</div></div>';
+
+      // Earnings card (compact)
+      h+='<div class="card" style="margin-top:10px"><div class="card-hdr"><h4>\u{1F4B0} Earnings</h4></div>';
+      h+='<div class="items">'+(incSrc.length?incSrc.map(i=>{
+        return'<div class="it"><div class="it-l"><div class="it-dot" style="background:'+accent+'"></div><span class="it-name">'+esc(i.name)+'</span><span class="it-meta">'+esc(i.type)+'</span></div><div class="it-r"><span class="it-val" style="font-weight:700;color:var(--green)">'+fmt(i.amount)+'/mo</span></div></div>';
+      }).join(''):'<div class="it-empty">No income</div>')+'</div></div>';
+
+      // Top Assets & Liabilities merged
+      h+='<div class="card" style="margin-top:10px">';
+      h+='<div class="card-hdr"><h4>\u{1F4C8} Top Assets</h4></div>';
+      if(topA.length){
+        h+='<div class="items" style="margin-bottom:8px">';
+        topA.forEach((asset,idx)=>{
+          const rank=['🥇','🥈','🥉'][idx]||'';
+          const pctOfTotal=a>0?Math.round((asset.currentValue||0)/a*100):0;
+          h+='<div class="it"><div class="it-l"><span style="font-size:.75rem;margin-right:4px">'+rank+'</span><span class="it-name">'+esc(asset.name)+'</span><span class="it-meta" style="background:'+accentBg+';color:'+accent+';padding:1px 6px;border-radius:4px;font-size:.6rem">'+pctOfTotal+'%</span></div><div class="it-r"><span class="it-val" style="font-weight:700">'+fmt(asset.currentValue)+'</span></div></div>';
+        });
+        h+='</div>';
+      }else{h+='<div class="items"><div class="it-empty">No assets</div></div>';}
+
+      if(topL.length){
+        h+='<div style="border-top:1px solid var(--border);margin-top:4px;padding-top:8px">';
+        h+='<div style="font-size:.78rem;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:6px">\u{1F4C9} Top Liabilities</div>';
+        h+='<div class="items">';
+        topL.forEach(lb=>{
+          const pctOfL=l>0?Math.round((lb.outstanding||0)/l*100):0;
+          h+='<div class="it"><div class="it-l"><div class="it-dot" style="background:var(--red)"></div><span class="it-name">'+esc(lb.name)+'</span><span class="it-meta" style="background:var(--red-bg);color:var(--red);padding:1px 6px;border-radius:4px;font-size:.6rem">'+pctOfL+'%</span></div><div class="it-r"><span class="it-val neg" style="font-weight:700">'+fmt(lb.outstanding)+'</span></div></div>';
+        });
+        h+='</div></div>';
+      }
+      h+='</div>';
+
+      h+='</div>';
     });
     h+='</div>';
   }else{
