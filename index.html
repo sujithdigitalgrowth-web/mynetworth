@@ -546,13 +546,23 @@ function lOf(o){return S.liabilities.filter(l=>l.owner===o).reduce((s,l)=>s+(+l.
 function nwOf(o){return aOf(o)-lOf(o)}
 function iOf(o){return S.income.filter(i=>i.owner===o).reduce((s,i)=>s+(+i.amount||0),0)}
 function eOf(o){return S.expenses.filter(e=>e.owner===o&&!e.isEMI).reduce((s,e)=>s+(+e.amount||0),0)}
-function emiOf(o){return S.liabilities.filter(l=>l.owner===o).reduce((s,l)=>s+(+l.emi||0),0)+S.expenses.filter(e=>e.owner===o&&e.isEMI).reduce((s,e)=>s+(+e.amount||0),0)}
+function emiOf(o){
+  const libEmi=S.liabilities.filter(l=>l.owner===o).reduce((s,l)=>s+(+l.emi||0),0);
+  const libNames=new Set(S.liabilities.filter(l=>l.owner===o&&l.emi>0).map(l=>l.name.toLowerCase().trim()));
+  const expEmi=S.expenses.filter(e=>e.owner===o&&e.isEMI&&!libNames.has(e.name.toLowerCase().trim())).reduce((s,e)=>s+(+e.amount||0),0);
+  return libEmi+expEmi;
+}
 function tA(){return S.assets.reduce((s,a)=>s+(+a.currentValue||0),0)}
 function tL(){return S.liabilities.reduce((s,l)=>s+(+l.outstanding||0),0)}
 function tNW(){return tA()-tL()}
 function tI(){return S.income.reduce((s,i)=>s+(+i.amount||0),0)}
 function tE(){return S.expenses.reduce((s,e)=>s+(+e.amount||0),0)}
-function tEMI(){return S.liabilities.reduce((s,l)=>s+(+l.emi||0),0)+S.expenses.filter(e=>e.isEMI).reduce((s,e)=>s+(+e.amount||0),0)}
+function tEMI(){
+  const libEmi=S.liabilities.reduce((s,l)=>s+(+l.emi||0),0);
+  const libNames=new Set(S.liabilities.filter(l=>l.emi>0).map(l=>(l.owner+'|'+l.name.toLowerCase().trim())));
+  const expEmi=S.expenses.filter(e=>e.isEMI&&!libNames.has(e.owner+'|'+e.name.toLowerCase().trim())).reduce((s,e)=>s+(+e.amount||0),0);
+  return libEmi+expEmi;
+}
 function fmt(n){if(n==null||isNaN(n))return'\u20B90';const a=Math.abs(n);let s;if(a>=1e7)s='\u20B9'+(a/1e7).toFixed(2)+' Cr';else if(a>=1e5)s='\u20B9'+(a/1e5).toFixed(2)+' L';else s='\u20B9'+a.toLocaleString('en-IN');return n<0?'\u2212'+s:s}
 function fP(n){return(n>=0?'+':'')+n.toFixed(1)+'%'}
 function retP(c,i){return i>0?((c-i)/i*100):0}
