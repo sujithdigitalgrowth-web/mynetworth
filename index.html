@@ -1770,7 +1770,7 @@ function n(id){return Number(v(id))||0}
 function saveMo(){
   if(!mCtx)return;const{type,col,id,isE}=mCtx;const name=v('f_name');if(!name)return;const owner=v('f_own')||'self';
   let item;
-  if(type==='asset'){const sameChk=document.getElementById('f_same');const curVal=sameChk&&sameChk.checked?n('f_inv'):n('f_cur');item={id:isE?id:gid(),name,category:v('f_cat'),owner,currentValue:curVal,invested:n('f_inv'),updated:v('f_upd')||td(),selfC:n('f_sc')||50,spouseC:n('f_spc')||50}};
+  if(type==='asset'){const sameChk=document.getElementById('f_same');const curVal=sameChk&&sameChk.checked?n('f_inv'):n('f_cur');item={id:isE?id:gid(),name,category:v('f_cat'),owner,currentValue:curVal,invested:n('f_inv'),updated:v('f_upd')||td(),selfC:n('f_sc')||50,spouseC:n('f_spc')||50}}
   else if(type==='liability')item={id:isE?id:gid(),name,type:v('f_type'),owner,total:n('f_total'),outstanding:n('f_out'),emi:n('f_emi'),rate:n('f_rate'),tenure:n('f_ten')};
   else if(type==='income')item={id:isE?id:gid(),name,type:v('f_type'),owner,amount:n('f_amt')};
   else if(type==='expense'){const cat=v('f_cat');item={id:isE?id:gid(),name,category:cat==='EMI'?'EMI':cat,owner,amount:n('f_amt'),isEMI:cat==='EMI'}}
