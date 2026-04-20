@@ -322,6 +322,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 .na-item .na-text b{color:var(--green);font-weight:700}
 .na-item .na-go{flex-shrink:0;padding:5px 12px;background:var(--green-bg);color:var(--green);border:1px solid var(--green);border-radius:8px;font-size:.7rem;font-weight:600;cursor:pointer;white-space:nowrap;text-decoration:none}
 .na-item .na-go:hover{background:var(--green);color:#fff}
+.na-impact{font-size:.76rem;color:var(--green);font-weight:600;margin-top:4px;line-height:1.4}
+.na-impact .na-arrow{color:var(--green);font-weight:800}
+.na-consequence{font-size:.68rem;color:var(--muted);font-style:italic;margin-top:2px;opacity:.85}
+.na-urgency{display:inline-block;font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.na-urgency.do-now{background:#ff4d4f22;color:#ff4d4f;border:1px solid #ff4d4f44}
+.na-urgency.this-month{background:#faad1422;color:#faad14;border:1px solid #faad1444}
+.na-urgency.later{background:var(--green-bg);color:var(--green);border:1px solid var(--green)}
+.na-item .na-body{display:flex;flex-direction:column;flex:1}
 .login-box{width:100%;max-width:400px;padding:40px 32px;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.4);text-align:center;margin:16px}
 .login-box h1{font-size:2rem;margin-bottom:4px;color:var(--text)}
 .login-box .sub{color:var(--muted);font-size:.88rem;margin-bottom:28px}
@@ -844,17 +852,21 @@ function genNextActions(){
   const liquidVal=assets.filter(a=>liquidCats.has(a.category)).reduce((s,a)=>s+(+a.currentValue||0),0);
   const investVal=assets.filter(a=>investCats.has(a.category)).reduce((s,a)=>s+(+a.currentValue||0),0);
   const monthlyBurn=exp+emi;
+  const age=getAge();
+  const retAge=getRetAge();
+  const yearsLeft=retAge>age?retAge-age:10;
 
   // Priority 1: No income
   if(S.income.length===0){
-    actions.push({pri:1,icon:'\u{1F4B0}',text:'<b>Add your income sources</b> \u2014 salary, freelance, rental. Nothing works without this.',page:'cashflow'});
+    actions.push({pri:1,icon:'\u{1F4B0}',text:'<b>Add your income sources</b> \u2014 salary, freelance, rental.',impact:null,urgency:'do-now',warn:'Without income data, no action below can be calculated accurately.',page:'cashflow'});
   }
 
   // Priority 2: Track expenses
   if(expenses.filter(e=>!e.isEMI).length===0&&inc>0){
-    actions.push({pri:2,icon:'\u{1F4DD}',text:'<b>Track your monthly expenses</b> \u2014 rent, food, transport, utilities. Your surplus of '+fmt(sur)+'/mo is a guess right now.',page:'cashflow'});
+    const estLeak=Math.round(inc*0.3);
+    actions.push({pri:2,icon:'\u{1F4DD}',text:'<b>Track your monthly expenses</b> \u2014 rent, food, transport, utilities.',impact:'\u2192 Identify up to '+fmt(estLeak)+'/mo in hidden spending leaks',urgency:'do-now',warn:'Your surplus of '+fmt(sur)+'/mo is a guess \u2014 real surplus could be much lower.',page:'cashflow'});
   }else if(expenses.filter(e=>!e.isEMI).length<3&&inc>0){
-    actions.push({pri:2,icon:'\u{1F4DD}',text:'<b>Add more expenses</b> \u2014 you only have '+expenses.filter(e=>!e.isEMI).length+'. Most people have 8\u201315 categories. Be honest to get real numbers.',page:'cashflow'});
+    actions.push({pri:2,icon:'\u{1F4DD}',text:'<b>Add more expenses</b> \u2014 you only have '+expenses.filter(e=>!e.isEMI).length+'. Most people have 8\u201315.',impact:'\u2192 Get your real savings rate (currently showing '+Math.round(sur/inc*100)+'%, likely inflated)',urgency:'this-month',warn:'Inaccurate expenses = inaccurate surplus = wrong goals timeline.',page:'cashflow'});
   }
 
   // Priority 3: Emergency fund
@@ -865,13 +877,14 @@ function genNextActions(){
       const gap=target6-liquidVal;
       if(sur>0){
         const months=Math.ceil(gap/sur);
-        actions.push({pri:3,icon:'\u{1F6E1}\ufe0f',text:'<b>Build emergency fund of '+fmt(target6)+'</b> (6 months of expenses). You\u2019re short by '+fmt(gap)+'. Save '+fmt(Math.ceil(gap/Math.max(months,1)))+'/mo for '+months+' months.',page:'assets'});
+        const saveAmt=Math.ceil(gap/Math.max(months,1));
+        actions.push({pri:3,icon:'\u{1F6E1}\ufe0f',text:'<b>Build emergency fund of '+fmt(target6)+'</b> \u2014 you\u2019re short by '+fmt(gap)+'.',impact:'\u2192 Save '+fmt(saveAmt)+'/mo \u2192 fully covered in '+months+' months ('+runway+'mo \u2192 6mo runway)',urgency:runway<2?'do-now':'this-month',warn:'A job loss or medical emergency with only '+runway+'-month runway could force you into debt.',page:'assets'});
       }else{
-        actions.push({pri:3,icon:'\u{1F6E1}\ufe0f',text:'<b>Build emergency fund of '+fmt(target6)+'</b> (6 months of expenses). You\u2019re short by '+fmt(gap)+'. Start with even \u20B95,000/mo.',page:'assets'});
+        actions.push({pri:3,icon:'\u{1F6E1}\ufe0f',text:'<b>Build emergency fund of '+fmt(target6)+'</b> (6 months of expenses).',impact:'\u2192 Even \u20B95,000/mo gets you to '+fmt(target6)+' in '+Math.ceil(target6/5000)+' months',urgency:'do-now',warn:'You have only '+runway+'-month runway. Any emergency = instant debt.',page:'assets'});
       }
     }
   }else if(liquidVal<50000&&inc>0){
-    actions.push({pri:3,icon:'\u{1F6E1}\ufe0f',text:'<b>Start an emergency fund</b> \u2014 keep 3\u20136 months of expenses in a savings account or liquid fund. Aim for at least '+fmt(inc*3)+'.',page:'assets'});
+    actions.push({pri:3,icon:'\u{1F6E1}\ufe0f',text:'<b>Start an emergency fund</b> \u2014 aim for '+fmt(inc*3)+' (3 months of income).',impact:'\u2192 \u20B95,000/mo reaches '+fmt(inc*3)+' in '+Math.ceil(inc*3/5000)+' months',urgency:'do-now',warn:'One surprise expense could wipe out your savings completely.',page:'assets'});
   }
 
   // Priority 4: Pay high-interest debt
@@ -879,30 +892,45 @@ function genNextActions(){
   if(highDebt.length>0){
     const top=highDebt[0];
     const extra=sur>0?Math.min(Math.round(sur*0.3),top.outstanding):0;
+    const monthlyRate=top.rate/100/12;
     if(extra>5000){
-      actions.push({pri:4,icon:'\u{1F525}',text:'<b>Pay extra '+fmt(extra)+' towards '+esc(top.name)+'</b> ('+top.rate+'% interest). Redirect 30% of your surplus to crush this debt faster.',page:'liabilities'});
+      const origEmi=top.emi||extra;
+      let origMo=0;
+      if(origEmi>0){let b2=top.outstanding;while(b2>0&&origMo<600){b2=b2*(1+monthlyRate)-origEmi;origMo++}}
+      let accMo=0;
+      if(origEmi>0){let b3=top.outstanding;while(b3>0&&accMo<600){b3=b3*(1+monthlyRate)-(origEmi+extra);accMo++}}
+      const moSaved=origMo-accMo;
+      const intSavedEst=Math.round(top.outstanding*monthlyRate*moSaved);
+      actions.push({pri:4,icon:'\u{1F525}',text:'<b>Pay extra '+fmt(extra)+'/mo towards '+esc(top.name)+'</b> ('+top.rate+'% interest).',impact:'\u2192 Save ~'+fmt(intSavedEst)+' in interest, become debt-free '+(moSaved>0?moSaved+' months earlier':'faster'),urgency:'do-now',warn:'At '+top.rate+'%, this debt costs you '+fmt(Math.round(top.outstanding*monthlyRate))+'/mo in interest alone.',page:'liabilities'});
     }else if(top.outstanding>0){
-      actions.push({pri:4,icon:'\u{1F525}',text:'<b>Prioritize paying off '+esc(top.name)+'</b> ('+fmt(top.outstanding)+' at '+top.rate+'% interest). High-interest debt is the most expensive thing you own.',page:'liabilities'});
+      const annualInt=Math.round(top.outstanding*top.rate/100);
+      actions.push({pri:4,icon:'\u{1F525}',text:'<b>Prioritize paying off '+esc(top.name)+'</b> ('+fmt(top.outstanding)+' at '+top.rate+'%).',impact:'\u2192 You\u2019re paying ~'+fmt(annualInt)+'/year just in interest on this loan',urgency:'do-now',warn:'High-interest debt erodes wealth faster than investments can build it.',page:'liabilities'});
     }
   }
 
   // Priority 5: Get insurance
   if(insurance.filter(i=>i.insType==='Term Life').length===0&&inc>0){
     const cover=inc*12*12;
-    actions.push({pri:5,icon:'\u{1F6E1}\ufe0f',text:'<b>Get a term life insurance</b> of '+fmt(cover)+' (12x annual income). It costs \u20B9500\u20131,000/mo and protects your family.',page:'insurance'});
+    const premEst=Math.round(cover*0.0003/12);
+    actions.push({pri:5,icon:'\u{1F6E1}\ufe0f',text:'<b>Get term life insurance</b> of '+fmt(cover)+' (12x annual income).',impact:'\u2192 Just ~'+fmt(premEst)+'/mo protects your family\'s '+fmt(cover)+' future',urgency:'this-month',warn:'If something happens to you, your family loses '+fmt(inc*12)+'/yr in income with zero cover.',page:'insurance'});
   }
   if(insurance.filter(i=>i.insType==='Health').length===0){
-    actions.push({pri:6,icon:'\u{1F3E5}',text:'<b>Get health insurance</b> \u2014 a \u20B910\u201320 lakh family floater plan. One hospitalization can cost \u20B92\u20135 lakhs.',page:'insurance'});
+    actions.push({pri:6,icon:'\u{1F3E5}',text:'<b>Get health insurance</b> \u2014 \u20B910\u201320 lakh family floater.',impact:'\u2192 \u20B91,000\u20131,500/mo saves you from \u20B92\u20135 lakh hospital bills',urgency:'this-month',warn:'One hospitalization without cover can drain months of savings overnight.',page:'insurance'});
   }
 
   // Priority 6: Start investing
   if(sur>0&&investVal<sur*6&&inc>0&&expenses.filter(e=>!e.isEMI).length>0){
     const sipAmt=Math.round(sur*0.5/1000)*1000;
     if(sipAmt>=1000){
-      actions.push({pri:7,icon:'\u{1F4C8}',text:'<b>Start a SIP of '+fmt(sipAmt)+'/mo</b> in mutual funds. You have surplus \u2014 let it compound instead of sitting in your bank.',page:'assets'});
+      const r=0.12/12;
+      const fv=Math.round(sipAmt*((Math.pow(1+r,yearsLeft*12)-1)/r)*(1+r));
+      actions.push({pri:7,icon:'\u{1F4C8}',text:'<b>Start a SIP of '+fmt(sipAmt)+'/mo</b> in mutual funds.',impact:'\u2192 '+fmt(sipAmt)+'/mo at 12% \u2192 '+fmt(fv)+' in '+yearsLeft+' years',urgency:'this-month',warn:'Every month you delay, you lose ~'+fmt(Math.round(sipAmt*r))+' in potential compounding.',page:'assets'});
     }
   }else if(sur>0&&investVal===0&&inc>0){
-    actions.push({pri:7,icon:'\u{1F4C8}',text:'<b>Start investing</b> \u2014 even '+fmt(Math.max(5000,Math.round(sur*0.3/1000)*1000))+'/mo in an index fund. Your money loses 6\u20137% to inflation every year just sitting idle.',page:'assets'});
+    const startAmt=Math.max(5000,Math.round(sur*0.3/1000)*1000);
+    const r=0.12/12;
+    const fv5=Math.round(startAmt*((Math.pow(1+r,60)-1)/r)*(1+r));
+    actions.push({pri:7,icon:'\u{1F4C8}',text:'<b>Start investing</b> \u2014 even '+fmt(startAmt)+'/mo in an index fund.',impact:'\u2192 '+fmt(startAmt)+'/mo grows to '+fmt(fv5)+' in just 5 years at 12%',urgency:'this-month',warn:'Cash loses 6\u20137% to inflation yearly \u2014 '+fmt(Math.round(liquidVal*0.06))+'/yr of your savings is silently eroding.',page:'assets'});
   }
 
   // Priority 7: Goal-specific actions
@@ -910,12 +938,14 @@ function genNextActions(){
     const gap=g.target-(g.current||0);
     const pct=g.target>0?Math.round((g.current||0)/g.target*100):0;
     if(gap>0&&pct<80){
-      const retAge=getRetAge();
-      const age=getAge();
-      const yearsLeft=retAge>age?retAge-age:10;
       const monthlyNeeded=Math.round(gap/(yearsLeft*12));
       if(monthlyNeeded>0){
-        actions.push({pri:8,icon:'\u{1F3AF}',text:'<b>Invest '+fmt(monthlyNeeded)+'/mo towards \u201c'+esc(g.name)+'\u201d</b> to close the '+fmt(gap)+' gap in '+yearsLeft+' years. Currently at '+pct+'%.',page:'goals'});
+        const r=0.10/12;
+        const fvSip=Math.round(monthlyNeeded*((Math.pow(1+r,yearsLeft*12)-1)/r)*(1+r));
+        const surplus2=fvSip-gap;
+        const lessMonths=surplus2>0?Math.floor(surplus2/monthlyNeeded):0;
+        const reducedYears=lessMonths>=12?Math.floor(lessMonths/12)+' years':lessMonths+' months';
+        actions.push({pri:8,icon:'\u{1F3AF}',text:'<b>Invest '+fmt(monthlyNeeded)+'/mo towards \u201c'+esc(g.name)+'\u201d</b> \u2014 currently at '+pct+'%.',impact:'\u2192 At 10% returns, reach '+fmt(g.target)+' ~'+reducedYears+' earlier than plain saving',urgency:pct<20?'do-now':'later',warn:'Delaying by 1 year increases monthly need to '+fmt(yearsLeft>1?Math.round(gap/((yearsLeft-1)*12)):gap)+'.',page:'goals'});
       }
     }
   });
@@ -926,13 +956,15 @@ function genNextActions(){
     assets.forEach(a=>{catTotals[a.category]=(catTotals[a.category]||0)+(+a.currentValue||0)});
     const topCat=Object.entries(catTotals).sort((a,b)=>b[1]-a[1])[0];
     if(topCat&&ta2>0&&topCat[1]/ta2>0.8){
-      actions.push({pri:9,icon:'\u{1F310}',text:'<b>Diversify your portfolio</b> \u2014 '+Math.round(topCat[1]/ta2*100)+'% is in '+topCat[0]+'. Spread across mutual funds, FDs, and PPF to reduce risk.',page:'assets'});
+      const concPct=Math.round(topCat[1]/ta2*100);
+      const moveAmt=Math.round(topCat[1]*0.2);
+      actions.push({pri:9,icon:'\u{1F310}',text:'<b>Diversify your portfolio</b> \u2014 '+concPct+'% is in '+topCat[0]+'.',impact:'\u2192 Moving '+fmt(moveAmt)+' (~20%) to other assets reduces risk to '+Math.round((topCat[1]-moveAmt)/ta2*100)+'%',urgency:'later',warn:'A single bad year in '+topCat[0]+' could impact '+fmt(topCat[1])+' of your wealth.',page:'assets'});
     }
   }
 
   // Priority 9: Set goals if none
   if(goals.length===0&&inc>0){
-    actions.push({pri:10,icon:'\u{1F3AF}',text:'<b>Set at least one financial goal</b> \u2014 house, car, retirement, education. A goal without a plan is just a dream.',page:'goals'});
+    actions.push({pri:10,icon:'\u{1F3AF}',text:'<b>Set at least one financial goal</b> \u2014 house, car, retirement, education.',impact:'\u2192 A clear goal turns your '+fmt(sur)+'/mo surplus into a concrete plan',urgency:'this-month',warn:'Without goals, surplus money gets spent unconsciously.',page:'goals'});
   }
 
   actions.sort((a,b)=>a.pri-b.pri);
@@ -943,7 +975,12 @@ function genNextActions(){
   h+='<div class="na-title"><span style="font-size:1.3rem">\u{1F680}</span><div><h3>Your Next Actions</h3><div class="na-sub">Do these to strengthen your finances \u2014 in order of priority</div></div></div>';
   h+='<div class="na-list">';
   shown.forEach((a,i)=>{
-    h+='<div class="na-item"><div class="na-num">'+(i+1)+'</div><span class="na-icon">'+a.icon+'</span><div class="na-text">'+a.text+'</div><span class="na-go" onclick="nav(\''+a.page+'\')">'+(a.page==='cashflow'?'Add \u2192':a.page==='goals'?'Plan \u2192':a.page==='insurance'?'Track \u2192':'View \u2192')+'</span></div>';
+    h+='<div class="na-item"><div class="na-num">'+(i+1)+'</div><span class="na-icon">'+a.icon+'</span><div class="na-body"><div class="na-text">'+a.text+'</div>';
+    if(a.impact)h+='<div class="na-impact">'+a.impact+'</div>';
+    h+='<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+    if(a.urgency)h+='<span class="na-urgency '+a.urgency+'">'+a.urgency.replace('-',' ')+'</span>';
+    if(a.warn)h+='<span class="na-consequence">\u26A0 If ignored: '+a.warn+'</span>';
+    h+='</div></div><span class="na-go" onclick="nav(\''+a.page+'\')">'+(a.page==='cashflow'?'Add \u2192':a.page==='goals'?'Plan \u2192':a.page==='insurance'?'Track \u2192':'View \u2192')+'</span></div>';
   });
   h+='</div></div>';
   return h;
