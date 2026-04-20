@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | NetWorth</title>
+<meta name="description" content="Get in touch with the NetWorth team. Share feedback, report issues, or ask questions about our free personal finance dashboard.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mynetworth.vercel.app/contact">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:32px}
+.contact-info{display:flex;flex-direction:column;gap:20px}
+.ci-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;gap:14px;align-items:flex-start}
+.ci-card .ci-icon{font-size:1.4rem;flex-shrink:0}
+.ci-card h3{font-size:.88rem;font-weight:700;margin-bottom:4px}
+.ci-card p{font-size:.82rem;color:var(--muted);line-height:1.5;margin:0}
+.contact-form{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px}
+.contact-form h3{font-size:1rem;font-weight:700;margin-bottom:20px}
+.submit-btn{width:100%;padding:14px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:.92rem;font-weight:600;cursor:pointer;transition:opacity .2s;font-family:inherit}
+.submit-btn:hover{opacity:.9}
+.form-note{font-size:.72rem;color:var(--muted);margin-top:12px;text-align:center}
+.success-msg{display:none;text-align:center;padding:24px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:12px;margin-top:16px}
+.success-msg .si{font-size:2rem;margin-bottom:8px}
+.success-msg h4{font-size:1rem;font-weight:700;color:var(--green);margin-bottom:4px}
+.success-msg p{font-size:.82rem;color:var(--muted)}
+@media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo">💰 NetWorth</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="this.parentElement.classList.toggle('mob-open')">Tools &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
+        <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
+        <a href="/house-down-payment-calculator">&#127968; Down Payment Calculator</a>
+      </div>
+    </div>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact" class="active">Contact</a>
+    <a href="/app" class="nav-cta">Open Dashboard</a>
+  </div>
+  <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
+</div></nav>
+
+<main>
+<div class="container" style="padding-top:40px;padding-bottom:60px">
+
+  <div class="page-hero" style="padding-top:0">
+    <h1>Contact <span class="accent">Us</span></h1>
+    <p>Have a question, feedback, or suggestion? We read every message and typically respond within 24–48 hours.</p>
+  </div>
+
+  <div class="contact-grid">
+
+    <div class="contact-info">
+      <div class="ci-card">
+        <div class="ci-icon">💬</div>
+        <div>
+          <h3>General Feedback</h3>
+          <p>Tell us what you like, what's confusing, or what features you'd want next. Every message is read.</p>
+        </div>
+      </div>
+      <div class="ci-card">
+        <div class="ci-icon">🐛</div>
+        <div>
+          <h3>Report a Bug</h3>
+          <p>Found something broken? Let us know what happened and on which device/browser. We'll fix it fast.</p>
+        </div>
+      </div>
+      <div class="ci-card">
+        <div class="ci-icon">💡</div>
+        <div>
+          <h3>Feature Request</h3>
+          <p>Have an idea for a new tool or feature? We build based on what users actually need.</p>
+        </div>
+      </div>
+      <div class="ci-card">
+        <div class="ci-icon">📧</div>
+        <div>
+          <h3>Email Us</h3>
+          <p>Prefer email? Write to us at <strong>hello@mynetworth.in</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="contact-form" id="contactForm">
+        <h3>Send a Message</h3>
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" class="form-input" id="cName" placeholder="Enter your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" class="form-input" id="cEmail" placeholder="your@email.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select class="form-input" id="cSubject" style="cursor:pointer">
+            <option value="">Select a topic</option>
+            <option>General Feedback</option>
+            <option>Bug Report</option>
+            <option>Feature Request</option>
+            <option>Question</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea class="form-textarea" id="cMessage" placeholder="Tell us what's on your mind..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="sendMsg()">Send Message →</button>
+        <div class="form-note">We typically respond within 24–48 hours.</div>
+      </div>
+      <div class="success-msg" id="successMsg">
+        <div class="si">✅</div>
+        <h4>Message Sent!</h4>
+        <p>Thanks for reaching out. We'll get back to you soon.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAQ -->
+  <div style="max-width:760px;margin:48px auto 0">
+    <h2 style="text-align:center;margin-bottom:24px">Quick Answers</h2>
+    <div class="content-section">
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How quickly do you respond?</div><div class="faq-a"><div>We aim to respond within 24–48 hours on weekdays. For bug reports with full details, we often respond faster.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">I found a bug — what details should I include?</div><div class="faq-a"><div>Please include: what you were trying to do, what actually happened, your device type (mobile/desktop), your browser (Chrome/Safari/Firefox), and any error messages you saw. Screenshots are very helpful.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I suggest a new calculator or feature?</div><div class="faq-a"><div>Yes! We love feature requests. Use the "Feature Request" category in the form above. Popular requests get prioritised. Tell us what problem you're trying to solve, not just the feature you want.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I delete my account and all my data?</div><div class="faq-a"><div>Send us an email at hello@mynetworth.in with the subject "Delete my account" and the email address linked to your account. We will permanently delete all your data within 7 business days.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is there a phone number I can call?</div><div class="faq-a"><div>We currently only support email and our contact form. This keeps us lean and responsive — we can typically answer email questions more thoroughly than phone calls.</div></div></div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer class="site-footer"><div class="footer-inner footer-grid">
+  <div class="footer-about">
+    <div class="footer-brand">💰 NetWorth</div>
+    <p class="footer-desc">Free personal finance platform for Indians. Track net worth, plan goals, and build wealth with simple tools and guides.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Free Tools</h4>
+    <a href="/net-worth-calculator">Net Worth Calculator</a>
+    <a href="/emergency-fund-calculator">Emergency Fund Calculator</a>
+    <a href="/house-down-payment-calculator">Down Payment Calculator</a>
+    <a href="/app">Dashboard</a>
+  </div>
+  <div class="footer-col">
+    <h4>Learn</h4>
+    <a href="/blog">All Articles</a>
+    <a href="/blog/how-to-calculate-net-worth">How to Calculate Net Worth</a>
+    <a href="/blog/emergency-fund-guide">Emergency Fund Guide</a>
+    <a href="/blog/financial-freedom-steps">Steps to Financial Freedom</a>
+    <a href="/blog/net-worth-vs-salary">Net Worth vs Salary</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/about">About</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+  </div>
+</div><div class="footer-bottom">
+  <p>&copy; 2026 NetWorth. All rights reserved. Built with &#10084;&#65039; in India.</p>
+</div></footer>
+
+<script>
+function sendMsg(){
+  const name=document.getElementById('cName').value.trim();
+  const email=document.getElementById('cEmail').value.trim();
+  const subject=document.getElementById('cSubject').value;
+  const message=document.getElementById('cMessage').value.trim();
+  if(!name||!email||!subject||!message){alert('Please fill in all fields.');return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Please enter a valid email.');return}
+  // In production, connect to a form backend (Formspree, Firebase, etc.)
+  document.getElementById('contactForm').style.display='none';
+  document.getElementById('successMsg').style.display='block';
+}
+</script>
+</body>
+</html>

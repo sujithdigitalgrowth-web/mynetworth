@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Fund Calculator India | How Much Do You Need?</title>
+<meta name="description" content="Calculate your ideal emergency fund size based on your monthly expenses. Free calculator for Indians — find out how many months of safety net you need.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mynetworth.vercel.app/emergency-fund-calculator">
+<meta property="og:title" content="Emergency Fund Calculator India">
+<meta property="og:description" content="How much emergency fund do you need? Calculate based on your expenses. Free tool.">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Emergency Fund Calculator India","description":"Calculate your ideal emergency fund based on monthly expenses.","url":"https://mynetworth.vercel.app/emergency-fund-calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}
+</script>
+<link rel="stylesheet" href="/styles.css">
+<style>
+.months-selector{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.months-selector button{padding:10px 18px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--muted);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.months-selector button.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.months-selector button:hover:not(.active){border-color:var(--blue);color:var(--text)}
+.progress-section{margin-top:24px;padding:20px;background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.15);border-radius:12px}
+.progress-section h4{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:10px}
+.prog-bar-wrap{height:10px;background:var(--border);border-radius:6px;overflow:hidden;margin-bottom:6px}
+.prog-bar-inner{height:100%;border-radius:6px;transition:width .5s ease}
+.prog-pct{font-size:.78rem;font-weight:600;margin-top:4px}
+.breakdown{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.breakdown-item{background:var(--bg);border-radius:8px;padding:12px;text-align:center}
+.breakdown-item .bv{font-size:1.2rem;font-weight:800;color:var(--green)}
+.breakdown-item .bl{font-size:.68rem;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+</style>
+</head>
+<body>
+
+<nav class="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo">💰 NetWorth</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <div class="nav-dropdown active">
+      <button class="nav-drop-trigger" onclick="this.parentElement.classList.toggle('mob-open')">Tools &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
+        <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
+        <a href="/house-down-payment-calculator">&#127968; Down Payment Calculator</a>
+      </div>
+    </div>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/app" class="nav-cta">Open Dashboard</a>
+  </div>
+  <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
+</div></nav>
+
+<main>
+<div class="container-sm" style="padding-top:40px;padding-bottom:60px">
+
+  <div class="breadcrumbs"><a href="/">Home</a> › <a href="/#tools">Free Tools</a> › Emergency Fund Calculator</div>
+
+  <div class="page-hero" style="padding-top:0">
+    <h1>Emergency Fund <span class="accent">Calculator</span></h1>
+    <p>An emergency fund is money set aside for life's unexpected events. Find out exactly how much you need based on your monthly expenses.</p>
+  </div>
+
+  <div class="calc-card">
+    <h2>🛟 Calculate Your Emergency Fund</h2>
+
+    <div class="calc-field">
+      <label>Monthly Expenses (₹)</label>
+      <input type="text" id="expenses" inputmode="numeric" placeholder="e.g. 40,000" oninput="calc()">
+      <div class="form-hint">Rent, groceries, bills, EMIs, transport, subscriptions — everything you spend monthly</div>
+      <div class="form-preview" id="eP"></div>
+    </div>
+
+    <div class="calc-field">
+      <label>How many months of safety net?</label>
+      <div class="months-selector" id="mSel">
+        <button onclick="setM(3)">3 months</button>
+        <button onclick="setM(6)" class="active">6 months</button>
+        <button onclick="setM(9)">9 months</button>
+        <button onclick="setM(12)">12 months</button>
+      </div>
+      <div class="form-hint" style="margin-top:8px">Salaried: 6 months is ideal. Self-employed/freelancer: 9–12 months recommended.</div>
+    </div>
+
+    <div class="calc-field">
+      <label>Current Emergency Savings (₹) <span style="font-weight:400;text-transform:none;letter-spacing:0">— optional</span></label>
+      <input type="text" id="current" inputmode="numeric" placeholder="e.g. 1,00,000" oninput="calc()">
+      <div class="form-hint">How much do you already have saved in a liquid/savings account?</div>
+      <div class="form-preview" id="cP"></div>
+    </div>
+
+    <div class="calc-result neutral" id="res">
+      <div class="calc-result-label">You Need</div>
+      <div class="calc-result-value" id="needV">₹0</div>
+      <div class="calc-result-sub" id="needS">Enter your monthly expenses above</div>
+    </div>
+
+    <div class="breakdown" id="bk" style="display:none">
+      <div class="breakdown-item"><div class="bv" id="bkTarget">₹0</div><div class="bl">Target Fund</div></div>
+      <div class="breakdown-item"><div class="bv" id="bkCurrent">₹0</div><div class="bl">Current Savings</div></div>
+      <div class="breakdown-item"><div class="bv" id="bkGap">₹0</div><div class="bl">Gap to Fill</div></div>
+      <div class="breakdown-item"><div class="bv" id="bkMonthly">₹0</div><div class="bl">Save/Month (1yr)</div></div>
+    </div>
+
+    <div class="progress-section" id="prog" style="display:none">
+      <h4>Your Progress</h4>
+      <div class="prog-bar-wrap"><div class="prog-bar-inner" id="progBar" style="width:0;background:var(--green)"></div></div>
+      <div class="prog-pct" id="progPct" style="color:var(--green)">0% funded</div>
+    </div>
+  </div>
+
+  <div class="cta-banner">
+    <h3>Track your emergency fund in the dashboard</h3>
+    <p>Set it as a goal and watch your progress month by month. Free forever.</p>
+    <a href="/app" class="btn btn-primary">Go to Dashboard →</a>
+  </div>
+
+  <div class="content-section">
+    <h2>📖 What is an Emergency Fund?</h2>
+    <p>An emergency fund is a cash reserve specifically set aside for unplanned expenses or financial emergencies. Think of it as your financial safety net — it catches you when life throws surprises.</p>
+    <p>Examples of emergencies: job loss, medical bills, urgent home or car repairs, family emergencies, or any situation where you suddenly need money you didn't budget for.</p>
+    <p>The key rule: an emergency fund should be in a <strong>liquid</strong> account — savings bank, liquid mutual fund, or sweep FD. Not in stocks, not in property, not locked in a 5-year FD. You need to access it within 24 hours.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>💡 How Much Emergency Fund Do You Need?</h2>
+    <p>The standard advice is 3–6 months of expenses. But the right number depends on your situation:</p>
+    <div class="example-box">
+      <strong>3 months</strong> — You have a stable government/corporate job, dual income household, no dependents<br><br>
+      <strong>6 months</strong> — Standard recommendation for most salaried professionals with a family<br><br>
+      <strong>9 months</strong> — Single income household, or you work in a volatile industry (startups, sales)<br><br>
+      <strong>12 months</strong> — Self-employed, freelancer, business owner, or sole earner with high responsibilities
+    </div>
+    <p>When in doubt, aim for 6 months. You can always increase it later.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>🚀 How to Build Your Emergency Fund</h2>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-icon">🎯</div><h4>Set a Clear Target</h4><p>Use the calculator above. Know the exact number you're aiming for.</p></div>
+      <div class="tip-card"><div class="tip-icon">🔄</div><h4>Automate It</h4><p>Set up an auto-transfer from salary account to a separate savings account on payday.</p></div>
+      <div class="tip-card"><div class="tip-icon">✂️</div><h4>Cut One Expense</h4><p>Cancel one subscription, eat out one less time, or switch to a cheaper plan. Redirect that money.</p></div>
+      <div class="tip-card"><div class="tip-icon">💧</div><h4>Use a Liquid Fund</h4><p>Liquid mutual funds give 5–6% returns vs 3–4% in savings accounts, and you can withdraw in 24 hours.</p></div>
+    </div>
+  </div>
+
+  <div class="content-section" itemscope itemtype="https://schema.org/FAQPage">
+    <h2>❓ FAQ</h2>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Should I invest my emergency fund?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">No — not in stocks or equity mutual funds. The whole point is instant access with no risk. Keep it in a savings account or liquid mutual fund. Returns don't matter here; availability does.</div></div></div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Should I build emergency fund or pay off debt first?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Build a small emergency fund first (1–2 months), then aggressively pay off high-interest debt (credit cards, personal loans). Once debt is cleared, build the full 6-month fund.</div></div></div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Does FD count as an emergency fund?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">A sweep FD or short-term FD (with no penalty for early withdrawal) can work. But a regular locked FD with penalties is not ideal — you need money available within 24 hours without losing returns.</div></div></div>
+  </div>
+
+  <div class="content-section">
+    <h2>🔧 More Free Tools</h2>
+    <div class="tips-grid">
+      <a href="/net-worth-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">🧮</div><h4>Net Worth Calculator</h4><p>Calculate your total net worth in seconds.</p></a>
+      <a href="/house-down-payment-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">🏠</div><h4>Down Payment Calculator</h4><p>Plan your home purchase with the right savings target.</p></a>
+    </div>
+  </div>
+
+  <!-- Related reading -->
+  <div class="content-section">
+    <h2>📚 Further Reading</h2>
+    <div class="tips-grid">
+      <a href="/blog/emergency-fund-guide" class="tip-card" style="text-decoration:none"><div class="tip-icon">📖</div><h4>Emergency Fund Complete Guide</h4><p>Deep-dive article: how much, where to keep it, and how to build it from scratch.</p></a>
+      <a href="/blog/financial-freedom-steps" class="tip-card" style="text-decoration:none"><div class="tip-icon">🚀</div><h4>5 Steps to Financial Freedom</h4><p>Building your emergency fund is Step 2. See the complete financial freedom roadmap.</p></a>
+      <a href="/blog/how-to-calculate-net-worth" class="tip-card" style="text-decoration:none"><div class="tip-icon">🧮</div><h4>How to Calculate Net Worth</h4><p>Once your emergency fund is set, start tracking your total wealth.</p></a>
+      <a href="/net-worth-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">💰</div><h4>Net Worth Calculator</h4><p>Your emergency fund is an asset. Add it to your net worth calculation.</p></a>
+    </div>
+  </div>
+
+  <div class="cta-banner">
+    <h3>Ready to get your finances in order?</h3>
+    <p>Track your net worth, set goals, and build your emergency fund with our free dashboard.</p>
+    <a href="/app" class="btn btn-primary">Start Tracking for Free →</a>
+  </div>
+
+</div>
+</main>
+
+<footer class="site-footer"><div class="footer-inner footer-grid">
+  <div class="footer-about">
+    <div class="footer-brand">💰 NetWorth</div>
+    <p class="footer-desc">Free personal finance platform for Indians. Track net worth, plan goals, and build wealth with simple tools and guides.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Free Tools</h4>
+    <a href="/net-worth-calculator">Net Worth Calculator</a>
+    <a href="/emergency-fund-calculator">Emergency Fund Calculator</a>
+    <a href="/house-down-payment-calculator">Down Payment Calculator</a>
+    <a href="/app">Dashboard</a>
+  </div>
+  <div class="footer-col">
+    <h4>Learn</h4>
+    <a href="/blog">All Articles</a>
+    <a href="/blog/how-to-calculate-net-worth">How to Calculate Net Worth</a>
+    <a href="/blog/emergency-fund-guide">Emergency Fund Guide</a>
+    <a href="/blog/financial-freedom-steps">Steps to Financial Freedom</a>
+    <a href="/blog/net-worth-vs-salary">Net Worth vs Salary</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/about">About</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+  </div>
+</div><div class="footer-bottom">
+  <p>&copy; 2026 NetWorth. All rights reserved. Built with &#10084;&#65039; in India.</p>
+</div></footer>
+
+<script>
+let months=6;
+function fmt(n){if(n==null||isNaN(n))return'₹0';const a=Math.abs(n);let s;if(a>=1e7)s='₹'+(a/1e7).toFixed(2)+' Cr';else if(a>=1e5)s='₹'+(a/1e5).toFixed(2)+' L';else s='₹'+a.toLocaleString('en-IN');return n<0?'−'+s:s}
+function fmtInput(el){const r=el.value.replace(/[^0-9]/g,'');if(!r){el.value='';return 0}const n=parseInt(r,10);el.value=n.toLocaleString('en-IN');return n}
+function setM(m){months=m;document.querySelectorAll('#mSel button').forEach(b=>{b.classList.toggle('active',parseInt(b.textContent)===m)});calc()}
+function calc(){
+  const exp=fmtInput(document.getElementById('expenses'));
+  const cur=fmtInput(document.getElementById('current'));
+  document.getElementById('eP').textContent=exp>0?fmt(exp):'';
+  document.getElementById('cP').textContent=cur>0?fmt(cur):'';
+  const target=exp*months;const gap=Math.max(0,target-cur);
+  const res=document.getElementById('res'),val=document.getElementById('needV'),sub=document.getElementById('needS');
+  if(exp===0){
+    val.textContent='₹0';sub.textContent='Enter your monthly expenses above';
+    res.className='calc-result neutral';
+    document.getElementById('bk').style.display='none';
+    document.getElementById('prog').style.display='none';return;
+  }
+  val.textContent=fmt(target);
+  sub.textContent=months+' months × '+fmt(exp)+'/month';
+  res.className='calc-result '+(gap>0?'neutral':'positive');
+  document.getElementById('bk').style.display='';
+  document.getElementById('bkTarget').textContent=fmt(target);
+  document.getElementById('bkCurrent').textContent=fmt(cur);
+  document.getElementById('bkGap').textContent=gap>0?fmt(gap):'₹0 ✓';
+  document.getElementById('bkGap').style.color=gap>0?'var(--orange)':'var(--green)';
+  document.getElementById('bkMonthly').textContent=gap>0?fmt(Math.ceil(gap/12)):'Done ✓';
+  document.getElementById('bkMonthly').style.color=gap>0?'var(--blue)':'var(--green)';
+  const pct=target>0?Math.min(100,Math.round(cur/target*100)):0;
+  document.getElementById('prog').style.display='';
+  document.getElementById('progBar').style.width=pct+'%';
+  document.getElementById('progBar').style.background=pct>=100?'var(--green)':pct>=50?'var(--blue)':'var(--orange)';
+  document.getElementById('progPct').textContent=pct+'% funded'+(pct>=100?' — You\'re covered! 🎉':'');
+  document.getElementById('progPct').style.color=pct>=100?'var(--green)':pct>=50?'var(--blue)':'var(--orange)';
+}
+</script>
+</body>
+</html>

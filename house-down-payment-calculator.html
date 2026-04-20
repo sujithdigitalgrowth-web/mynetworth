@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>House Down Payment Calculator India | Plan Your Home Purchase</title>
+<meta name="description" content="Calculate how much down payment you need for a house in India. Find out monthly savings needed and timeline to reach your goal. Free calculator.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mynetworth.vercel.app/house-down-payment-calculator">
+<meta property="og:title" content="House Down Payment Calculator India">
+<meta property="og:description" content="Plan your home purchase. Calculate down payment and monthly savings needed.">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"House Down Payment Calculator India","description":"Calculate down payment needed for a house in India and plan your savings.","url":"https://mynetworth.vercel.app/house-down-payment-calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}
+</script>
+<link rel="stylesheet" href="/styles.css">
+<style>
+.pct-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.pct-btns button{padding:10px 18px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--muted);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.pct-btns button.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.pct-btns button:hover:not(.active){border-color:var(--blue);color:var(--text)}
+.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+.result-box{background:var(--bg);border-radius:10px;padding:16px;text-align:center}
+.result-box .rv{font-size:1.3rem;font-weight:800}
+.result-box .rl{font-size:.68rem;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+.timeline{margin-top:20px;padding:20px;background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.15);border-radius:12px}
+.timeline h4{font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:8px}
+.timeline-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.timeline-row:last-child{border:none}
+.timeline-row .tl{color:var(--muted)}
+.timeline-row .tv{font-weight:700}
+.loan-info{margin-top:16px;padding:16px;background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:12px;font-size:.82rem;color:var(--muted);line-height:1.6}
+.loan-info strong{color:var(--orange)}
+</style>
+</head>
+<body>
+
+<nav class="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo">💰 NetWorth</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <div class="nav-dropdown active">
+      <button class="nav-drop-trigger" onclick="this.parentElement.classList.toggle('mob-open')">Tools &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
+        <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
+        <a href="/house-down-payment-calculator">&#127968; Down Payment Calculator</a>
+      </div>
+    </div>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/app" class="nav-cta">Open Dashboard</a>
+  </div>
+  <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
+</div></nav>
+
+<main>
+<div class="container-sm" style="padding-top:40px;padding-bottom:60px">
+
+  <div class="breadcrumbs"><a href="/">Home</a> › <a href="/#tools">Free Tools</a> › Down Payment Calculator</div>
+
+  <div class="page-hero" style="padding-top:0">
+    <h1>House Down Payment <span class="accent">Calculator</span></h1>
+    <p>Planning to buy a home? Find out how much you need for the down payment and how long it'll take to save up.</p>
+  </div>
+
+  <div class="calc-card">
+    <h2>🏠 Calculate Your Down Payment</h2>
+
+    <div class="calc-field">
+      <label>Property Price (₹)</label>
+      <input type="text" id="price" inputmode="numeric" placeholder="e.g. 80,00,000" oninput="calc()">
+      <div class="form-hint">Estimated price of the home you want to buy</div>
+      <div class="form-preview" id="pP"></div>
+    </div>
+
+    <div class="calc-field">
+      <label>Down Payment Percentage</label>
+      <div class="pct-btns" id="pctBtns">
+        <button onclick="setPct(10)">10%</button>
+        <button onclick="setPct(20)" class="active">20%</button>
+        <button onclick="setPct(25)">25%</button>
+        <button onclick="setPct(30)">30%</button>
+      </div>
+      <div class="form-hint" style="margin-top:8px">Banks typically require 10–20% down payment. 20% is recommended to avoid higher interest rates.</div>
+    </div>
+
+    <div class="calc-field">
+      <label>Current Savings for House (₹) <span style="font-weight:400;text-transform:none;letter-spacing:0">— optional</span></label>
+      <input type="text" id="saved" inputmode="numeric" placeholder="e.g. 5,00,000" oninput="calc()">
+      <div class="form-preview" id="sP"></div>
+    </div>
+
+    <div class="calc-field">
+      <label>Monthly Savings Capacity (₹) <span style="font-weight:400;text-transform:none;letter-spacing:0">— optional</span></label>
+      <input type="text" id="monthly" inputmode="numeric" placeholder="e.g. 30,000" oninput="calc()">
+      <div class="form-hint">How much can you save per month toward this goal?</div>
+      <div class="form-preview" id="mP"></div>
+    </div>
+
+    <div class="calc-result neutral" id="res">
+      <div class="calc-result-label">Down Payment Needed</div>
+      <div class="calc-result-value" id="dpV">₹0</div>
+      <div class="calc-result-sub" id="dpS">Enter the property price above</div>
+    </div>
+
+    <div class="result-grid" id="rGrid" style="display:none">
+      <div class="result-box"><div class="rv" id="rgDp" style="color:var(--blue)">₹0</div><div class="rl">Down Payment</div></div>
+      <div class="result-box"><div class="rv" id="rgLoan" style="color:var(--orange)">₹0</div><div class="rl">Loan Amount</div></div>
+      <div class="result-box"><div class="rv" id="rgGap" style="color:var(--red)">₹0</div><div class="rl">Still Need to Save</div></div>
+      <div class="result-box"><div class="rv" id="rgStamp" style="color:var(--purple)">₹0</div><div class="rl">Stamp Duty (~7%)</div></div>
+    </div>
+
+    <div class="timeline" id="tl" style="display:none">
+      <h4>📅 Savings Timeline</h4>
+      <div id="tlRows"></div>
+    </div>
+
+    <div class="loan-info" id="loanInfo" style="display:none">
+      <strong>Estimated Home Loan EMI:</strong> <span id="emi">₹0</span>/month for 20 years at 8.5% interest
+    </div>
+  </div>
+
+  <div class="cta-banner">
+    <h3>Set this as a goal in the dashboard</h3>
+    <p>Track your down payment savings progress monthly and stay on target for your dream home.</p>
+    <a href="/app" class="btn btn-primary">Go to Dashboard →</a>
+  </div>
+
+  <div class="content-section">
+    <h2>📖 How Much Down Payment for a House in India?</h2>
+    <p>When you buy a home in India, the bank doesn't fund the entire amount. You need to pay a portion upfront — that's the down payment. Here's what you should know:</p>
+    <div class="example-box">
+      <strong>Minimum:</strong> 10–15% of property value (for home loans up to ₹30L)<br><br>
+      <strong>Recommended:</strong> 20% of property value — lower EMI, better interest rates, less total interest paid<br><br>
+      <strong>Additional costs:</strong> Stamp duty (5–7%), registration (1–2%), broker fee, interior work — budget an extra 10–12% beyond the down payment
+    </div>
+    <p>For example, for a ₹80 lakh flat with 20% down payment: you need ₹16 lakh as down payment + approximately ₹5.6 lakh for stamp duty and registration = around ₹21.6 lakh total upfront.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>💡 Tips for Saving Your Down Payment</h2>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-icon">🎯</div><h4>Set a Deadline</h4><p>Pick a date — "I want to buy a home by Dec 2028." Work backwards to find monthly savings needed.</p></div>
+      <div class="tip-card"><div class="tip-icon">📈</div><h4>Invest While Saving</h4><p>If buying in 3+ years, put savings in a balanced hybrid fund. For 1–2 years, use a debt fund or RD.</p></div>
+      <div class="tip-card"><div class="tip-icon">💳</div><h4>Clear Debts First</h4><p>Banks check your existing EMIs. Lower debt = higher loan eligibility = easier approval.</p></div>
+      <div class="tip-card"><div class="tip-icon">🏦</div><h4>Improve CIBIL Score</h4><p>750+ score gets you the best interest rates. Pay credit cards on time and keep utilization under 30%.</p></div>
+    </div>
+  </div>
+
+  <div class="content-section" itemscope itemtype="https://schema.org/FAQPage">
+    <h2>❓ FAQ</h2>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Can I buy a house with 0% down payment?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Very unlikely in India. Banks require at least 10% down payment for most home loans. Some government schemes offer subsidies, but you'll still need cash upfront for stamp duty and registration.</div></div></div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Should I pay a larger down payment?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">If you can afford it, yes. A larger down payment means smaller loan, lower EMI, less interest paid over the loan tenure, and often a better interest rate from the bank.</div></div></div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What other costs should I budget for?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Beyond down payment: stamp duty (5–7%), registration (1–2%), GST on under-construction property (5%), broker commission (1–2%), home loan processing fee (0.5–1%), interior/renovation costs. Budget an extra 10–15% of property value.</div></div></div>
+  </div>
+
+  <div class="content-section">
+    <h2>🔧 More Free Tools</h2>
+    <div class="tips-grid">
+      <a href="/net-worth-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">🧮</div><h4>Net Worth Calculator</h4><p>Calculate your total net worth in seconds.</p></a>
+      <a href="/emergency-fund-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">🛟</div><h4>Emergency Fund Calculator</h4><p>Build your financial safety net first.</p></a>
+    </div>
+  </div>
+
+  <!-- Related reading -->
+  <div class="content-section">
+    <h2>📚 Further Reading</h2>
+    <div class="tips-grid">
+      <a href="/blog/financial-freedom-steps" class="tip-card" style="text-decoration:none"><div class="tip-icon">🚀</div><h4>5 Steps to Financial Freedom</h4><p>Where does buying a home fit in your overall financial plan? Read the full roadmap.</p></a>
+      <a href="/blog/how-to-calculate-net-worth" class="tip-card" style="text-decoration:none"><div class="tip-icon">🧮</div><h4>How to Calculate Net Worth</h4><p>Your home purchase will significantly affect your net worth. Learn how to track it all.</p></a>
+      <a href="/emergency-fund-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">🛟</div><h4>Emergency Fund Calculator</h4><p>Before buying a home, make sure your emergency fund is in place first.</p></a>
+      <a href="/blog/net-worth-vs-salary" class="tip-card" style="text-decoration:none"><div class="tip-icon">💡</div><h4>Net Worth vs Salary</h4><p>A home is an asset. Understanding net worth helps you make smarter purchase decisions.</p></a>
+    </div>
+  </div>
+
+  <div class="cta-banner">
+    <h3>Track all your financial goals in one place</h3>
+    <p>House, car, retirement, education — set goals and track progress with our free dashboard.</p>
+    <a href="/app" class="btn btn-primary">Start Tracking for Free →</a>
+  </div>
+
+</div>
+</main>
+
+<footer class="site-footer"><div class="footer-inner footer-grid">
+  <div class="footer-about">
+    <div class="footer-brand">💰 NetWorth</div>
+    <p class="footer-desc">Free personal finance platform for Indians. Track net worth, plan goals, and build wealth with simple tools and guides.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Free Tools</h4>
+    <a href="/net-worth-calculator">Net Worth Calculator</a>
+    <a href="/emergency-fund-calculator">Emergency Fund Calculator</a>
+    <a href="/house-down-payment-calculator">Down Payment Calculator</a>
+    <a href="/app">Dashboard</a>
+  </div>
+  <div class="footer-col">
+    <h4>Learn</h4>
+    <a href="/blog">All Articles</a>
+    <a href="/blog/how-to-calculate-net-worth">How to Calculate Net Worth</a>
+    <a href="/blog/emergency-fund-guide">Emergency Fund Guide</a>
+    <a href="/blog/financial-freedom-steps">Steps to Financial Freedom</a>
+    <a href="/blog/net-worth-vs-salary">Net Worth vs Salary</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/about">About</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+  </div>
+</div><div class="footer-bottom">
+  <p>&copy; 2026 NetWorth. All rights reserved. Built with &#10084;&#65039; in India.</p>
+</div></footer>
+
+<script>
+let pct=20;
+function fmt(n){if(n==null||isNaN(n))return'₹0';const a=Math.abs(n);let s;if(a>=1e7)s='₹'+(a/1e7).toFixed(2)+' Cr';else if(a>=1e5)s='₹'+(a/1e5).toFixed(2)+' L';else s='₹'+a.toLocaleString('en-IN');return n<0?'−'+s:s}
+function fmtInput(el){const r=el.value.replace(/[^0-9]/g,'');if(!r){el.value='';return 0}const n=parseInt(r,10);el.value=n.toLocaleString('en-IN');return n}
+function setPct(p){pct=p;document.querySelectorAll('#pctBtns button').forEach(b=>{b.classList.toggle('active',parseInt(b.textContent)===p)});calc()}
+function calcEMI(p,r,n){const mr=r/12/100;return Math.round(p*mr*Math.pow(1+mr,n)/(Math.pow(1+mr,n)-1))}
+function calc(){
+  const price=fmtInput(document.getElementById('price'));
+  const saved=fmtInput(document.getElementById('saved'));
+  const mo=fmtInput(document.getElementById('monthly'));
+  document.getElementById('pP').textContent=price>0?fmt(price):'';
+  document.getElementById('sP').textContent=saved>0?fmt(saved):'';
+  document.getElementById('mP').textContent=mo>0?fmt(mo):'';
+  const res=document.getElementById('res'),val=document.getElementById('dpV'),sub=document.getElementById('dpS');
+  if(price===0){val.textContent='₹0';sub.textContent='Enter the property price above';res.className='calc-result neutral';
+    document.getElementById('rGrid').style.display='none';document.getElementById('tl').style.display='none';document.getElementById('loanInfo').style.display='none';return}
+  const dp=Math.round(price*pct/100);const loan=price-dp;const gap=Math.max(0,dp-saved);const stamp=Math.round(price*0.07);
+  val.textContent=fmt(dp);sub.textContent=pct+'% of '+fmt(price);
+  res.className='calc-result '+(gap===0?'positive':'neutral');
+  document.getElementById('rGrid').style.display='';
+  document.getElementById('rgDp').textContent=fmt(dp);
+  document.getElementById('rgLoan').textContent=fmt(loan);
+  document.getElementById('rgGap').textContent=gap>0?fmt(gap):'₹0 ✓';
+  document.getElementById('rgGap').style.color=gap>0?'var(--red)':'var(--green)';
+  document.getElementById('rgStamp').textContent=fmt(stamp);
+  const emi=calcEMI(loan,8.5,240);
+  document.getElementById('loanInfo').style.display='';
+  document.getElementById('emi').textContent=fmt(emi);
+  const tl=document.getElementById('tl'),rows=document.getElementById('tlRows');
+  if(mo>0&&gap>0){tl.style.display='';
+    const mos=Math.ceil(gap/mo);const yrs=Math.floor(mos/12);const rm=mos%12;
+    rows.innerHTML='<div class="timeline-row"><span class="tl">Monthly savings</span><span class="tv">'+fmt(mo)+'</span></div>'
+      +'<div class="timeline-row"><span class="tl">Amount to save</span><span class="tv">'+fmt(gap)+'</span></div>'
+      +'<div class="timeline-row"><span class="tl">Time to goal</span><span class="tv">'+(yrs>0?yrs+' yr ':'')+(rm>0?rm+' mo':'')+'</span></div>'
+      +'<div class="timeline-row"><span class="tl">Total upfront needed</span><span class="tv" style="color:var(--orange)">'+fmt(dp+stamp)+'</span></div>';
+  }else{tl.style.display='none'}
+}
+</script>
+</body>
+</html>

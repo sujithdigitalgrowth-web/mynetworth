@@ -1,365 +1,627 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Net Worth Calculator India | Free & Simple Tool</title>
-<meta name="description" content="Calculate your net worth in seconds. Enter your total assets and liabilities to find out where you stand financially. Free, simple, no signup needed.">
-<meta name="keywords" content="net worth calculator, net worth calculator india, calculate net worth, personal finance, assets minus liabilities">
+<title>Net Worth Calculator India | Calculate Your Net Worth Online</title>
+<meta name="description" content="Use our free net worth calculator India to calculate your net worth online in seconds. Enter total assets and liabilities to find your exact financial position. No signup required.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://mynetworth.vercel.app/net-worth-calculator">
-<meta property="og:title" content="Net Worth Calculator India | Free & Simple Tool">
-<meta property="og:description" content="Find your net worth in seconds. Assets minus liabilities — that's it. Free calculator for Indians.">
+<meta property="og:title" content="Net Worth Calculator India | Calculate Your Net Worth Online">
+<meta property="og:description" content="Free net worth calculator for Indians. Assets minus liabilities — see your net worth instantly. Includes benchmarks, age-wise targets, tips and FAQs.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mynetworth.vercel.app/net-worth-calculator">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Net Worth Calculator India">
-<meta name="twitter:description" content="Calculate your net worth instantly. Free, no signup.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Net Worth Calculator India",
-  "description": "A free, simple net worth calculator for Indians. Enter your assets and liabilities to instantly see your net worth.",
-  "url": "https://mynetworth.vercel.app/net-worth-calculator",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "Any",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Net Worth Calculator India",
+      "description": "Free online net worth calculator for Indians. Enter total assets and liabilities to calculate net worth instantly.",
+      "url": "https://mynetworth.vercel.app/net-worth-calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is net worth?", "acceptedAnswer": { "@type": "Answer", "text": "Net worth is the total value of everything you own (assets) minus everything you owe (liabilities). It is the single most accurate measure of your financial health — more meaningful than salary or bank balance alone." } },
+        { "@type": "Question", "name": "How to calculate net worth in India?", "acceptedAnswer": { "@type": "Answer", "text": "Add up all assets (savings, FDs, mutual funds, stocks, EPF/PPF, gold, real estate) and subtract all liabilities (home loan, car loan, personal loan, credit card dues). Net Worth = Total Assets − Total Liabilities." } },
+        { "@type": "Question", "name": "What is a good net worth in India?", "acceptedAnswer": { "@type": "Answer", "text": "A common benchmark: 1–3× annual income by age 30, 3–6× by age 35, and 6–10× by age 45. The most important factor is consistent upward growth each year." } },
+        { "@type": "Question", "name": "Does salary affect net worth?", "acceptedAnswer": { "@type": "Answer", "text": "Salary provides the raw material to build net worth, but income alone does not determine it. What matters is savings rate, debt decisions, and investment consistency. Net worth reflects what you keep and grow, not what you earn." } },
+        { "@type": "Question", "name": "How often should I calculate my net worth?", "acceptedAnswer": { "@type": "Answer", "text": "Once a month is ideal. Update your asset values and recalculate on the 1st of every month. It takes 5–10 minutes and provides the monthly financial check-in most wealth builders swear by." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mynetworth.vercel.app/" },
+        { "@type": "ListItem", "position": 2, "name": "Net Worth Calculator", "item": "https://mynetworth.vercel.app/net-worth-calculator" }
+      ]
+    }
+  ]
 }
 </script>
+<link rel="stylesheet" href="/styles.css">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0b10;--card:#161922;--border:#232738;--text:#e8e8ec;--muted:#8b8fa0;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--orange:#f59e0b}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
-a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+/* === Page-specific styles === */
+.nwc-intro{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:32px}
+.nwc-intro p{font-size:.95rem;color:var(--text2);line-height:1.8;margin-bottom:10px}
+.nwc-intro p:last-child{margin-bottom:0}
 
-/* Header */
-.top-bar{background:var(--card);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
-.top-bar .logo{font-size:1.1rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
-.top-bar .cta-sm{font-size:.78rem;font-weight:600;padding:8px 18px;background:var(--blue);color:#fff;border-radius:8px;text-decoration:none;transition:opacity .2s}
-.top-bar .cta-sm:hover{opacity:.85;text-decoration:none}
+.formula-visual{display:flex;align-items:center;justify-content:center;gap:10px;margin:20px 0 4px;flex-wrap:wrap}
+.formula-visual .fv-box{padding:10px 18px;border-radius:10px;font-weight:700;font-size:.95rem;text-align:center}
+.formula-visual .fv-op{font-size:1.3rem;color:var(--muted);font-weight:300}
+.fv-assets{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.25)}
+.fv-liabs{background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.25)}
+.fv-result{background:rgba(59,130,246,.12);color:var(--blue);border:1px solid rgba(59,130,246,.25)}
 
-/* Container */
-.container{max-width:760px;margin:0 auto;padding:40px 20px 60px}
+.result-insight{margin-top:16px;padding:16px 20px;border-radius:10px;font-size:.88rem;line-height:1.7}
+.result-insight.ins-pos{background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);color:var(--text2)}
+.result-insight.ins-neg{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);color:var(--text2)}
+.result-insight.ins-neutral{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);color:var(--text2)}
+.result-insight strong{display:block;margin-bottom:4px;font-size:.92rem}
 
-/* Hero */
-.hero{text-align:center;margin-bottom:40px}
-.hero h1{font-size:2rem;font-weight:800;margin-bottom:12px;line-height:1.3}
-.hero h1 span{color:var(--green)}
-.hero p{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.7}
+.step-list{list-style:none;padding:0;margin:20px 0;counter-reset:step-counter}
+.step-list li{counter-increment:step-counter;display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.step-list li:last-child{border:none}
+.step-list li::before{content:counter(step-counter);background:var(--blue);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-list li .sl-body h4{font-size:.92rem;font-weight:700;margin-bottom:4px}
+.step-list li .sl-body p{font-size:.84rem;color:var(--muted);line-height:1.6;margin:0}
 
-/* Calculator Card */
-.calc-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:40px;box-shadow:0 4px 24px rgba(0,0,0,.3)}
-.calc-card h2{font-size:1.1rem;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px}
-.field{margin-bottom:18px}
-.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.field input{width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:1.05rem;font-weight:600;outline:none;transition:border-color .2s}
-.field input:focus{border-color:var(--blue)}
-.field .hint{font-size:.7rem;color:var(--muted);margin-top:4px}
-.field .preview{font-size:.78rem;font-weight:600;color:var(--blue);margin-top:4px;min-height:20px}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.why-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 18px;transition:border-color .2s}
+.why-card:hover{border-color:rgba(59,130,246,.3)}
+.why-card .wc-icon{font-size:1.6rem;margin-bottom:10px}
+.why-card h4{font-size:.88rem;font-weight:700;margin-bottom:6px}
+.why-card p{font-size:.8rem;color:var(--muted);line-height:1.6;margin:0}
 
-/* Result */
-.result{margin-top:24px;padding:24px;border-radius:12px;text-align:center;transition:all .3s}
-.result.positive{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2)}
-.result.negative{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2)}
-.result.zero{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2)}
-.result-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.8px;font-weight:600;margin-bottom:6px}
-.result.positive .result-label{color:var(--green)}
-.result.negative .result-label{color:var(--red)}
-.result.zero .result-label{color:var(--blue)}
-.result-value{font-size:2.2rem;font-weight:800;line-height:1.2}
-.result.positive .result-value{color:var(--green)}
-.result.negative .result-value{color:var(--red)}
-.result.zero .result-value{color:var(--blue)}
-.result-sub{font-size:.8rem;color:var(--muted);margin-top:8px}
-.result-bar{height:8px;border-radius:6px;background:rgba(239,68,68,.15);margin-top:14px;overflow:hidden}
-.result-bar-fill{height:100%;border-radius:6px;background:var(--green);transition:width .5s ease}
+.improve-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.improve-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;gap:14px;align-items:flex-start}
+.improve-card .ic-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px}
+.improve-card h4{font-size:.88rem;font-weight:700;margin-bottom:4px}
+.improve-card p{font-size:.8rem;color:var(--muted);line-height:1.6;margin:0}
 
-/* Formula */
-.formula{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;font-size:.82rem;color:var(--muted);flex-wrap:wrap}
-.formula span{padding:4px 10px;border-radius:6px;font-weight:600}
-.formula .f-a{background:rgba(34,197,94,.1);color:var(--green)}
-.formula .f-l{background:rgba(239,68,68,.1);color:var(--red)}
-.formula .f-n{background:rgba(59,130,246,.1);color:var(--blue)}
+.bench-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:.85rem}
+.bench-table th{text-align:left;padding:10px 14px;background:rgba(59,130,246,.08);color:var(--text);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.bench-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2)}
+.bench-table tr:last-child td{border:none}
+.bench-table tr:hover td{background:rgba(255,255,255,.02)}
 
-/* CTA Banner */
-.cta-banner{background:linear-gradient(135deg,var(--card),#1a1d2e);border:1px solid var(--border);border-radius:14px;padding:28px 32px;text-align:center;margin:36px 0}
-.cta-banner h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
-.cta-banner p{font-size:.88rem;color:var(--muted);margin-bottom:16px}
-.cta-btn{display:inline-block;padding:12px 32px;background:var(--blue);color:#fff;border-radius:10px;font-size:.92rem;font-weight:700;text-decoration:none;transition:all .2s}
-.cta-btn:hover{opacity:.9;transform:translateY(-1px);text-decoration:none}
+.example-scenario{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin:16px 0}
+.example-scenario .es-header{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--blue);margin-bottom:12px}
+.example-scenario table{width:100%;font-size:.85rem}
+.example-scenario td{padding:5px 0;color:var(--text2)}
+.example-scenario td:last-child{text-align:right;font-weight:600;color:var(--text)}
+.example-scenario .es-total td{border-top:1px solid var(--border);padding-top:10px;font-weight:700;color:var(--green);font-size:.92rem}
+.example-scenario .es-nw td{font-weight:800;color:var(--blue);font-size:1rem;padding-top:10px}
 
-/* Content Sections */
-.content-section{margin-bottom:36px}
-.content-section h2{font-size:1.25rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.content-section h3{font-size:1rem;font-weight:600;margin:18px 0 8px;color:var(--text)}
-.content-section p{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:12px}
-.content-section ul{list-style:none;padding:0}
-.content-section li{font-size:.88rem;color:var(--muted);padding:8px 0;padding-left:24px;position:relative;line-height:1.6}
-.content-section li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700}
-.content-section .example-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin:14px 0;font-size:.85rem;color:var(--text);line-height:1.7}
-.content-section .example-box strong{color:var(--green)}
+.tools-link-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.tool-link-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;display:flex;gap:14px;align-items:center;transition:all .2s}
+.tool-link-card:hover{border-color:var(--blue);transform:translateY(-1px);text-decoration:none}
+.tool-link-card .tlc-icon{font-size:1.8rem;flex-shrink:0}
+.tool-link-card .tlc-body h4{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.tool-link-card .tlc-body p{font-size:.78rem;color:var(--muted);line-height:1.5;margin:0}
 
-/* Tips Grid */
-.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.tip-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;transition:border-color .2s}
-.tip-card:hover{border-color:var(--blue)}
-.tip-card .tip-icon{font-size:1.3rem;margin-bottom:6px}
-.tip-card h4{font-size:.82rem;font-weight:700;margin-bottom:4px;color:var(--text)}
-.tip-card p{font-size:.75rem;color:var(--muted);line-height:1.5;margin:0}
+.disclaimer{background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.12);border-radius:10px;padding:16px 20px;font-size:.75rem;color:var(--muted);line-height:1.7;margin-top:40px}
 
-/* FAQ */
-.faq{margin-top:36px}
-.faq h2{font-size:1.25rem;font-weight:700;margin-bottom:16px}
-.faq-item{border-bottom:1px solid var(--border);padding:14px 0}
-.faq-q{font-size:.9rem;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-.faq-q::after{content:'+';font-size:1.1rem;color:var(--muted);transition:transform .2s}
-.faq-item.open .faq-q::after{transform:rotate(45deg)}
-.faq-a{font-size:.84rem;color:var(--muted);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
-.faq-item.open .faq-a{max-height:200px;padding-top:10px}
+.formula-live{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;font-size:.85rem;flex-wrap:wrap}
+.formula-live span{padding:5px 12px;border-radius:7px;font-weight:600}
+.f-a{background:rgba(34,197,94,.1);color:var(--green)}
+.f-l{background:rgba(239,68,68,.1);color:var(--red)}
+.f-n{background:rgba(59,130,246,.1);color:var(--blue)}
+.f-op{color:var(--muted);font-size:1rem}
 
-/* Footer */
-.footer{text-align:center;padding:24px;font-size:.72rem;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
+.calc-result.positive .calc-result-label,.calc-result.positive .calc-result-value{color:var(--green)}
+.calc-result.negative .calc-result-label,.calc-result.negative .calc-result-value{color:var(--red)}
+.calc-result.neutral .calc-result-label,.calc-result.neutral .calc-result-value{color:var(--blue)}
 
-@media(max-width:600px){
-  .container{padding:24px 16px 40px}
-  .hero h1{font-size:1.5rem}
-  .calc-card{padding:22px 18px}
-  .result-value{font-size:1.6rem}
-  .tips-grid{grid-template-columns:1fr}
-  .formula{font-size:.72rem}
+@media(max-width:768px){
+  .why-grid{grid-template-columns:1fr 1fr}
+  .improve-grid{grid-template-columns:1fr}
+  .tools-link-grid{grid-template-columns:1fr}
 }
+@media(max-width:480px){.why-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- Header -->
-<div class="top-bar">
-  <a href="/" class="logo">💰 NetWorth</a>
-  <a href="/" class="cta-sm">Open Dashboard →</a>
-</div>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo">💰 NetWorth</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <div class="nav-dropdown active">
+      <button class="nav-drop-trigger" onclick="this.parentElement.classList.toggle('mob-open')">Tools &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
+        <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
+        <a href="/house-down-payment-calculator">&#127968; Down Payment Calculator</a>
+      </div>
+    </div>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/app" class="nav-cta">Open Dashboard</a>
+  </div>
+  <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
+</div></nav>
 
-<div class="container">
+<main>
+<div class="container-sm" style="padding-top:40px;padding-bottom:60px">
 
-  <!-- Hero -->
-  <div class="hero">
-    <h1>Net Worth <span>Calculator</span></h1>
-    <p>Your net worth is everything you own minus everything you owe. It's the single most honest number about your financial health. Calculate yours in 10 seconds.</p>
+  <!-- Breadcrumb -->
+  <div class="breadcrumbs"><a href="/">Home</a> › <a href="/#tools">Free Tools</a> › Net Worth Calculator</div>
+
+  <!-- H1 + Intro -->
+  <div class="page-hero" style="padding-top:0;text-align:left">
+    <h1>Net Worth <span class="accent">Calculator</span> India</h1>
+    <p style="font-size:1.05rem;color:var(--text2);line-height:1.8;margin-top:10px">Calculate your net worth online in seconds — free, simple, and no signup needed. Your <strong>net worth</strong> is the single most honest number about your financial health: everything you own minus everything you owe.</p>
   </div>
 
-  <!-- Calculator -->
+  <!-- Intro content block -->
+  <div class="nwc-intro">
+    <p><strong>Net worth meaning:</strong> Net worth is the difference between your total assets (what you own) and your total liabilities (what you owe). A positive net worth means you own more than you owe. A negative net worth means your debts currently exceed your assets — which is normal at the start of a financial journey.</p>
+    <p>Unlike your salary, which shows what you earn, net worth shows what you've actually <em>built</em>. Two people with the same income can have completely different net worths based on their savings, spending, and debt habits. That's why <strong>calculating net worth in India</strong> is the first step to real financial planning.</p>
+    <p>Use the free calculator below, then scroll down for a complete guide on what to include, how to interpret your result, and what steps to take next.</p>
+  </div>
+
+  <!-- ═══ CALCULATOR ═══ -->
   <div class="calc-card">
-    <h2>🧮 Calculate Your Net Worth</h2>
+    <h2>🧮 Net Worth Calculator — India</h2>
 
-    <div class="field">
+    <div class="calc-field">
       <label>Total Assets (₹)</label>
-      <input type="text" id="assets" inputmode="numeric" placeholder="e.g. 50,00,000" oninput="calc()">
-      <div class="hint">Include savings, investments, property, gold, FDs — everything you own</div>
-      <div class="preview" id="aPreview"></div>
+      <input type="text" id="assets" inputmode="numeric" placeholder="e.g. 50,00,000" oninput="calc()" autocomplete="off">
+      <div class="form-hint">Savings accounts + FDs + mutual funds + stocks + EPF/PPF + gold + property — everything you own</div>
+      <div class="form-preview" id="aP"></div>
     </div>
 
-    <div class="field">
+    <div class="calc-field">
       <label>Total Liabilities (₹)</label>
-      <input type="text" id="liabilities" inputmode="numeric" placeholder="e.g. 18,00,000" oninput="calc()">
-      <div class="hint">Include home loan, car loan, gold loan, credit card debt — everything you owe</div>
-      <div class="preview" id="lPreview"></div>
+      <input type="text" id="liabs" inputmode="numeric" placeholder="e.g. 18,00,000" oninput="calc()" autocomplete="off">
+      <div class="form-hint">Home loan + car loan + personal loan + credit card dues — everything you owe</div>
+      <div class="form-preview" id="lP"></div>
     </div>
 
-    <div class="formula">
-      <span class="f-a" id="fA">₹0</span>
-      <span>−</span>
-      <span class="f-l" id="fL">₹0</span>
-      <span>=</span>
-      <span class="f-n" id="fN">₹0</span>
+    <!-- Live formula -->
+    <div class="formula-live">
+      <span class="f-a" id="fA">Assets: ₹0</span>
+      <span class="f-op">−</span>
+      <span class="f-l" id="fL">Liabilities: ₹0</span>
+      <span class="f-op">=</span>
+      <span class="f-n" id="fN">Net Worth: ₹0</span>
     </div>
 
-    <div class="result zero" id="result">
-      <div class="result-label">Your Net Worth</div>
-      <div class="result-value" id="nwValue">₹0</div>
-      <div class="result-sub" id="nwSub">Enter your assets and liabilities above</div>
-      <div class="result-bar"><div class="result-bar-fill" id="nwBar" style="width:50%"></div></div>
+    <!-- Result -->
+    <div class="calc-result neutral" id="res">
+      <div class="calc-result-label">Your Net Worth</div>
+      <div class="calc-result-value" id="nwV">₹0</div>
+      <div class="calc-result-sub" id="nwS">Enter your assets and liabilities above to calculate</div>
+      <div class="calc-bar"><div class="calc-bar-fill" id="nwB" style="width:50%"></div></div>
+    </div>
+
+    <!-- Dynamic insight -->
+    <div class="result-insight ins-neutral" id="insight" style="display:none">
+      <strong id="insightTitle"></strong>
+      <span id="insightText"></span>
     </div>
   </div>
 
-  <!-- CTA -->
+  <!-- Track over time CTA -->
   <div class="cta-banner">
-    <h3>Want to track this over time?</h3>
-    <p>Our free dashboard lets you add individual assets, track goals, manage family finances, and watch your net worth grow month by month.</p>
-    <a href="/" class="cta-btn">Go to Dashboard →</a>
+    <h3>Track your net worth over time</h3>
+    <p>The real power is in tracking it monthly — watching the number grow, catching problems early, and seeing your wealth build year over year. Our free dashboard makes that effortless.</p>
+    <a href="/app" class="btn btn-primary">Open Dashboard — Free →</a>
   </div>
 
-  <!-- What is Net Worth -->
+  <!-- ═══ WHAT IS NET WORTH ═══ -->
   <div class="content-section">
-    <h2>📖 What is Net Worth?</h2>
-    <p>Net worth is the simplest way to measure your financial health. It's calculated as:</p>
-    <div class="example-box">
-      <strong>Net Worth</strong> = Total Assets − Total Liabilities<br><br>
-      <strong>Assets</strong> = Savings accounts + Fixed deposits + Mutual funds + Stocks + Property + Gold + PPF/EPF + NPS + anything else you own<br><br>
-      <strong>Liabilities</strong> = Home loan + Car loan + Personal loan + Gold loan + Credit card debt + anything else you owe
+    <h2>📖 What is Net Worth? (Simple Explanation)</h2>
+    <p><strong>Net worth meaning:</strong> Net worth is a financial snapshot — the total rupee value of your financial life at a single point in time. It tells you whether you're ahead or behind in building real wealth.</p>
+
+    <div class="formula-visual" style="margin-bottom:20px">
+      <div class="fv-box fv-assets">Total Assets<br><small style="font-weight:400;font-size:.75rem">What you own</small></div>
+      <div class="fv-op" style="font-size:1.5rem">−</div>
+      <div class="fv-box fv-liabs">Total Liabilities<br><small style="font-weight:400;font-size:.75rem">What you owe</small></div>
+      <div class="fv-op" style="font-size:1.5rem">=</div>
+      <div class="fv-box fv-result">Net Worth<br><small style="font-weight:400;font-size:.75rem">Your wealth</small></div>
     </div>
-    <p>If your assets are more than your liabilities, your net worth is positive — you own more than you owe. If it's negative, don't panic. Most people start with negative net worth (think student loans, home loans). What matters is the direction — is it going up over time?</p>
+
+    <p>Think of it like a company's balance sheet — assets on one side, liabilities on the other, net worth is what's left over. The higher it is, the more financial security and freedom you have.</p>
+    <p>Net worth is not the same as income. A government employee earning ₹8 LPA who saves diligently for 10 years can have a higher net worth than a startup employee earning ₹30 LPA who spends everything. <strong>Income is what flows in. Net worth is what stays.</strong></p>
   </div>
 
-  <!-- Why it matters -->
+  <!-- ═══ HOW TO CALCULATE ═══ -->
   <div class="content-section">
-    <h2>💡 Why Does Net Worth Matter?</h2>
-    <p>Your salary tells you how much you earn. Your net worth tells you how much you've <em>kept</em>. Here's why tracking it matters:</p>
-    <ul>
-      <li>It gives you one honest number instead of scattered bank balances</li>
-      <li>It shows whether you're actually making financial progress year over year</li>
-      <li>It helps you understand if your assets are growing faster than your debts</li>
-      <li>It shifts your mindset from "how much do I earn" to "how much do I own"</li>
-      <li>It's the number that actually determines if you can retire, buy a house, or be financially free</li>
-    </ul>
+    <h2>🧾 How to Calculate Net Worth in India — Step by Step</h2>
+    <p>Calculating your net worth in India takes three steps: list your assets, list your liabilities, and subtract. Here's exactly what to include:</p>
 
-    <h3>Net Worth Benchmarks for India</h3>
-    <div class="example-box">
-      <strong>Age 25–30:</strong> Net worth = 1–3x annual income (you're building the base)<br>
-      <strong>Age 30–35:</strong> Net worth = 3–5x annual income (compounding kicks in)<br>
-      <strong>Age 35–45:</strong> Net worth = 5–10x annual income (peak earning years)<br>
-      <strong>Age 45+:</strong> Net worth = 10x+ annual income (retirement prep)<br><br>
-      These are rough guidelines. The most important thing is that your net worth is going <strong>up</strong> every year.
+    <ol class="step-list">
+      <li>
+        <div class="sl-body">
+          <h4>List all your Assets (what you own)</h4>
+          <p>Savings accounts, salary account balance, fixed deposits (FDs), recurring deposits, liquid mutual funds, equity mutual funds (current NAV value), stocks in demat (current market value), PPF balance, EPF balance, NPS corpus, Sukanya Samriddhi Yojana, sovereign gold bonds, physical gold at today's market rate, real estate (current market value, not purchase price), vehicle resale value, and any other investments.</p>
+        </div>
+      </li>
+      <li>
+        <div class="sl-body">
+          <h4>List all your Liabilities (what you owe)</h4>
+          <p>Home loan outstanding principal, car loan balance, personal loan balance, gold loan, education loan, credit card total outstanding (not just minimum due), EMI purchases (phone, laptop, appliances), and any money borrowed from family or friends you intend to repay.</p>
+        </div>
+      </li>
+      <li>
+        <div class="sl-body">
+          <h4>Calculate: Net Worth = Total Assets − Total Liabilities</h4>
+          <p>Use the calculator above. Positive means you own more than you owe — great! Negative means your debts currently exceed your assets — this is common early on (home loans, education loans) and improves over time as you pay down debt and build assets.</p>
+        </div>
+      </li>
+      <li>
+        <div class="sl-body">
+          <h4>Track it every month</h4>
+          <p>One calculation is informative. Monthly tracking is transformative. Set a reminder on the 1st of every month to update your values and recalculate. The trend — not the single number — is what builds financial discipline.</p>
+        </div>
+      </li>
+    </ol>
+
+    <h3>Real Example: Calculating Net Worth in India</h3>
+
+    <div class="example-scenario">
+      <div class="es-header">Example: Arjun, 33 years old, Software Engineer, Pune</div>
+      <table>
+        <tr><td colspan="2" style="font-weight:700;color:var(--text);padding-bottom:6px">Assets</td></tr>
+        <tr><td>Savings account</td><td>₹2,50,000</td></tr>
+        <tr><td>Fixed deposits</td><td>₹5,00,000</td></tr>
+        <tr><td>Mutual funds (current NAV)</td><td>₹9,80,000</td></tr>
+        <tr><td>Stocks (demat, market value)</td><td>₹3,40,000</td></tr>
+        <tr><td>EPF balance</td><td>₹7,20,000</td></tr>
+        <tr><td>PPF</td><td>₹4,60,000</td></tr>
+        <tr><td>Gold jewellery (market rate)</td><td>₹2,80,000</td></tr>
+        <tr><td>Car (resale value)</td><td>₹4,00,000</td></tr>
+        <tr class="es-total"><td>Total Assets</td><td>₹39,30,000</td></tr>
+        <tr><td colspan="2" style="font-weight:700;color:var(--text);padding:12px 0 6px">Liabilities</td></tr>
+        <tr><td>Car loan outstanding</td><td>₹2,60,000</td></tr>
+        <tr><td>Credit card dues</td><td>₹35,000</td></tr>
+        <tr class="es-total"><td style="color:var(--red)">Total Liabilities</td><td style="color:var(--red)">₹2,95,000</td></tr>
+        <tr class="es-nw"><td>Net Worth</td><td>₹36,35,000</td></tr>
+      </table>
     </div>
+
+    <p>Arjun's net worth is approximately ₹36.35 lakhs. For a 33-year-old earning around ₹12–15 LPA, this is a solid position. The key is that this number should grow each year — ideally by 15–20% annually through a combination of debt repayment and asset growth.</p>
   </div>
 
-  <!-- How to improve -->
+  <!-- ═══ WHY NET WORTH MATTERS ═══ -->
   <div class="content-section">
-    <h2>🚀 How to Improve Your Net Worth</h2>
-    <p>There are only two levers: grow your assets or reduce your liabilities. Here are practical ways:</p>
+    <h2>💡 Why Net Worth Matters More Than Your Salary</h2>
+    <p>Salary tells you what you earn. Net worth tells you what you've built. The difference is enormous — and understanding it changes how you make financial decisions.</p>
 
-    <div class="tips-grid">
-      <div class="tip-card">
-        <div class="tip-icon">💰</div>
-        <h4>Build an Emergency Fund</h4>
-        <p>Keep 6 months of expenses in a savings account or liquid fund. This stops you from borrowing during emergencies.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="wc-icon">📈</div>
+        <h4>Tracks Real Financial Progress</h4>
+        <p>Your salary can stay flat while your net worth grows (through investing), or your salary can rise while net worth stays stagnant (through lifestyle inflation). Net worth shows the truth.</p>
       </div>
-      <div class="tip-card">
-        <div class="tip-icon">🔥</div>
-        <h4>Pay Off High-Interest Debt</h4>
-        <p>Credit cards (36%), personal loans (14–18%) destroy wealth. Pay these off first before investing.</p>
+      <div class="why-card">
+        <div class="wc-icon">🏦</div>
+        <h4>Reveals Your True Wealth</h4>
+        <p>Two people earning ₹20 LPA can differ by ₹50+ lakhs in net worth. Net worth captures the impact of savings habits, debt decisions, and investment choices over years — salary doesn't.</p>
       </div>
-      <div class="tip-card">
-        <div class="tip-icon">📈</div>
-        <h4>Start a Monthly SIP</h4>
-        <p>Even ₹5,000/month in an index fund grows to ₹50+ lakhs in 20 years at 12% returns.</p>
+      <div class="why-card">
+        <div class="wc-icon">🎯</div>
+        <h4>Drives Better Goal Planning</h4>
+        <p>Every financial goal — retirement, home purchase, children's education, financial freedom — is defined by a net worth number, not a salary number. Planning starts with knowing your current position.</p>
       </div>
-      <div class="tip-card">
-        <div class="tip-icon">🏠</div>
-        <h4>Own Appreciating Assets</h4>
-        <p>Stocks, mutual funds, and property appreciate. Cars and electronics depreciate. Choose wisely.</p>
+      <div class="why-card">
+        <div class="wc-icon">🛡️</div>
+        <h4>Measures Financial Resilience</h4>
+        <p>How long could you survive without income? Net worth answers this. A high net worth means financial stability even through job loss, illness, or unexpected expenses.</p>
       </div>
-      <div class="tip-card">
-        <div class="tip-icon">📊</div>
-        <h4>Track Monthly</h4>
-        <p>What gets measured gets managed. Check your net worth every month — it becomes a habit.</p>
+      <div class="why-card">
+        <div class="wc-icon">🔓</div>
+        <h4>Is the Key to Financial Freedom</h4>
+        <p>Financial freedom isn't about a high salary — it's about having a net worth large enough that your investments generate passive income to cover your expenses. That target is a net worth number.</p>
       </div>
-      <div class="tip-card">
-        <div class="tip-icon">🛡️</div>
-        <h4>Get Insurance</h4>
-        <p>Term life + health insurance protects your family's net worth from unexpected events.</p>
+      <div class="why-card">
+        <div class="wc-icon">🧠</div>
+        <h4>Changes Financial Behaviour</h4>
+        <p>People who track net worth monthly naturally spend less impulsively, invest more consistently, and pay down debt faster. Measurement creates accountability and motivation.</p>
       </div>
     </div>
   </div>
 
-  <!-- FAQ -->
-  <div class="faq" itemscope itemtype="https://schema.org/FAQPage">
+  <!-- ═══ BENCHMARKS ═══ -->
+  <div class="content-section">
+    <h2>📊 What is a Good Net Worth in India? (Age-wise Benchmarks)</h2>
+    <p>There's no single "correct" net worth — but here are widely-used benchmarks as a multiple of annual income. These are rough guides; your personal situation matters more than hitting a number.</p>
+
+    <table class="bench-table">
+      <thead>
+        <tr><th>Age Group</th><th>Target Net Worth</th><th>What to Focus On</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>22–27</td><td>0.5–1× annual income</td><td>Build emergency fund, start first SIP, avoid lifestyle debt</td></tr>
+        <tr><td>27–32</td><td>1–3× annual income</td><td>Maximise savings rate, pay off personal loans, get insured</td></tr>
+        <tr><td>32–38</td><td>3–6× annual income</td><td>Compounding kicks in — keep investing consistently</td></tr>
+        <tr><td>38–45</td><td>6–10× annual income</td><td>Peak earning years — aggressively build corpus</td></tr>
+        <tr><td>45–55</td><td>10–15× annual income</td><td>Shift to capital preservation, plan retirement</td></tr>
+        <tr><td>55+</td><td>15–25× annual expenses</td><td>Retirement corpus = 25–30× annual expenses at 4% withdrawal rate</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:14px;font-size:.85rem;color:var(--muted)">Note: These benchmarks assume a consistent career income. If you started investing late or had setbacks, don't be discouraged. What matters most is the direction — net worth trending upward year over year is the real goal.</p>
+  </div>
+
+  <!-- ═══ HOW TO IMPROVE ═══ -->
+  <div class="content-section">
+    <h2>🚀 How to Improve Your Net Worth in India</h2>
+    <p>There are only two levers to improve net worth: <strong>grow your assets</strong> or <strong>reduce your liabilities</strong>. The most powerful approach is doing both simultaneously. Here's how:</p>
+
+    <div class="improve-grid">
+      <div class="improve-card">
+        <div class="ic-icon">💸</div>
+        <div>
+          <h4>Increase Your Savings Rate</h4>
+          <p>Save at least 20–30% of take-home income. Every extra rupee saved today is a seed for compounding. The savings rate matters more than investment returns in the early years.</p>
+        </div>
+      </div>
+      <div class="improve-card">
+        <div class="ic-icon">🔥</div>
+        <div>
+          <h4>Eliminate High-Interest Debt First</h4>
+          <p>Credit cards (24–42% p.a.) and personal loans (12–18% p.a.) are wealth destroyers. Pay these off completely before investing. Clearing ₹1L in 36% credit card debt is a guaranteed 36% return.</p>
+        </div>
+      </div>
+      <div class="improve-card">
+        <div class="ic-icon">📈</div>
+        <div>
+          <h4>Start or Increase Monthly SIPs</h4>
+          <p>Investing ₹10,000/month in a Nifty 50 index fund at 12% CAGR grows to over ₹1 crore in 20 years. The key is starting early and staying consistent — don't pause SIPs in market dips.</p>
+        </div>
+      </div>
+      <div class="improve-card">
+        <div class="ic-icon">🏠</div>
+        <div>
+          <h4>Own Appreciating Assets</h4>
+          <p>Stocks, mutual funds, gold, and well-located real estate appreciate over time. Cars, electronics, and gadgets depreciate to near zero. Shift your asset mix toward appreciating assets.</p>
+        </div>
+      </div>
+      <div class="improve-card">
+        <div class="ic-icon">🛡️</div>
+        <div>
+          <h4>Get Adequate Insurance</h4>
+          <p>A single uninsured medical emergency can destroy years of wealth building. Term life + health insurance costs very little relative to the risk they protect against. Insure first, invest second.</p>
+        </div>
+      </div>
+      <div class="improve-card">
+        <div class="ic-icon">📅</div>
+        <div>
+          <h4>Track Monthly Without Fail</h4>
+          <p>Set a recurring reminder on the 1st of every month. Update asset values and recalculate. People who track their net worth regularly build wealth 2–3× faster than those who don't — measurement creates motivation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FAQ ═══ -->
+  <div class="content-section" itemscope itemtype="https://schema.org/FAQPage">
     <h2>❓ Frequently Asked Questions</h2>
 
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What should I include in assets?</div>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Include everything you own that has monetary value: bank savings, fixed deposits, mutual funds, stocks, EPF/PPF balance, NPS, real estate (market value), gold/jewellery, vehicles, and any other investments.</div></div>
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What is net worth?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div itemprop="text">Net worth is the total value of everything you own (assets) minus everything you owe (liabilities). It is the most comprehensive and honest single measure of your financial health — more meaningful than salary, bank balance, or income alone. A positive net worth means your assets exceed your debts; a negative net worth means your debts currently exceed your assets.</div>
+      </div>
     </div>
 
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What counts as liabilities?</div>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Any money you owe: home loan outstanding, car loan, personal loan, gold loan, education loan, credit card dues, EMIs on purchases, and any borrowed money from family or friends.</div></div>
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">How to calculate net worth in India?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div itemprop="text">To calculate net worth in India: (1) Add up all assets — savings accounts, FDs, mutual funds, stocks, EPF/PPF, NPS, gold, real estate market value, vehicle resale value; (2) Add up all liabilities — home loan outstanding, car loan, personal loan, credit card dues, any other debts; (3) Net Worth = Total Assets − Total Liabilities. Use today's market values for assets, not original purchase prices.</div>
+      </div>
     </div>
 
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Is negative net worth bad?</div>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Not necessarily. If you recently took a home loan, your net worth will likely be negative. That's normal. What matters is the trend — your net worth should increase every year. Focus on paying down debt and building assets.</div></div>
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What is a good net worth in India?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div itemprop="text">A commonly used benchmark: net worth should be approximately 1–3× annual income by age 30, 3–6× by age 35, and 6–10× by age 45. For retirement readiness, target 25–30× your annual expenses. However, the most important thing is not the absolute number but consistent upward growth — your net worth should increase meaningfully every year.</div>
+      </div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Does salary affect net worth?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div itemprop="text">Salary provides the raw material to build net worth, but it does not determine it. What matters is how much of your income you save and invest. Two people earning the same salary can have vastly different net worths — entirely due to spending habits, debt decisions, and investment consistency. Net worth is what you keep, not what you earn.</div>
+      </div>
     </div>
 
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">How often should I calculate my net worth?</div>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Once a month is ideal. It takes just 5 minutes and helps you see real progress. Our dashboard makes it automatic — just update your asset values and it tracks everything.</div></div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div itemprop="text">Once a month is ideal. On the 1st of each month, update your asset values (check mutual fund NAVs, stock portfolio, and loan outstanding) and recalculate your net worth. It takes 5–10 minutes and provides the monthly financial check-in that most wealth builders swear by.</div>
+      </div>
     </div>
 
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What's a good net worth for my age in India?</div>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">A common benchmark is your net worth should be at least your annual income multiplied by your age divided by 10. For example, if you're 30 and earn ₹12L/year, target ₹36L. But don't compare — focus on growing yours consistently.</div></div>
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Should I include my house in net worth?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div itemprop="text">Yes — include your home's current market value (not purchase price) in assets, and your outstanding home loan in liabilities. The difference is your home equity, which counts toward net worth. Remember that your primary residence is an illiquid asset, so also track your liquid net worth (financial assets minus debts) separately for planning purposes.</div>
+      </div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Is negative net worth bad?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div itemprop="text">Not necessarily — it depends on why it's negative. If you recently took a home loan for a property that will appreciate, your net worth will be temporarily negative but improving over time. However, if it's negative due to credit card debt or personal loans, those are urgent problems to fix. The key is whether your net worth is improving each month.</div>
+      </div>
     </div>
   </div>
 
-  <!-- Final CTA -->
-  <div class="cta-banner" style="margin-top:40px">
-    <h3>Ready to track your net worth seriously?</h3>
-    <p>Stop guessing. Our dashboard tracks every asset, liability, goal, and insurance — individually and as a family. Free forever.</p>
-    <a href="/" class="cta-btn">Start Tracking for Free →</a>
+  <!-- ═══ INTERNAL LINKS — OTHER TOOLS ═══ -->
+  <div class="content-section">
+    <h2>🔧 More Free Financial Calculators</h2>
+    <p>Net worth is one piece of the financial picture. These tools help with the rest:</p>
+    <div class="tools-link-grid">
+      <a href="/emergency-fund-calculator" class="tool-link-card">
+        <div class="tlc-icon">🛟</div>
+        <div class="tlc-body">
+          <h4>Emergency Fund Calculator</h4>
+          <p>How much safety net do you need? Calculate the right target based on your monthly expenses and income stability.</p>
+        </div>
+      </a>
+      <a href="/house-down-payment-calculator" class="tool-link-card">
+        <div class="tlc-icon">🏠</div>
+        <div class="tlc-body">
+          <h4>House Down Payment Calculator</h4>
+          <p>Planning to buy a home in India? Find out how much you need for the down payment and how long it will take to save up.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ═══ RELATED READING ═══ -->
+  <div class="content-section">
+    <h2>📚 Related Guides</h2>
+    <div class="tips-grid">
+      <a href="/blog/how-to-calculate-net-worth" class="tip-card" style="text-decoration:none">
+        <div class="tip-icon">📖</div>
+        <h4>How to Calculate Net Worth in India (Full Guide)</h4>
+        <p>Detailed step-by-step article with a full Indian household example, age benchmarks, and tracking tips.</p>
+      </a>
+      <a href="/blog/net-worth-vs-salary" class="tip-card" style="text-decoration:none">
+        <div class="tip-icon">💡</div>
+        <h4>Why Net Worth Matters More Than Salary</h4>
+        <p>Same salary, ₹51 lakh difference in wealth. This article explains the mindset shift that changes everything.</p>
+      </a>
+      <a href="/blog/financial-freedom-steps" class="tip-card" style="text-decoration:none">
+        <div class="tip-icon">🚀</div>
+        <h4>5 Steps to Financial Freedom in India</h4>
+        <p>Tracking your net worth is Step 1. Here's the complete roadmap from safety net to financial freedom.</p>
+      </a>
+      <a href="/blog/emergency-fund-guide" class="tip-card" style="text-decoration:none">
+        <div class="tip-icon">🛟</div>
+        <h4>Emergency Fund Guide: How Much Do You Need?</h4>
+        <p>Before investing to grow net worth, protect it from emergencies. A complete planning guide.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- ═══ FINAL CTA ═══ -->
+  <div class="cta-banner">
+    <h3>Track your net worth over time — free, forever</h3>
+    <p>A single calculation is a snapshot. Our dashboard tracks every asset, liability, goal, and insurance policy individually — so you can watch your net worth grow month by month, with charts and trends built in.</p>
+    <a href="/app" class="btn btn-primary btn-lg">Open Dashboard — It's Free →</a>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Disclaimer:</strong> This net worth calculator and all content on this page are for informational and educational purposes only. Results are estimates based on the values you enter and do not constitute financial, investment, or tax advice. Please consult a SEBI-registered financial advisor before making major financial decisions. NetWorth is not a financial institution or licensed advisor.
   </div>
 
 </div>
+</main>
 
-<!-- Footer -->
-<div class="footer">
-  <p>💰 NetWorth — Track your financial health, simply.</p>
-  <p style="margin-top:4px"><a href="/">Dashboard</a> · <a href="/net-worth-calculator">Calculator</a></p>
-</div>
+<footer class="site-footer"><div class="footer-inner footer-grid">
+  <div class="footer-about">
+    <div class="footer-brand">💰 NetWorth</div>
+    <p class="footer-desc">Free personal finance platform for Indians. Track net worth, plan goals, and build wealth with simple tools and guides.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Free Tools</h4>
+    <a href="/net-worth-calculator">Net Worth Calculator</a>
+    <a href="/emergency-fund-calculator">Emergency Fund Calculator</a>
+    <a href="/house-down-payment-calculator">Down Payment Calculator</a>
+    <a href="/app">Dashboard</a>
+  </div>
+  <div class="footer-col">
+    <h4>Learn</h4>
+    <a href="/blog">All Articles</a>
+    <a href="/blog/how-to-calculate-net-worth">How to Calculate Net Worth</a>
+    <a href="/blog/emergency-fund-guide">Emergency Fund Guide</a>
+    <a href="/blog/financial-freedom-steps">Steps to Financial Freedom</a>
+    <a href="/blog/net-worth-vs-salary">Net Worth vs Salary</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/about">About</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+  </div>
+</div><div class="footer-bottom">
+  <p>&copy; 2026 NetWorth. All rights reserved. Built with &#10084;&#65039; in India.</p>
+</div></footer>
 
 <script>
-function parseNum(s){return Number(s.replace(/[^0-9.-]/g,''))||0}
 function fmt(n){
   if(n==null||isNaN(n))return'₹0';
-  const a=Math.abs(n);let s;
-  if(a>=1e7)s='₹'+(a/1e7).toFixed(2)+' Cr';
-  else if(a>=1e5)s='₹'+(a/1e5).toFixed(2)+' L';
+  const a=Math.abs(n);
+  let s;
+  if(a>=1e7) s='₹'+(a/1e7).toFixed(2)+' Cr';
+  else if(a>=1e5) s='₹'+(a/1e5).toFixed(2)+' L';
   else s='₹'+a.toLocaleString('en-IN');
   return n<0?'−'+s:s;
 }
-function formatInput(el){
-  const raw=el.value.replace(/[^0-9]/g,'');
-  if(!raw){el.value='';return 0}
-  const num=parseInt(raw,10);
-  el.value=num.toLocaleString('en-IN');
-  return num;
+function fmtInput(el){
+  const r=el.value.replace(/[^0-9]/g,'');
+  if(!r){el.value='';return 0;}
+  const n=parseInt(r,10);
+  el.value=n.toLocaleString('en-IN');
+  return n;
 }
 function calc(){
-  const aEl=document.getElementById('assets');
-  const lEl=document.getElementById('liabilities');
-  const a=formatInput(aEl);
-  const l=formatInput(lEl);
+  const a=fmtInput(document.getElementById('assets'));
+  const l=fmtInput(document.getElementById('liabs'));
   const nw=a-l;
 
-  document.getElementById('aPreview').textContent=a>0?fmt(a):'';
-  document.getElementById('lPreview').textContent=l>0?fmt(l):'';
-  document.getElementById('fA').textContent=fmt(a);
-  document.getElementById('fL').textContent=fmt(l);
-  document.getElementById('fN').textContent=fmt(nw);
+  document.getElementById('aP').textContent=a>0?fmt(a):'';
+  document.getElementById('lP').textContent=l>0?fmt(l):'';
+  document.getElementById('fA').textContent='Assets: '+fmt(a);
+  document.getElementById('fL').textContent='Liabilities: '+fmt(l);
+  document.getElementById('fN').textContent='Net Worth: '+fmt(nw);
 
-  const res=document.getElementById('result');
-  const val=document.getElementById('nwValue');
-  const sub=document.getElementById('nwSub');
-  const bar=document.getElementById('nwBar');
+  const res=document.getElementById('res');
+  const val=document.getElementById('nwV');
+  const sub=document.getElementById('nwS');
+  const bar=document.getElementById('nwB');
+  const insight=document.getElementById('insight');
+  const insTitle=document.getElementById('insightTitle');
+  const insText=document.getElementById('insightText');
 
   val.textContent=fmt(nw);
-  res.className='result '+(nw>0?'positive':nw<0?'negative':'zero');
 
   if(a===0&&l===0){
-    sub.textContent='Enter your assets and liabilities above';
+    res.className='calc-result neutral';
+    sub.textContent='Enter your assets and liabilities above to calculate';
     bar.style.width='50%';
-  }else if(nw>0){
-    const ratio=a>0?Math.round(nw/a*100):0;
-    sub.textContent='You own '+ratio+'% more than you owe. Keep building! 💪';
-    bar.style.width=Math.min(95,Math.max(5,Math.round(a/(a+l)*100)))+'%';
-  }else if(nw<0){
-    sub.textContent='Your liabilities exceed your assets. Focus on paying down debt.';
-    bar.style.width=Math.min(45,Math.max(5,Math.round(a/(a+l)*100)))+'%';
-  }else{
-    sub.textContent='You\'re at breakeven — everything you own covers everything you owe.';
-    bar.style.width='50%';
+    insight.style.display='none';
+    return;
   }
+
+  if(nw>0){
+    res.className='calc-result positive';
+    const pct=Math.round(nw/a*100);
+    sub.textContent='You own '+pct+'% more than you owe.';
+    bar.style.width=Math.min(95,Math.max(5,Math.round(a/(a+l)*100)))+'%';
+    insight.className='result-insight ins-pos';
+    insTitle.textContent='✅ You are building wealth.';
+    insText.textContent='Your net worth is positive — assets exceed liabilities. Keep investing consistently, reduce any remaining debts, and track monthly to watch this number grow. Consider setting a target of growing your net worth by 15–20% per year.';
+  } else if(nw<0){
+    res.className='calc-result negative';
+    sub.textContent='Your liabilities exceed your assets by '+fmt(Math.abs(nw));
+    bar.style.width=Math.min(45,Math.max(2,Math.round(a/(a+l)*100)))+'%';
+    insight.className='result-insight ins-neg';
+    insTitle.textContent='⚠️ Focus on reducing liabilities.';
+    insText.textContent='A negative net worth is common — especially with home loans, education loans, or early career debts. The fix: stop accumulating new high-interest debt, aggressively pay off credit cards and personal loans, and start any investment you can even if small. Your net worth will turn positive as you pay down debt.';
+  } else {
+    res.className='calc-result neutral';
+    sub.textContent='You are at breakeven — assets equal liabilities.';
+    bar.style.width='50%';
+    insight.className='result-insight ins-neutral';
+    insTitle.textContent='📊 You\'re at breakeven.';
+    insText.textContent='Everything you own just covers everything you owe. This is a turning point — any savings or investment from here builds positive net worth. Focus on paying down the highest-interest debt first while starting even a small monthly SIP.';
+  }
+  insight.style.display='block';
 }
 </script>
-
 </body>
 </html>

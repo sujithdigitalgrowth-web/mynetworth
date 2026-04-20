@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | NetWorth — Personal Finance Guides for Indians</title>
+<meta name="description" content="Simple, practical personal finance articles. Learn about net worth, emergency funds, investing, and financial planning for Indians.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mynetworth.vercel.app/blog">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.blog-list{display:grid;gap:20px;margin-top:32px}
+.bl-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;display:flex;gap:24px;text-decoration:none;transition:border-color .2s}
+.bl-card:hover{border-color:rgba(59,130,246,.3);text-decoration:none}
+.bl-icon{font-size:2.4rem;flex-shrink:0;width:60px;height:60px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:12px}
+.bl-body{flex:1}
+.bl-tag{display:inline-block;padding:3px 8px;border-radius:5px;font-size:.65rem;font-weight:600;text-transform:uppercase;margin-bottom:8px}
+.bl-card h3{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.4}
+.bl-card p{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.bl-meta{font-size:.72rem;color:var(--muted)}
+.bl-read{color:var(--blue);font-size:.82rem;font-weight:600}
+@media(max-width:600px){.bl-card{flex-direction:column;gap:12px}.bl-icon{width:48px;height:48px;font-size:1.6rem}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo">💰 NetWorth</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="this.parentElement.classList.toggle('mob-open')">Tools &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
+        <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
+        <a href="/house-down-payment-calculator">&#127968; Down Payment Calculator</a>
+      </div>
+    </div>
+    <a href="/blog" class="active">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/app" class="nav-cta">Open Dashboard</a>
+  </div>
+  <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
+</div></nav>
+
+<main>
+<div class="container" style="padding-top:40px;padding-bottom:60px">
+
+  <div class="page-hero" style="padding-top:0">
+    <h1>Personal Finance <span class="accent">Blog</span></h1>
+    <p>Simple, practical guides to help you understand money, build wealth, and plan your financial future. No jargon, no fluff.</p>
+  </div>
+
+  <div class="blog-list">
+
+    <a href="/blog/how-to-calculate-net-worth" class="bl-card">
+      <div class="bl-icon">🧮</div>
+      <div class="bl-body">
+        <span class="bl-tag" style="background:rgba(34,197,94,.1);color:var(--green)">Guide</span>
+        <h3>How to Calculate Your Net Worth in India</h3>
+        <p>A step-by-step guide to figuring out your exact financial position. What to include, what to skip, and how to track it over time.</p>
+        <span class="bl-meta">8 min read</span>
+      </div>
+    </a>
+
+    <a href="/blog/emergency-fund-guide" class="bl-card">
+      <div class="bl-icon">🛟</div>
+      <div class="bl-body">
+        <span class="bl-tag" style="background:rgba(59,130,246,.1);color:var(--blue)">Planning</span>
+        <h3>Emergency Fund: How Much Do You Really Need?</h3>
+        <p>The complete guide to building your financial safety net. How much, where to keep it, and how to build it from scratch.</p>
+        <span class="bl-meta">7 min read</span>
+      </div>
+    </a>
+
+    <a href="/blog/financial-freedom-steps" class="bl-card">
+      <div class="bl-icon">🚀</div>
+      <div class="bl-body">
+        <span class="bl-tag" style="background:rgba(168,85,247,.1);color:var(--purple)">Strategy</span>
+        <h3>5 Simple Steps to Financial Freedom in India</h3>
+        <p>A practical roadmap anyone can follow — from tracking your net worth to building passive income. No complicated strategies needed.</p>
+        <span class="bl-meta">10 min read</span>
+      </div>
+    </a>
+
+    <a href="/blog/net-worth-vs-salary" class="bl-card">
+      <div class="bl-icon">💡</div>
+      <div class="bl-body">
+        <span class="bl-tag" style="background:rgba(245,158,11,.1);color:var(--orange)">Mindset</span>
+        <h3>Why Your Net Worth Matters More Than Your Salary</h3>
+        <p>Your income isn't your wealth. Learn why the richest people focus on net worth, not monthly income, and how you can shift your mindset.</p>
+        <span class="bl-meta">6 min read</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="cta-banner" style="margin-top:48px">
+    <h3>Ready to take action?</h3>
+    <p>Stop reading about money and start tracking it. Our free dashboard helps you see your full financial picture.</p>
+    <a href="/app" class="btn btn-primary">Open Dashboard — Free →</a>
+  </div>
+
+  <!-- Free Tools Callout -->
+  <div class="content-section" style="margin-top:48px">
+    <h2>📐 Free Financial Calculators</h2>
+    <p>Alongside our guides, we provide free, easy-to-use calculators built for Indian personal finance. No signup needed.</p>
+    <div class="tips-grid">
+      <a href="/net-worth-calculator" class="tip-card" style="text-decoration:none">
+        <div class="tip-icon">🧮</div>
+        <h4>Net Worth Calculator</h4>
+        <p>Assets minus liabilities. Find out exactly where you stand financially in under 2 minutes.</p>
+      </a>
+      <a href="/emergency-fund-calculator" class="tip-card" style="text-decoration:none">
+        <div class="tip-icon">🛟</div>
+        <h4>Emergency Fund Calculator</h4>
+        <p>How many months of safety net do you need? Calculate based on your actual expenses.</p>
+      </a>
+      <a href="/house-down-payment-calculator" class="tip-card" style="text-decoration:none">
+        <div class="tip-icon">🏠</div>
+        <h4>Down Payment Calculator</h4>
+        <p>Planning to buy a home? Find out how much to save and how long it will take.</p>
+      </a>
+      <a href="/app" class="tip-card" style="text-decoration:none">
+        <div class="tip-icon">📊</div>
+        <h4>Personal Finance Dashboard</h4>
+        <p>Track your net worth, assets, goals, insurance, and family finances in one free dashboard.</p>
+      </a>
+    </div>
+  </div>
+
+  <p style="font-size:.75rem;color:var(--muted);text-align:center;margin-top:32px;line-height:1.6">All articles on NetWorth are for informational and educational purposes only. They do not constitute financial, investment, or tax advice. Always consult a qualified financial professional before making major financial decisions.</p>
+
+</div>
+</main>
+
+<footer class="site-footer"><div class="footer-inner footer-grid">
+  <div class="footer-about">
+    <div class="footer-brand">💰 NetWorth</div>
+    <p class="footer-desc">Free personal finance platform for Indians. Track net worth, plan goals, and build wealth with simple tools and guides.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Free Tools</h4>
+    <a href="/net-worth-calculator">Net Worth Calculator</a>
+    <a href="/emergency-fund-calculator">Emergency Fund Calculator</a>
+    <a href="/house-down-payment-calculator">Down Payment Calculator</a>
+    <a href="/app">Dashboard</a>
+  </div>
+  <div class="footer-col">
+    <h4>Learn</h4>
+    <a href="/blog">All Articles</a>
+    <a href="/blog/how-to-calculate-net-worth">How to Calculate Net Worth</a>
+    <a href="/blog/emergency-fund-guide">Emergency Fund Guide</a>
+    <a href="/blog/financial-freedom-steps">Steps to Financial Freedom</a>
+    <a href="/blog/net-worth-vs-salary">Net Worth vs Salary</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/about">About</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+  </div>
+</div><div class="footer-bottom">
+  <p>&copy; 2026 NetWorth. All rights reserved. Built with &#10084;&#65039; in India.</p>
+</div></footer>
+
+</body>
+</html>
