@@ -1839,13 +1839,15 @@ function openMo(type,owner,id){
   mCtx={type,owner:item?item.owner:owner,id,col,isE};
   document.getElementById('moTitle').textContent=(isE?'Edit ':'Add ')+type.charAt(0).toUpperCase()+type.slice(1);
   document.getElementById('delBtn').style.display=isE?'block':'none';
-  const oo=S.meta.sp?'<option value="self" '+(mCtx.owner==='self'?'selected':'')+'>'+esc(gn('self'))+'</option><option value="spouse" '+(mCtx.owner==='spouse'?'selected':'')+'>'+esc(gn('spouse'))+'</option><option value="joint" '+(mCtx.owner==='joint'?'selected':'')+'>Joint</option>':'<option value="self" selected>'+esc(gn('self'))+'</option>';
+  const oo=S.meta.sp?'<option value="self" '+(mCtx.owner==='self'||mCtx.owner==='joint'?'selected':'')+'>'+esc(gn('self'))+'</option><option value="spouse" '+(mCtx.owner==='spouse'?'selected':'')+'>'+esc(gn('spouse'))+'</option>':'<option value="self" selected>'+esc(gn('self'))+'</option>';
+  const isJoint=mCtx.owner==='joint';
   let h='';
   if(type==='asset'){const a=item||{};
     h='<div class="fg"><label>Asset Name</label><input id="f_name" value="'+esc(a.name||'')+'" placeholder="e.g. HDFC Savings"></div>'+
-    '<div class="fr"><div class="fg"><label>Category</label><select id="f_cat">'+ACAT.map(c=>'<option '+(a.category===c?'selected':'')+'>'+c+'</option>').join('')+'</select></div><div class="fg"><label>Owner</label><select id="f_own">'+oo+'</select></div></div>'+
+    '<div class="fr"><div class="fg"><label>Category</label><select id="f_cat">'+ACAT.map(c=>'<option '+(a.category===c?'selected':'')+'>'+c+'</option>').join('')+'</select></div><div class="fg"><label>Owner</label><select id="f_own"'+(isJoint?' disabled style="opacity:.5"':'')+'>'+oo+'</select>'+
+    (S.meta.sp?'<div style="display:flex;align-items:center;gap:8px;margin-top:6px"><input type="checkbox" id="f_joint" style="accent-color:var(--purple);cursor:pointer"'+(isJoint?' checked':'')+' onchange="toggleJoint()"><label for="f_joint" style="font-size:.72rem;color:var(--purple);cursor:pointer;margin:0;font-weight:600">\u{1F91D} Joint asset (shared ownership)</label></div>':'')+'</div></div>'+
     '<div class="fr"><div class="fg"><label>Invested Amount (\u20B9)</label><input id="f_inv" type="number" value="'+(a.invested||'')+'"></div><div class="fg"><label>Current Value (\u20B9)</label><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><input type="checkbox" id="f_same" style="accent-color:var(--blue);cursor:pointer"'+(a.invested&&a.currentValue&&a.invested===a.currentValue?' checked':'')+' onchange="toggleSameVal()"><label for="f_same" style="font-size:.72rem;color:var(--muted);cursor:pointer;margin:0">Same as invested</label></div><input id="f_cur" type="number" value="'+(a.currentValue||'')+'"'+(a.invested&&a.currentValue&&a.invested===a.currentValue?' disabled style=\"opacity:.5\"':'')+'></div></div>'+
-    '<div class="fr" id="cRow" style="display:'+(mCtx.owner==='joint'?'grid':'none')+'"><div class="fg"><label>Self Contribution %</label><input id="f_sc" type="number" value="'+(a.selfC||50)+'" min="0" max="100"></div><div class="fg"><label>Spouse Contribution %</label><input id="f_spc" type="number" value="'+(a.spouseC||50)+'" min="0" max="100"></div></div>'+
+    '<div class="fr" id="cRow" style="display:'+(isJoint?'grid':'none')+'"><div class="fg"><label>Self Contribution %</label><input id="f_sc" type="number" value="'+(a.selfC||50)+'" min="0" max="100"></div><div class="fg"><label>Spouse Contribution %</label><input id="f_spc" type="number" value="'+(a.spouseC||50)+'" min="0" max="100"></div></div>'+
     '<div class="fg"><label>Last Updated</label><input id="f_upd" type="date" value="'+(a.updated||td())+'"></div>'}
   else if(type==='liability'){const l=item||{};
     h='<div class="fg"><label>Liability Name</label><input id="f_name" value="'+esc(l.name||'')+'" placeholder="e.g. Home Loan"></div>'+
@@ -1872,18 +1874,17 @@ function openMo(type,owner,id){
     '<div class="fg"><label>Expiry Date</label><input id="f_exp" type="date" value="'+(p.expiry||'')+'"></div>'}
   document.getElementById('moFields').innerHTML=h;
   document.getElementById('moOverlay').classList.add('active');
-  const os=document.getElementById('f_own');
-  if(os&&type==='asset')os.addEventListener('change',()=>{const cr=document.getElementById('cRow');if(cr)cr.style.display=os.value==='joint'?'grid':'none'});
   if(type==='asset'){const cb2=document.getElementById('f_same');if(cb2&&cb2.checked){document.getElementById('f_inv').addEventListener('input',syncInvToCur)}}
   setTimeout(()=>{document.querySelector('#moFields input')?.focus();attachAmtPreview()},50);
 }
 function closeMo(){document.getElementById('moOverlay').classList.remove('active');mCtx=null}
+function toggleJoint(){const cb=document.getElementById('f_joint');const own=document.getElementById('f_own');const cr=document.getElementById('cRow');if(cb&&cb.checked){own.disabled=true;own.style.opacity='.5';if(cr)cr.style.display='grid'}else{own.disabled=false;own.style.opacity='';if(cr)cr.style.display='none'}}
 function toggleSameVal(){const cb=document.getElementById('f_same');const cur=document.getElementById('f_cur');const inv=document.getElementById('f_inv');if(cb.checked){cur.value=inv.value;cur.disabled=true;cur.style.opacity='.5';inv.addEventListener('input',syncInvToCur)}else{cur.disabled=false;cur.style.opacity='';inv.removeEventListener('input',syncInvToCur)}attachAmtPreview()}
 function syncInvToCur(){const cb=document.getElementById('f_same');if(cb&&cb.checked){document.getElementById('f_cur').value=document.getElementById('f_inv').value;attachAmtPreview()}}
 function v(id){const el=document.getElementById(id);return el?el.value.trim():''}
 function n(id){return Number(v(id))||0}
 function saveMo(){
-  if(!mCtx)return;const{type,col,id,isE}=mCtx;const name=v('f_name');if(!name)return;const owner=v('f_own')||'self';
+  if(!mCtx)return;const{type,col,id,isE}=mCtx;const name=v('f_name');if(!name)return;const jCb=document.getElementById('f_joint');const owner=jCb&&jCb.checked?'joint':(v('f_own')||'self');
   let item;
   if(type==='asset'){const sameChk=document.getElementById('f_same');const curVal=sameChk&&sameChk.checked?n('f_inv'):n('f_cur');item={id:isE?id:gid(),name,category:v('f_cat'),owner,currentValue:curVal,invested:n('f_inv'),updated:v('f_upd')||td(),selfC:n('f_sc')||50,spouseC:n('f_spc')||50}}
   else if(type==='liability')item={id:isE?id:gid(),name,type:v('f_type'),owner,total:n('f_total'),outstanding:n('f_out'),emi:n('f_emi'),rate:n('f_rate'),tenure:n('f_ten')};
