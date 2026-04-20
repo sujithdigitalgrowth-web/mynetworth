@@ -776,8 +776,10 @@ function pgOverview(){
   let h=hBanner();
   h+=sumCards();
   if(S.meta.sp){
-    h+='<div class="split tri">';
-    ['self','spouse','joint'].forEach(o=>{
+    const hasJoint2=aOf('joint')>0||lOf('joint')>0||iOf('joint')>0||eOf('joint')>0||emiOf('joint')>0;
+    const oCols=hasJoint2?['self','spouse','joint']:['self','spouse'];
+    h+='<div class="split '+(hasJoint2?'tri':'duo')+'">';
+    oCols.forEach(o=>{
       const cls=o==='self'?'h-self':o==='spouse'?'h-spouse':'h-joint';
       const a=aOf(o),l=lOf(o),nw=nwOf(o),inc=iOf(o),exp=eOf(o),emi=emiOf(o),sur=inc-exp-emi;
       const topA=S.assets.filter(x=>x.owner===o).sort((a,b)=>(b.currentValue||0)-(a.currentValue||0)).slice(0,3);
@@ -1101,10 +1103,11 @@ function sumCards(){
     '</div>';
   }else{
     const snw=nwOf('self'),spnw=nwOf('spouse'),jnw=nwOf('joint'),tnw=tNW(),ta2=tA(),tl2=tL(),ti2=tI(),te2=tEMI(),texp=tE(),sur=ti2-texp-te2;
+    const hasJ=aOf('joint')>0||lOf('joint')>0||iOf('joint')>0||eOf('joint')>0||emiOf('joint')>0;
     return'<div class="scards">'+
       '<div class="sc"><div class="sl">'+esc(gn('self'))+'\'s NW</div><div class="sv '+(snw>=0?'pos':'neg')+'">'+fmt(snw)+'</div></div>'+
       '<div class="sc"><div class="sl">'+esc(gn('spouse'))+'\'s NW</div><div class="sv '+(spnw>=0?'pos':'neg')+'">'+fmt(spnw)+'</div></div>'+
-      '<div class="sc"><div class="sl">Joint NW</div><div class="sv '+(jnw>=0?'pos':'neg')+'">'+fmt(jnw)+'</div></div>'+
+      (hasJ?'<div class="sc"><div class="sl">Joint NW</div><div class="sv '+(jnw>=0?'pos':'neg')+'">'+fmt(jnw)+'</div></div>':'')+
       '<div class="sc hero"><div class="sl">Total Family Net Worth</div><div class="sv '+(tnw>=0?'pos':'neg')+'">'+fmt(tnw)+'</div><div class="ss">Assets '+fmt(ta2)+' \u2212 Liabilities '+fmt(tl2)+'</div></div>'+
       '<div class="sc"><div class="sl">Family Assets</div><div class="sv pos">'+fmt(ta2)+'</div></div>'+
       '<div class="sc"><div class="sl">Family Liabilities</div><div class="sv neg">'+fmt(tl2)+'</div></div>'+
