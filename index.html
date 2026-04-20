@@ -289,9 +289,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
   .charts-grid,.cgrid{grid-template-columns:1fr}
   .sob{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:49}.sob.active{display:block}
 }
+.login-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;}
+.login-box{width:100%;max-width:400px;padding:40px 32px;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.4);text-align:center;margin:16px}
+.login-box h1{font-size:2rem;margin-bottom:4px;color:var(--text)}
+.login-box .sub{color:var(--muted);font-size:.88rem;margin-bottom:28px}
+.login-box .lg-field{width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.9rem;outline:none;margin-bottom:14px;box-sizing:border-box}
+.login-box .lg-field:focus{border-color:var(--blue)}
+.login-box .lg-btn{width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;margin-top:6px;transition:opacity .2s}
+.login-box .lg-btn:hover{opacity:.9}
+.login-box .lg-err{color:var(--red);font-size:.78rem;margin-top:8px;min-height:1.2em}
 </style>
 </head>
 <body>
+
+<!-- Login Screen -->
+<div class="login-screen" id="loginScreen" style="display:none">
+  <div class="login-box">
+    <div style="font-size:2.5rem;margin-bottom:8px">💰</div>
+    <h1>NetWorth</h1>
+    <p class="sub">Your personal finance dashboard</p>
+    <input class="lg-field" id="lg_name" placeholder="Your Name" autocomplete="name">
+    <input class="lg-field" id="lg_email" type="email" placeholder="Email Address" autocomplete="email">
+    <button class="lg-btn" onclick="doLogin()">Enter Dashboard →</button>
+    <div class="lg-err" id="lgErr"></div>
+  </div>
+</div>
+
 <div class="mob-hdr">
   <button class="ham" onclick="togSB()">☰</button>
   <h2 id="mobTitle">Overview</h2>
@@ -358,6 +381,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
       <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">🌓</span><span style="font-size:.82rem;font-weight:500;color:var(--text2)" id="themeLblP">Dark Mode</span></div>
       <div class="tsw" id="tSwP" onclick="togTheme()" style="cursor:pointer"></div>
     </div>
+    <div style="margin-top:16px;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">👤</span><span style="font-size:.82rem;color:var(--muted)" id="loggedInAs">Logged in as</span></div>
+      <button onclick="doLogout()" style="padding:6px 14px;background:var(--red-bg);color:var(--red);border:1px solid var(--red);border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer">Logout</button>
+    </div>
     <div class="ma" style="margin-top:20px">
       <button class="btn-c" onclick="closeProfile()">Cancel</button>
       <button class="btn-s" onclick="saveProfile()">Save Profile</button>
@@ -395,9 +422,48 @@ const ITYPS=['Term Life','Health','Vehicle','Home','Travel','Critical Illness','
 // ── Firebase Init ──
 const fbApp=firebase.initializeApp({apiKey:"AIzaSyAQw98PicAW-L-Y9pNVUBzT2FNdrlcUyWo",authDomain:"mynetworth-a4a31.firebaseapp.com",projectId:"mynetworth-a4a31",storageBucket:"mynetworth-a4a31.firebasestorage.app",messagingSenderId:"933747897994",appId:"1:933747897994:web:e05430ff1d696683871f73",measurementId:"G-34VQNGQFDY"});
 const db=firebase.firestore();
-function getSyncId(){let id=localStorage.getItem('nw_sync_id');if(!id){id='nw_'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('nw_sync_id',id)}return id}
-let syncId=getSyncId();
+function emailToDocId(email){return email.toLowerCase().trim().replace(/[^a-z0-9@.\-_]/g,'')}
+function getLoggedInUser(){const u=localStorage.getItem('nw_user');if(u)try{return JSON.parse(u)}catch(e){}return null}
+let currentUser=getLoggedInUser();
+let syncId=currentUser?emailToDocId(currentUser.email):null;
 let syncStatus='local';
+
+function doLogin(){
+  const name=document.getElementById('lg_name').value.trim();
+  const email=document.getElementById('lg_email').value.trim();
+  const err=document.getElementById('lgErr');
+  if(!name){err.textContent='Please enter your name.';return}
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Please enter a valid email.';return}
+  err.textContent='';
+  currentUser={name,email};
+  localStorage.setItem('nw_user',JSON.stringify(currentUser));
+  syncId=emailToDocId(email);
+  startApp();
+}
+function doLogout(){
+  if(!confirm('Are you sure you want to logout?'))return;
+  closeProfile();
+  currentUser=null;syncId=null;
+  localStorage.removeItem('nw_user');
+  showLoginScreen();
+}
+function showLoginScreen(){
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('app').style.display='none';
+  document.querySelector('.mob-hdr').style.display='none';
+}
+async function startApp(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('app').style.display='';
+  document.querySelector('.mob-hdr').style.display='';
+  if(!S.meta.name1&&currentUser)S.meta.name1=currentUser.name;
+  const cloud=await loadFromCloud();
+  if(cloud){S=cloud;localStorage.setItem('nw_s',JSON.stringify(S));
+    if(!S.meta.name1&&currentUser)S.meta.name1=currentUser.name;}
+  else{saveS()}
+  render();
+  if(!S.profile?.age||!S.profile?.city){setTimeout(()=>openProfile(),800)}
+}
 
 // City cost tiers
 const CITY_TIER={Mumbai:'high',Delhi:'high',Bengaluru:'high',Hyderabad:'high',Chennai:'high',Pune:'high',Kolkata:'mid',Ahmedabad:'mid',Jaipur:'mid',Kochi:'mid',Chandigarh:'mid',Vizag:'low',Indore:'low',Coimbatore:'low',Lucknow:'low',Nagpur:'low',Bhopal:'low',Patna:'low',Surat:'mid'};
@@ -487,6 +553,8 @@ function openProfile(){
   document.getElementById('pf_kids').value=p.kids||'';
   document.getElementById('pf_retAge').value=p.retAge||60;
   applyThemeToggle();
+  const lia=document.getElementById('loggedInAs');
+  if(lia&&currentUser)lia.textContent=currentUser.email;
   document.getElementById('profOverlay').classList.add('active');
 }
 function closeProfile(){document.getElementById('profOverlay').classList.remove('active')}
@@ -1445,13 +1513,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElem
 
 // ── Init ──
 applyTheme();
-(async()=>{
-  const cloud=await loadFromCloud();
-  if(cloud){const local=localStorage.getItem('nw_s');
-    if(!local||JSON.stringify(cloud)!==local){S=cloud;localStorage.setItem('nw_s',JSON.stringify(S))}}
-  updSyncBadge();render();
-  if(!S.profile?.age||!S.profile?.city){setTimeout(()=>openProfile(),800)}
-})()
+if(currentUser){startApp()}else{showLoginScreen()}
+document.getElementById('lg_email').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
 </script>
 </body>
 </html>
