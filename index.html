@@ -290,6 +290,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
   .sob{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:49}.sob.active{display:block}
 }
 .login-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;}
+
+/* Reality Check */
+.rc-section{margin-top:24px}
+.rc-title{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.rc-title h3{font-size:1.05rem;font-weight:700;color:var(--text);margin:0}
+.rc-title .rc-sub{font-size:.74rem;color:var(--muted);font-weight:400}
+.rc-list{display:flex;flex-direction:column;gap:10px}
+.rc-item{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;background:var(--card);border:1px solid var(--border);border-radius:12px;transition:border-color .2s}
+.rc-item:hover{border-color:var(--border-light)}
+.rc-item .rc-sev{flex-shrink:0;width:54px;padding:4px 0;border-radius:6px;font-size:.65rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.5px}
+.rc-sev.high{background:var(--red-bg);color:var(--red);border:1px solid var(--red)}
+.rc-sev.med{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange)}
+.rc-sev.low{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue)}
+.rc-item .rc-content{flex:1}
+.rc-item .rc-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+.rc-item .rc-msg{font-size:.85rem;color:var(--text);line-height:1.5;font-weight:500}
+.rc-item .rc-hint{font-size:.75rem;color:var(--muted);margin-top:4px;line-height:1.4}
 .login-box{width:100%;max-width:400px;padding:40px 32px;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.4);text-align:center;margin:16px}
 .login-box h1{font-size:2rem;margin-bottom:4px;color:var(--text)}
 .login-box .sub{color:var(--muted);font-size:.88rem;margin-bottom:28px}
@@ -772,10 +789,112 @@ function pgOverview(){
     h+='<div class="stitle"><span>\u{1F4A1} Quick Insights</span><span style="font-size:.72rem;color:var(--blue);cursor:pointer" onclick="nav(\'insights\')">See all \u2192</span></div>';
     h+='<div class="cgrid">'+qi.map(i=>'<div class="ins-card"><div class="ins-icon" style="background:'+i.bg+'">'+i.ic+'</div><div class="ins-body"><h5>'+i.t+'</h5><p>'+i.d+'</p></div></div>').join('')+'</div>';
   }
+  h+=genRealityCheck();
   return h;
 }
 
 // ── Summary Cards ──
+function genRealityCheck(){
+  const checks=[];
+  const name=S.meta.name1||'You';
+  const inc=tI(),exp=tE(),emi=tEMI(),sur=inc-exp-emi;
+  const ta2=tA(),tl2=tL(),nw=tNW();
+  const goals=S.goals||[];
+  const assets=S.assets||[];
+  const liabs=S.liabilities||[];
+  const insurance=S.insurance||[];
+  const expenses=S.expenses||[];
+
+  // 1. No expenses tracked
+  if(expenses.filter(e=>!e.isEMI).length===0&&inc>0){
+    checks.push({sev:'high',icon:'\u{1F6A8}',msg:name+', you haven\u2019t tracked any expenses. Your surplus of '+fmt(sur)+'/mo is likely not accurate \u2014 real surplus could be much lower.',hint:'Add your monthly expenses to see the real picture.'});
+  }else if(expenses.filter(e=>!e.isEMI).length<3&&inc>0){
+    checks.push({sev:'med',icon:'\u{1F4DD}',msg:'You\u2019ve only tracked '+expenses.filter(e=>!e.isEMI).length+' expense(s). Most people have 8\u201315 expense categories. Your '+fmt(sur)+'/mo surplus might be inflated.',hint:'Add housing, food, transport, utilities to get a real picture.'});
+  }
+
+  // 2. Illiquid assets domination
+  const illiquidCats=new Set(['Real Estate','Vehicles','Gold','Electronics']);
+  const illiquidVal=assets.filter(a=>illiquidCats.has(a.category)).reduce((s,a)=>s+(+a.currentValue||0),0);
+  if(ta2>0&&illiquidVal/ta2>0.7){
+    const pct=Math.round(illiquidVal/ta2*100);
+    checks.push({sev:'high',icon:'\u{1F512}',msg:pct+'% of your wealth ('+fmt(illiquidVal)+') is locked in illiquid assets like real estate, vehicles, or gold. If you need cash urgently, this won\u2019t help.',hint:'Consider building liquid reserves \u2014 FDs, mutual funds, or savings.'});
+  }
+
+  // 3. Emergency runway
+  const monthlyBurn=exp+emi;
+  const liquidCats=new Set(['Cash & Bank','Fixed Deposits','Mutual Funds','Stocks','Crypto']);
+  const liquidVal=assets.filter(a=>liquidCats.has(a.category)).reduce((s,a)=>s+(+a.currentValue||0),0);
+  if(monthlyBurn>0){
+    const runway=Math.floor(liquidVal/monthlyBurn);
+    if(runway<6){
+      checks.push({sev:runway<3?'high':'med',icon:'\u23F0',msg:'If your income stops today, your liquid savings ('+fmt(liquidVal)+') can cover only <b>'+runway+' month'+(runway!==1?'s':'')+'</b> of expenses. Financial advisors recommend 6\u201312 months.',hint:'Build an emergency fund of at least '+fmt(monthlyBurn*6)+' in liquid assets.'});
+    }
+  }
+
+  // 4. No insurance
+  const termLife=insurance.filter(i=>i.insType==='Term Life');
+  const health=insurance.filter(i=>i.insType==='Health');
+  if(termLife.length===0&&inc>0){
+    checks.push({sev:'high',icon:'\u{1F6E1}\ufe0f',msg:'You have no term life insurance. If something happens to you, your family has no financial safety net.',hint:'A term plan of 10\u201315x annual income ('+fmt(inc*12*10)+' \u2013 '+fmt(inc*12*15)+') is typically recommended.'});
+  }
+  if(health.length===0){
+    checks.push({sev:'med',icon:'\u{1F3E5}',msg:'No health insurance tracked. One medical emergency can wipe out months of savings.',hint:'A family health cover of \u20B910\u201320 lakhs is a good starting point.'});
+  }
+
+  // 5. Goals without progress
+  const staleGoals=goals.filter(g=>g.target>0&&(!g.current||g.current/g.target<0.1));
+  if(staleGoals.length>0){
+    const gNames=staleGoals.slice(0,2).map(g=>g.name).join(', ');
+    checks.push({sev:'med',icon:'\u{1F3AF}',msg:'Your goal'+(staleGoals.length>1?'s':'')+' \u201c'+esc(gNames)+'\u201d '+(staleGoals.length>1?'have':'has')+' less than 10% progress. Without a plan, '+(staleGoals.length>1?'they\u2019re':'it\u2019s')+' just a wish.',hint:'Set up a monthly SIP or auto-invest to make progress.'});
+  }
+
+  // 6. No active investments
+  const investCats=new Set(['Stocks','Mutual Funds','NPS','PPF/EPF','Crypto']);
+  const investVal=assets.filter(a=>investCats.has(a.category)).reduce((s,a)=>s+(+a.currentValue||0),0);
+  if(ta2>0&&investVal/ta2<0.15&&ta2>100000){
+    checks.push({sev:'med',icon:'\u{1F4B4}',msg:'Only '+Math.round(investVal/ta2*100)+'% of your wealth is in active investments. Your money is mostly sitting idle \u2014 inflation is quietly eating it.',hint:'Even starting with \u20B95,000/mo in mutual funds can make a big difference.'});
+  }
+
+  // 7. Debt-to-income ratio
+  if(inc>0&&emi/inc>0.5){
+    const pct=Math.round(emi/inc*100);
+    checks.push({sev:'high',icon:'\u26d3\ufe0f',msg:pct+'% of your income goes to EMIs. That\u2019s '+fmt(emi)+' out of '+fmt(inc)+'. You\u2019re financially stretched \u2014 any income disruption will hurt.',hint:'Try to keep EMI burden below 40% of income. Consider prepaying high-interest loans.'});
+  }else if(inc>0&&emi/inc>0.35){
+    const pct=Math.round(emi/inc*100);
+    checks.push({sev:'med',icon:'\u26d3\ufe0f',msg:pct+'% of your income goes to EMIs ('+fmt(emi)+'/mo). You\u2019re in the caution zone.',hint:'Ideal EMI-to-income ratio is below 35%. Prepay loans when possible.'});
+  }
+
+  // 8. Negative net worth
+  if(nw<0){
+    checks.push({sev:'high',icon:'\u{1F534}',msg:'Your net worth is negative ('+fmt(nw)+'). You owe more than you own. Every month without a plan takes you deeper.',hint:'Focus on paying down high-interest debt first. Even small progress matters.'});
+  }
+
+  // 9. No income tracked
+  if(S.income.length===0){
+    checks.push({sev:'high',icon:'\u{1F4B8}',msg:'You haven\u2019t added any income sources. Without this, nothing else \u2014 savings rate, surplus, runway \u2014 can be calculated.',hint:'Add your salary or primary income to unlock all insights.'});
+  }
+
+  // 10. Surplus being wasted
+  if(sur>0&&investVal<sur*3&&inc>0&&expenses.filter(e=>!e.isEMI).length>0){
+    checks.push({sev:'low',icon:'\u{1F4A4}',msg:'You have a healthy surplus of '+fmt(sur)+'/mo but your total investments are only '+fmt(investVal)+'. Where is the money going?',hint:'Automate savings \u2014 set up SIPs or recurring deposits on salary day.'});
+  }
+
+  // Sort: high > med > low
+  const sevOrder={high:0,med:1,low:2};
+  checks.sort((a,b)=>sevOrder[a.sev]-sevOrder[b.sev]);
+  const shown=checks.slice(0,5);
+
+  if(shown.length===0)return'';
+
+  let h='<div class="rc-section">';
+  h+='<div class="rc-title"><span style="font-size:1.3rem">\u{1FA9E}</span><div><h3>Reality Check</h3><div class="rc-sub">Honest insights your spreadsheet won\u2019t tell you</div></div></div>';
+  h+='<div class="rc-list">';
+  shown.forEach(c=>{
+    h+='<div class="rc-item"><span class="rc-icon">'+c.icon+'</span><div class="rc-content"><div class="rc-msg">'+c.msg+'</div><div class="rc-hint">'+c.hint+'</div></div><div class="rc-sev '+c.sev+'">'+c.sev+'</div></div>';
+  });
+  h+='</div></div>';
+  return h;
+}
 function sumCards(){
   const sp=S.meta.sp;
   if(!sp){
