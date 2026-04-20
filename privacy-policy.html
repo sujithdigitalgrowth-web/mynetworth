@@ -16,7 +16,7 @@
   <div class="nav-links">
     <a href="/">Home</a>
     <div class="nav-dropdown">
-      <button class="nav-drop-trigger" onclick="this.parentElement.classList.toggle('mob-open')">Tools &#9662;</button>
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Tools &#9662;</button>
       <div class="nav-drop-menu">
         <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
         <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
@@ -173,5 +173,6 @@
   <p>&copy; 2026 NetWorth. All rights reserved. Built with &#10084;&#65039; in India.</p>
 </div></footer>
 
+<script src="/nav.js"></script>
 </body>
 </html>
