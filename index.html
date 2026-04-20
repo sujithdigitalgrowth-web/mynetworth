@@ -358,12 +358,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
       <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">🌓</span><span style="font-size:.82rem;font-weight:500;color:var(--text2)" id="themeLblP">Dark Mode</span></div>
       <div class="tsw" id="tSwP" onclick="togTheme()" style="cursor:pointer"></div>
     </div>
-    <div style="margin-top:16px;padding:14px;background:var(--bg);border:1px solid var(--border);border-radius:10px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1rem">☁️</span><span style="font-size:.82rem;font-weight:600;color:var(--text)">Cloud Sync</span><span id="syncBadge" style="font-size:.7rem;padding:2px 8px;border-radius:20px;background:var(--blue-bg);color:var(--blue)">checking...</span></div>
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px"><label style="font-size:.72rem;color:var(--muted);white-space:nowrap">Your Sync ID</label><input id="pf_syncId" readonly style="flex:1;padding:7px 10px;background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.78rem;font-family:monospace;outline:none" onclick="this.select()"><button onclick="navigator.clipboard.writeText(document.getElementById('pf_syncId').value);this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)" style="padding:6px 12px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:.72rem;cursor:pointer;white-space:nowrap">Copy</button></div>
-      <div style="display:flex;align-items:center;gap:6px"><input id="pf_loadSyncId" placeholder="Enter another Sync ID to load data" style="flex:1;padding:7px 10px;background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.78rem;outline:none"><button onclick="switchSyncId(document.getElementById('pf_loadSyncId').value.trim())" style="padding:6px 12px;background:var(--green);color:#fff;border:none;border-radius:6px;font-size:.72rem;cursor:pointer;white-space:nowrap">Load</button></div>
-      <div style="margin-top:8px;display:flex;gap:6px"><button onclick="forceCloudLoad()" style="padding:5px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:.7rem;cursor:pointer">↓ Pull from Cloud</button><button onclick="saveS();" style="padding:5px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:.7rem;cursor:pointer">↑ Push to Cloud</button></div>
-    </div>
     <div class="ma" style="margin-top:20px">
       <button class="btn-c" onclick="closeProfile()">Cancel</button>
       <button class="btn-s" onclick="saveProfile()">Save Profile</button>
@@ -456,7 +450,7 @@ function saveS(){
   localStorage.setItem('nw_s',JSON.stringify(S));
   db.collection('users').doc(syncId).set({data:JSON.stringify(S),updated:firebase.firestore.FieldValue.serverTimestamp()}).then(()=>{syncStatus='synced';updSyncBadge()}).catch(()=>{syncStatus='offline';updSyncBadge()});
 }
-function updSyncBadge(){const el=document.getElementById('syncBadge');if(el)el.textContent=syncStatus==='synced'?'☁️ Synced':'⚠️ Local only'}
+function updSyncBadge(){}
 async function loadFromCloud(){
   try{const doc=await db.collection('users').doc(syncId).get();
   if(doc.exists){const d=JSON.parse(doc.data().data);const def=defS();for(const k of Object.keys(def))if(!(k in d))d[k]=def[k];if(!d.profile)d.profile=def.profile;syncStatus='synced';return d;}
@@ -492,8 +486,7 @@ function openProfile(){
   document.getElementById('pf_sage').value=p.spouseAge||'';
   document.getElementById('pf_kids').value=p.kids||'';
   document.getElementById('pf_retAge').value=p.retAge||60;
-  document.getElementById('pf_syncId').value=syncId;
-  applyThemeToggle();updSyncBadge();
+  applyThemeToggle();
   document.getElementById('profOverlay').classList.add('active');
 }
 function closeProfile(){document.getElementById('profOverlay').classList.remove('active')}
