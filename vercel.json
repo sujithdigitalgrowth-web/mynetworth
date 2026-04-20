@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/net-worth-calculator", "destination": "/net-worth-calculator.html" }
+  ]
+}

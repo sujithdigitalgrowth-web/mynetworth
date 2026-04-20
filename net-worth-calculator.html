@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Net Worth Calculator India | Free & Simple Tool</title>
+<meta name="description" content="Calculate your net worth in seconds. Enter your total assets and liabilities to find out where you stand financially. Free, simple, no signup needed.">
+<meta name="keywords" content="net worth calculator, net worth calculator india, calculate net worth, personal finance, assets minus liabilities">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mynetworth.vercel.app/net-worth-calculator">
+<meta property="og:title" content="Net Worth Calculator India | Free & Simple Tool">
+<meta property="og:description" content="Find your net worth in seconds. Assets minus liabilities — that's it. Free calculator for Indians.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mynetworth.vercel.app/net-worth-calculator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Net Worth Calculator India">
+<meta name="twitter:description" content="Calculate your net worth instantly. Free, no signup.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Net Worth Calculator India",
+  "description": "A free, simple net worth calculator for Indians. Enter your assets and liabilities to instantly see your net worth.",
+  "url": "https://mynetworth.vercel.app/net-worth-calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0b10;--card:#161922;--border:#232738;--text:#e8e8ec;--muted:#8b8fa0;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--orange:#f59e0b}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+
+/* Header */
+.top-bar{background:var(--card);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
+.top-bar .logo{font-size:1.1rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
+.top-bar .cta-sm{font-size:.78rem;font-weight:600;padding:8px 18px;background:var(--blue);color:#fff;border-radius:8px;text-decoration:none;transition:opacity .2s}
+.top-bar .cta-sm:hover{opacity:.85;text-decoration:none}
+
+/* Container */
+.container{max-width:760px;margin:0 auto;padding:40px 20px 60px}
+
+/* Hero */
+.hero{text-align:center;margin-bottom:40px}
+.hero h1{font-size:2rem;font-weight:800;margin-bottom:12px;line-height:1.3}
+.hero h1 span{color:var(--green)}
+.hero p{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.7}
+
+/* Calculator Card */
+.calc-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:40px;box-shadow:0 4px 24px rgba(0,0,0,.3)}
+.calc-card h2{font-size:1.1rem;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.field input{width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:1.05rem;font-weight:600;outline:none;transition:border-color .2s}
+.field input:focus{border-color:var(--blue)}
+.field .hint{font-size:.7rem;color:var(--muted);margin-top:4px}
+.field .preview{font-size:.78rem;font-weight:600;color:var(--blue);margin-top:4px;min-height:20px}
+
+/* Result */
+.result{margin-top:24px;padding:24px;border-radius:12px;text-align:center;transition:all .3s}
+.result.positive{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2)}
+.result.negative{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2)}
+.result.zero{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2)}
+.result-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.8px;font-weight:600;margin-bottom:6px}
+.result.positive .result-label{color:var(--green)}
+.result.negative .result-label{color:var(--red)}
+.result.zero .result-label{color:var(--blue)}
+.result-value{font-size:2.2rem;font-weight:800;line-height:1.2}
+.result.positive .result-value{color:var(--green)}
+.result.negative .result-value{color:var(--red)}
+.result.zero .result-value{color:var(--blue)}
+.result-sub{font-size:.8rem;color:var(--muted);margin-top:8px}
+.result-bar{height:8px;border-radius:6px;background:rgba(239,68,68,.15);margin-top:14px;overflow:hidden}
+.result-bar-fill{height:100%;border-radius:6px;background:var(--green);transition:width .5s ease}
+
+/* Formula */
+.formula{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;font-size:.82rem;color:var(--muted);flex-wrap:wrap}
+.formula span{padding:4px 10px;border-radius:6px;font-weight:600}
+.formula .f-a{background:rgba(34,197,94,.1);color:var(--green)}
+.formula .f-l{background:rgba(239,68,68,.1);color:var(--red)}
+.formula .f-n{background:rgba(59,130,246,.1);color:var(--blue)}
+
+/* CTA Banner */
+.cta-banner{background:linear-gradient(135deg,var(--card),#1a1d2e);border:1px solid var(--border);border-radius:14px;padding:28px 32px;text-align:center;margin:36px 0}
+.cta-banner h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+.cta-banner p{font-size:.88rem;color:var(--muted);margin-bottom:16px}
+.cta-btn{display:inline-block;padding:12px 32px;background:var(--blue);color:#fff;border-radius:10px;font-size:.92rem;font-weight:700;text-decoration:none;transition:all .2s}
+.cta-btn:hover{opacity:.9;transform:translateY(-1px);text-decoration:none}
+
+/* Content Sections */
+.content-section{margin-bottom:36px}
+.content-section h2{font-size:1.25rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.content-section h3{font-size:1rem;font-weight:600;margin:18px 0 8px;color:var(--text)}
+.content-section p{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:12px}
+.content-section ul{list-style:none;padding:0}
+.content-section li{font-size:.88rem;color:var(--muted);padding:8px 0;padding-left:24px;position:relative;line-height:1.6}
+.content-section li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700}
+.content-section .example-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin:14px 0;font-size:.85rem;color:var(--text);line-height:1.7}
+.content-section .example-box strong{color:var(--green)}
+
+/* Tips Grid */
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.tip-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;transition:border-color .2s}
+.tip-card:hover{border-color:var(--blue)}
+.tip-card .tip-icon{font-size:1.3rem;margin-bottom:6px}
+.tip-card h4{font-size:.82rem;font-weight:700;margin-bottom:4px;color:var(--text)}
+.tip-card p{font-size:.75rem;color:var(--muted);line-height:1.5;margin:0}
+
+/* FAQ */
+.faq{margin-top:36px}
+.faq h2{font-size:1.25rem;font-weight:700;margin-bottom:16px}
+.faq-item{border-bottom:1px solid var(--border);padding:14px 0}
+.faq-q{font-size:.9rem;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q::after{content:'+';font-size:1.1rem;color:var(--muted);transition:transform .2s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{font-size:.84rem;color:var(--muted);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+.faq-item.open .faq-a{max-height:200px;padding-top:10px}
+
+/* Footer */
+.footer{text-align:center;padding:24px;font-size:.72rem;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
+
+@media(max-width:600px){
+  .container{padding:24px 16px 40px}
+  .hero h1{font-size:1.5rem}
+  .calc-card{padding:22px 18px}
+  .result-value{font-size:1.6rem}
+  .tips-grid{grid-template-columns:1fr}
+  .formula{font-size:.72rem}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="top-bar">
+  <a href="/" class="logo">💰 NetWorth</a>
+  <a href="/" class="cta-sm">Open Dashboard →</a>
+</div>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Net Worth <span>Calculator</span></h1>
+    <p>Your net worth is everything you own minus everything you owe. It's the single most honest number about your financial health. Calculate yours in 10 seconds.</p>
+  </div>
+
+  <!-- Calculator -->
+  <div class="calc-card">
+    <h2>🧮 Calculate Your Net Worth</h2>
+
+    <div class="field">
+      <label>Total Assets (₹)</label>
+      <input type="text" id="assets" inputmode="numeric" placeholder="e.g. 50,00,000" oninput="calc()">
+      <div class="hint">Include savings, investments, property, gold, FDs — everything you own</div>
+      <div class="preview" id="aPreview"></div>
+    </div>
+
+    <div class="field">
+      <label>Total Liabilities (₹)</label>
+      <input type="text" id="liabilities" inputmode="numeric" placeholder="e.g. 18,00,000" oninput="calc()">
+      <div class="hint">Include home loan, car loan, gold loan, credit card debt — everything you owe</div>
+      <div class="preview" id="lPreview"></div>
+    </div>
+
+    <div class="formula">
+      <span class="f-a" id="fA">₹0</span>
+      <span>−</span>
+      <span class="f-l" id="fL">₹0</span>
+      <span>=</span>
+      <span class="f-n" id="fN">₹0</span>
+    </div>
+
+    <div class="result zero" id="result">
+      <div class="result-label">Your Net Worth</div>
+      <div class="result-value" id="nwValue">₹0</div>
+      <div class="result-sub" id="nwSub">Enter your assets and liabilities above</div>
+      <div class="result-bar"><div class="result-bar-fill" id="nwBar" style="width:50%"></div></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <h3>Want to track this over time?</h3>
+    <p>Our free dashboard lets you add individual assets, track goals, manage family finances, and watch your net worth grow month by month.</p>
+    <a href="/" class="cta-btn">Go to Dashboard →</a>
+  </div>
+
+  <!-- What is Net Worth -->
+  <div class="content-section">
+    <h2>📖 What is Net Worth?</h2>
+    <p>Net worth is the simplest way to measure your financial health. It's calculated as:</p>
+    <div class="example-box">
+      <strong>Net Worth</strong> = Total Assets − Total Liabilities<br><br>
+      <strong>Assets</strong> = Savings accounts + Fixed deposits + Mutual funds + Stocks + Property + Gold + PPF/EPF + NPS + anything else you own<br><br>
+      <strong>Liabilities</strong> = Home loan + Car loan + Personal loan + Gold loan + Credit card debt + anything else you owe
+    </div>
+    <p>If your assets are more than your liabilities, your net worth is positive — you own more than you owe. If it's negative, don't panic. Most people start with negative net worth (think student loans, home loans). What matters is the direction — is it going up over time?</p>
+  </div>
+
+  <!-- Why it matters -->
+  <div class="content-section">
+    <h2>💡 Why Does Net Worth Matter?</h2>
+    <p>Your salary tells you how much you earn. Your net worth tells you how much you've <em>kept</em>. Here's why tracking it matters:</p>
+    <ul>
+      <li>It gives you one honest number instead of scattered bank balances</li>
+      <li>It shows whether you're actually making financial progress year over year</li>
+      <li>It helps you understand if your assets are growing faster than your debts</li>
+      <li>It shifts your mindset from "how much do I earn" to "how much do I own"</li>
+      <li>It's the number that actually determines if you can retire, buy a house, or be financially free</li>
+    </ul>
+
+    <h3>Net Worth Benchmarks for India</h3>
+    <div class="example-box">
+      <strong>Age 25–30:</strong> Net worth = 1–3x annual income (you're building the base)<br>
+      <strong>Age 30–35:</strong> Net worth = 3–5x annual income (compounding kicks in)<br>
+      <strong>Age 35–45:</strong> Net worth = 5–10x annual income (peak earning years)<br>
+      <strong>Age 45+:</strong> Net worth = 10x+ annual income (retirement prep)<br><br>
+      These are rough guidelines. The most important thing is that your net worth is going <strong>up</strong> every year.
+    </div>
+  </div>
+
+  <!-- How to improve -->
+  <div class="content-section">
+    <h2>🚀 How to Improve Your Net Worth</h2>
+    <p>There are only two levers: grow your assets or reduce your liabilities. Here are practical ways:</p>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">💰</div>
+        <h4>Build an Emergency Fund</h4>
+        <p>Keep 6 months of expenses in a savings account or liquid fund. This stops you from borrowing during emergencies.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🔥</div>
+        <h4>Pay Off High-Interest Debt</h4>
+        <p>Credit cards (36%), personal loans (14–18%) destroy wealth. Pay these off first before investing.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📈</div>
+        <h4>Start a Monthly SIP</h4>
+        <p>Even ₹5,000/month in an index fund grows to ₹50+ lakhs in 20 years at 12% returns.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🏠</div>
+        <h4>Own Appreciating Assets</h4>
+        <p>Stocks, mutual funds, and property appreciate. Cars and electronics depreciate. Choose wisely.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📊</div>
+        <h4>Track Monthly</h4>
+        <p>What gets measured gets managed. Check your net worth every month — it becomes a habit.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🛡️</div>
+        <h4>Get Insurance</h4>
+        <p>Term life + health insurance protects your family's net worth from unexpected events.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq" itemscope itemtype="https://schema.org/FAQPage">
+    <h2>❓ Frequently Asked Questions</h2>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What should I include in assets?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Include everything you own that has monetary value: bank savings, fixed deposits, mutual funds, stocks, EPF/PPF balance, NPS, real estate (market value), gold/jewellery, vehicles, and any other investments.</div></div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What counts as liabilities?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Any money you owe: home loan outstanding, car loan, personal loan, gold loan, education loan, credit card dues, EMIs on purchases, and any borrowed money from family or friends.</div></div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Is negative net worth bad?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Not necessarily. If you recently took a home loan, your net worth will likely be negative. That's normal. What matters is the trend — your net worth should increase every year. Focus on paying down debt and building assets.</div></div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">How often should I calculate my net worth?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Once a month is ideal. It takes just 5 minutes and helps you see real progress. Our dashboard makes it automatic — just update your asset values and it tracks everything.</div></div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What's a good net worth for my age in India?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">A common benchmark is your net worth should be at least your annual income multiplied by your age divided by 10. For example, if you're 30 and earn ₹12L/year, target ₹36L. But don't compare — focus on growing yours consistently.</div></div>
+    </div>
+  </div>
+
+  <!-- Final CTA -->
+  <div class="cta-banner" style="margin-top:40px">
+    <h3>Ready to track your net worth seriously?</h3>
+    <p>Stop guessing. Our dashboard tracks every asset, liability, goal, and insurance — individually and as a family. Free forever.</p>
+    <a href="/" class="cta-btn">Start Tracking for Free →</a>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>💰 NetWorth — Track your financial health, simply.</p>
+  <p style="margin-top:4px"><a href="/">Dashboard</a> · <a href="/net-worth-calculator">Calculator</a></p>
+</div>
+
+<script>
+function parseNum(s){return Number(s.replace(/[^0-9.-]/g,''))||0}
+function fmt(n){
+  if(n==null||isNaN(n))return'₹0';
+  const a=Math.abs(n);let s;
+  if(a>=1e7)s='₹'+(a/1e7).toFixed(2)+' Cr';
+  else if(a>=1e5)s='₹'+(a/1e5).toFixed(2)+' L';
+  else s='₹'+a.toLocaleString('en-IN');
+  return n<0?'−'+s:s;
+}
+function formatInput(el){
+  const raw=el.value.replace(/[^0-9]/g,'');
+  if(!raw){el.value='';return 0}
+  const num=parseInt(raw,10);
+  el.value=num.toLocaleString('en-IN');
+  return num;
+}
+function calc(){
+  const aEl=document.getElementById('assets');
+  const lEl=document.getElementById('liabilities');
+  const a=formatInput(aEl);
+  const l=formatInput(lEl);
+  const nw=a-l;
+
+  document.getElementById('aPreview').textContent=a>0?fmt(a):'';
+  document.getElementById('lPreview').textContent=l>0?fmt(l):'';
+  document.getElementById('fA').textContent=fmt(a);
+  document.getElementById('fL').textContent=fmt(l);
+  document.getElementById('fN').textContent=fmt(nw);
+
+  const res=document.getElementById('result');
+  const val=document.getElementById('nwValue');
+  const sub=document.getElementById('nwSub');
+  const bar=document.getElementById('nwBar');
+
+  val.textContent=fmt(nw);
+  res.className='result '+(nw>0?'positive':nw<0?'negative':'zero');
+
+  if(a===0&&l===0){
+    sub.textContent='Enter your assets and liabilities above';
+    bar.style.width='50%';
+  }else if(nw>0){
+    const ratio=a>0?Math.round(nw/a*100):0;
+    sub.textContent='You own '+ratio+'% more than you owe. Keep building! 💪';
+    bar.style.width=Math.min(95,Math.max(5,Math.round(a/(a+l)*100)))+'%';
+  }else if(nw<0){
+    sub.textContent='Your liabilities exceed your assets. Focus on paying down debt.';
+    bar.style.width=Math.min(45,Math.max(5,Math.round(a/(a+l)*100)))+'%';
+  }else{
+    sub.textContent='You\'re at breakeven — everything you own covers everything you owe.';
+    bar.style.width='50%';
+  }
+}
+</script>
+
+</body>
+</html>
