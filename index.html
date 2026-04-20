@@ -741,7 +741,26 @@ function hBanner(){
   let rpBadge='';
   if(age>0)rpBadge='<span class="ins-badge" style="background:'+rp.color+'15;color:'+rp.color+'">'+rp.label+' \u2014 '+rp.desc+'</span>';
 
-  return'<div class="h-banner"><div class="h-greet">'+greeting+' \u{1F44B}</div>'+lines.join('<br>')+(rpBadge?'<div style="margin-top:8px">'+rpBadge+'</div>':'')+'</div>';
+  // Right side quick stats
+  const ta2=tA(),tl2=tL(),inc=tI(),savRate=inc>0?Math.round(sur/inc*100):0;
+  const liquidCats=new Set(['Cash & Bank','Fixed Deposits','Mutual Funds','Stocks','Crypto']);
+  const liquidVal=(S.assets||[]).filter(a=>liquidCats.has(a.category)).reduce((s,a)=>s+(+a.currentValue||0),0);
+  const monthlyBurn=tE()+tEMI();
+  const runway=monthlyBurn>0?Math.floor(liquidVal/monthlyBurn):0;
+  const goalsCount=S.goals.length;
+  const goalsDone=S.goals.filter(g=>g.target>0&&g.current>=g.target).length;
+
+  let right='<div style="display:flex;flex-direction:column;gap:10px;min-width:180px;text-align:right">';
+  right+='<div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600">Quick Snapshot</div>';
+  right+='<div style="display:flex;justify-content:flex-end;gap:16px;flex-wrap:wrap">';
+  right+='<div style="text-align:center"><div style="font-size:1.1rem;font-weight:800;color:var(--green)">'+savRate+'%</div><div style="font-size:.65rem;color:var(--muted)">Savings Rate</div></div>';
+  right+='<div style="text-align:center"><div style="font-size:1.1rem;font-weight:800;color:'+(runway>=6?'var(--green)':runway>=3?'var(--orange)':'var(--red)')+'">'+runway+'mo</div><div style="font-size:.65rem;color:var(--muted)">Runway</div></div>';
+  right+='<div style="text-align:center"><div style="font-size:1.1rem;font-weight:800;color:var(--blue)">'+goalsDone+'/'+goalsCount+'</div><div style="font-size:.65rem;color:var(--muted)">Goals Done</div></div>';
+  right+='</div>';
+  if(inc>0)right+='<div style="font-size:.68rem;color:var(--muted);margin-top:2px">Liquid: <b style="color:var(--text2)">'+fmt(liquidVal)+'</b></div>';
+  right+='</div>';
+
+  return'<div class="h-banner" style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap"><div style="flex:1;min-width:280px"><div class="h-greet">'+greeting+' \u{1F44B}</div>'+lines.join('<br>')+(rpBadge?'<div style="margin-top:8px">'+rpBadge+'</div>':'')+'</div>'+right+'</div>';
 }
 
 // ── Page: Overview ──
