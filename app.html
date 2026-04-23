@@ -856,7 +856,10 @@ function togSB(){document.getElementById('sidebar').classList.toggle('open');doc
 
 // ── Humanized Banner ──
 function hBanner(){
-  const age=getAge(),city=getCity(),nw=tNW(),sur=tI()-tE()-tEMI();
+  const sp=S.meta.sp;
+  const age=getAge(),city=getCity();
+  const nw=sp?tNW():nwOf('self');
+  const sur=sp?(tI()-tE()-tEMI()):(iOf('self')-eOf('self')-emiOf('self'));
   const rp=getRiskProfile();
   let greeting=getGreeting();
   let lines=[];
