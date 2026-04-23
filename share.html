@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shared Dashboard – WorthScale</title>
+<meta name="robots" content="noindex, nofollow">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<style>
+:root{
+  --bg:#0a0b10;--bg2:#10121a;--card:#161922;--border:#232738;
+  --text:#e8e8ec;--text2:#c4c4cc;--muted:#6b6f80;
+  --green:#22c55e;--green-bg:rgba(34,197,94,.08);
+  --red:#ef4444;--red-bg:rgba(239,68,68,.08);
+  --blue:#3b82f6;--blue-bg:rgba(59,130,246,.08);
+  --orange:#f59e0b;--orange-bg:rgba(245,158,11,.08);
+  --cyan:#06b6d4;--purple:#a855f7;--pink:#ec4899;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* Header */
+.top-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:40}
+.brand{font-size:1rem;font-weight:700;display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text)}
+.view-badge{font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange);letter-spacing:.3px}
+.cta-btn{padding:8px 18px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .2s}
+.cta-btn:hover{opacity:.85}
+
+/* Layout */
+.page{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+
+/* States */
+.state-box{text-align:center;padding:80px 20px;color:var(--muted)}
+.state-box .icon{font-size:3rem;margin-bottom:16px}
+.state-box h2{font-size:1.1rem;font-weight:600;margin-bottom:8px;color:var(--text)}
+.state-box p{font-size:.83rem;line-height:1.6;max-width:340px;margin:0 auto}
+
+/* Shared by bar */
+.shared-by{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.shared-by .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.shared-by .info{flex:1}
+.shared-by .info .name{font-size:.92rem;font-weight:700;margin-bottom:2px}
+.shared-by .info .sub{font-size:.7rem;color:var(--muted)}
+.ro-badge{font-size:.65rem;font-weight:600;padding:3px 9px;border-radius:6px;background:var(--green-bg);color:var(--green);border:1px solid rgba(34,197,94,.2);flex-shrink:0}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
+.card+.card{margin-top:14px}
+.scards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.sc.hero{border-color:var(--green);background:var(--green-bg)}
+.sc.hero.neg{border-color:var(--red);background:var(--red-bg)}
+.sl{font-size:.67rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600;margin-bottom:6px}
+.sv{font-size:1.3rem;font-weight:800}
+.pos{color:var(--green)}.neg{color:var(--red)}
+
+/* Section title */
+.stitle{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:24px 0 12px;display:flex;align-items:center;gap:8px}
+.stitle::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Items */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.it{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.it:last-child{border-bottom:none}
+.it-l{display:flex;align-items:flex-start;gap:10px}
+.it-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.it-name{font-size:.82rem;font-weight:500;display:block}
+.it-meta{font-size:.67rem;color:var(--muted);display:block;margin-top:2px}
+.it-r{text-align:right}
+.it-val{font-size:.88rem;font-weight:600;display:block}
+.it-sub{font-size:.68rem;color:var(--muted);display:block;margin-top:2px}
+.it-empty{font-size:.8rem;color:var(--muted);padding:12px 0;text-align:center}
+
+/* Progress bar */
+.pb{height:6px;background:var(--border);border-radius:4px;overflow:hidden}
+.pf{height:100%;border-radius:4px;transition:width .5s}
+
+/* Goal card */
+.gt{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.gn{font-size:.88rem;font-weight:600}
+.gp{font-size:.82rem;font-weight:700}
+.gd{display:flex;justify-content:space-between;margin-top:6px;font-size:.65rem;color:var(--muted)}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--blue-bg),rgba(168,85,247,.08));border:1px solid var(--blue);border-radius:16px;padding:28px;text-align:center;margin-top:36px}
+.cta-section h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+.cta-section p{font-size:.82rem;color:var(--muted);margin-bottom:18px;line-height:1.6}
+
+/* Mobile */
+@media(max-width:500px){
+  .scards{grid-template-columns:1fr 1fr}
+  .cgrid{grid-template-columns:1fr}
+  .top-bar{flex-wrap:wrap;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="/" class="brand">💰 WorthScale</a>
+  <div style="display:flex;align-items:center;gap:10px">
+    <span class="view-badge">👁 View Only</span>
+    <a href="/app" class="cta-btn">Track My Finances →</a>
+  </div>
+</div>
+
+<div class="page" id="page">
+  <div class="state-box" id="loading">
+    <div class="icon">⏳</div>
+    <h2>Loading shared dashboard…</h2>
+    <p>Fetching the shared view. This only takes a moment.</p>
+  </div>
+</div>
+
+<script>
+firebase.initializeApp({
+  apiKey:"AIzaSyAQw98PicAW-L-Y9pNVUBzT2FNdrlcUyWo",
+  authDomain:"mynetworth-a4a31.firebaseapp.com",
+  projectId:"mynetworth-a4a31"
+});
+const db = firebase.firestore();
+
+function fmt(n){
+  if(n==null||isNaN(n))return'₹0';
+  const a=Math.abs(n);let s;
+  if(a>=1e7)s='₹'+(a/1e7).toFixed(2)+' Cr';
+  else if(a>=1e5)s='₹'+(a/1e5).toFixed(2)+' L';
+  else s='₹'+a.toLocaleString('en-IN');
+  return n<0?'−'+s:s;
+}
+function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
+function fP(n){return(n>=0?'+':'')+n.toFixed(1)+'%'}
+function timeAgo(iso){
+  if(!iso)return'';
+  const d=new Date(iso),now=new Date();
+  const diff=Math.floor((now-d)/1000);
+  if(diff<60)return'just now';
+  if(diff<3600)return Math.floor(diff/60)+'m ago';
+  if(diff<86400)return Math.floor(diff/3600)+'h ago';
+  return Math.floor(diff/86400)+'d ago';
+}
+
+function render(snap){
+  const {view,title,sharedBy,created,data}=snap;
+  const D=data;
+  const name1=D.meta&&D.meta.name1?D.meta.name1:'User';
+  const name2=D.meta&&D.meta.name2?D.meta.name2:'Spouse';
+
+  const assets=D.assets||[];
+  const liabs=D.liabilities||[];
+  const income=D.income||[];
+  const expenses=D.expenses||[];
+  const goals=D.goals||[];
+  const insurance=D.insurance||[];
+
+  const totalA=assets.reduce((s,a)=>s+(+a.currentValue||0),0);
+  const totalL=liabs.reduce((s,l)=>s+(+l.outstanding||0),0);
+  const totalI=income.reduce((s,i)=>s+(+i.amount||0),0);
+  const totalE=expenses.filter(e=>!e.isEMI).reduce((s,e)=>s+(+e.amount||0),0);
+  const totalEMI=expenses.filter(e=>e.isEMI).reduce((s,e)=>s+(+e.amount||0),0);
+  const nw=totalA-totalL;
+  const sur=totalI-totalE-totalEMI;
+  const savRate=totalI>0?Math.round(sur/totalI*100):0;
+  const createdStr=created&&created.seconds?timeAgo(new Date(created.seconds*1000).toISOString()):'recently';
+
+  // Display names per owner
+  const ownerLabel=o=>o==='self'?name1:o==='spouse'?name2:'Joint';
+
+  let h='';
+
+  // Shared by bar
+  h+='<div class="shared-by">';
+  h+='<div class="avatar">👤</div>';
+  h+='<div class="info"><div class="name">'+esc(title)+'</div><div class="sub">Shared by '+esc(sharedBy)+' · '+createdStr+'</div></div>';
+  h+='<span class="ro-badge">✓ Read Only</span>';
+  h+='</div>';
+
+  // Hero summary cards
+  h+='<div class="scards">';
+  h+='<div class="sc hero'+(nw<0?' neg':'')+'"><div class="sl">Net Worth</div><div class="sv '+(nw>=0?'pos':'neg')+'">'+fmt(nw)+'</div></div>';
+  h+='<div class="sc"><div class="sl">Total Assets</div><div class="sv pos">'+fmt(totalA)+'</div></div>';
+  h+='<div class="sc"><div class="sl">Total Liabilities</div><div class="sv neg">'+fmt(totalL)+'</div></div>';
+  if(totalI>0){
+    h+='<div class="sc"><div class="sl">Monthly Income</div><div class="sv">'+fmt(totalI)+'/mo</div></div>';
+    h+='<div class="sc"><div class="sl">Monthly Surplus</div><div class="sv '+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'/mo</div></div>';
+    h+='<div class="sc"><div class="sl">Savings Rate</div><div class="sv '+(savRate>=30?'pos':savRate>=10?'':'neg')+'">'+savRate+'%</div></div>';
+  }
+  h+='</div>';
+
+  // Assets section
+  if(assets.length){
+    h+='<div class="stitle">📈 Assets</div><div class="cgrid">';
+    const ACAT={'Cash & Bank':'var(--cyan)','Fixed Deposits':'var(--blue)','Stocks':'var(--green)','Mutual Funds':'var(--purple)','Real Estate':'var(--pink)','Gold':'#f59e0b','PPF/EPF':'var(--cyan)','NPS':'var(--blue)','Crypto':'var(--orange)','Vehicles':'var(--red)','Electronics':'var(--muted)','Other':'var(--muted)'};
+    const cats={};assets.forEach(a=>{const c=a.category||'Other';if(!cats[c])cats[c]=[];cats[c].push(a)});
+    Object.entries(cats).forEach(([cat,items])=>{
+      const color=ACAT[cat]||'var(--muted)';
+      let cv=0;items.forEach(a=>cv+=(+a.currentValue||0));
+      h+='<div class="card" style="border-left:3px solid '+color+'">';
+      h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">';
+      h+='<span style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:'+color+'">'+esc(cat)+'</span>';
+      h+='<span style="font-size:.88rem;font-weight:700">'+fmt(cv)+'</span>';
+      h+='</div>';
+      items.forEach(a=>{
+        const g=(+a.currentValue||0)-(+a.invested||0);const r=a.invested>0?((a.currentValue-a.invested)/a.invested*100):0;
+        h+='<div class="it"><div class="it-l"><div class="it-dot" style="background:'+color+'"></div><div><span class="it-name">'+esc(a.name)+'</span><span class="it-meta">Invested: '+fmt(a.invested)+(D.meta&&D.meta.sp?' · '+ownerLabel(a.owner):'')+'</span></div></div>';
+        h+='<div class="it-r"><span class="it-val">'+fmt(a.currentValue)+'</span><span class="it-sub '+(g>=0?'pos':'neg')+'">'+fmt(g)+' ('+fP(r)+')</span></div></div>';
+      });
+      h+='</div>';
+    });
+    h+='</div>';
+  }
+
+  // Liabilities section
+  if(liabs.length){
+    h+='<div class="stitle">📉 Liabilities</div><div class="cgrid">';
+    const LTYP={'Home Loan':'var(--red)','Car Loan':'var(--orange)','Personal Loan':'var(--pink)','Education Loan':'var(--blue)','Credit Card':'var(--red)','Gold Loan':'#f59e0b','Other':'var(--muted)'};
+    const ltypes={};liabs.forEach(l=>{const t=l.type||'Other';if(!ltypes[t])ltypes[t]=[];ltypes[t].push(l)});
+    Object.entries(ltypes).forEach(([type,items])=>{
+      const color=LTYP[type]||'var(--muted)';
+      let lo=0,lemi=0;items.forEach(l=>{lo+=(+l.outstanding||0);lemi+=(+l.emi||0)});
+      h+='<div class="card" style="border-left:3px solid '+color+'">';
+      h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">';
+      h+='<span style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:'+color+'">'+esc(type)+'</span>';
+      h+='<span style="font-size:.88rem;font-weight:700;color:var(--red)">'+fmt(lo)+'</span>';
+      h+='</div>';
+      items.forEach(l=>{
+        h+='<div class="it"><div class="it-l"><div class="it-dot" style="background:'+color+'"></div><div><span class="it-name">'+esc(l.name)+'</span><span class="it-meta">'+l.rate+'% · EMI '+fmt(l.emi)+'/mo'+(D.meta&&D.meta.sp?' · '+ownerLabel(l.owner):'')+'</span></div></div>';
+        h+='<div class="it-r"><span class="it-val neg">'+fmt(l.outstanding)+'</span></div></div>';
+      });
+      h+='</div>';
+    });
+    h+='</div>';
+  }
+
+  // Cash flow summary
+  if(income.length||expenses.length){
+    h+='<div class="stitle">💸 Cash Flow</div><div class="cgrid">';
+    if(income.length){
+      h+='<div class="card"><h4 style="font-size:.82rem;margin-bottom:12px;color:var(--green)">💰 Income</h4>';
+      income.forEach(i=>{h+='<div class="it"><div class="it-l"><div class="it-dot" style="background:var(--green)"></div><div><span class="it-name">'+esc(i.name)+'</span><span class="it-meta">'+esc(i.type)+(D.meta&&D.meta.sp?' · '+ownerLabel(i.owner):'')+'</span></div></div><div class="it-r"><span class="it-val">'+fmt(i.amount)+'/mo</span></div></div>';});
+      h+='</div>';
+    }
+    const nonEMI=expenses.filter(e=>!e.isEMI);const emis=expenses.filter(e=>e.isEMI);
+    if(nonEMI.length){
+      h+='<div class="card"><h4 style="font-size:.82rem;margin-bottom:12px;color:var(--orange)">🛒 Expenses</h4>';
+      nonEMI.forEach(e=>{h+='<div class="it"><div class="it-l"><div class="it-dot" style="background:var(--orange)"></div><div><span class="it-name">'+esc(e.name)+'</span><span class="it-meta">'+esc(e.category)+(D.meta&&D.meta.sp?' · '+ownerLabel(e.owner):'')+'</span></div></div><div class="it-r"><span class="it-val">'+fmt(e.amount)+'/mo</span></div></div>';});
+      h+='</div>';
+    }
+    if(emis.length){
+      h+='<div class="card"><h4 style="font-size:.82rem;margin-bottom:12px;color:var(--red)">📅 EMIs</h4>';
+      emis.forEach(e=>{h+='<div class="it"><div class="it-l"><div class="it-dot" style="background:var(--red)"></div><div><span class="it-name">'+esc(e.name)+'</span><span class="it-meta">EMI'+(D.meta&&D.meta.sp?' · '+ownerLabel(e.owner):'')+'</span></div></div><div class="it-r"><span class="it-val neg">'+fmt(e.amount)+'/mo</span></div></div>';});
+      h+='</div>';
+    }
+    h+='</div>';
+  }
+
+  // Goals
+  if(goals.length){
+    h+='<div class="stitle">🎯 Goals</div><div class="cgrid">';
+    goals.forEach(g=>{
+      const p=g.target>0?Math.min(100,Math.round(g.current/g.target*100)):0;
+      const gap=Math.max(0,g.target-g.current);
+      const c=p>=100?'var(--green)':p>50?'var(--blue)':'var(--orange)';
+      h+='<div class="card"><div class="gt"><span class="gn">'+esc(g.name)+'</span><span class="gp" style="color:'+c+'">'+p+'%</span></div>';
+      h+='<div class="pb"><div class="pf" style="width:'+p+'%;background:'+c+'"></div></div>';
+      h+='<div class="gd"><span>'+fmt(g.current)+' saved</span><span>'+(p<100?fmt(gap)+' to go':'✓ Reached!')+'</span><span>Target: '+fmt(g.target)+'</span></div>';
+      h+='</div>';
+    });
+    h+='</div>';
+  }
+
+  // CTA
+  h+='<div class="cta-section">';
+  h+='<h3>Track your own finances with WorthScale</h3>';
+  h+='<p>Get a clear picture of your net worth, monthly surplus, goals, and more — all in one place. Free to use.</p>';
+  h+='<a href="/app" class="cta-btn" style="font-size:.88rem;padding:11px 28px">Start Tracking Free →</a>';
+  h+='</div>';
+
+  document.getElementById('page').innerHTML=h;
+}
+
+async function loadShare(){
+  const id=new URLSearchParams(location.search).get('id');
+  if(!id){
+    document.getElementById('page').innerHTML='<div class="state-box"><div class="icon">🔗</div><h2>Invalid Link</h2><p>This share link is missing a token. Ask the person to re-share their dashboard.</p></div>';
+    return;
+  }
+  try{
+    const doc=await db.collection('shares').doc(id).get();
+    if(!doc.exists){
+      document.getElementById('page').innerHTML='<div class="state-box"><div class="icon">⏰</div><h2>Link Not Found</h2><p>This share link may have expired or been deleted. Ask the person to generate a new one.</p></div>';
+      return;
+    }
+    const snap=doc.data();
+    // Check expiry
+    if(snap.expires&&new Date(snap.expires)<new Date()){
+      document.getElementById('page').innerHTML='<div class="state-box"><div class="icon">⏰</div><h2>Link Expired</h2><p>This share link has expired (30-day limit). Ask the person to generate a new one.</p></div>';
+      return;
+    }
+    render(snap);
+  }catch(e){
+    document.getElementById('page').innerHTML='<div class="state-box"><div class="icon">⚠️</div><h2>Unable to Load</h2><p>Could not fetch the shared dashboard. This may be a permissions issue — the owner may need to check their Firestore rules.</p></div>';
+  }
+}
+
+loadShare();
+</script>
+</body>
+</html>

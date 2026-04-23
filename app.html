@@ -412,6 +412,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
   <main class="content">
     <header class="content-header">
       <h2 id="pgTitle">Overview</h2>
+      <button id="shareBtn" onclick="shareView()" style="display:none;align-items:center;gap:6px;padding:7px 14px;background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue);border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s">🔗 Share View</button>
     </header>
     <div class="content-body" id="cBody"></div>
   </main>
@@ -461,6 +462,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
     <div style="display:flex;gap:10px">
       <button onclick="closeLogoutModal()" style="flex:1;padding:11px;background:var(--border);color:var(--text);border:none;border-radius:9px;font-size:.88rem;font-weight:500;cursor:pointer">Cancel</button>
       <button onclick="confirmLogout()" style="flex:1;padding:11px;background:var(--red);color:#fff;border:none;border-radius:9px;font-size:.88rem;font-weight:600;cursor:pointer">Yes, Log Out</button>
+    </div>
+  </div>
+</div>
+
+<!-- Share Modal -->
+<div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:500;justify-content:center;align-items:center;padding:20px" id="shareModal" onclick="if(event.target===this)closeShareModal()">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;width:92%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <h3 style="font-size:1rem;font-weight:700">🔗 Share Dashboard View</h3>
+      <button onclick="closeShareModal()" style="background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer">✕</button>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:18px;line-height:1.5">Anyone with this link can view a <strong style="color:var(--text)">read-only snapshot</strong> of this dashboard. Your login and private data stay protected.</p>
+    <div id="shareStatus" style="text-align:center;padding:20px;color:var(--muted);font-size:.82rem">Generating link…</div>
+    <div id="shareLinkBox" style="display:none">
+      <div style="display:flex;gap:8px;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:10px 14px;margin-bottom:12px">
+        <span id="shareLinkText" style="flex:1;font-size:.73rem;color:var(--text2);word-break:break-all;overflow:hidden;max-height:40px"></span>
+        <button id="copyLinkBtn" onclick="copyShareLink()" style="flex-shrink:0;padding:6px 12px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer">Copy</button>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button onclick="closeShareModal()" style="flex:1;padding:10px;background:var(--border);color:var(--text);border:none;border-radius:9px;font-size:.82rem;cursor:pointer">Done</button>
+        <button onclick="newShareLink()" style="flex:1;padding:10px;background:var(--bg);color:var(--muted);border:1px solid var(--border);border-radius:9px;font-size:.82rem;cursor:pointer">New Link</button>
+      </div>
+      <p style="font-size:.68rem;color:var(--muted);margin-top:10px;text-align:center">⏱ Link expires in 30 days</p>
     </div>
   </div>
 </div>
@@ -691,6 +715,69 @@ function saveS(){
   db.collection('users').doc(syncId).set({data:JSON.stringify(S),updated:firebase.firestore.FieldValue.serverTimestamp()}).then(()=>{syncStatus='synced';updSyncBadge()}).catch(()=>{syncStatus='offline';updSyncBadge()});
 }
 function updSyncBadge(){}
+
+// ── Share ──
+let _shareLink='';
+function shareView(){
+  const modal=document.getElementById('shareModal');
+  const statusEl=document.getElementById('shareStatus');
+  const linkBox=document.getElementById('shareLinkBox');
+  modal.style.display='flex';
+  statusEl.style.display='block';
+  statusEl.textContent='Generating link…';
+  linkBox.style.display='none';
+  _generateShareLink();
+}
+async function _generateShareLink(){
+  try{
+    const view=page; // 'overview','my','spouse','joint'
+    const ownerMap={overview:null,my:'self',spouse:'spouse',joint:'joint'};
+    const owner=ownerMap[view];
+    const filterByOwner=arr=>owner?arr.filter(x=>x.owner===owner):arr;
+    const snapshot={
+      view,
+      title:view==='overview'?'Family Overview':view==='my'?(S.meta.name1||'My')+' Dashboard':view==='spouse'?(S.meta.name2||'Spouse')+' Dashboard':'Joint / Family',
+      sharedBy:S.meta.name1||'WorthScale User',
+      created:firebase.firestore.FieldValue.serverTimestamp(),
+      expires:new Date(Date.now()+30*24*60*60*1000).toISOString(),
+      data:{
+        meta:{name1:S.meta.name1,name2:S.meta.name2,sp:S.meta.sp},
+        profile:{age:(S.profile||{}).age,city:(S.profile||{}).city},
+        assets:filterByOwner(S.assets||[]),
+        liabilities:filterByOwner(S.liabilities||[]),
+        income:filterByOwner(S.income||[]),
+        expenses:filterByOwner(S.expenses||[]),
+        goals:filterByOwner(S.goals||[]),
+        insurance:filterByOwner(S.insurance||[])
+      }
+    };
+    const token=gid()+gid();
+    await db.collection('shares').doc(token).set(snapshot);
+    _shareLink='https://worthscale.in/share?id='+token;
+    document.getElementById('shareLinkText').textContent=_shareLink;
+    document.getElementById('shareStatus').style.display='none';
+    document.getElementById('shareLinkBox').style.display='block';
+  }catch(e){
+    document.getElementById('shareStatus').textContent='Failed to generate link. Check your internet connection.';
+  }
+}
+function closeShareModal(){document.getElementById('shareModal').style.display='none';}
+function copyShareLink(){
+  navigator.clipboard.writeText(_shareLink).then(()=>{
+    const btn=document.getElementById('copyLinkBtn');
+    btn.textContent='Copied!';btn.style.background='var(--green)';
+    setTimeout(()=>{btn.textContent='Copy';btn.style.background='var(--blue)'},2000);
+  }).catch(()=>{
+    const t=document.getElementById('shareLinkText');
+    t.style.userSelect='all';const r=document.createRange();r.selectNode(t);window.getSelection().removeAllRanges();window.getSelection().addRange(r);
+  });
+}
+function newShareLink(){
+  document.getElementById('shareLinkBox').style.display='none';
+  document.getElementById('shareStatus').style.display='block';
+  document.getElementById('shareStatus').textContent='Generating new link…';
+  _generateShareLink();
+}
 async function loadFromCloud(){
   try{const doc=await db.collection('users').doc(syncId).get();
   if(doc.exists){const d=JSON.parse(doc.data().data);const def=defS();for(const k of Object.keys(def))if(!(k in d))d[k]=def[k];if(!d.profile)d.profile=def.profile;syncStatus='synced';return d;}
@@ -816,6 +903,8 @@ function nav(p){
   const t={overview:'Overview',my:'My Dashboard',spouse:'Spouse Dashboard',joint:'Joint / Family',assets:'Assets',liabilities:'Liabilities',cashflow:'Cash Flow',goals:'Goals',insurance:'Insurance',charts:'Charts & Visuals',insights:'Insights'};
   document.getElementById('pgTitle').textContent=t[p]||'Dashboard';
   document.getElementById('mobTitle').textContent=t[p]||'Dashboard';
+  const sb=document.getElementById('shareBtn');
+  if(sb)sb.style.display=['overview','my','spouse','joint'].includes(p)?'flex':'none';
   renderPage();
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sbOverlay').classList.remove('active');
