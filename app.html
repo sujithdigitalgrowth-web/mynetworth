@@ -354,8 +354,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
     </div>
     <input class="lg-field" id="lg_email" type="email" placeholder="Email Address" autocomplete="email">
     <input class="lg-field" id="lg_pass" type="password" placeholder="Password" autocomplete="current-password">
+    <div id="lg_forgot_wrap" style="text-align:right;margin-top:-6px;margin-bottom:8px;display:none">
+      <span onclick="showForgotPassword()" style="font-size:.78rem;color:var(--blue);cursor:pointer;font-weight:500">Forgot password?</span>
+    </div>
     <button class="lg-btn" id="lgBtn" onclick="doLogin()">Enter Dashboard →</button>
     <div class="lg-err" id="lgErr"></div>
+    <!-- Forgot Password panel -->
+    <div id="lg_reset_panel" style="display:none;margin-top:14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px">
+      <div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:8px">Reset your password</div>
+      <div style="font-size:.76rem;color:var(--muted);margin-bottom:10px;line-height:1.5">Enter your email and we'll send a reset link.</div>
+      <input class="lg-field" id="lg_reset_email" type="email" placeholder="Email Address" style="margin-bottom:8px">
+      <button class="lg-btn" id="lgResetBtn" onclick="sendPasswordReset()" style="font-size:.85rem;padding:10px">Send Reset Link</button>
+      <div class="lg-err" id="lgResetErr" style="margin-top:6px"></div>
+      <div style="margin-top:8px;font-size:.76rem;color:var(--blue);cursor:pointer" onclick="hideForgotPassword()">← Back to login</div>
+    </div>
     <div style="margin-top:16px;font-size:.82rem;color:var(--muted)">
       <span id="lgToggleText">Already have an account?</span>
       <span id="lgToggle" onclick="toggleAuthMode()" style="color:var(--blue);cursor:pointer;font-weight:600;margin-left:4px">Log In</span>
@@ -482,12 +494,50 @@ let lgMode='signup'; // 'signup' or 'login'
 function toggleAuthMode(){
   lgMode=lgMode==='signup'?'login':'signup';
   const isLogin=lgMode==='login';
+  hideForgotPassword();
   document.getElementById('lg_name_wrap').style.display=isLogin?'none':'';
+  document.getElementById('lg_forgot_wrap').style.display=isLogin?'':'none';
   document.getElementById('lgSub').textContent=isLogin?'Welcome back':'Create your free account';
   document.getElementById('lgBtn').textContent=isLogin?'Log In →':'Enter Dashboard →';
   document.getElementById('lgToggleText').textContent=isLogin?'New user?':'Already have an account?';
   document.getElementById('lgToggle').textContent=isLogin?'Create account':'Log In';
   document.getElementById('lgErr').textContent='';
+}
+
+function showForgotPassword(){
+  document.getElementById('lg_reset_panel').style.display='';
+  document.getElementById('lg_reset_email').value=document.getElementById('lg_email').value||'';
+  document.getElementById('lgResetErr').textContent='';
+  document.getElementById('lgResetBtn').textContent='Send Reset Link';
+  document.getElementById('lgResetBtn').disabled=false;
+  document.getElementById('lgBtn').style.display='none';
+  document.getElementById('lg_forgot_wrap').style.display='none';
+}
+function hideForgotPassword(){
+  document.getElementById('lg_reset_panel').style.display='none';
+  document.getElementById('lgBtn').style.display='';
+  document.getElementById('lgResetErr').textContent='';
+  if(lgMode==='login')document.getElementById('lg_forgot_wrap').style.display='';
+}
+async function sendPasswordReset(){
+  const email=document.getElementById('lg_reset_email').value.trim();
+  const err=document.getElementById('lgResetErr');
+  err.textContent='';
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Please enter a valid email.';return}
+  document.getElementById('lgResetBtn').textContent='Sending...';
+  document.getElementById('lgResetBtn').disabled=true;
+  try{
+    await auth.sendPasswordResetEmail(email);
+    err.style.color='var(--green)';
+    err.textContent='✅ Reset link sent! Check your inbox (and spam folder).';
+    document.getElementById('lgResetBtn').textContent='Sent!';
+  }catch(e){
+    err.style.color='var(--red)';
+    if(e.code==='auth/user-not-found')err.textContent='No account found with this email.';
+    else err.textContent='Could not send reset email. Please try again.';
+    document.getElementById('lgResetBtn').textContent='Send Reset Link';
+    document.getElementById('lgResetBtn').disabled=false;
+  }
 }
 
 async function doLogin(){
@@ -545,6 +595,9 @@ function showLoginScreen(){
   document.getElementById('lg_name').value='';
   document.getElementById('lg_email').value='';
   document.getElementById('lg_pass').value='';
+  document.getElementById('lg_forgot_wrap').style.display='none';
+  document.getElementById('lg_reset_panel').style.display='none';
+  document.getElementById('lgBtn').style.display='';
   // default to signup mode
   lgMode='signup';
   document.getElementById('lg_name_wrap').style.display='';
