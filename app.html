@@ -6,6 +6,7 @@
 <title>Net Worth Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <style>
 /* ── Theme Variables ── */
@@ -347,11 +348,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
   <div class="login-box">
     <div style="font-size:2.5rem;margin-bottom:8px">💰</div>
     <h1>NetWorth</h1>
-    <p class="sub">Your personal finance dashboard</p>
-    <input class="lg-field" id="lg_name" placeholder="Your Name" autocomplete="name">
+    <p class="sub" id="lgSub">Create your free account</p>
+    <div id="lg_name_wrap">
+      <input class="lg-field" id="lg_name" placeholder="Your Name" autocomplete="name">
+    </div>
     <input class="lg-field" id="lg_email" type="email" placeholder="Email Address" autocomplete="email">
-    <button class="lg-btn" onclick="doLogin()">Enter Dashboard →</button>
+    <input class="lg-field" id="lg_pass" type="password" placeholder="Password" autocomplete="current-password">
+    <button class="lg-btn" id="lgBtn" onclick="doLogin()">Enter Dashboard →</button>
     <div class="lg-err" id="lgErr"></div>
+    <div style="margin-top:16px;font-size:.82rem;color:var(--muted)">
+      <span id="lgToggleText">Already have an account?</span>
+      <span id="lgToggle" onclick="toggleAuthMode()" style="color:var(--blue);cursor:pointer;font-weight:600;margin-left:4px">Log In</span>
+    </div>
   </div>
 </div>
 
@@ -462,40 +470,94 @@ const ITYPS=['Term Life','Health','Vehicle','Home','Travel','Critical Illness','
 // ── Firebase Init ──
 const fbApp=firebase.initializeApp({apiKey:"AIzaSyAQw98PicAW-L-Y9pNVUBzT2FNdrlcUyWo",authDomain:"mynetworth-a4a31.firebaseapp.com",projectId:"mynetworth-a4a31",storageBucket:"mynetworth-a4a31.firebasestorage.app",messagingSenderId:"933747897994",appId:"1:933747897994:web:e05430ff1d696683871f73",measurementId:"G-34VQNGQFDY"});
 const db=firebase.firestore();
+const auth=firebase.auth();
+
 function emailToDocId(email){return email.toLowerCase().trim().replace(/[^a-z0-9@.\-_]/g,'')}
 function getLoggedInUser(){const u=localStorage.getItem('nw_user');if(u)try{return JSON.parse(u)}catch(e){}return null}
-let currentUser=getLoggedInUser();
-let syncId=currentUser?emailToDocId(currentUser.email):null;
+let currentUser=null;
+let syncId=null;
 let syncStatus='local';
+let lgMode='signup'; // 'signup' or 'login'
 
-function doLogin(){
+function toggleAuthMode(){
+  lgMode=lgMode==='signup'?'login':'signup';
+  const isLogin=lgMode==='login';
+  document.getElementById('lg_name_wrap').style.display=isLogin?'none':'';
+  document.getElementById('lgSub').textContent=isLogin?'Welcome back':'Create your free account';
+  document.getElementById('lgBtn').textContent=isLogin?'Log In →':'Enter Dashboard →';
+  document.getElementById('lgToggleText').textContent=isLogin?'New user?':'Already have an account?';
+  document.getElementById('lgToggle').textContent=isLogin?'Create account':'Log In';
+  document.getElementById('lgErr').textContent='';
+}
+
+async function doLogin(){
   const name=document.getElementById('lg_name').value.trim();
   const email=document.getElementById('lg_email').value.trim();
+  const pass=document.getElementById('lg_pass').value;
   const err=document.getElementById('lgErr');
-  if(!name){err.textContent='Please enter your name.';return}
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Please enter a valid email.';return}
   err.textContent='';
-  currentUser={name,email};
-  localStorage.setItem('nw_user',JSON.stringify(currentUser));
-  syncId=emailToDocId(email);
-  startApp();
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Please enter a valid email.';return}
+  if(!pass||pass.length<6){err.textContent='Password must be at least 6 characters.';return}
+  document.getElementById('lgBtn').textContent='Please wait...';
+  document.getElementById('lgBtn').disabled=true;
+  try{
+    if(lgMode==='signup'){
+      if(!name){err.textContent='Please enter your name.';document.getElementById('lgBtn').textContent='Enter Dashboard →';document.getElementById('lgBtn').disabled=false;return}
+      const cred=await auth.createUserWithEmailAndPassword(email,pass);
+      currentUser={name,email,uid:cred.user.uid};
+    } else {
+      const cred=await auth.signInWithEmailAndPassword(email,pass);
+      const storedName=localStorage.getItem('nw_name_'+cred.user.uid)||name||email.split('@')[0];
+      currentUser={name:storedName,email,uid:cred.user.uid};
+    }
+    localStorage.setItem('nw_user',JSON.stringify(currentUser));
+    if(lgMode==='signup')localStorage.setItem('nw_name_'+currentUser.uid,name);
+    syncId=emailToDocId(email);
+    await startApp();
+  }catch(e){
+    let msg='Something went wrong. Please try again.';
+    if(e.code==='auth/email-already-in-use')msg='This email is already registered. Please log in instead.';
+    else if(e.code==='auth/user-not-found'||e.code==='auth/wrong-password'||e.code==='auth/invalid-credential')msg='Incorrect email or password.';
+    else if(e.code==='auth/weak-password')msg='Password must be at least 6 characters.';
+    else if(e.code==='auth/invalid-email')msg='Please enter a valid email address.';
+    err.textContent=msg;
+    document.getElementById('lgBtn').textContent=lgMode==='login'?'Log In →':'Enter Dashboard →';
+    document.getElementById('lgBtn').disabled=false;
+  }
 }
-function doLogout(){
+
+async function doLogout(){
   if(!confirm('Are you sure you want to logout?'))return;
   closeProfile();
+  await auth.signOut();
   currentUser=null;syncId=null;
   localStorage.removeItem('nw_user');
+  S=defS();
   showLoginScreen();
 }
 function showLoginScreen(){
   document.getElementById('loginScreen').style.display='flex';
   document.getElementById('app').style.display='none';
   document.querySelector('.mob-hdr').style.display='none';
+  document.getElementById('lgBtn').textContent='Enter Dashboard →';
+  document.getElementById('lgBtn').disabled=false;
+  document.getElementById('lgErr').textContent='';
+  document.getElementById('lg_name').value='';
+  document.getElementById('lg_email').value='';
+  document.getElementById('lg_pass').value='';
+  // default to signup mode
+  lgMode='signup';
+  document.getElementById('lg_name_wrap').style.display='';
+  document.getElementById('lgSub').textContent='Create your free account';
+  document.getElementById('lgBtn').textContent='Enter Dashboard →';
+  document.getElementById('lgToggleText').textContent='Already have an account?';
+  document.getElementById('lgToggle').textContent='Log In';
 }
 async function startApp(){
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('app').style.display='';
   document.querySelector('.mob-hdr').style.display='';
+  S=loadS();
   if(!S.meta.name1&&currentUser)S.meta.name1=currentUser.name;
   const cloud=await loadFromCloud();
   if(cloud){S=cloud;localStorage.setItem('nw_s',JSON.stringify(S));
@@ -1905,12 +1967,28 @@ if(inp.value){const v=Number(inp.value);tip.textContent=v?fmt(v):''}})}
 
 // ── Keyboard ──
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('profOverlay').classList.contains('active'))closeProfile();else if(document.getElementById('ipOverlay').classList.contains('active'))closeIP();else closeMo()}if(e.key==='Enter'&&document.getElementById('moOverlay').classList.contains('active')){e.preventDefault();saveMo()}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('loginScreen').style.display!=='none'){e.preventDefault();doLogin()}});
 
 // ── Init ──
 applyTheme();
-if(!currentUser){currentUser={name:'Guest',email:'guest@local'};localStorage.setItem('nw_user',JSON.stringify(currentUser));syncId=emailToDocId(currentUser.email)}
-startApp();
-document.getElementById('lg_email').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+// Show a blank screen until Firebase Auth resolves
+document.getElementById('app').style.display='none';
+document.querySelector('.mob-hdr').style.display='none';
+
+auth.onAuthStateChanged(async function(user){
+  if(user){
+    // User already authenticated
+    const storedUser=getLoggedInUser();
+    const storedName=localStorage.getItem('nw_name_'+user.uid)||storedUser?.name||user.email.split('@')[0];
+    currentUser={name:storedName,email:user.email,uid:user.uid};
+    localStorage.setItem('nw_user',JSON.stringify(currentUser));
+    syncId=emailToDocId(user.email);
+    await startApp();
+  } else {
+    // Not logged in — show login screen
+    showLoginScreen();
+  }
+});
 </script>
 </body>
 </html>
