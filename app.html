@@ -452,6 +452,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
   </div>
 </div>
 
+<!-- Logout Confirm Modal -->
+<div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:500;justify-content:center;align-items:center;padding:20px" id="logoutModal">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 28px 24px;width:92%;max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,.4);text-align:center">
+    <div style="font-size:2rem;margin-bottom:10px">👋</div>
+    <h3 style="font-size:1.05rem;margin-bottom:8px">Log out of WorthScale?</h3>
+    <p style="font-size:.83rem;color:var(--muted);margin-bottom:22px;line-height:1.5">Your data is saved to the cloud. You can log back in anytime.</p>
+    <div style="display:flex;gap:10px">
+      <button onclick="closeLogoutModal()" style="flex:1;padding:11px;background:var(--border);color:var(--text);border:none;border-radius:9px;font-size:.88rem;font-weight:500;cursor:pointer">Cancel</button>
+      <button onclick="confirmLogout()" style="flex:1;padding:11px;background:var(--red);color:#fff;border:none;border-radius:9px;font-size:.88rem;font-weight:600;cursor:pointer">Yes, Log Out</button>
+    </div>
+  </div>
+</div>
+
 <div class="ip-overlay" id="ipOverlay" onclick="if(event.target===this)closeIP()">
   <div class="ip-modal">
     <div class="ip-hdr"><h3 id="ipTitle">🎯 Investment Planner</h3><button class="ip-close" onclick="closeIP()">✕</button></div>
@@ -576,8 +589,14 @@ async function doLogin(){
   }
 }
 
-async function doLogout(){
-  if(!confirm('Are you sure you want to logout?'))return;
+function doLogout(){
+  document.getElementById('logoutModal').style.display='flex';
+}
+function closeLogoutModal(){
+  document.getElementById('logoutModal').style.display='none';
+}
+async function confirmLogout(){
+  closeLogoutModal();
   closeProfile();
   await auth.signOut();
   currentUser=null;syncId=null;
