@@ -16,48 +16,46 @@
 </script>
 <link rel="stylesheet" href="/styles.css">
 <style>
-.home-hero{padding:80px 0 60px;text-align:center}
-.home-hero h1{font-size:2.6rem;font-weight:800;line-height:1.25;margin-bottom:16px;max-width:700px;margin-left:auto;margin-right:auto}
+.home-hero{padding:56px 0 44px;text-align:center}
+.home-hero h1{font-size:2.4rem;font-weight:800;line-height:1.25;margin-bottom:14px;max-width:680px;margin-left:auto;margin-right:auto;color:var(--text)}
 .home-hero h1 .grad{background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.home-hero p{font-size:1.08rem;color:var(--muted);max-width:560px;margin:0 auto 28px}
+.home-hero p{font-size:1rem;color:var(--text2);max-width:520px;margin:0 auto 24px}
 .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.hero-stats{display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap}
+.hero-stats{display:flex;justify-content:center;gap:48px;margin-top:36px;padding-top:28px;border-top:1px solid var(--border);flex-wrap:wrap}
 .hero-stats div{text-align:center}
-.hero-stats .num{font-size:1.6rem;font-weight:800;color:var(--green)}
-.hero-stats .lbl{font-size:.75rem;color:var(--muted);margin-top:2px}
-.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:28px}
-.step{text-align:center;padding:24px 16px}
-.step-num{width:36px;height:36px;border-radius:50%;background:rgba(59,130,246,.15);color:var(--blue);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.88rem;margin-bottom:12px}
-.step h4{font-size:.88rem;font-weight:600;margin-bottom:6px}
-.step p{font-size:.78rem;color:var(--muted);line-height:1.5}
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
-.feat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 24px;transition:border-color .2s}
-.feat-card:hover{border-color:rgba(59,130,246,.3)}
-.feat-icon{font-size:1.8rem;margin-bottom:12px}
-.feat-card h3{font-size:.95rem;font-weight:700;margin-bottom:6px}
-.feat-card p{font-size:.82rem;color:var(--muted);line-height:1.6}
+.hero-stats .num{font-size:1.5rem;font-weight:800;color:var(--green)}
+.hero-stats .lbl{font-size:.74rem;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
 .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
-.tool-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 24px;text-decoration:none;transition:all .2s;display:block}
-.tool-card:hover{border-color:var(--blue);transform:translateY(-2px);text-decoration:none}
+.tool-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 24px;text-decoration:none;transition:all .2s;display:block;box-shadow:0 1px 4px rgba(15,23,42,.04)}
+.tool-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 4px 16px rgba(37,99,235,.10);text-decoration:none}
 .tool-card .tool-icon{font-size:1.6rem;margin-bottom:10px}
 .tool-card h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:6px}
-.tool-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.tool-card p{font-size:.82rem;color:var(--text2);line-height:1.5}
 .tool-card .arr{color:var(--blue);font-size:.82rem;font-weight:600;margin-top:12px;display:inline-block}
 .blog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:28px}
-.blog-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;text-decoration:none;display:block;transition:border-color .2s}
-.blog-card:hover{border-color:rgba(59,130,246,.3);text-decoration:none}
+.blog-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;text-decoration:none;display:block;transition:border-color .2s;box-shadow:0 1px 4px rgba(15,23,42,.04)}
+.blog-card:hover{border-color:var(--blue);text-decoration:none}
 .blog-card .btag{display:inline-block;padding:3px 8px;border-radius:5px;font-size:.65rem;font-weight:600;text-transform:uppercase;margin-bottom:10px}
 .blog-card h3{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.4}
-.blog-card p{font-size:.78rem;color:var(--muted);line-height:1.5}
+.blog-card p{font-size:.78rem;color:var(--text2);line-height:1.5}
 .blog-card .rd{color:var(--blue);font-size:.78rem;font-weight:600;margin-top:10px;display:inline-block}
-.sec-hd{text-align:center;margin-bottom:4px}
-.sec-sub{text-align:center;color:var(--muted);font-size:.92rem;margin-bottom:0}
+.sec-hd{text-align:center;font-size:1.35rem;font-weight:700;margin-bottom:6px;color:var(--text)}
+.sec-sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:0}
+.faq-item{border-bottom:1px solid var(--border);padding:16px 0}
+.faq-q{font-weight:600;font-size:.92rem;cursor:pointer;color:var(--text);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-q::after{content:"+";font-size:1.1rem;color:var(--muted);flex-shrink:0}
+.faq-item.open .faq-q::after{content:"−"}
+.faq-a{display:none;padding-top:10px;font-size:.84rem;color:var(--text2);line-height:1.65}
+.faq-item.open .faq-a{display:block}
+.cta-banner{background:linear-gradient(135deg,#1e40af,#1d4ed8);border-radius:16px;padding:44px 32px;text-align:center;color:#fff}
+.cta-banner h3{font-size:1.4rem;font-weight:800;margin-bottom:10px}
+.cta-banner p{font-size:.92rem;opacity:.85;margin-bottom:22px;max-width:480px;margin-left:auto;margin-right:auto}
 @media(max-width:768px){
-  .home-hero h1{font-size:1.7rem}
-  .home-hero{padding:50px 0 40px}
-  .feat-grid,.tool-grid,.steps-grid{grid-template-columns:1fr}
+  .home-hero h1{font-size:1.65rem}
+  .home-hero{padding:40px 0 32px}
+  .tool-grid{grid-template-columns:1fr}
   .blog-grid{grid-template-columns:1fr}
-  .hero-stats{gap:24px}
+  .hero-stats{gap:28px}
 }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
@@ -98,60 +96,33 @@
   <div class="hero-stats">
     <div><div class="num">100%</div><div class="lbl">Free Forever</div></div>
     <div><div class="num">₹</div><div class="lbl">Built for India</div></div>
-    <div><div class="num">0</div><div class="lbl">Ads in Dashboard</div></div>
-  </div>
-</div>
-</section>
-
-<!-- How It Works -->
-<section class="section">
-<div class="container">
-  <h2 class="sec-hd">How It Works</h2>
-  <p class="sec-sub">Four simple steps to financial clarity</p>
-  <div class="steps-grid">
-    <div class="step"><div class="step-num">1</div><h4>Add Your Assets</h4><p>Savings, FDs, stocks, mutual funds, property, gold — everything you own.</p></div>
-    <div class="step"><div class="step-num">2</div><h4>Add Liabilities</h4><p>Home loan, car loan, credit card debt — everything you owe.</p></div>
-    <div class="step"><div class="step-num">3</div><h4>See Your Net Worth</h4><p>Instant calculation with charts, trends, and breakdowns.</p></div>
-    <div class="step"><div class="step-num">4</div><h4>Track Monthly</h4><p>Update monthly and watch your wealth grow over time.</p></div>
-  </div>
-</div>
-</section>
-
-<!-- Features -->
-<section class="section" style="padding-top:20px">
-<div class="container">
-  <h2 class="sec-hd">Everything You Need</h2>
-  <p class="sec-sub">One dashboard to manage your entire financial life</p>
-  <div class="feat-grid">
-    <div class="feat-card"><div class="feat-icon">📊</div><h3>Net Worth Tracking</h3><p>Add individual assets and liabilities. See your total net worth update instantly with beautiful charts.</p></div>
-    <div class="feat-card"><div class="feat-icon">👨‍👩‍👧</div><h3>Family Mode</h3><p>Track finances for your whole family. Compare, combine, and manage joint assets in one view.</p></div>
-    <div class="feat-card"><div class="feat-icon">🎯</div><h3>Goal Planning</h3><p>Set financial goals — house, car, retirement, education — and track your progress toward each one.</p></div>
-    <div class="feat-card"><div class="feat-icon">🛡️</div><h3>Insurance Tracker</h3><p>Keep all your insurance policies in one place. Term, health, vehicle — never miss a renewal.</p></div>
-    <div class="feat-card"><div class="feat-icon">💡</div><h3>Smart Insights</h3><p>Get personalized next actions based on your data — debt payoff priorities, SIP suggestions, and more.</p></div>
-    <div class="feat-card"><div class="feat-icon">☁️</div><h3>Cloud Sync</h3><p>Your data syncs securely to the cloud. Access it from any device, anytime.</p></div>
+    <div><div class="num">3</div><div class="lbl">Free Calculators</div></div>
   </div>
 </div>
 </section>
 
 <!-- Tools -->
-<section class="section" id="tools">
+<section class="section" id="tools" style="padding-top:12px">
 <div class="container">
-  <h2 class="sec-hd">Free Financial Tools</h2>
-  <p class="sec-sub">Simple calculators to help you make smarter money decisions</p>
+  <h2 class="sec-hd">Free Financial Calculators</h2>
+  <p class="sec-sub">Simple tools to help you make smarter money decisions</p>
   <div class="tool-grid">
     <a href="/net-worth-calculator" class="tool-card">
-      <div class="tool-icon">🧮</div><h3>Net Worth Calculator</h3>
-      <p>Find out your net worth in seconds. Assets minus liabilities — simple.</p>
+      <div class="tool-icon">🧮</div>
+      <h3>Net Worth Calculator</h3>
+      <p>Find out your net worth in seconds. Assets minus liabilities — simple and instant.</p>
       <span class="arr">Calculate →</span>
     </a>
     <a href="/emergency-fund-calculator" class="tool-card">
-      <div class="tool-icon">🛟</div><h3>Emergency Fund Calculator</h3>
-      <p>How much emergency fund do you need? Find out based on your expenses.</p>
+      <div class="tool-icon">🛟</div>
+      <h3>Emergency Fund Calculator</h3>
+      <p>How much emergency fund do you need? Find out based on your monthly expenses.</p>
       <span class="arr">Calculate →</span>
     </a>
     <a href="/house-down-payment-calculator" class="tool-card">
-      <div class="tool-icon">🏠</div><h3>Down Payment Calculator</h3>
-      <p>Planning to buy a house? Calculate how much you need to save for the down payment.</p>
+      <div class="tool-icon">🏠</div>
+      <h3>Down Payment Calculator</h3>
+      <p>Planning to buy a house? Calculate exactly how much you need to save.</p>
       <span class="arr">Calculate →</span>
     </a>
   </div>
@@ -159,104 +130,63 @@
 </section>
 
 <!-- Blog -->
-<section class="section" style="padding-top:20px">
+<section class="section" style="padding-top:8px">
 <div class="container">
   <h2 class="sec-hd">From the Blog</h2>
-  <p class="sec-sub">Simple, practical personal finance guides</p>
+  <p class="sec-sub">Practical personal finance guides for Indians</p>
   <div class="blog-grid">
     <a href="/blog/how-to-calculate-net-worth" class="blog-card">
-      <span class="btag" style="background:rgba(34,197,94,.1);color:var(--green)">Guide</span>
+      <span class="btag" style="background:rgba(22,163,74,.1);color:var(--green)">Guide</span>
       <h3>How to Calculate Your Net Worth in India</h3>
       <p>A step-by-step guide to figuring out exactly where you stand financially.</p>
       <span class="rd">Read article →</span>
     </a>
     <a href="/blog/emergency-fund-guide" class="blog-card">
-      <span class="btag" style="background:rgba(59,130,246,.1);color:var(--blue)">Planning</span>
+      <span class="btag" style="background:rgba(37,99,235,.1);color:var(--blue)">Planning</span>
       <h3>Emergency Fund: How Much Do You Really Need?</h3>
       <p>The complete guide to building your financial safety net.</p>
       <span class="rd">Read article →</span>
     </a>
-    <a href="/blog/financial-freedom-steps" class="blog-card">
-      <span class="btag" style="background:rgba(168,85,247,.1);color:var(--purple)">Strategy</span>
-      <h3>5 Simple Steps to Financial Freedom</h3>
-      <p>A practical roadmap anyone can follow to build lasting wealth.</p>
-      <span class="rd">Read article →</span>
-    </a>
-    <a href="/blog/net-worth-vs-salary" class="blog-card">
-      <span class="btag" style="background:rgba(245,158,11,.1);color:var(--orange)">Mindset</span>
-      <h3>Why Net Worth Matters More Than Salary</h3>
-      <p>Your income isn't your wealth. Here's why the distinction matters.</p>
-      <span class="rd">Read article →</span>
-    </a>
   </div>
-  <div style="text-align:center;margin-top:28px">
+  <div style="text-align:center;margin-top:22px">
     <a href="/blog" class="btn btn-outline">View All Articles →</a>
   </div>
 </div>
 </section>
 
-<!-- Who is this for -->
-<section class="section" style="padding-top:20px">
-<div class="container">
-  <h2 class="sec-hd">Built for Every Stage of Your Financial Journey</h2>
-  <p class="sec-sub">Whether you're just starting out or already investing seriously</p>
-  <div class="audience-grid">
-    <div class="audience-card">
-      <div class="au-icon">👨‍💻</div>
-      <h4>Young Professionals (25–35)</h4>
-      <p>Just started earning? Build strong financial habits early. Track your first investments, avoid the lifestyle inflation trap, and know your number from day one.</p>
-    </div>
-    <div class="audience-card">
-      <div class="au-icon">👨‍👩‍👧‍👦</div>
-      <h4>Families & Dual Incomes</h4>
-      <p>Manage the whole household's finances in one view. Track joint assets, plan for children's education, and set shared goals as a family.</p>
-    </div>
-    <div class="audience-card">
-      <div class="au-icon">🧑‍💼</div>
-      <h4>Self-Employed & Business Owners</h4>
-      <p>Keep personal wealth separate from your business. Get a clear, honest picture of your personal net worth — independent of how work is going.</p>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- Trust strip -->
-<section style="padding:0 0 40px">
-<div class="container">
-  <div class="trust-grid">
-    <div class="trust-item"><div class="ti-icon">🔒</div><h4>No Bank Login</h4><p>We never ask for banking credentials. Enter values manually — your accounts stay fully private.</p></div>
-    <div class="trust-item"><div class="ti-icon">🇮🇳</div><h4>Made for India</h4><p>Rupee formatting, Indian investment types (PPF, EPF, NPS, ELSS) and India-specific financial guides.</p></div>
-    <div class="trust-item"><div class="ti-icon">🆓</div><h4>Free Forever</h4><p>No premium plan. No trial period. No credit card. All tools and the dashboard are permanently free.</p></div>
-    <div class="trust-item"><div class="ti-icon">📱</div><h4>Works on Any Device</h4><p>Fully responsive — open on your phone, tablet, or desktop. No app download required.</p></div>
-  </div>
-</div>
-</section>
-
 <!-- FAQ -->
-<section class="section" style="padding-top:0">
+<section class="section" style="padding-top:8px">
 <div class="container-sm">
   <h2 class="sec-hd">Frequently Asked Questions</h2>
-  <p class="sec-sub">Quick answers before you get started</p>
-  <div style="margin-top:28px" itemscope itemtype="https://schema.org/FAQPage">
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Is WorthScale really free?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes, completely and permanently free. The dashboard, calculators, and all tools have no hidden fees, no premium tier, and no trial period. Free forever means free forever.</div></div></div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Do I need to connect my bank account?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">No. WorthScale does not connect to your bank, demat account, or any financial institution. You manually enter your asset and liability values. Your banking credentials stay completely private and secure.</div></div></div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">How is my financial data kept safe?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Your data is stored in Google Firebase Firestore with encryption in transit and at rest. We never sell, share, or use your financial data for advertising. See our Privacy Policy for full details.</div></div></div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Can I use WorthScale on my mobile phone?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes. The website is fully responsive and works on all devices — mobile, tablet, and desktop. No app download needed. Just open it in your browser.</div></div></div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What is net worth and why does it matter?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Net worth = Total Assets − Total Liabilities. It's the most accurate single measure of your financial health — far more honest than salary or bank balance alone. Tracking it monthly helps you see if your wealth is actually growing.</div></div></div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Is this only useful if I have a high income or large investments?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Not at all. WorthScale is useful at any stage — whether you have ₹10,000 or ₹10 crore saved. The earlier you start tracking, the better your financial decisions will be. Start with exactly what you have today.</div></div></div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What tools and calculators are available?</div><div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">We currently offer three free calculators: Net Worth Calculator (assets minus liabilities), Emergency Fund Calculator (find your ideal safety net size), and House Down Payment Calculator (plan your home purchase). More tools are being added.</div></div></div>
+  <div style="margin-top:20px" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Is WorthScale really free?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes — completely and permanently free. The dashboard, calculators, and all tools have no hidden fees, no premium tier, and no trial period.</div></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">Do I need to connect my bank account?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">No. WorthScale does not connect to your bank or demat account. You manually enter your values — your banking credentials stay completely private.</div></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">How is my financial data kept safe?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Your data is stored in Google Firebase with encryption in transit and at rest. We never sell or share your financial data. See our Privacy Policy for full details.</div></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name" onclick="this.parentElement.classList.toggle('open')">What is net worth and why does it matter?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Net worth = Total Assets − Total Liabilities. It's the most accurate single measure of your financial health — far more honest than salary or bank balance alone. Tracking it monthly helps you see if your wealth is actually growing.</div></div>
+    </div>
   </div>
-  <p style="font-size:.78rem;color:var(--muted);text-align:center;margin-top:24px;line-height:1.6">WorthScale is an informational and organizational tool. All calculators and content are for educational purposes only and do not constitute financial, investment, or tax advice. Please consult a qualified financial advisor before making major financial decisions.</p>
+  <p style="font-size:.75rem;color:var(--muted);text-align:center;margin-top:20px;line-height:1.6">WorthScale is an informational tool only. All calculators and content are for educational purposes and do not constitute financial, investment, or tax advice. Please consult a qualified financial advisor before making major financial decisions.</p>
 </div>
 </section>
 
 <!-- CTA -->
-<section class="section" style="padding-top:0">
+<section class="section" style="padding-top:8px;padding-bottom:60px">
 <div class="container">
   <div class="cta-banner">
     <h3>Ready to take control of your finances?</h3>
-    <p>Track your net worth, set goals, manage family finances, and get smart insights — all free, forever.</p>
-    <a href="/app" class="btn btn-primary btn-lg">Open Dashboard — It's Free →</a>
+    <p>Track your net worth, set goals, and build wealth — all free, forever.</p>
+    <a href="/app" class="btn btn-primary btn-lg" style="background:#fff;color:#1e40af;font-weight:700">Open Dashboard — It's Free →</a>
   </div>
 </div>
 </section>
