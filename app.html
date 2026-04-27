@@ -896,7 +896,7 @@ function tA(){return S.assets.reduce((s,a)=>s+(+a.currentValue||0),0)}
 function tL(){return S.liabilities.reduce((s,l)=>s+(+l.outstanding||0),0)}
 function tNW(){return tA()-tL()}
 function tI(){return S.income.reduce((s,i)=>s+(+i.amount||0),0)}
-function tE(){return S.expenses.reduce((s,e)=>s+(+e.amount||0),0)}
+function tE(){return S.expenses.filter(e=>!e.isEMI).reduce((s,e)=>s+(+e.amount||0),0)}
 function tEMI(){
   return ['self','spouse','joint'].reduce((sum,owner)=>sum+emiOf(owner),0);
 }
@@ -1408,7 +1408,7 @@ function sumCards(){
       '<div class="sc"><div class="sl">Monthly Income</div><div class="sv">'+fmt(inc)+'</div></div>'+
       '<div class="sc"><div class="sl">Monthly Expenses</div><div class="sv">'+fmt(exp)+'</div></div>'+
       '<div class="sc"><div class="sl">Monthly EMI</div><div class="sv neg">'+fmt(emi)+'</div></div>'+
-      '<div class="sc"><div class="sl">Monthly Surplus</div><div class="sv '+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'</div></div>'+
+      '<div class="sc"><div class="sl">Cash Flow</div><div class="sv '+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'</div></div>'+
     '</div>';
   }else{
     const snw=nwOf('self'),spnw=nwOf('spouse'),jnw=nwOf('joint'),tnw=tNW(),ta2=tA(),tl2=tL(),ti2=tI(),te2=tEMI(),texp=tE(),sur=ti2-texp-te2;
@@ -1422,7 +1422,7 @@ function sumCards(){
       '<div class="sc"><div class="sl">Family Liabilities</div><div class="sv neg">'+fmt(tl2)+'</div></div>'+
       '<div class="sc"><div class="sl">Combined Income</div><div class="sv">'+fmt(ti2)+'</div></div>'+
       '<div class="sc"><div class="sl">Combined EMI</div><div class="sv neg">'+fmt(te2)+'</div></div>'+
-      '<div class="sc"><div class="sl">Family Surplus</div><div class="sv '+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'</div></div>'+
+      '<div class="sc"><div class="sl">Family Cash Flow</div><div class="sv '+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'</div></div>'+
     '</div>';
   }
 }
@@ -1610,7 +1610,7 @@ function pgCF(){
     S.liabilities.filter(l=>l.owner==='self'&&l.emi>0).forEach(l=>{h+='<div class="cf-row"><span>'+esc(l.name)+'</span><span class="neg">'+fmt(l.emi)+'</span></div>'});
     if(showExpenseEmiFallback)S.expenses.filter(e=>e.owner==='self'&&e.isEMI).forEach(e=>{h+='<div class="cf-row"><span>'+esc(e.name)+'</span><span class="neg">'+fmt(e.amount)+'</span></div>'});
     h+='<div class="cf-total"><span>Total EMIs</span><span class="neg">'+fmt(emi)+'</span></div></div>';
-    h+='<div style="padding:14px;background:'+(sur>=0?'var(--green-bg)':'var(--red-bg)')+';border-radius:10px;display:flex;justify-content:space-between;font-weight:700;font-size:1rem"><span>Monthly Surplus</span><span class="'+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'</span></div>';
+    h+='<div style="padding:14px;background:'+(sur>=0?'var(--green-bg)':'var(--red-bg)')+';border-radius:10px;display:flex;justify-content:space-between;font-weight:700;font-size:1rem"><span>Cash Flow</span><span class="'+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'</span></div>';
     h+='</div></div>';
   }else{
     h+='<div class="split">';
@@ -1629,7 +1629,7 @@ function pgCF(){
       S.liabilities.filter(l=>l.owner===o&&l.emi>0).forEach(l=>{h+='<div class="cf-row"><span>'+esc(l.name)+'</span><span class="neg">'+fmt(l.emi)+'</span></div>'});
       if(showExpenseEmiFallback)S.expenses.filter(e=>e.owner===o&&e.isEMI).forEach(e=>{h+='<div class="cf-row"><span>'+esc(e.name)+'</span><span class="neg">'+fmt(e.amount)+'</span></div>'});
       h+='<div class="cf-total"><span>EMIs</span><span class="neg">'+fmt(emi)+'</span></div></div>';
-      h+='<div style="padding:12px;background:'+(sur>=0?'var(--green-bg)':'var(--red-bg)')+';border-radius:8px;display:flex;justify-content:space-between;font-weight:700"><span>Surplus</span><span class="'+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'</span></div></div>';
+      h+='<div style="padding:12px;background:'+(sur>=0?'var(--green-bg)':'var(--red-bg)')+';border-radius:8px;display:flex;justify-content:space-between;font-weight:700"><span>Cash Flow</span><span class="'+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'</span></div></div>';
     });
     h+='</div>';
     const ti2=tI(),te2=tE(),temi2=tEMI(),tsur=ti2-te2-temi2;
@@ -1637,7 +1637,7 @@ function pgCF(){
       '<div class="cr"><span class="cl">Total Income</span><span class="cv pos">'+fmt(ti2)+'</span></div>'+
       '<div class="cr"><span class="cl">Total Expenses</span><span class="cv">'+fmt(te2)+'</span></div>'+
       '<div class="cr"><span class="cl">Total EMIs</span><span class="cv neg">'+fmt(temi2)+'</span></div>'+
-    '</div><div style="margin-top:12px;padding:12px;background:'+(tsur>=0?'var(--green-bg)':'var(--red-bg)')+';border-radius:8px;display:flex;justify-content:space-between;font-weight:700"><span>Family Surplus</span><span class="'+(tsur>=0?'pos':'neg')+'">'+fmt(tsur)+'</span></div></div>';
+    '</div><div style="margin-top:12px;padding:12px;background:'+(tsur>=0?'var(--green-bg)':'var(--red-bg)')+';border-radius:8px;display:flex;justify-content:space-between;font-weight:700"><span>Family Cash Flow</span><span class="'+(tsur>=0?'pos':'neg')+'">'+fmt(tsur)+'</span></div></div>';
   }
   return h;
 }
