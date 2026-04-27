@@ -191,6 +191,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 .amt-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
 .amt-chip{padding:3px 9px;border-radius:5px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);font-size:.68rem;cursor:pointer;font-weight:600;transition:all .15s}
 .amt-chip:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.goal-inline-edit{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-top:12px}
+.goal-inline-edit .gie-label{font-size:.68rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px;display:block}
+.goal-inline-edit input{width:100%;padding:8px 11px;background:var(--bg);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:.88rem;outline:none;margin-bottom:5px}
+.goal-inline-edit input:focus{border-color:var(--blue)}
+.gie-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 
 /* Profile Setup Modal */
 .profile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:300;justify-content:center;align-items:center;padding:20px}
@@ -933,7 +938,7 @@ function renderPage(){
     case'assets':b.innerHTML=pgAssets();break;
     case'liabilities':b.innerHTML=pgLiab();break;
     case'cashflow':b.innerHTML=pgCF();break;
-    case'goals':b.innerHTML=pgGoals();break;
+    case'goals':b.innerHTML=pgGoals();S.goals.forEach(g=>{if(document.getElementById('gc_cur_'+g.id))goalPreview(g.id)});break;
     case'insurance':b.innerHTML=pgInsurance();break;
     case'charts':b.innerHTML=pgCharts();break;
     case'insights':b.innerHTML=pgInsights();break;
@@ -1697,8 +1702,20 @@ function pgGoals(){
     }
     if(st&&stOpt){
       const timeHuman=fmtTimeHuman(st.months);
-      h+='<div class="strat-banner">\u{1F4CB} <b>Your plan:</b> '+stOpt.icon+' '+esc(stOpt.name)+' \u00B7 '+st.allocPct+'% surplus \u00B7 '+fmt(st.monthlySIP)+'/mo \u00B7 '+timeHuman+'<span class="strat-clear" onclick="event.stopPropagation();clearStrategy(\''+g.id+'\')">\u2715 Clear</span></div>';
+      h+='<div class="strat-banner">\u{1F4CB} <b>Your plan:</b> '+stOpt.icon+' '+esc(stOpt.name)+' \u00B7 '+st.allocPct+'% surplus \u00B7 '+fmt(st.monthlySIP)+'/mo \u00B7 '+timeHuman+'<span class="strat-clear" onclick="event.stopPropagation();clearStrategy(\''+g.id+'\')">&times; Clear</span></div>';
     }
+    // ── Inline update section ──
+    h+='<div class="goal-inline-edit">';
+    h+='<div style="font-size:.74rem;font-weight:700;color:var(--text2);margin-bottom:10px;display:flex;align-items:center;gap:5px">\u270F\uFE0F Update Progress</div>';
+    h+='<div class="gie-row">';
+    h+='<div><span class="gie-label">Already Saved (\u20B9)</span><input id="gc_cur_'+g.id+'" type="number" value="'+(g.current||'')+'" placeholder="0" oninput="goalPreview(\''+g.id+'\')">';
+    h+='<div class="amt-chips">'+['10k','30k','50k','75k','1L'].map(v=>'<button type="button" class="amt-chip" onclick="goalChip(\''+g.id+'\',\'cur\',\''+v+'\')">'+(v)+'</button>').join('')+'</div></div>';
+    h+='<div><span class="gie-label">Monthly SIP (\u20B9)</span><input id="gc_sip_'+g.id+'" type="number" value="'+(g.monthlySIP||'')+'" placeholder="e.g. 10,000" oninput="goalPreview(\''+g.id+'\')">';
+    h+='<div class="amt-chips">'+['5k','10k','15k','20k','30k'].map(v=>'<button type="button" class="amt-chip" onclick="goalChip(\''+g.id+'\',\'sip\',\''+v+'\')">'+(v)+'</button>').join('')+'</div></div>';
+    h+='</div>';
+    h+='<div id="gc_preview_'+g.id+'"></div>';
+    h+='<button onclick="saveGoalInline(\''+g.id+'\')" style="width:100%;margin-top:10px;padding:9px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer">\u2713 Update</button>';
+    h+='</div>';
     h+='</div>';
     const surplus=getSurplusForGoal(g);
     const defPct=60;
@@ -2105,10 +2122,8 @@ function openMo(type,owner,id){
   else if(type==='goal'){const g=item||{};
     h='<div class="fg"><label>Goal Name</label><input id="f_name" value="'+esc(g.name||'')+'" placeholder="e.g. Emergency Fund"></div>'+
     '<div class="fg"><label>Owner</label><select id="f_own">'+oo+'</select></div>'+
-    '<div class="fg"><label>Target Amount (\u20B9)</label><input id="f_tar" type="number" value="'+(g.target||'')+'" oninput="updateGoalPreview()"><div class="amt-chips">'+['50k','75k','1L','2L','5L','10L','25L','50L'].map(v=>'<button type="button" class="amt-chip" onclick="setGoalChip(\''+'f_tar'+'\',\''+v+'\')">'+(v)+'</button>').join('')+'</div></div>'+
-    '<div class="fg"><label>Saved So Far / Already Invested (\u20B9)</label><input id="f_cur" type="number" value="'+(g.current||'')+'" oninput="updateGoalPreview()"><div class="amt-chips">'+['10k','30k','50k','75k','1L'].map(v=>'<button type="button" class="amt-chip" onclick="setGoalChip(\''+'f_cur'+'\',\''+v+'\')">'+(v)+'</button>').join('')+'</div></div>'+
-    '<div class="fg"><label>Monthly SIP Towards This Goal (\u20B9)</label><input id="f_sip" type="number" value="'+(g.monthlySIP||'')+'" placeholder="e.g. 10,000" oninput="updateGoalPreview()"><div class="amt-chips">'+['5k','10k','15k','20k','30k'].map(v=>'<button type="button" class="amt-chip" onclick="setGoalChip(\''+'f_sip'+'\',\''+v+'\')">'+(v)+'</button>').join('')+'</div></div>'+
-    '<div id="goal-preview"></div>'}
+    '<div class="fg"><label>Target Amount (\u20B9)</label><input id="f_tar" type="number" value="'+(g.target||'')+'"><div class="amt-chips">'+['50k','75k','1L','2L','5L','10L','25L','50L'].map(v=>'<button type="button" class="amt-chip" onclick="setGoalChip(\'f_tar\',\''+v+'\')">'+(v)+'</button>').join('')+'</div></div>'+
+    (isE?'<p style="font-size:.72rem;color:var(--muted);background:var(--bg2);border-radius:6px;padding:8px 10px;margin:0">\\u{1F4A1} Update saved amount & SIP directly on the Goals page</p>':'')}
   else if(type==='insurance'){const p=item||{};
     h='<div class="fg"><label>Policy Name</label><input id="f_name" value="'+esc(p.name||'')+'" placeholder="e.g. HDFC Term Plan"></div>'+
     '<div class="fr"><div class="fg"><label>Insurance Type</label><select id="f_itype">'+ITYPS.map(t=>'<option '+(p.insType===t?'selected':'')+'>'+t+'</option>').join('')+'</select></div><div class="fg"><label>Owner</label><select id="f_own">'+oo+'</select></div></div>'+
@@ -2118,7 +2133,7 @@ function openMo(type,owner,id){
   document.getElementById('moFields').innerHTML=h;
   document.getElementById('moOverlay').classList.add('active');
   if(type==='asset'){const cb2=document.getElementById('f_same');if(cb2&&cb2.checked){document.getElementById('f_inv').addEventListener('input',syncInvToCur)}}
-  setTimeout(()=>{document.querySelector('#moFields input')?.focus();attachAmtPreview();if(type==='goal')updateGoalPreview();},50);
+  setTimeout(()=>{document.querySelector('#moFields input')?.focus();attachAmtPreview();},50);
 }
 function closeMo(){document.getElementById('moOverlay').classList.remove('active');mCtx=null}
 function toggleJoint(){const cb=document.getElementById('f_joint');const own=document.getElementById('f_own');const cr=document.getElementById('cRow');if(cb&&cb.checked){own.disabled=true;own.style.opacity='.5';if(cr)cr.style.display='grid'}else{own.disabled=false;own.style.opacity='';if(cr)cr.style.display='none'}}
@@ -2133,7 +2148,7 @@ function saveMo(){
   else if(type==='liability')item={id:isE?id:gid(),name,type:v('f_type'),owner,total:n('f_total'),outstanding:n('f_out'),emi:n('f_emi'),rate:n('f_rate'),tenure:n('f_ten')};
   else if(type==='income')item={id:isE?id:gid(),name,type:v('f_type'),owner,amount:n('f_amt')};
   else if(type==='expense'){const cat=v('f_cat');item={id:isE?id:gid(),name,category:cat==='EMI'?'EMI':cat,owner,amount:n('f_amt'),isEMI:cat==='EMI'}}
-  else if(type==='goal'){const prev=isE?S.goals.find(x=>x.id===id):null;const sip2=n('f_sip');item={id:isE?id:gid(),name,owner,target:n('f_tar'),current:n('f_cur'),monthlySIP:sip2||undefined,strategy:prev?prev.strategy:undefined}}
+  else if(type==='goal'){const prev=isE?S.goals.find(x=>x.id===id):null;item={id:isE?id:gid(),name,owner,target:n('f_tar'),current:prev?prev.current:0,monthlySIP:prev?prev.monthlySIP:undefined,strategy:prev?prev.strategy:undefined}}
   else if(type==='insurance')item={id:isE?id:gid(),name,insType:v('f_itype'),owner,provider:v('f_prov'),policyNo:v('f_pno'),cover:n('f_cover'),premium:n('f_prem'),expiry:v('f_exp')};
   if(isE){const idx=S[col].findIndex(x=>x.id===id);if(idx>=0)S[col][idx]=item}else S[col].push(item);
   saveS();render();closeMo();
@@ -2141,7 +2156,61 @@ function saveMo(){
 function delItem(){if(!mCtx)return;S[mCtx.col]=S[mCtx.col].filter(x=>x.id!==mCtx.id);saveS();render();closeMo()}
 function delById(col,id){S[col]=S[col].filter(x=>x.id!==id);saveS();render()}
 
-// ── Goal chip helpers ──
+// ── Goal inline helpers ──
+function goalChip(gid,field,val){
+  const num=val.toLowerCase().endsWith('l')?parseFloat(val)*100000:parseFloat(val)*1000;
+  const el=document.getElementById('gc_'+field+'_'+gid);if(!el)return;
+  el.value=num;goalPreview(gid);
+}
+function goalPreview(gid){
+  const g=S.goals.find(x=>x.id===gid);if(!g)return;
+  const el=document.getElementById('gc_preview_'+gid);if(!el)return;
+  const cur=Number(document.getElementById('gc_cur_'+gid)?.value)||0;
+  const sip=Number(document.getElementById('gc_sip_'+gid)?.value)||0;
+  const tar=g.target||0;
+  if(!tar){el.innerHTML='';return;}
+  const gap=Math.max(0,tar-cur);
+  const pct=Math.min(100,Math.round(cur/tar*100));
+  const pColor=pct>=100?'var(--green)':pct>50?'var(--blue)':'var(--orange)';
+  let h='<div style="background:var(--card);border:1px solid var(--border);border-radius:9px;padding:11px 13px;margin-top:8px">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
+  h+='<span style="font-size:.62rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px">Live Preview</span>';
+  h+='<span style="font-size:.74rem;font-weight:700;color:'+pColor+'">'+pct+'% done</span></div>';
+  h+='<div style="height:4px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:9px">';
+  h+='<div style="height:100%;width:'+pct+'%;background:'+pColor+';border-radius:3px;transition:width .3s"></div></div>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:'+(sip>0&&gap>0?'8px':'0')+'">';
+  h+='<div style="text-align:center;padding:6px;background:var(--bg2);border-radius:6px"><div style="font-size:.58rem;color:var(--muted)">Saved</div><div style="font-size:.82rem;font-weight:700;color:var(--green)">'+fmt(cur)+'</div></div>';
+  h+='<div style="text-align:center;padding:6px;background:var(--bg2);border-radius:6px"><div style="font-size:.58rem;color:var(--muted)">Still Needed</div><div style="font-size:.82rem;font-weight:700;color:'+(gap>0?'var(--red)':'var(--green)')+'">'+fmt(gap)+'</div></div>';
+  h+='</div>';
+  if(sip>0&&gap>0){
+    const calc=sipMonths(sip,11.5,gap,0);
+    if(calc.months<600){
+      const y=Math.floor(calc.months/12),mo=calc.months%12;
+      const tStr=y>0?(mo>0?y+'y '+mo+'mo':y+' yrs'):mo+' mo';
+      h+='<div style="background:var(--blue-bg);border:1px solid rgba(59,130,246,.18);border-radius:7px;padding:8px 11px;display:flex;align-items:center;justify-content:space-between">';
+      h+='<div><div style="font-size:.6rem;color:var(--muted);margin-bottom:1px">\uD83D\uDCC8 Mutual Fund @ 11.5% p.a.</div>';
+      h+='<div style="font-size:.78rem;color:var(--text2)">'+fmt(sip)+'/mo SIP \u2192 <b style="color:var(--green);font-size:.92rem">'+tStr+'</b></div></div>';
+      h+='<div style="text-align:right;flex-shrink:0"><div style="font-size:.58rem;color:var(--muted)">Returns</div><div style="font-size:.8rem;font-weight:700;color:var(--green)">+'+fmt(calc.totalRet)+'</div></div>';
+      h+='</div>';
+    }else{
+      h+='<div style="background:var(--orange-bg);border-radius:7px;padding:8px 11px;font-size:.72rem;color:var(--text2)">\u26A0 SIP of '+fmt(sip)+'/mo needs 50+ years. Try a higher amount.</div>';
+    }
+  }else if(gap>0&&sip===0){
+    h+='<div style="font-size:.68rem;color:var(--muted);text-align:center;padding:4px">\u2191 Enter monthly SIP above to see your timeline</div>';
+  }else if(pct>=100){
+    h+='<div style="font-size:.76rem;color:var(--green);text-align:center;font-weight:600;padding:4px">\u2705 Goal reached!</div>';
+  }
+  h+='</div>';el.innerHTML=h;
+}
+function saveGoalInline(gid){
+  const g=S.goals.find(x=>x.id===gid);if(!g)return;
+  const cur=Number(document.getElementById('gc_cur_'+gid)?.value)||0;
+  const sip=Number(document.getElementById('gc_sip_'+gid)?.value)||0;
+  g.current=cur;g.monthlySIP=sip||undefined;
+  saveS();renderPage();
+}
+
+// ── Goal chip helpers (modal) ──
 function setGoalChip(id,val){
   const el=document.getElementById(id);if(!el)return;
   const v2=val.toLowerCase();
