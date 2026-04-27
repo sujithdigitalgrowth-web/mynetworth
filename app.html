@@ -188,6 +188,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 .btn-c{background:var(--border);color:var(--text)}
 .btn-s{background:var(--blue);color:#fff}.btn-s:hover{opacity:.9}
 .btn-d{background:var(--red);color:#fff;flex:.4}
+.amt-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.amt-chip{padding:3px 9px;border-radius:5px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);font-size:.68rem;cursor:pointer;font-weight:600;transition:all .15s}
+.amt-chip:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
 
 /* Profile Setup Modal */
 .profile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:300;justify-content:center;align-items:center;padding:20px}
@@ -2102,7 +2105,10 @@ function openMo(type,owner,id){
   else if(type==='goal'){const g=item||{};
     h='<div class="fg"><label>Goal Name</label><input id="f_name" value="'+esc(g.name||'')+'" placeholder="e.g. Emergency Fund"></div>'+
     '<div class="fg"><label>Owner</label><select id="f_own">'+oo+'</select></div>'+
-    '<div class="fr"><div class="fg"><label>Target Amount (\u20B9)</label><input id="f_tar" type="number" value="'+(g.target||'')+'"></div><div class="fg"><label>Saved So Far (\u20B9)</label><input id="f_cur" type="number" value="'+(g.current||'')+'"></div></div>'}
+    '<div class="fg"><label>Target Amount (\u20B9)</label><input id="f_tar" type="number" value="'+(g.target||'')+'" oninput="updateGoalPreview()"><div class="amt-chips">'+['50k','75k','1L','2L','5L','10L','25L','50L'].map(v=>'<button type="button" class="amt-chip" onclick="setGoalChip(\''+'f_tar'+'\',\''+v+'\')">'+(v)+'</button>').join('')+'</div></div>'+
+    '<div class="fg"><label>Saved So Far / Already Invested (\u20B9)</label><input id="f_cur" type="number" value="'+(g.current||'')+'" oninput="updateGoalPreview()"><div class="amt-chips">'+['10k','30k','50k','75k','1L'].map(v=>'<button type="button" class="amt-chip" onclick="setGoalChip(\''+'f_cur'+'\',\''+v+'\')">'+(v)+'</button>').join('')+'</div></div>'+
+    '<div class="fg"><label>Monthly SIP Towards This Goal (\u20B9)</label><input id="f_sip" type="number" value="'+(g.monthlySIP||'')+'" placeholder="e.g. 10,000" oninput="updateGoalPreview()"><div class="amt-chips">'+['5k','10k','15k','20k','30k'].map(v=>'<button type="button" class="amt-chip" onclick="setGoalChip(\''+'f_sip'+'\',\''+v+'\')">'+(v)+'</button>').join('')+'</div></div>'+
+    '<div id="goal-preview"></div>'}
   else if(type==='insurance'){const p=item||{};
     h='<div class="fg"><label>Policy Name</label><input id="f_name" value="'+esc(p.name||'')+'" placeholder="e.g. HDFC Term Plan"></div>'+
     '<div class="fr"><div class="fg"><label>Insurance Type</label><select id="f_itype">'+ITYPS.map(t=>'<option '+(p.insType===t?'selected':'')+'>'+t+'</option>').join('')+'</select></div><div class="fg"><label>Owner</label><select id="f_own">'+oo+'</select></div></div>'+
@@ -2112,7 +2118,7 @@ function openMo(type,owner,id){
   document.getElementById('moFields').innerHTML=h;
   document.getElementById('moOverlay').classList.add('active');
   if(type==='asset'){const cb2=document.getElementById('f_same');if(cb2&&cb2.checked){document.getElementById('f_inv').addEventListener('input',syncInvToCur)}}
-  setTimeout(()=>{document.querySelector('#moFields input')?.focus();attachAmtPreview()},50);
+  setTimeout(()=>{document.querySelector('#moFields input')?.focus();attachAmtPreview();if(type==='goal')updateGoalPreview();},50);
 }
 function closeMo(){document.getElementById('moOverlay').classList.remove('active');mCtx=null}
 function toggleJoint(){const cb=document.getElementById('f_joint');const own=document.getElementById('f_own');const cr=document.getElementById('cRow');if(cb&&cb.checked){own.disabled=true;own.style.opacity='.5';if(cr)cr.style.display='grid'}else{own.disabled=false;own.style.opacity='';if(cr)cr.style.display='none'}}
@@ -2127,13 +2133,61 @@ function saveMo(){
   else if(type==='liability')item={id:isE?id:gid(),name,type:v('f_type'),owner,total:n('f_total'),outstanding:n('f_out'),emi:n('f_emi'),rate:n('f_rate'),tenure:n('f_ten')};
   else if(type==='income')item={id:isE?id:gid(),name,type:v('f_type'),owner,amount:n('f_amt')};
   else if(type==='expense'){const cat=v('f_cat');item={id:isE?id:gid(),name,category:cat==='EMI'?'EMI':cat,owner,amount:n('f_amt'),isEMI:cat==='EMI'}}
-  else if(type==='goal'){const prev=isE?S.goals.find(x=>x.id===id):null;item={id:isE?id:gid(),name,owner,target:n('f_tar'),current:n('f_cur'),strategy:prev?prev.strategy:undefined}}
+  else if(type==='goal'){const prev=isE?S.goals.find(x=>x.id===id):null;const sip2=n('f_sip');item={id:isE?id:gid(),name,owner,target:n('f_tar'),current:n('f_cur'),monthlySIP:sip2||undefined,strategy:prev?prev.strategy:undefined}}
   else if(type==='insurance')item={id:isE?id:gid(),name,insType:v('f_itype'),owner,provider:v('f_prov'),policyNo:v('f_pno'),cover:n('f_cover'),premium:n('f_prem'),expiry:v('f_exp')};
   if(isE){const idx=S[col].findIndex(x=>x.id===id);if(idx>=0)S[col][idx]=item}else S[col].push(item);
   saveS();render();closeMo();
 }
 function delItem(){if(!mCtx)return;S[mCtx.col]=S[mCtx.col].filter(x=>x.id!==mCtx.id);saveS();render();closeMo()}
 function delById(col,id){S[col]=S[col].filter(x=>x.id!==id);saveS();render()}
+
+// ── Goal chip helpers ──
+function setGoalChip(id,val){
+  const el=document.getElementById(id);if(!el)return;
+  const v2=val.toLowerCase();
+  const num=v2.endsWith('l')?parseFloat(v2)*100000:parseFloat(v2)*1000;
+  el.value=num;updateGoalPreview();
+}
+function updateGoalPreview(){
+  const tar=Number(document.getElementById('f_tar')?.value)||0;
+  const cur=Number(document.getElementById('f_cur')?.value)||0;
+  const sip=Number(document.getElementById('f_sip')?.value)||0;
+  const el=document.getElementById('goal-preview');if(!el)return;
+  if(!tar){el.innerHTML='';return;}
+  const gap=Math.max(0,tar-cur);
+  const pct=tar>0?Math.min(100,Math.round(cur/tar*100)):0;
+  const pColor=pct>=100?'var(--green)':pct>50?'var(--blue)':'var(--orange)';
+  let h='<div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:4px">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">';
+  h+='<span style="font-size:.65rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.6px">Live Preview</span>';
+  h+='<span style="font-size:.76rem;font-weight:700;color:'+pColor+'">'+pct+'% done</span>';
+  h+='</div>';
+  h+='<div style="height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:10px">';
+  h+='<div style="height:100%;width:'+pct+'%;background:'+pColor+';border-radius:3px;transition:width .3s"></div></div>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">';
+  h+='<div style="text-align:center;padding:7px;background:var(--card);border-radius:7px"><div style="font-size:.6rem;color:var(--muted);margin-bottom:1px">Saved So Far</div><div style="font-size:.84rem;font-weight:700;color:var(--green)">'+fmt(cur)+'</div></div>';
+  h+='<div style="text-align:center;padding:7px;background:var(--card);border-radius:7px"><div style="font-size:.6rem;color:var(--muted);margin-bottom:1px">Still Needed</div><div style="font-size:.84rem;font-weight:700;color:'+(gap>0?'var(--red)':'var(--green)')+'">'+fmt(gap)+'</div></div>';
+  h+='</div>';
+  if(sip>0&&gap>0){
+    const calc=sipMonths(sip,11.5,gap,0);
+    if(calc.months<600){
+      const y=Math.floor(calc.months/12),mo=calc.months%12;
+      const tStr=y>0?(mo>0?y+'y '+mo+'mo':y+' yrs'):mo+' mo';
+      h+='<div style="background:var(--blue-bg);border:1px solid rgba(59,130,246,.2);border-radius:8px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px">';
+      h+='<div><div style="font-size:.62rem;color:var(--muted);margin-bottom:2px">\uD83D\uDCC8 Mutual Fund @ 11.5% p.a.</div>';
+      h+='<div style="font-size:.76rem;color:var(--text2)">'+fmt(sip)+'/mo SIP \u2192 <b style="color:var(--green);font-size:.9rem">'+tStr+'</b></div></div>';
+      h+='<div style="text-align:right;flex-shrink:0"><div style="font-size:.6rem;color:var(--muted)">Returns</div><div style="font-size:.82rem;font-weight:700;color:var(--green)">+'+fmt(calc.totalRet)+'</div></div>';
+      h+='</div>';
+    }else{
+      h+='<div style="background:var(--orange-bg);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:9px 12px;font-size:.74rem;color:var(--text2)">\u26A0 SIP of '+fmt(sip)+'/mo needs 50+ years. Try a higher amount.</div>';
+    }
+  }else if(gap>0){
+    h+='<div style="font-size:.7rem;color:var(--muted);text-align:center;padding:5px">\u2191 Enter monthly SIP above to see your timeline</div>';
+  }else if(pct>=100){
+    h+='<div style="font-size:.76rem;color:var(--green);text-align:center;padding:5px;font-weight:600">\u2705 Goal reached!</div>';
+  }
+  h+='</div>';el.innerHTML=h;
+}
 
 // ── Live Amount Preview ──
 function attachAmtPreview(){document.querySelectorAll('#moFields input[type=number]').forEach(inp=>{let tip=inp.parentElement.querySelector('.amt-tip');if(!tip){tip=document.createElement('div');tip.className='amt-tip';tip.style.cssText='font-size:.72rem;color:var(--blue);margin-top:2px;min-height:1em;font-weight:500';inp.parentElement.appendChild(tip)}inp.addEventListener('input',()=>{const v=Number(inp.value);tip.textContent=v?fmt(v):''});
