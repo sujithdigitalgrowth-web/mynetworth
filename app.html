@@ -883,11 +883,14 @@ function lOf(o){return S.liabilities.filter(l=>l.owner===o).reduce((s,l)=>s+(+l.
 function nwOf(o){return aOf(o)-lOf(o)}
 function iOf(o){return S.income.filter(i=>i.owner===o).reduce((s,i)=>s+(+i.amount||0),0)}
 function eOf(o){return S.expenses.filter(e=>e.owner===o&&!e.isEMI).reduce((s,e)=>s+(+e.amount||0),0)}
+function liabilityEmiOf(o){return S.liabilities.filter(l=>l.owner===o).reduce((s,l)=>s+(+l.emi||0),0)}
+function expenseEmiFallbackOf(o){
+  // If liabilities already carry EMI, treat them as source of truth to avoid hidden double counting.
+  if(S.liabilities.some(l=>l.owner===o&&(+l.emi||0)>0))return 0;
+  return S.expenses.filter(e=>e.owner===o&&e.isEMI).reduce((s,e)=>s+(+e.amount||0),0);
+}
 function emiOf(o){
-  const libEmi=S.liabilities.filter(l=>l.owner===o).reduce((s,l)=>s+(+l.emi||0),0);
-  const libNames=new Set(S.liabilities.filter(l=>l.owner===o&&l.emi>0).map(l=>l.name.toLowerCase().trim()));
-  const expEmi=S.expenses.filter(e=>e.owner===o&&e.isEMI&&!libNames.has(e.name.toLowerCase().trim())).reduce((s,e)=>s+(+e.amount||0),0);
-  return libEmi+expEmi;
+  return liabilityEmiOf(o)+expenseEmiFallbackOf(o);
 }
 function tA(){return S.assets.reduce((s,a)=>s+(+a.currentValue||0),0)}
 function tL(){return S.liabilities.reduce((s,l)=>s+(+l.outstanding||0),0)}
@@ -895,10 +898,7 @@ function tNW(){return tA()-tL()}
 function tI(){return S.income.reduce((s,i)=>s+(+i.amount||0),0)}
 function tE(){return S.expenses.reduce((s,e)=>s+(+e.amount||0),0)}
 function tEMI(){
-  const libEmi=S.liabilities.reduce((s,l)=>s+(+l.emi||0),0);
-  const libNames=new Set(S.liabilities.filter(l=>l.emi>0).map(l=>(l.owner+'|'+l.name.toLowerCase().trim())));
-  const expEmi=S.expenses.filter(e=>e.isEMI&&!libNames.has(e.owner+'|'+e.name.toLowerCase().trim())).reduce((s,e)=>s+(+e.amount||0),0);
-  return libEmi+expEmi;
+  return ['self','spouse','joint'].reduce((sum,owner)=>sum+emiOf(owner),0);
 }
 function fmt(n){if(n==null||isNaN(n))return'\u20B90';const a=Math.abs(n);let s;if(a>=1e7)s='\u20B9'+(a/1e7).toFixed(2)+' Cr';else if(a>=1e5)s='\u20B9'+(a/1e5).toFixed(2)+' L';else s='\u20B9'+a.toLocaleString('en-IN');return n<0?'\u2212'+s:s}
 function fP(n){return(n>=0?'+':'')+n.toFixed(1)+'%'}
@@ -1598,6 +1598,7 @@ function pgCF(){
   let h='';
   if(!S.meta.sp){
     const inc=iOf('self'),exp=eOf('self'),emi=emiOf('self'),sur=inc-exp-emi;
+    const showExpenseEmiFallback=liabilityEmiOf('self')===0;
     h+='<div class="cgrid"><div class="card" style="max-width:520px">'+
       '<div style="margin-bottom:12px"><div class="cf-hdr"><span>Income</span><button class="btn-add" onclick="openMo(\'income\',\'self\')" style="font-size:.72rem;padding:4px 10px">+ Add</button></div>';
     S.income.filter(i=>i.owner==='self').forEach(i=>{h+='<div class="cf-row"><span>'+esc(i.name)+'</span><span class="pos">'+fmt(i.amount)+'</span></div>'});
@@ -1607,7 +1608,7 @@ function pgCF(){
     h+='<div class="cf-total"><span>Total Expenses</span><span>'+fmt(exp)+'</span></div></div>';
     h+='<div style="margin-bottom:12px"><div class="cf-hdr"><span>EMIs</span></div>';
     S.liabilities.filter(l=>l.owner==='self'&&l.emi>0).forEach(l=>{h+='<div class="cf-row"><span>'+esc(l.name)+'</span><span class="neg">'+fmt(l.emi)+'</span></div>'});
-    S.expenses.filter(e=>e.owner==='self'&&e.isEMI).forEach(e=>{h+='<div class="cf-row"><span>'+esc(e.name)+'</span><span class="neg">'+fmt(e.amount)+'</span></div>'});
+    if(showExpenseEmiFallback)S.expenses.filter(e=>e.owner==='self'&&e.isEMI).forEach(e=>{h+='<div class="cf-row"><span>'+esc(e.name)+'</span><span class="neg">'+fmt(e.amount)+'</span></div>'});
     h+='<div class="cf-total"><span>Total EMIs</span><span class="neg">'+fmt(emi)+'</span></div></div>';
     h+='<div style="padding:14px;background:'+(sur>=0?'var(--green-bg)':'var(--red-bg)')+';border-radius:10px;display:flex;justify-content:space-between;font-weight:700;font-size:1rem"><span>Monthly Surplus</span><span class="'+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'</span></div>';
     h+='</div></div>';
@@ -1615,6 +1616,7 @@ function pgCF(){
     h+='<div class="split">';
     ['self','spouse'].forEach(o=>{
       const inc=iOf(o),exp=eOf(o),emi=emiOf(o),sur=inc-exp-emi;
+      const showExpenseEmiFallback=liabilityEmiOf(o)===0;
       const cls=o==='self'?'h-self':'h-spouse';
       h+='<div class="card"><div class="col-hdr '+cls+'">'+esc(gn(o))+'</div>'+
         '<div style="margin-bottom:12px"><div class="cf-hdr"><span>Income</span><button class="btn-add" onclick="openMo(\'income\',\''+o+'\')" style="font-size:.72rem;padding:4px 10px">+ Add</button></div>';
@@ -1625,7 +1627,7 @@ function pgCF(){
       h+='<div class="cf-total"><span>Expenses</span><span>'+fmt(exp)+'</span></div></div>';
       h+='<div style="margin-bottom:12px"><div class="cf-hdr"><span>EMIs</span></div>';
       S.liabilities.filter(l=>l.owner===o&&l.emi>0).forEach(l=>{h+='<div class="cf-row"><span>'+esc(l.name)+'</span><span class="neg">'+fmt(l.emi)+'</span></div>'});
-      S.expenses.filter(e=>e.owner===o&&e.isEMI).forEach(e=>{h+='<div class="cf-row"><span>'+esc(e.name)+'</span><span class="neg">'+fmt(e.amount)+'</span></div>'});
+      if(showExpenseEmiFallback)S.expenses.filter(e=>e.owner===o&&e.isEMI).forEach(e=>{h+='<div class="cf-row"><span>'+esc(e.name)+'</span><span class="neg">'+fmt(e.amount)+'</span></div>'});
       h+='<div class="cf-total"><span>EMIs</span><span class="neg">'+fmt(emi)+'</span></div></div>';
       h+='<div style="padding:12px;background:'+(sur>=0?'var(--green-bg)':'var(--red-bg)')+';border-radius:8px;display:flex;justify-content:space-between;font-weight:700"><span>Surplus</span><span class="'+(sur>=0?'pos':'neg')+'">'+fmt(sur)+'</span></div></div>';
     });
