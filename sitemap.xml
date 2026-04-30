@@ -4,87 +4,87 @@
   <!-- Main Pages -->
   <url>
     <loc>https://worthscale.in/</loc>
-    <lastmod>2026-04-28</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/app.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/app</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/net-worth-calculator.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/net-worth-calculator</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/emergency-fund-calculator.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/emergency-fund-calculator</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/house-down-payment-calculator.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/house-down-payment-calculator</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/about.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/about</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/contact.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/contact</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/privacy-policy.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/privacy-policy</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/terms.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/terms</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <!-- Blog Pages -->
   <url>
-    <loc>https://worthscale.in/blog/</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/blog</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/blog/how-to-calculate-net-worth.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/blog/how-to-calculate-net-worth</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/blog/emergency-fund-guide.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/blog/emergency-fund-guide</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/blog/financial-freedom-steps.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/blog/financial-freedom-steps</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://worthscale.in/blog/net-worth-vs-salary.html</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://worthscale.in/blog/net-worth-vs-salary</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
