@@ -244,6 +244,10 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:10px}
 .example-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin:14px 0;font-size:.85rem;color:var(--text);line-height:1.7}
 .example-box strong{color:var(--green)}
 
+/* === ADS: collapse unfilled slots so no blank space === */
+ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;height:0!important;min-height:0!important}
+.ad-wrap:has(ins.adsbygoogle[data-ad-status="unfilled"]){display:none!important;padding:0!important;margin:0!important}
+
 /* === TIPS GRID === */
 .tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
 .tip-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;transition:border-color .2s}
