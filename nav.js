@@ -6,3 +6,19 @@ document.addEventListener('click', function(e) {
     });
   }
 });
+
+// FAQ Accordion
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    var item = this.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    // Close all others in the same accordion
+    var accordion = item.closest('.faq-accordion, [itemtype*="FAQPage"]');
+    if (accordion) {
+      accordion.querySelectorAll('.faq-item.open').forEach(function(other) {
+        if (other !== item) other.classList.remove('open');
+      });
+    }
+    item.classList.toggle('open');
+  });
+});
