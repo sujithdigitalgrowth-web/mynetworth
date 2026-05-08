@@ -1,6 +1,7 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="google-adsense-account" content="ca-pub-4837443132966026">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Net Worth Dashboard</title>
@@ -12,7 +13,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <style>
-/* ── Theme Variables ── */
+/* -- Theme Variables -- */
 :root {
   --bg:#0a0b10;--bg2:#10121a;--card:#161922;--card-hover:#1c1f2e;
   --border:#232738;--border-light:#2e3348;--text:#e8e8ec;--text2:#c4c4cc;--muted:#6b6f80;
@@ -249,7 +250,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 .inv-opt{background:var(--card);border:2px solid var(--border);border-radius:11px;padding:14px 12px;cursor:pointer;text-align:center;transition:all .2s;position:relative}
 .inv-opt:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.18)}
 .inv-opt.active{border-color:var(--green);background:rgba(34,197,94,.04)}
-.inv-opt.active::after{content:'✓ Active';position:absolute;top:-7px;right:8px;font-size:.5rem;padding:1px 6px;border-radius:3px;background:var(--green);color:#000;font-weight:700}
+.inv-opt.active::after{content:'? Active';position:absolute;top:-7px;right:8px;font-size:.5rem;padding:1px 6px;border-radius:3px;background:var(--green);color:#000;font-weight:700}
 .inv-icon{font-size:1.6rem;margin-bottom:6px}
 .inv-opt h5{font-size:.8rem;font-weight:600;margin-bottom:4px}
 .inv-label{font-size:.55rem;padding:2px 7px;border-radius:4px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;display:inline-block;margin-bottom:5px}
@@ -375,7 +376,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 <div class="login-screen" id="loginScreen" style="display:none">
   <div class="login-orb-mid"></div>
   <div class="login-box">
-    <div class="login-icon">💰</div>
+    <div class="login-icon">??</div>
     <h1>WorthScale</h1>
     <p class="sub" id="lgSub">Create your free account</p>
     <div id="lg_name_wrap">
@@ -386,7 +387,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
     <div id="lg_forgot_wrap" style="text-align:right;margin-top:-6px;margin-bottom:8px;display:none">
       <span onclick="showForgotPassword()" style="font-size:.78rem;color:var(--blue);cursor:pointer;font-weight:500">Forgot password?</span>
     </div>
-    <button class="lg-btn" id="lgBtn" onclick="doLogin()">Enter Dashboard →</button>
+    <button class="lg-btn" id="lgBtn" onclick="doLogin()">Enter Dashboard ?</button>
     <div class="lg-err" id="lgErr"></div>
     <!-- Forgot Password panel -->
     <div id="lg_reset_panel" style="display:none;margin-top:14px;background:rgba(10,11,16,.6);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;text-align:left">
@@ -395,7 +396,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
       <input class="lg-field" id="lg_reset_email" type="email" placeholder="Email Address" style="margin-bottom:8px">
       <button class="lg-btn" id="lgResetBtn" onclick="sendPasswordReset()" style="font-size:.85rem;padding:10px">Send Reset Link</button>
       <div class="lg-err" id="lgResetErr" style="margin-top:6px"></div>
-      <div style="margin-top:8px;font-size:.76rem;color:var(--blue);cursor:pointer" onclick="hideForgotPassword()">← Back to login</div>
+      <div style="margin-top:8px;font-size:.76rem;color:var(--blue);cursor:pointer" onclick="hideForgotPassword()">? Back to login</div>
     </div>
     <div style="margin-top:20px;font-size:.82rem;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:5px">
       <span id="lgToggleText">Already have an account?</span>
@@ -405,36 +406,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 </div>
 
 <div class="mob-hdr">
-  <button class="ham" onclick="togSB()">☰</button>
+  <button class="ham" onclick="togSB()">?</button>
   <h2 id="mobTitle">Overview</h2>
 </div>
 <div class="sob" id="sbOverlay" onclick="togSB()"></div>
 
 <div class="app" id="app">
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand">💰 WorthScale</div>
+    <div class="sidebar-brand">?? WorthScale</div>
     <nav class="sidebar-nav">
       <div class="nav-section">Main</div>
-      <div class="nav-item active" data-p="overview"><span class="ni">📊</span>Overview</div>
-      <div class="nav-item" data-p="my"><span class="ni">👤</span>My Dashboard</div>
-      <div class="nav-item sp-only" data-p="spouse"><span class="ni">👩</span>Spouse Dashboard</div>
-      <div class="nav-item sp-only" data-p="joint"><span class="ni">🏠</span>Joint / Family</div>
+      <div class="nav-item active" data-p="overview"><span class="ni">??</span>Overview</div>
+      <div class="nav-item" data-p="my"><span class="ni">??</span>My Dashboard</div>
+      <div class="nav-item sp-only" data-p="spouse"><span class="ni">??</span>Spouse Dashboard</div>
+      <div class="nav-item sp-only" data-p="joint"><span class="ni">??</span>Joint / Family</div>
       <div class="nav-section">Manage</div>
-      <div class="nav-item" data-p="assets"><span class="ni">📈</span>Assets</div>
-      <div class="nav-item" data-p="liabilities"><span class="ni">📉</span>Liabilities</div>
-      <div class="nav-item" data-p="cashflow"><span class="ni">💸</span>Cash Flow</div>
-      <div class="nav-item" data-p="goals"><span class="ni">🎯</span>Goals</div>
-      <div class="nav-item" data-p="insurance"><span class="ni">🛡️</span>Insurance</div>
+      <div class="nav-item" data-p="assets"><span class="ni">??</span>Assets</div>
+      <div class="nav-item" data-p="liabilities"><span class="ni">??</span>Liabilities</div>
+      <div class="nav-item" data-p="cashflow"><span class="ni">??</span>Cash Flow</div>
+      <div class="nav-item" data-p="goals"><span class="ni">??</span>Goals</div>
+      <div class="nav-item" data-p="insurance"><span class="ni">???</span>Insurance</div>
       <div class="nav-section">Analysis</div>
-      <div class="nav-item" data-p="charts"><span class="ni">📊</span>Charts</div>
-      <div class="nav-item" data-p="insights"><span class="ni">💡</span>Insights</div>
+      <div class="nav-item" data-p="charts"><span class="ni">??</span>Charts</div>
+      <div class="nav-item" data-p="insights"><span class="ni">??</span>Insights</div>
     </nav>
     <div class="sidebar-footer">
       <div class="mode-toggle" onclick="togSP()">
         <div class="sw" id="spSw"></div>
         <span id="modeLbl">Family Mode</span>
       </div>
-      <div class="nav-item" onclick="openProfile()" style="margin:0;padding:6px 10px;font-size:.76rem;gap:6px"><span class="ni" style="font-size:.85rem">⚙️</span>Profile Settings</div>
+      <div class="nav-item" onclick="openProfile()" style="margin:0;padding:6px 10px;font-size:.76rem;gap:6px"><span class="ni" style="font-size:.85rem">??</span>Profile Settings</div>
       <a href="/sitemap" style="font-size:.72rem;color:var(--muted);text-align:center;padding:4px 0;text-decoration:none;display:block">Sitemap</a>
     </div>
   </aside>
@@ -442,7 +443,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
   <main class="content">
     <header class="content-header">
       <h2 id="pgTitle">Overview</h2>
-      <button id="shareBtn" onclick="shareView()" style="display:none;align-items:center;gap:6px;padding:7px 14px;background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue);border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s">🔗 Share View</button>
+      <button id="shareBtn" onclick="shareView()" style="display:none;align-items:center;gap:6px;padding:7px 14px;background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue);border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s">?? Share View</button>
     </header>
     <div class="content-body" id="cBody"></div>
   </main>
@@ -451,7 +452,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 <!-- Profile Setup -->
 <div class="profile-overlay" id="profOverlay" onclick="if(event.target===this)closeProfile()">
   <div class="profile-modal">
-    <h3>⚙️ Your Profile</h3>
+    <h3>?? Your Profile</h3>
     <p class="pm-sub">Personalize your dashboard. We use this for age-based insights, city-relevant advice, and life-stage recommendations.</p>
     <div class="fr">
       <div class="fg"><label style="display:block;color:var(--muted);font-size:.75rem;margin-bottom:4px;font-weight:500">Your Name *</label><input id="pf_name1" placeholder="e.g. Harsha" style="width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.85rem;outline:none"></div>
@@ -469,11 +470,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
     </div>
     <div class="fg"><label style="display:block;color:var(--muted);font-size:.75rem;margin-bottom:4px;font-weight:500">Retirement Age (default 60)</label><input id="pf_retAge" type="number" min="45" max="75" placeholder="60" style="width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.85rem;outline:none"></div>
     <div style="margin-top:16px;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:space-between">
-      <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">🌓</span><span style="font-size:.82rem;font-weight:500;color:var(--text2)" id="themeLblP">Dark Mode</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">??</span><span style="font-size:.82rem;font-weight:500;color:var(--text2)" id="themeLblP">Dark Mode</span></div>
       <div class="tsw" id="tSwP" onclick="togTheme()" style="cursor:pointer"></div>
     </div>
     <div style="margin-top:16px;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:space-between">
-      <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">👤</span><span style="font-size:.82rem;color:var(--muted)" id="loggedInAs">Logged in as</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">??</span><span style="font-size:.82rem;color:var(--muted)" id="loggedInAs">Logged in as</span></div>
       <button onclick="doLogout()" style="padding:6px 14px;background:var(--red-bg);color:var(--red);border:1px solid var(--red);border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer">Logout</button>
     </div>
     <div class="ma" style="margin-top:20px">
@@ -486,7 +487,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 <!-- Logout Confirm Modal -->
 <div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:500;justify-content:center;align-items:center;padding:20px" id="logoutModal">
   <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 28px 24px;width:92%;max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,.4);text-align:center">
-    <div style="font-size:2rem;margin-bottom:10px">👋</div>
+    <div style="font-size:2rem;margin-bottom:10px">??</div>
     <h3 style="font-size:1.05rem;margin-bottom:8px">Log out of WorthScale?</h3>
     <p style="font-size:.83rem;color:var(--muted);margin-bottom:22px;line-height:1.5">Your data is saved to the cloud. You can log back in anytime.</p>
     <div style="display:flex;gap:10px">
@@ -500,11 +501,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 <div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:500;justify-content:center;align-items:center;padding:20px" id="shareModal" onclick="if(event.target===this)closeShareModal()">
   <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;width:92%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.4)">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-      <h3 style="font-size:1rem;font-weight:700">🔗 Share Dashboard View</h3>
-      <button onclick="closeShareModal()" style="background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer">✕</button>
+      <h3 style="font-size:1rem;font-weight:700">?? Share Dashboard View</h3>
+      <button onclick="closeShareModal()" style="background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer">?</button>
     </div>
     <p style="font-size:.78rem;color:var(--muted);margin-bottom:18px;line-height:1.5">Anyone with this link can view a <strong style="color:var(--text)">read-only snapshot</strong> of this dashboard. Your login and private data stay protected.</p>
-    <div id="shareStatus" style="text-align:center;padding:20px;color:var(--muted);font-size:.82rem">Generating link…</div>
+    <div id="shareStatus" style="text-align:center;padding:20px;color:var(--muted);font-size:.82rem">Generating link�</div>
     <div id="shareLinkBox" style="display:none">
       <div style="display:flex;gap:8px;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:10px 14px;margin-bottom:12px">
         <span id="shareLinkText" style="flex:1;font-size:.73rem;color:var(--text2);word-break:break-all;overflow:hidden;max-height:40px"></span>
@@ -514,14 +515,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
         <button onclick="closeShareModal()" style="flex:1;padding:10px;background:var(--border);color:var(--text);border:none;border-radius:9px;font-size:.82rem;cursor:pointer">Done</button>
         <button onclick="newShareLink()" style="flex:1;padding:10px;background:var(--bg);color:var(--muted);border:1px solid var(--border);border-radius:9px;font-size:.82rem;cursor:pointer">New Link</button>
       </div>
-      <p style="font-size:.68rem;color:var(--muted);margin-top:10px;text-align:center">⏱ Link expires in 30 days</p>
+      <p style="font-size:.68rem;color:var(--muted);margin-top:10px;text-align:center">? Link expires in 30 days</p>
     </div>
   </div>
 </div>
 
 <div class="ip-overlay" id="ipOverlay" onclick="if(event.target===this)closeIP()">
   <div class="ip-modal">
-    <div class="ip-hdr"><h3 id="ipTitle">🎯 Investment Planner</h3><button class="ip-close" onclick="closeIP()">✕</button></div>
+    <div class="ip-hdr"><h3 id="ipTitle">?? Investment Planner</h3><button class="ip-close" onclick="closeIP()">?</button></div>
     <div class="ip-body" id="ipBody"></div>
   </div>
 </div>
@@ -539,14 +540,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 </div>
 
 <script>
-// ── Constants ──
+// -- Constants --
 const ACAT=['Cash & Bank','Fixed Deposits','Stocks','Mutual Funds','Real Estate','Gold','PPF/EPF','NPS','Crypto','Vehicles','Electronics','Other'];
 const LTYP=['Home Loan','Car Loan','Personal Loan','Education Loan','Credit Card','Gold Loan','Other'];
 const ECAT=['Housing','Food','Transport','Utilities','Insurance','Shopping','Health','Education','Entertainment','Other'];
 const ITYP=['Salary','Freelance','Rental','Dividend','Interest','Business','Other'];
 const ITYPS=['Term Life','Health','Vehicle','Home','Travel','Critical Illness','Personal Accident','Other'];
 
-// ── Firebase Init ──
+// -- Firebase Init --
 const fbApp=firebase.initializeApp({apiKey:"AIzaSyAQw98PicAW-L-Y9pNVUBzT2FNdrlcUyWo",authDomain:"mynetworth-a4a31.firebaseapp.com",projectId:"mynetworth-a4a31",storageBucket:"mynetworth-a4a31.firebasestorage.app",messagingSenderId:"933747897994",appId:"1:933747897994:web:e05430ff1d696683871f73",measurementId:"G-34VQNGQFDY"});
 const db=firebase.firestore();
 const auth=firebase.auth();
@@ -565,7 +566,7 @@ function toggleAuthMode(){
   document.getElementById('lg_name_wrap').style.display=isLogin?'none':'';
   document.getElementById('lg_forgot_wrap').style.display=isLogin?'':'none';
   document.getElementById('lgSub').textContent=isLogin?'Welcome back':'Create your free account';
-  document.getElementById('lgBtn').textContent=isLogin?'Log In →':'Enter Dashboard →';
+  document.getElementById('lgBtn').textContent=isLogin?'Log In ?':'Enter Dashboard ?';
   document.getElementById('lgToggleText').textContent=isLogin?'New user?':'Already have an account?';
   document.getElementById('lgToggle').textContent=isLogin?'Create account':'Log In';
   document.getElementById('lgErr').textContent='';
@@ -596,7 +597,7 @@ async function sendPasswordReset(){
   try{
     await auth.sendPasswordResetEmail(email);
     err.style.color='var(--green)';
-    err.textContent='✅ Reset link sent! Check your inbox (and spam folder).';
+    err.textContent='? Reset link sent! Check your inbox (and spam folder).';
     document.getElementById('lgResetBtn').textContent='Sent!';
   }catch(e){
     err.style.color='var(--red)';
@@ -619,7 +620,7 @@ async function doLogin(){
   document.getElementById('lgBtn').disabled=true;
   try{
     if(lgMode==='signup'){
-      if(!name){err.textContent='Please enter your name.';document.getElementById('lgBtn').textContent='Enter Dashboard →';document.getElementById('lgBtn').disabled=false;return}
+      if(!name){err.textContent='Please enter your name.';document.getElementById('lgBtn').textContent='Enter Dashboard ?';document.getElementById('lgBtn').disabled=false;return}
       const cred=await auth.createUserWithEmailAndPassword(email,pass);
       currentUser={name,email,uid:cred.user.uid};
     } else {
@@ -638,7 +639,7 @@ async function doLogin(){
     else if(e.code==='auth/weak-password')msg='Password must be at least 6 characters.';
     else if(e.code==='auth/invalid-email')msg='Please enter a valid email address.';
     err.textContent=msg;
-    document.getElementById('lgBtn').textContent=lgMode==='login'?'Log In →':'Enter Dashboard →';
+    document.getElementById('lgBtn').textContent=lgMode==='login'?'Log In ?':'Enter Dashboard ?';
     document.getElementById('lgBtn').disabled=false;
   }
 }
@@ -662,7 +663,7 @@ function showLoginScreen(){
   document.getElementById('loginScreen').style.display='flex';
   document.getElementById('app').style.display='none';
   document.querySelector('.mob-hdr').style.display='none';
-  document.getElementById('lgBtn').textContent='Enter Dashboard →';
+  document.getElementById('lgBtn').textContent='Enter Dashboard ?';
   document.getElementById('lgBtn').disabled=false;
   document.getElementById('lgErr').textContent='';
   document.getElementById('lg_name').value='';
@@ -675,7 +676,7 @@ function showLoginScreen(){
   lgMode='signup';
   document.getElementById('lg_name_wrap').style.display='';
   document.getElementById('lgSub').textContent='Create your free account';
-  document.getElementById('lgBtn').textContent='Enter Dashboard →';
+  document.getElementById('lgBtn').textContent='Enter Dashboard ?';
   document.getElementById('lgToggleText').textContent='Already have an account?';
   document.getElementById('lgToggle').textContent='Log In';
 }
@@ -696,7 +697,7 @@ async function startApp(){
 // City cost tiers
 const CITY_TIER={Mumbai:'high',Delhi:'high',Bengaluru:'high',Hyderabad:'high',Chennai:'high',Pune:'high',Kolkata:'mid',Ahmedabad:'mid',Jaipur:'mid',Kochi:'mid',Chandigarh:'mid',Vizag:'low',Indore:'low',Coimbatore:'low',Lucknow:'low',Nagpur:'low',Bhopal:'low',Patna:'low',Surat:'mid'};
 
-// ── State ──
+// -- State --
 let S=loadS();
 let page='overview';
 let mCtx=null;
@@ -746,7 +747,7 @@ function saveS(){
 }
 function updSyncBadge(){}
 
-// ── Share ──
+// -- Share --
 let _shareLink='';
 function shareView(){
   const modal=document.getElementById('shareModal');
@@ -754,7 +755,7 @@ function shareView(){
   const linkBox=document.getElementById('shareLinkBox');
   modal.style.display='flex';
   statusEl.style.display='block';
-  statusEl.textContent='Generating link…';
+  statusEl.textContent='Generating link�';
   linkBox.style.display='none';
   _generateShareLink();
 }
@@ -805,7 +806,7 @@ function copyShareLink(){
 function newShareLink(){
   document.getElementById('shareLinkBox').style.display='none';
   document.getElementById('shareStatus').style.display='block';
-  document.getElementById('shareStatus').textContent='Generating new link…';
+  document.getElementById('shareStatus').textContent='Generating new link�';
   _generateShareLink();
 }
 async function loadFromCloud(){
@@ -833,7 +834,7 @@ function td(){return new Date().toISOString().split('T')[0]}
 function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
 function gn(o){return o==='self'?(S.meta.name1||'You'):o==='spouse'?(S.meta.name2||'Spouse'):'Joint'}
 
-// ── Profile ──
+// -- Profile --
 function openProfile(){
   const p=S.profile||{};
   document.getElementById('pf_name1').value=S.meta.name1||'';
@@ -878,7 +879,7 @@ function fmtTimeHuman(m){
   return s;
 }
 
-// ── Theme ──
+// -- Theme --
 function togTheme(){
   const isLight=document.documentElement.getAttribute('data-theme')==='light';
   document.documentElement.setAttribute('data-theme',isLight?'dark':'light');
@@ -899,7 +900,7 @@ function applyThemeToggle(){
   if(lbl){lbl.textContent=t==='light'?'Light Mode':'Dark Mode'}
 }
 
-// ── Calculations ──
+// -- Calculations --
 function aOf(o){return S.assets.filter(a=>a.owner===o).reduce((s,a)=>s+(+a.currentValue||0),0)}
 function lOf(o){return S.liabilities.filter(l=>l.owner===o).reduce((s,l)=>s+(+l.outstanding||0),0)}
 function nwOf(o){return aOf(o)-lOf(o)}
@@ -926,7 +927,7 @@ function fmt(n){if(n==null||isNaN(n))return'\u20B90';const a=Math.abs(n);let s;i
 function fP(n){return(n>=0?'+':'')+n.toFixed(1)+'%'}
 function retP(c,i){return i>0?((c-i)/i*100):0}
 
-// ── Navigation ──
+// -- Navigation --
 function nav(p){
   page=p;
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.p===p));
@@ -973,7 +974,7 @@ function applySP(){
 }
 function togSB(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sbOverlay').classList.toggle('active')}
 
-// ── Humanized Banner ──
+// -- Humanized Banner --
 function hBanner(){
   const sp=S.meta.sp;
   const age=getAge(),city=getCity();
@@ -1027,7 +1028,7 @@ function hBanner(){
   return'<div class="h-banner" style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap"><div style="flex:1;min-width:280px"><div class="h-greet">'+greeting+' \u{1F44B}</div>'+lines.join('<br>')+(rpBadge?'<div style="margin-top:8px">'+rpBadge+'</div>':'')+'</div>'+right+'</div>';
 }
 
-// ── Page: Overview ──
+// -- Page: Overview --
 function pgOverview(){
   let h=hBanner();
   h+=sumCards();
@@ -1118,7 +1119,7 @@ function pgOverview(){
       if(topA.length){
         h+='<div class="items" style="margin-bottom:8px">';
         topA.forEach((asset,idx)=>{
-          const rank=['🥇','🥈','🥉'][idx]||'';
+          const rank=['??','??','??'][idx]||'';
           const pctOfTotal=a>0?Math.round((asset.currentValue||0)/a*100):0;
           h+='<div class="it"><div class="it-l"><span style="font-size:.75rem;margin-right:4px">'+rank+'</span><span class="it-name">'+esc(asset.name)+'</span><span class="it-meta" style="background:'+accentBg+';color:'+accent+';padding:1px 6px;border-radius:4px;font-size:.6rem">'+pctOfTotal+'%</span></div><div class="it-r"><span class="it-val" style="font-weight:700">'+fmt(asset.currentValue)+'</span></div></div>';
         });
@@ -1169,7 +1170,7 @@ function pgOverview(){
   return h;
 }
 
-// ── Summary Cards ──
+// -- Summary Cards --
 function genNextActions(){
   const actions=[];
   const name=S.meta.name1||'You';
@@ -1449,7 +1450,7 @@ function sumCards(){
   }
 }
 
-// ── Page: Individual Dashboard ──
+// -- Page: Individual Dashboard --
 function pgDash(o){
   const a=aOf(o),l=lOf(o),nw=nwOf(o),inc=iOf(o),exp=eOf(o),emi=emiOf(o),sur=inc-exp-emi;
   let h='<div class="scards">'+
@@ -1477,7 +1478,7 @@ function pgDash(o){
   return h;
 }
 
-// ── Page: Assets ──
+// -- Page: Assets --
 const ACAT_ICONS={'Cash & Bank':'\u{1F3E6}','Fixed Deposits':'\u{1F512}','Stocks':'\u{1F4CA}','Mutual Funds':'\u{1F4C8}','Real Estate':'\u{1F3E0}','Gold':'\u{1F947}','PPF/EPF':'\u{1F3DB}\u{FE0F}','NPS':'\u{1F4CB}','Crypto':'\u{20BF}','Vehicles':'\u{1F697}','Electronics':'\u{1F4BB}','Other':'\u{1F4E6}'};
 const ACAT_COLORS={'Cash & Bank':'var(--cyan)','Fixed Deposits':'var(--blue)','Stocks':'var(--green)','Mutual Funds':'var(--purple)','Real Estate':'var(--pink)','Gold':'#f59e0b','PPF/EPF':'var(--cyan)','NPS':'var(--blue)','Crypto':'var(--orange)','Vehicles':'var(--red)','Electronics':'var(--muted)','Other':'var(--muted)'};
 function pgAssets(){
@@ -1545,7 +1546,7 @@ function pgAssets(){
 }
 function fAT(o,b){b.parentElement.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));b.classList.add('active');document.querySelectorAll('#aGrid .card').forEach(c=>{if(o==='all'){c.style.display=''}else{const ow=c.dataset.owners||'';c.style.display=ow.includes(o)?'':'none'}})}
 
-// ── Page: Liabilities ──
+// -- Page: Liabilities --
 const LTYP_ICONS={'Home Loan':'\u{1F3E0}','Car Loan':'\u{1F697}','Personal Loan':'\u{1F4B3}','Education Loan':'\u{1F393}','Credit Card':'\u{1F4B8}','Gold Loan':'\u{1F947}','Other':'\u{1F4CB}'};
 const LTYP_COLORS={'Home Loan':'#3b82f6','Car Loan':'#ec4899','Personal Loan':'#f59e0b','Education Loan':'#a855f7','Credit Card':'#ef4444','Gold Loan':'#f97316','Other':'#6b7280'};
 function pgLiab(){
@@ -1615,7 +1616,7 @@ function pgLiab(){
 }
 function fLT(o,b){b.parentElement.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));b.classList.add('active');document.querySelectorAll('#lGrid .card').forEach(c=>{if(o==='all'){c.style.display=''}else{const ow=c.dataset.owners||'';c.style.display=ow.includes(o)?'':'none'}})}
 
-// ── Page: Cash Flow ──
+// -- Page: Cash Flow --
 function pgCF(){
   let h='';
   if(!S.meta.sp){
@@ -1664,7 +1665,7 @@ function pgCF(){
   return h;
 }
 
-// ── Page: Goals ──
+// -- Page: Goals --
 const INV_TYPES=[
   {key:'mf',name:'Mutual Funds',label:'Growth',labelCls:'il-growth',icon:'\u{1F4C8}',rate:11.5,tag:'Fastest Wealth Creation',desc:'Equity / Index Funds',risk:'High Growth',badge:'\u26A1 Fastest'},
   {key:'hybrid',name:'Hybrid Funds',label:'Moderate',labelCls:'il-mod',icon:'\u2696\u{FE0F}',rate:8.5,tag:'Balanced Risk',desc:'Balanced / Hybrid MF',risk:'Moderate',badge:''},
@@ -1718,7 +1719,7 @@ function pgGoals(){
       const timeHuman=fmtTimeHuman(st.months);
       h+='<div class="strat-banner">\u{1F4CB} <b>Your plan:</b> '+stOpt.icon+' '+esc(stOpt.name)+' \u00B7 '+st.allocPct+'% surplus \u00B7 '+fmt(st.monthlySIP)+'/mo \u00B7 '+timeHuman+'<span class="strat-clear" onclick="event.stopPropagation();clearStrategy(\''+g.id+'\')">&times; Clear</span></div>';
     }
-    // ── Inline update section ──
+    // -- Inline update section --
     h+='<div class="goal-inline-edit">';
     h+='<div style="font-size:.74rem;font-weight:700;color:var(--text2);margin-bottom:10px;display:flex;align-items:center;gap:5px">\u270F\uFE0F Update Progress</div>';
     h+='<div class="gie-row">';
@@ -1774,7 +1775,7 @@ function pgGoals(){
 function fG(o,b){b.parentElement.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));b.classList.add('active');document.querySelectorAll('#gGrid .goal-block').forEach(c=>{c.style.display=(o==='all'||c.dataset.o===o)?'':'none'})}
 function clearStrategy(gid2){const g=S.goals.find(x=>x.id===gid2);if(g){delete g.strategy;saveS();renderPage()}}
 
-// ── Page: Insurance ──
+// -- Page: Insurance --
 const INS_ICONS={'Term Life':'\u{1F6E1}\u{FE0F}','Health':'\u{1F3E5}','Whole Life':'\u{1F48E}','ULIP':'\u{1F4CA}','Vehicle':'\u{1F697}','Home':'\u{1F3E0}','Travel':'\u2708\u{FE0F}','Other':'\u{1F4CB}'};
 const INS_COLORS={'Term Life':'#3b82f6','Health':'#22c55e','Whole Life':'#a855f7','ULIP':'#f59e0b','Vehicle':'#ec4899','Home':'#06b6d4','Travel':'#f97316','Other':'#6b7280'};
 function pgInsurance(){
@@ -1829,7 +1830,7 @@ function pgInsurance(){
 }
 function fIns(o,b){b.parentElement.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));b.classList.add('active');document.querySelectorAll('#iGrid .card').forEach(c=>{if(o==='all'){c.style.display=''}else{const ow=c.dataset.owners||'';c.style.display=ow.includes(o)?'':'none'}})}
 
-// ── Page: Charts ──
+// -- Page: Charts --
 function pgCharts(){
   return'<div class="charts-grid">'+
     '<div class="chart-card"><h4>Asset Allocation</h4><div class="chart-wrap"><canvas id="cAA"></canvas></div></div>'+
@@ -1862,7 +1863,7 @@ function initCharts(){
   if(gs.length){charts.gp=new Chart(document.getElementById('cGP'),{type:'bar',data:{labels:gs.map(g=>g.name),datasets:[{label:'Saved',data:gs.map(g=>g.current||0),backgroundColor:'#22c55e'},{label:'Remaining',data:gs.map(g=>Math.max(0,(g.target||0)-(g.current||0))),backgroundColor:isLight?'#e2e8f0':'#2a2d3a'}]},options:{...opts,indexAxis:'y',scales:{x:{stacked:true,ticks:{color:mutC},grid:{color:gridC}},y:{stacked:true,ticks:{color:txtC}}}}})}
 }
 
-// ── Page: Insights ──
+// -- Page: Insights --
 function pgInsights(){
   const ins=genIns();
   if(!ins.length)return'<div class="card"><div class="it-empty">Add financial data to see personalized insights.</div></div>';
@@ -1932,7 +1933,7 @@ function genIns(){
   return ins;
 }
 
-// ── Investment Planner ──
+// -- Investment Planner --
 let ipGoalId=null,ipTypeKey=null,ipPct=60,ipLump=0,ipManualSIP=0,ipManualMode=false,ipCustomRate=0;
 
 function openIP(gid2,typeKey){
@@ -2094,10 +2095,10 @@ function applyStrategy(){
   saveS();closeIP();renderPage();
 }
 
-// ── Snapshots ──
+// -- Snapshots --
 function snap(){const m=new Date().toISOString().slice(0,7);if(!S.snaps)S.snaps=[];const ex=S.snaps.find(s=>s.month===m);const sn={month:m,nw:tNW(),a:tA(),l:tL()};if(ex)Object.assign(ex,sn);else S.snaps.push(sn);if(S.snaps.length>24)S.snaps=S.snaps.slice(-24);saveS()}
 
-// ── Modal ──
+// -- Modal --
 function openMo(type,owner,id){
   const isE=!!id;let item=null,col='';
   if(type==='asset'){col='assets';item=isE?S.assets.find(a=>a.id===id):null}
@@ -2170,7 +2171,7 @@ function saveMo(){
 function delItem(){if(!mCtx)return;S[mCtx.col]=S[mCtx.col].filter(x=>x.id!==mCtx.id);saveS();render();closeMo()}
 function delById(col,id){S[col]=S[col].filter(x=>x.id!==id);saveS();render()}
 
-// ── Goal inline helpers ──
+// -- Goal inline helpers --
 function goalChip(gid,field,val){
   const num=val.toLowerCase().endsWith('l')?parseFloat(val)*100000:parseFloat(val)*1000;
   const el=document.getElementById('gc_'+field+'_'+gid);if(!el)return;
@@ -2224,7 +2225,7 @@ function saveGoalInline(gid){
   saveS();renderPage();
 }
 
-// ── Goal chip helpers (modal) ──
+// -- Goal chip helpers (modal) --
 function setGoalChip(id,val){
   const el=document.getElementById(id);if(!el)return;
   const v2=val.toLowerCase();
@@ -2272,15 +2273,15 @@ function updateGoalPreview(){
   h+='</div>';el.innerHTML=h;
 }
 
-// ── Live Amount Preview ──
+// -- Live Amount Preview --
 function attachAmtPreview(){document.querySelectorAll('#moFields input[type=number]').forEach(inp=>{let tip=inp.parentElement.querySelector('.amt-tip');if(!tip){tip=document.createElement('div');tip.className='amt-tip';tip.style.cssText='font-size:.72rem;color:var(--blue);margin-top:2px;min-height:1em;font-weight:500';inp.parentElement.appendChild(tip)}inp.addEventListener('input',()=>{const v=Number(inp.value);tip.textContent=v?fmt(v):''});
 if(inp.value){const v=Number(inp.value);tip.textContent=v?fmt(v):''}})}
 
-// ── Keyboard ──
+// -- Keyboard --
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('profOverlay').classList.contains('active'))closeProfile();else if(document.getElementById('ipOverlay').classList.contains('active'))closeIP();else closeMo()}if(e.key==='Enter'&&document.getElementById('moOverlay').classList.contains('active')){e.preventDefault();saveMo()}});
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('loginScreen').style.display!=='none'){e.preventDefault();doLogin()}});
 
-// ── Init ──
+// -- Init --
 applyTheme();
 // Show a blank screen until Firebase Auth resolves
 document.getElementById('app').style.display='none';
@@ -2296,7 +2297,7 @@ auth.onAuthStateChanged(async function(user){
     syncId=emailToDocId(user.email);
     await startApp();
   } else {
-    // Not logged in — show login screen
+    // Not logged in � show login screen
     showLoginScreen();
   }
 });
