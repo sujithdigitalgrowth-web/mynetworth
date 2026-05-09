@@ -172,7 +172,7 @@
 <body>
 
 <nav class="site-nav"><div class="nav-inner">
-  <a href="/" class="nav-logo">?? WorthScale</a>
+  <a href="/" class="nav-logo">⚖️ WorthScale</a>
   <div class="nav-links">
     <a href="/">Home</a>
     <div class="nav-dropdown active">
@@ -195,7 +195,7 @@
 
 <div class="container-sm" style="padding-top:40px;padding-bottom:60px">
 
-  <div class="breadcrumbs"><a href="/">Home</a> � <a href="/#tools">Free Tools</a> � House Down Payment Calculator</div>
+  <div class="breadcrumbs"><a href="/">Home</a> › <a href="/#tools">Free Tools</a> — House Down Payment Calculator</div>
 
   <div class="page-hero" style="padding-top:0">
     <h1>House Down Payment <span class="accent">Calculator</span> India</h1>
@@ -217,7 +217,7 @@
   </div>
 
   <div class="calc-card">
-    <h2>?? Calculate Your Down Payment</h2>
+    <h2>🏠 Calculate Your Down Payment</h2>
 
     <div class="calc-field">
       <label>Property Price (?)</label>
@@ -238,28 +238,28 @@
     </div>
 
     <div class="calc-field">
-      <label>Current Savings for House (?) <span style="font-weight:400;text-transform:none;letter-spacing:0">� optional</span></label>
+      <label>Current Savings for House (?) <span style="font-weight:400;text-transform:none;letter-spacing:0">— optional</span></label>
       <input type="text" id="saved" inputmode="numeric" placeholder="e.g. 5,00,000" oninput="calc()">
       <div class="form-hint">How much money have you already saved for this house purchase?</div>
       <div class="form-preview" id="sP"></div>
     </div>
 
     <div class="calc-field">
-      <label>Monthly Savings Capacity (?) <span style="font-weight:400;text-transform:none;letter-spacing:0">� optional</span></label>
+      <label>Monthly Savings Capacity (?) <span style="font-weight:400;text-transform:none;letter-spacing:0">— optional</span></label>
       <input type="text" id="monthly" inputmode="numeric" placeholder="e.g. 30,000" oninput="calc()">
       <div class="form-hint">How much can you save every month toward this goal?</div>
       <div class="form-preview" id="mP"></div>
     </div>
 
     <div class="calc-field">
-      <label>Annual CTC (?) <span style="font-weight:400;text-transform:none;letter-spacing:0">� optional</span></label>
+      <label>Annual CTC (?) <span style="font-weight:400;text-transform:none;letter-spacing:0">— optional</span></label>
       <input type="text" id="ctc" inputmode="numeric" placeholder="e.g. 18,00,000" oninput="calc()">
       <div class="form-hint">Used to estimate loan eligibility based on typical bank affordability benchmarks in India.</div>
       <div class="form-preview" id="cP"></div>
     </div>
 
     <div class="calc-field">
-      <label>Existing Monthly EMIs (?) <span style="font-weight:400;text-transform:none;letter-spacing:0">� optional</span></label>
+      <label>Existing Monthly EMIs (?) <span style="font-weight:400;text-transform:none;letter-spacing:0">— optional</span></label>
       <input type="text" id="existingEmi" inputmode="numeric" placeholder="e.g. 15,000" oninput="calc()">
       <div class="form-hint">Car loan, personal loan, credit card EMI, or any other fixed monthly obligation.</div>
       <div class="form-preview" id="eP"></div>
@@ -276,12 +276,12 @@
       <div class="result-box"><div class="rv" id="rgLoan" style="color:var(--orange)">?0</div><div class="rl">Estimated Loan</div></div>
       <div class="result-box"><div class="rv" id="rgGap" style="color:var(--red)">?0</div><div class="rl">Still Need to Save</div></div>
       <div class="result-box"><div class="rv" id="rgStamp" style="color:var(--purple)">?0</div><div class="rl">Stamp Duty (~7%)</div></div>
-      <div class="result-box"><div class="rv" id="rgElig" style="color:var(--green)">�</div><div class="rl">Loan Eligibility</div></div>
-      <div class="result-box"><div class="rv" id="rgShort" style="color:var(--red)">�</div><div class="rl">Eligibility Gap</div></div>
+      <div class="result-box"><div class="rv" id="rgElig" style="color:var(--green)">—</div><div class="rl">Loan Eligibility</div></div>
+      <div class="result-box"><div class="rv" id="rgShort" style="color:var(--red)">—</div><div class="rl">Eligibility Gap</div></div>
     </div>
 
     <div class="timeline" id="tl" style="display:none">
-      <h4>?? Savings Timeline</h4>
+      <h4>📅 Savings Timeline</h4>
       <div id="tlRows"></div>
     </div>
 
@@ -291,7 +291,7 @@
 
     <div class="eligibility-wrap" id="eligibilityWrap" style="display:none">
       <div class="eligibility-card">
-        <h4>?? Home Loan Eligibility Snapshot</h4>
+        <h4>🏦 Home Loan Eligibility Snapshot</h4>
         <p style="font-size:.82rem;color:var(--muted);line-height:1.6;margin:0">
           This estimate uses a take-home proxy from your CTC, then applies a standard affordability benchmark similar to what many banks use while assessing EMI comfort.
         </p>
@@ -310,7 +310,7 @@
       </div>
 
       <div class="benchmark-card">
-        <h4>?? Interest Rate Benchmarks</h4>
+        <h4>📊 Interest Rate Benchmarks</h4>
         <table class="benchmark-table">
           <thead>
             <tr>
@@ -323,17 +323,17 @@
             <tr>
               <td>Conservative</td>
               <td>8.50%</td>
-              <td id="multLow">�0</td>
+              <td id="multLow">—0</td>
             </tr>
             <tr>
               <td>Base Case</td>
               <td>9.00%</td>
-              <td id="multBase">�0</td>
+              <td id="multBase">—0</td>
             </tr>
             <tr>
               <td>Stress Case</td>
               <td>9.50%</td>
-              <td id="multHigh">�0</td>
+              <td id="multHigh">—0</td>
             </tr>
           </tbody>
         </table>
@@ -351,15 +351,15 @@
   </div>
 
   <div class="content-section">
-    <h2>?? How Much Down Payment is Needed for a House in India?</h2>
+    <h2>💰 How Much Down Payment is Needed for a House in India?</h2>
     <p>
       When you buy a home in India, banks do not usually finance the entire property value. You are expected to bring in a part of the amount from your own pocket. That is your down payment.
     </p>
 
     <div class="example-box">
-      <strong>10% to 15%</strong> � Often the minimum for many home loans<br><br>
-      <strong>20%</strong> � A healthy standard for most buyers<br><br>
-      <strong>25% to 30%</strong> � Better if you want a lower loan burden and more manageable EMI
+      <strong>10% to 15%</strong> — Often the minimum for many home loans<br><br>
+      <strong>20%</strong> — A healthy standard for most buyers<br><br>
+      <strong>25% to 30%</strong> — Better if you want a lower loan burden and more manageable EMI
     </div>
 
     <p>
@@ -368,7 +368,7 @@
   </div>
 
   <div class="content-section">
-    <h2>?? Other Costs You Must Budget For</h2>
+    <h2>⚠️ Other Costs You Must Budget For</h2>
     <p>
       A common mistake is thinking only about the down payment. In reality, buying a house in India comes with other major upfront costs as well.
     </p>
@@ -398,7 +398,7 @@
   </div>
 
   <div class="content-section">
-    <h2>?? How Home Loan Eligibility is Estimated in India</h2>
+    <h2>🏦 How Home Loan Eligibility is Estimated in India</h2>
     <p>
       Banks typically do not decide your eligibility only from your CTC. They usually look at your approximate take-home pay, your existing EMIs, your age, credit profile, and how much of your monthly income can safely go toward loan repayment.
     </p>
@@ -414,22 +414,22 @@
   </div>
 
   <div class="content-section">
-    <h2>?? If You Enter Your CTC, What Will This Calculator Show?</h2>
+    <h2>💼 If You Enter Your CTC, What Will This Calculator Show?</h2>
     <div class="tips-grid">
-      <div class="tip-card"><div class="tip-icon">??</div><h4>Estimated In-Hand Income</h4><p>A practical monthly take-home proxy derived from annual CTC for affordability planning.</p></div>
-      <div class="tip-card"><div class="tip-icon">??</div><h4>Approx Loan Eligibility</h4><p>An estimated loan amount you may qualify for under standard home loan interest assumptions.</p></div>
-      <div class="tip-card"><div class="tip-icon">??</div><h4>EMI Comfort Check</h4><p>Whether the EMI for your selected property appears manageable relative to your income and obligations.</p></div>
-      <div class="tip-card"><div class="tip-icon">??</div><h4>Affordable Property Range</h4><p>An approximate property value you may be able to target based on your current down payment percentage.</p></div>
+      <div class="tip-card"><div class="tip-icon">💵</div><h4>Estimated In-Hand Income</h4><p>A practical monthly take-home proxy derived from annual CTC for affordability planning.</p></div>
+      <div class="tip-card"><div class="tip-icon">🏦</div><h4>Approx Loan Eligibility</h4><p>An estimated loan amount you may qualify for under standard home loan interest assumptions.</p></div>
+      <div class="tip-card"><div class="tip-icon">✅</div><h4>EMI Comfort Check</h4><p>Whether the EMI for your selected property appears manageable relative to your income and obligations.</p></div>
+      <div class="tip-card"><div class="tip-icon">🏡</div><h4>Affordable Property Range</h4><p>An approximate property value you may be able to target based on your current down payment percentage.</p></div>
     </div>
   </div>
 
   <div class="content-section">
-    <h2>?? How to Save for a House Down Payment</h2>
+    <h2>💡 How to Save for a House Down Payment</h2>
     <div class="tips-grid">
-      <div class="tip-card"><div class="tip-icon">??</div><h4>Set a Target Date</h4><p>Choose a realistic home purchase timeline and work backwards to calculate monthly savings needed.</p></div>
-      <div class="tip-card"><div class="tip-icon">??</div><h4>Invest Based on Timeline</h4><p>If you plan to buy in 3+ years, you may consider balanced or growth-oriented options. If your timeline is short, stay safer.</p></div>
-      <div class="tip-card"><div class="tip-icon">??</div><h4>Reduce Existing Debt</h4><p>Lower EMIs and a cleaner balance sheet improve both loan eligibility and monthly savings capacity.</p></div>
-      <div class="tip-card"><div class="tip-icon">??</div><h4>Improve Credit Profile</h4><p>A strong CIBIL score helps you secure better interest rates and increases your borrowing comfort.</p></div>
+      <div class="tip-card"><div class="tip-icon">📅</div><h4>Set a Target Date</h4><p>Choose a realistic home purchase timeline and work backwards to calculate monthly savings needed.</p></div>
+      <div class="tip-card"><div class="tip-icon">📈</div><h4>Invest Based on Timeline</h4><p>If you plan to buy in 3+ years, you may consider balanced or growth-oriented options. If your timeline is short, stay safer.</p></div>
+      <div class="tip-card"><div class="tip-icon">✂️</div><h4>Reduce Existing Debt</h4><p>Lower EMIs and a cleaner balance sheet improve both loan eligibility and monthly savings capacity.</p></div>
+      <div class="tip-card"><div class="tip-icon">⭐</div><h4>Improve Credit Profile</h4><p>A strong CIBIL score helps you secure better interest rates and increases your borrowing comfort.</p></div>
     </div>
   </div>
 
@@ -450,26 +450,26 @@
   </div>
 
   <div class="content-section">
-    <h2>?? More Free Tools</h2>
+    <h2>🧮 More Free Tools</h2>
     <div class="tips-grid">
-      <a href="/net-worth-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">??</div><h4>Net Worth Calculator</h4><p>Calculate your total net worth and see how a home purchase affects your finances.</p></a>
-      <a href="/emergency-fund-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">??</div><h4>Emergency Fund Calculator</h4><p>Before buying a home, make sure your financial safety net is strong enough.</p></a>
+      <a href="/net-worth-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">⚖️</div><h4>Net Worth Calculator</h4><p>Calculate your total net worth and see how a home purchase affects your finances.</p></a>
+      <a href="/emergency-fund-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">🛡️</div><h4>Emergency Fund Calculator</h4><p>Before buying a home, make sure your financial safety net is strong enough.</p></a>
     </div>
   </div>
 
   <div class="content-section">
-    <h2>?? Related Reading</h2>
+    <h2>📚 Related Reading</h2>
     <div class="tips-grid">
-      <a href="/blog/financial-freedom-steps" class="tip-card" style="text-decoration:none"><div class="tip-icon">??</div><h4>5 Steps to Financial Freedom</h4><p>Understand where a home purchase fits into your larger financial journey.</p></a>
-      <a href="/blog/how-to-calculate-net-worth" class="tip-card" style="text-decoration:none"><div class="tip-icon">??</div><h4>How to Calculate Net Worth</h4><p>Your house becomes part of your asset mix. Learn how to track it properly.</p></a>
-      <a href="/emergency-fund-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">??</div><h4>Emergency Fund Calculator</h4><p>Build your safety net first so your home purchase does not create financial stress.</p></a>
-      <a href="/blog/net-worth-vs-salary" class="tip-card" style="text-decoration:none"><div class="tip-icon">??</div><h4>Net Worth vs Salary</h4><p>Buying a home is not just an expense decision. It also changes your long-term wealth picture.</p></a>
+      <a href="/blog/financial-freedom-steps" class="tip-card" style="text-decoration:none"><div class="tip-icon">🎯</div><h4>5 Steps to Financial Freedom</h4><p>Understand where a home purchase fits into your larger financial journey.</p></a>
+      <a href="/blog/how-to-calculate-net-worth" class="tip-card" style="text-decoration:none"><div class="tip-icon">📊</div><h4>How to Calculate Net Worth</h4><p>Your house becomes part of your asset mix. Learn how to track it properly.</p></a>
+      <a href="/emergency-fund-calculator" class="tip-card" style="text-decoration:none"><div class="tip-icon">🛡️</div><h4>Emergency Fund Calculator</h4><p>Build your safety net first so your home purchase does not create financial stress.</p></a>
+      <a href="/blog/net-worth-vs-salary" class="tip-card" style="text-decoration:none"><div class="tip-icon">💡</div><h4>Net Worth vs Salary</h4><p>Buying a home is not just an expense decision. It also changes your long-term wealth picture.</p></a>
     </div>
   </div>
 
   <div class="cta-banner">
     <h3>Track all your financial goals in one place</h3>
-    <p>House, retirement, emergency fund, investments, and net worth � manage everything inside the free dashboard.</p>
+    <p>House, retirement, emergency fund, investments, and net worth — manage everything inside the free dashboard.</p>
     <a href="/app" class="btn btn-primary">Start Tracking for Free ?</a>
   </div>
 
@@ -503,7 +503,7 @@
 
 <footer class="site-footer"><div class="footer-inner footer-grid">
   <div class="footer-about">
-    <div class="footer-brand">?? WorthScale</div>
+    <div class="footer-brand">⚖️ WorthScale</div>
     <p class="footer-desc">Free personal finance platform for Indians. Track net worth, plan goals, and build wealth with simple tools and practical guides.</p>
   </div>
   <div class="footer-col">
@@ -631,9 +631,9 @@ function calc(){
   const multLow=Math.round(calcLoanFromEmi(1,8.5,240));
   const multBase=Math.round(calcLoanFromEmi(1,9,240));
   const multHigh=Math.round(calcLoanFromEmi(1,9.5,240));
-  document.getElementById('multLow').textContent='�'+multLow;
-  document.getElementById('multBase').textContent='�'+multBase;
-  document.getElementById('multHigh').textContent='�'+multHigh;
+  document.getElementById('multLow').textContent='—'+multLow;
+  document.getElementById('multBase').textContent='—'+multBase;
+  document.getElementById('multHigh').textContent='—'+multHigh;
 
   const tl=document.getElementById('tl');
   const rows=document.getElementById('tlRows');
@@ -668,10 +668,10 @@ function calc(){
     maxProperty=Math.round(eligibility/(1-(pct/100)));
 
     if(existingEmi>0 && existingEmi >= Math.round(monthlyIncome*0.45)){
-      msg='?? Your existing EMIs already consume most of the usual affordability limit. Loan eligibility may be very restricted unless income rises or debt reduces.';
+      msg='⚠️ Your existing EMIs already consume most of the usual affordability limit. Loan eligibility may be very restricted unless income rises or debt reduces.';
       msgClass='eligibility-note warning';
     } else if(loan > eligibility && eligibility>0){
-      msg='?? The required loan for this property looks higher than your estimated eligibility. Consider a bigger down payment, lower budget, co-applicant, or lower existing EMIs.';
+      msg='⚠️ The required loan for this property looks higher than your estimated eligibility. Consider a bigger down payment, lower budget, co-applicant, or lower existing EMIs.';
       msgClass='eligibility-note warning';
     } else if(eligibility>0){
       msg='? Based on the current assumptions, this property appears broadly affordable from a home loan eligibility perspective.';
@@ -679,9 +679,9 @@ function calc(){
     }
   }
 
-  document.getElementById('rgElig').textContent=ctc>0?fmt(eligibility):'�';
+  document.getElementById('rgElig').textContent=ctc>0?fmt(eligibility):'—';
   const shortfall=Math.max(0, loan-eligibility);
-  document.getElementById('rgShort').textContent=ctc>0?(shortfall>0?fmt(shortfall):'?0 ?'):'�';
+  document.getElementById('rgShort').textContent=ctc>0?(shortfall>0?fmt(shortfall):'?0 ?'):'—';
   document.getElementById('rgShort').style.color=ctc>0?(shortfall>0?'var(--red)':'var(--green)'):'var(--muted)';
 
   if(ctc>0){

@@ -376,7 +376,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 <div class="login-screen" id="loginScreen" style="display:none">
   <div class="login-orb-mid"></div>
   <div class="login-box">
-    <div class="login-icon">??</div>
+    <div class="login-icon">⚖️</div>
     <h1>WorthScale</h1>
     <p class="sub" id="lgSub">Create your free account</p>
     <div id="lg_name_wrap">
@@ -413,29 +413,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 
 <div class="app" id="app">
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand">?? WorthScale</div>
+    <div class="sidebar-brand">⚖️ WorthScale</div>
     <nav class="sidebar-nav">
       <div class="nav-section">Main</div>
-      <div class="nav-item active" data-p="overview"><span class="ni">??</span>Overview</div>
-      <div class="nav-item" data-p="my"><span class="ni">??</span>My Dashboard</div>
-      <div class="nav-item sp-only" data-p="spouse"><span class="ni">??</span>Spouse Dashboard</div>
-      <div class="nav-item sp-only" data-p="joint"><span class="ni">??</span>Joint / Family</div>
+      <div class="nav-item active" data-p="overview"><span class="ni">🏠</span>Overview</div>
+      <div class="nav-item" data-p="my"><span class="ni">👤</span>My Dashboard</div>
+      <div class="nav-item sp-only" data-p="spouse"><span class="ni">👩</span>Spouse Dashboard</div>
+      <div class="nav-item sp-only" data-p="joint"><span class="ni">👨‍👩‍👧‍👦</span>Joint / Family</div>
       <div class="nav-section">Manage</div>
-      <div class="nav-item" data-p="assets"><span class="ni">??</span>Assets</div>
-      <div class="nav-item" data-p="liabilities"><span class="ni">??</span>Liabilities</div>
-      <div class="nav-item" data-p="cashflow"><span class="ni">??</span>Cash Flow</div>
-      <div class="nav-item" data-p="goals"><span class="ni">??</span>Goals</div>
-      <div class="nav-item" data-p="insurance"><span class="ni">???</span>Insurance</div>
+      <div class="nav-item" data-p="assets"><span class="ni">💰</span>Assets</div>
+      <div class="nav-item" data-p="liabilities"><span class="ni">📋</span>Liabilities</div>
+      <div class="nav-item" data-p="cashflow"><span class="ni">💸</span>Cash Flow</div>
+      <div class="nav-item" data-p="goals"><span class="ni">🎯</span>Goals</div>
+      <div class="nav-item" data-p="insurance"><span class="ni">🛡️?</span>Insurance</div>
       <div class="nav-section">Analysis</div>
-      <div class="nav-item" data-p="charts"><span class="ni">??</span>Charts</div>
-      <div class="nav-item" data-p="insights"><span class="ni">??</span>Insights</div>
+      <div class="nav-item" data-p="charts"><span class="ni">📊</span>Charts</div>
+      <div class="nav-item" data-p="insights"><span class="ni">💡</span>Insights</div>
     </nav>
     <div class="sidebar-footer">
       <div class="mode-toggle" onclick="togSP()">
         <div class="sw" id="spSw"></div>
         <span id="modeLbl">Family Mode</span>
       </div>
-      <div class="nav-item" onclick="openProfile()" style="margin:0;padding:6px 10px;font-size:.76rem;gap:6px"><span class="ni" style="font-size:.85rem">??</span>Profile Settings</div>
+      <div class="nav-item" onclick="openProfile()" style="margin:0;padding:6px 10px;font-size:.76rem;gap:6px"><span class="ni" style="font-size:.85rem">⚙️</span>Profile Settings</div>
       <a href="/sitemap" style="font-size:.72rem;color:var(--muted);text-align:center;padding:4px 0;text-decoration:none;display:block">Sitemap</a>
     </div>
   </aside>
@@ -443,7 +443,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
   <main class="content">
     <header class="content-header">
       <h2 id="pgTitle">Overview</h2>
-      <button id="shareBtn" onclick="shareView()" style="display:none;align-items:center;gap:6px;padding:7px 14px;background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue);border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s">?? Share View</button>
+      <button id="shareBtn" onclick="shareView()" style="display:none;align-items:center;gap:6px;padding:7px 14px;background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue);border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s">🔗 Share View</button>
     </header>
     <div class="content-body" id="cBody"></div>
   </main>
@@ -452,7 +452,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 <!-- Profile Setup -->
 <div class="profile-overlay" id="profOverlay" onclick="if(event.target===this)closeProfile()">
   <div class="profile-modal">
-    <h3>?? Your Profile</h3>
+    <h3>👤 Your Profile</h3>
     <p class="pm-sub">Personalize your dashboard. We use this for age-based insights, city-relevant advice, and life-stage recommendations.</p>
     <div class="fr">
       <div class="fg"><label style="display:block;color:var(--muted);font-size:.75rem;margin-bottom:4px;font-weight:500">Your Name *</label><input id="pf_name1" placeholder="e.g. Harsha" style="width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.85rem;outline:none"></div>
@@ -470,11 +470,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
     </div>
     <div class="fg"><label style="display:block;color:var(--muted);font-size:.75rem;margin-bottom:4px;font-weight:500">Retirement Age (default 60)</label><input id="pf_retAge" type="number" min="45" max="75" placeholder="60" style="width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.85rem;outline:none"></div>
     <div style="margin-top:16px;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:space-between">
-      <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">??</span><span style="font-size:.82rem;font-weight:500;color:var(--text2)" id="themeLblP">Dark Mode</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">📧</span><span style="font-size:.82rem;font-weight:500;color:var(--text2)" id="themeLblP">Dark Mode</span></div>
       <div class="tsw" id="tSwP" onclick="togTheme()" style="cursor:pointer"></div>
     </div>
     <div style="margin-top:16px;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:space-between">
-      <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">??</span><span style="font-size:.82rem;color:var(--muted)" id="loggedInAs">Logged in as</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">📅</span><span style="font-size:.82rem;color:var(--muted)" id="loggedInAs">Logged in as</span></div>
       <button onclick="doLogout()" style="padding:6px 14px;background:var(--red-bg);color:var(--red);border:1px solid var(--red);border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer">Logout</button>
     </div>
     <div class="ma" style="margin-top:20px">
@@ -487,7 +487,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 <!-- Logout Confirm Modal -->
 <div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:500;justify-content:center;align-items:center;padding:20px" id="logoutModal">
   <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 28px 24px;width:92%;max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,.4);text-align:center">
-    <div style="font-size:2rem;margin-bottom:10px">??</div>
+    <div style="font-size:2rem;margin-bottom:10px">🔗</div>
     <h3 style="font-size:1.05rem;margin-bottom:8px">Log out of WorthScale?</h3>
     <p style="font-size:.83rem;color:var(--muted);margin-bottom:22px;line-height:1.5">Your data is saved to the cloud. You can log back in anytime.</p>
     <div style="display:flex;gap:10px">
@@ -501,11 +501,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 <div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:500;justify-content:center;align-items:center;padding:20px" id="shareModal" onclick="if(event.target===this)closeShareModal()">
   <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;width:92%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.4)">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-      <h3 style="font-size:1rem;font-weight:700">?? Share Dashboard View</h3>
+      <h3 style="font-size:1rem;font-weight:700">🔗 Share Dashboard View</h3>
       <button onclick="closeShareModal()" style="background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer">?</button>
     </div>
     <p style="font-size:.78rem;color:var(--muted);margin-bottom:18px;line-height:1.5">Anyone with this link can view a <strong style="color:var(--text)">read-only snapshot</strong> of this dashboard. Your login and private data stay protected.</p>
-    <div id="shareStatus" style="text-align:center;padding:20px;color:var(--muted);font-size:.82rem">Generating link�</div>
+    <div id="shareStatus" style="text-align:center;padding:20px;color:var(--muted);font-size:.82rem">Generating link—</div>
     <div id="shareLinkBox" style="display:none">
       <div style="display:flex;gap:8px;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:10px 14px;margin-bottom:12px">
         <span id="shareLinkText" style="flex:1;font-size:.73rem;color:var(--text2);word-break:break-all;overflow:hidden;max-height:40px"></span>
@@ -522,7 +522,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 
 <div class="ip-overlay" id="ipOverlay" onclick="if(event.target===this)closeIP()">
   <div class="ip-modal">
-    <div class="ip-hdr"><h3 id="ipTitle">?? Investment Planner</h3><button class="ip-close" onclick="closeIP()">?</button></div>
+    <div class="ip-hdr"><h3 id="ipTitle">📈 Investment Planner</h3><button class="ip-close" onclick="closeIP()">?</button></div>
     <div class="ip-body" id="ipBody"></div>
   </div>
 </div>
@@ -755,7 +755,7 @@ function shareView(){
   const linkBox=document.getElementById('shareLinkBox');
   modal.style.display='flex';
   statusEl.style.display='block';
-  statusEl.textContent='Generating link�';
+  statusEl.textContent='Generating link—';
   linkBox.style.display='none';
   _generateShareLink();
 }
@@ -806,7 +806,7 @@ function copyShareLink(){
 function newShareLink(){
   document.getElementById('shareLinkBox').style.display='none';
   document.getElementById('shareStatus').style.display='block';
-  document.getElementById('shareStatus').textContent='Generating new link�';
+  document.getElementById('shareStatus').textContent='Generating new link—';
   _generateShareLink();
 }
 async function loadFromCloud(){
@@ -1119,7 +1119,7 @@ function pgOverview(){
       if(topA.length){
         h+='<div class="items" style="margin-bottom:8px">';
         topA.forEach((asset,idx)=>{
-          const rank=['??','??','??'][idx]||'';
+          const rank=['🥇','🥈','🥉'][idx]||'';
           const pctOfTotal=a>0?Math.round((asset.currentValue||0)/a*100):0;
           h+='<div class="it"><div class="it-l"><span style="font-size:.75rem;margin-right:4px">'+rank+'</span><span class="it-name">'+esc(asset.name)+'</span><span class="it-meta" style="background:'+accentBg+';color:'+accent+';padding:1px 6px;border-radius:4px;font-size:.6rem">'+pctOfTotal+'%</span></div><div class="it-r"><span class="it-val" style="font-weight:700">'+fmt(asset.currentValue)+'</span></div></div>';
         });
@@ -2297,7 +2297,7 @@ auth.onAuthStateChanged(async function(user){
     syncId=emailToDocId(user.email);
     await startApp();
   } else {
-    // Not logged in � show login screen
+    // Not logged in — show login screen
     showLoginScreen();
   }
 });
