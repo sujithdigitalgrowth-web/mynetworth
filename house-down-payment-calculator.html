@@ -267,15 +267,15 @@
 
     <div class="calc-result neutral" id="res">
       <div class="calc-result-label">Down Payment Needed</div>
-      <div class="calc-result-value" id="dpV">?0</div>
+      <div class="calc-result-value" id="dpV">₹0</div>
       <div class="calc-result-sub" id="dpS">Enter the property price above</div>
     </div>
 
     <div class="result-grid" id="rGrid" style="display:none">
-      <div class="result-box"><div class="rv" id="rgDp" style="color:var(--blue)">?0</div><div class="rl">Down Payment</div></div>
-      <div class="result-box"><div class="rv" id="rgLoan" style="color:var(--orange)">?0</div><div class="rl">Estimated Loan</div></div>
-      <div class="result-box"><div class="rv" id="rgGap" style="color:var(--red)">?0</div><div class="rl">Still Need to Save</div></div>
-      <div class="result-box"><div class="rv" id="rgStamp" style="color:var(--purple)">?0</div><div class="rl">Stamp Duty (~7%)</div></div>
+      <div class="result-box"><div class="rv" id="rgDp" style="color:var(--blue)">₹0</div><div class="rl">Down Payment</div></div>
+      <div class="result-box"><div class="rv" id="rgLoan" style="color:var(--orange)">₹0</div><div class="rl">Estimated Loan</div></div>
+      <div class="result-box"><div class="rv" id="rgGap" style="color:var(--red)">₹0</div><div class="rl">Still Need to Save</div></div>
+      <div class="result-box"><div class="rv" id="rgStamp" style="color:var(--purple)">₹0</div><div class="rl">Stamp Duty (~7%)</div></div>
       <div class="result-box"><div class="rv" id="rgElig" style="color:var(--green)">—</div><div class="rl">Loan Eligibility</div></div>
       <div class="result-box"><div class="rv" id="rgShort" style="color:var(--red)">—</div><div class="rl">Eligibility Gap</div></div>
     </div>
@@ -286,7 +286,7 @@
     </div>
 
     <div class="loan-info" id="loanInfo" style="display:none">
-      <strong>Estimated Home Loan EMI:</strong> <span id="emi">?0</span>/month for 20 years at 8.5% interest
+      <strong>Estimated Home Loan EMI:</strong> <span id="emi">₹0</span>/month for 20 years at 8.5% interest
     </div>
 
     <div class="eligibility-wrap" id="eligibilityWrap" style="display:none">
@@ -296,10 +296,10 @@
           This estimate uses a take-home proxy from your CTC, then applies a standard affordability benchmark similar to what many banks use while assessing EMI comfort.
         </p>
         <div class="eligibility-meta">
-          <div class="eligibility-mini"><div class="ev" id="monthlyIncome">?0</div><div class="el">Estimated Monthly In-Hand</div></div>
-          <div class="eligibility-mini"><div class="ev" id="maxEmi">?0</div><div class="el">Max Comfortable EMI</div></div>
+          <div class="eligibility-mini"><div class="ev" id="monthlyIncome">₹0</div><div class="el">Estimated Monthly In-Hand</div></div>
+          <div class="eligibility-mini"><div class="ev" id="maxEmi">₹0</div><div class="el">Max Comfortable EMI</div></div>
           <div class="eligibility-mini"><div class="ev" id="foirUsed">45%</div><div class="el">FOIR Used</div></div>
-          <div class="eligibility-mini"><div class="ev" id="maxProperty">?0</div><div class="el">Approx Affordable Property</div></div>
+          <div class="eligibility-mini"><div class="ev" id="maxProperty">₹0</div><div class="el">Approx Affordable Property</div></div>
         </div>
         <div class="eligibility-note neutral" id="eligibilityMsg">
           Enter your CTC to see whether the selected property appears affordable.
@@ -537,7 +537,7 @@
 let pct=20;
 
 function fmt(n){
-  if(n==null||isNaN(n)) return '?0';
+  if(n==null||isNaN(n)) return '₹0';
   const a=Math.abs(n);
   let s;
   if(a>=1e7) s='?'+(a/1e7).toFixed(2)+' Cr';
@@ -598,7 +598,7 @@ function calc(){
   const sub=document.getElementById('dpS');
 
   if(price===0){
-    val.textContent='?0';
+    val.textContent='₹0';
     sub.textContent='Enter the property price above';
     res.className='calc-result neutral';
     document.getElementById('rGrid').style.display='none';
@@ -620,7 +620,7 @@ function calc(){
   document.getElementById('rGrid').style.display='';
   document.getElementById('rgDp').textContent=fmt(dp);
   document.getElementById('rgLoan').textContent=fmt(loan);
-  document.getElementById('rgGap').textContent=gap>0?fmt(gap):'?0 ?';
+  document.getElementById('rgGap').textContent=gap>0?fmt(gap):'₹0 ?';
   document.getElementById('rgGap').style.color=gap>0?'var(--red)':'var(--green)';
   document.getElementById('rgStamp').textContent=fmt(stamp);
 
@@ -681,7 +681,7 @@ function calc(){
 
   document.getElementById('rgElig').textContent=ctc>0?fmt(eligibility):'—';
   const shortfall=Math.max(0, loan-eligibility);
-  document.getElementById('rgShort').textContent=ctc>0?(shortfall>0?fmt(shortfall):'?0 ?'):'—';
+  document.getElementById('rgShort').textContent=ctc>0?(shortfall>0?fmt(shortfall):'₹0 ?'):'—';
   document.getElementById('rgShort').style.color=ctc>0?(shortfall>0?'var(--red)':'var(--green)'):'var(--muted)';
 
   if(ctc>0){

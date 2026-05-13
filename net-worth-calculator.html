@@ -260,16 +260,16 @@
     </div>
 
     <div class="formula-live">
-      <span class="f-a" id="fA">Assets: ?0</span>
+      <span class="f-a" id="fA">Assets: ₹0</span>
       <span class="f-op">-</span>
-      <span class="f-l" id="fL">Liabilities: ?0</span>
+      <span class="f-l" id="fL">Liabilities: ₹0</span>
       <span class="f-op">=</span>
-      <span class="f-n" id="fN">Net Worth: ?0</span>
+      <span class="f-n" id="fN">Net Worth: ₹0</span>
     </div>
 
     <div class="calc-result neutral" id="res">
       <div class="calc-result-label">Your Net Worth</div>
-      <div class="calc-result-value" id="nwV">?0</div>
+      <div class="calc-result-value" id="nwV">₹0</div>
       <div class="calc-result-sub" id="nwS">Enter your assets and liabilities above to calculate</div>
       <div class="calc-bar"><div class="calc-bar-fill" id="nwB" style="width:50%"></div></div>
     </div>
@@ -346,26 +346,26 @@
       <div class="es-header">Example: Arjun, 33, Software Engineer, Pune</div>
       <table>
         <tr><td colspan="2" style="font-weight:700;color:var(--text);padding-bottom:6px">Assets</td></tr>
-        <tr><td>Savings account</td><td>?2,50,000</td></tr>
-        <tr><td>Fixed deposits</td><td>?5,00,000</td></tr>
-        <tr><td>Mutual funds</td><td>?9,80,000</td></tr>
-        <tr><td>Stocks</td><td>?3,40,000</td></tr>
-        <tr><td>EPF balance</td><td>?7,20,000</td></tr>
-        <tr><td>PPF</td><td>?4,60,000</td></tr>
-        <tr><td>Gold</td><td>?2,80,000</td></tr>
-        <tr><td>Car resale value</td><td>?4,00,000</td></tr>
-        <tr class="es-total"><td>Total Assets</td><td>?39,30,000</td></tr>
+        <tr><td>Savings account</td><td>₹2,50,000</td></tr>
+        <tr><td>Fixed deposits</td><td>₹5,00,000</td></tr>
+        <tr><td>Mutual funds</td><td>₹9,80,000</td></tr>
+        <tr><td>Stocks</td><td>₹3,40,000</td></tr>
+        <tr><td>EPF balance</td><td>₹7,20,000</td></tr>
+        <tr><td>PPF</td><td>₹4,60,000</td></tr>
+        <tr><td>Gold</td><td>₹2,80,000</td></tr>
+        <tr><td>Car resale value</td><td>₹4,00,000</td></tr>
+        <tr class="es-total"><td>Total Assets</td><td>₹39,30,000</td></tr>
 
         <tr><td colspan="2" style="font-weight:700;color:var(--text);padding:12px 0 6px">Liabilities</td></tr>
-        <tr><td>Car loan outstanding</td><td>?2,60,000</td></tr>
-        <tr><td>Credit card dues</td><td>?35,000</td></tr>
-        <tr class="es-total"><td style="color:var(--red)">Total Liabilities</td><td style="color:var(--red)">?2,95,000</td></tr>
-        <tr class="es-nw"><td>Net Worth</td><td>?36,35,000</td></tr>
+        <tr><td>Car loan outstanding</td><td>₹2,60,000</td></tr>
+        <tr><td>Credit card dues</td><td>₹35,000</td></tr>
+        <tr class="es-total"><td style="color:var(--red)">Total Liabilities</td><td style="color:var(--red)">₹2,95,000</td></tr>
+        <tr class="es-nw"><td>Net Worth</td><td>₹36,35,000</td></tr>
       </table>
     </div>
 
     <p>
-      In this example, Arjun—s net worth is ?36.35 lakh. That number gives him a much more honest financial picture than salary alone ever could.
+      In this example, Arjun—s net worth is ₹36.35 lakh. That number gives him a much more honest financial picture than salary alone ever could.
     </p>
   </div>
 
@@ -636,7 +636,7 @@
 
 <script>
 function fmt(n){
-  if(n==null||isNaN(n)) return '?0';
+  if(n==null||isNaN(n)) return '₹0';
   const a=Math.abs(n);
   let s;
   if(a>=1e7) s='?'+(a/1e7).toFixed(2)+' Cr';

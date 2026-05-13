@@ -1904,7 +1904,7 @@ function genIns(){
     if(tc&&ta2>0&&tc[1]/ta2>.6)ins.push({ic:'\u2696\u{FE0F}',bg:'var(--purple-bg)',t:'Most of your wealth is in one place',d:Math.round(tc[1]/ta2*100)+'% of your assets are in "'+tc[0]+'". '+(tc[0]==='Real Estate'?'This limits your liquidity \u2014 consider diversifying into financial assets.':'Consider spreading across categories for safety.')})}
 
   if(city&&ti2>0){
-    const months=tier==='high'?9:6;
+    const months=tier==='high'₹9:6;
     const needed=(te2+temi2)*months;
     const cashAssets=S.assets.filter(a=>a.category==='Cash & Bank'||a.category==='Fixed Deposits').reduce((s,a)=>s+(a.currentValue||0),0);
     if(cashAssets<needed)ins.push({ic:'\u{1F3E6}',bg:'var(--orange-bg)',t:'Your emergency fund may be low',d:'Living in '+esc(city)+', we recommend '+months+' months of expenses as emergency fund ('+fmt(needed)+'). You currently have '+fmt(cashAssets)+' in liquid assets.'});

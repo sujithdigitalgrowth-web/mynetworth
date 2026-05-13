@@ -218,15 +218,15 @@
 
     <div class="calc-result neutral" id="res">
       <div class="calc-result-label">You Need</div>
-      <div class="calc-result-value" id="needV">?0</div>
+      <div class="calc-result-value" id="needV">₹0</div>
       <div class="calc-result-sub" id="needS">Enter your monthly expenses above</div>
     </div>
 
     <div class="breakdown" id="bk" style="display:none">
-      <div class="breakdown-item"><div class="bv" id="bkTarget">?0</div><div class="bl">Target Fund</div></div>
-      <div class="breakdown-item"><div class="bv" id="bkCurrent">?0</div><div class="bl">Current Savings</div></div>
-      <div class="breakdown-item"><div class="bv" id="bkGap">?0</div><div class="bl">Gap to Fill</div></div>
-      <div class="breakdown-item"><div class="bv" id="bkMonthly">?0</div><div class="bl">Save/Month (1yr)</div></div>
+      <div class="breakdown-item"><div class="bv" id="bkTarget">₹0</div><div class="bl">Target Fund</div></div>
+      <div class="breakdown-item"><div class="bv" id="bkCurrent">₹0</div><div class="bl">Current Savings</div></div>
+      <div class="breakdown-item"><div class="bv" id="bkGap">₹0</div><div class="bl">Gap to Fill</div></div>
+      <div class="breakdown-item"><div class="bv" id="bkMonthly">₹0</div><div class="bl">Save/Month (1yr)</div></div>
     </div>
 
     <div class="progress-section" id="prog" style="display:none">
@@ -443,7 +443,7 @@
 let months=6;
 
 function fmt(n){
-  if(n==null||isNaN(n)) return '?0';
+  if(n==null||isNaN(n)) return '₹0';
   const a=Math.abs(n);
   let s;
   if(a>=1e7) s='?'+(a/1e7).toFixed(2)+' Cr';
@@ -483,7 +483,7 @@ function calc(){
   const sub=document.getElementById('needS');
 
   if(exp===0){
-    val.textContent='?0';
+    val.textContent='₹0';
     sub.textContent='Enter your monthly expenses above';
     res.className='calc-result neutral';
     document.getElementById('bk').style.display='none';
@@ -498,7 +498,7 @@ function calc(){
   document.getElementById('bk').style.display='';
   document.getElementById('bkTarget').textContent=fmt(target);
   document.getElementById('bkCurrent').textContent=fmt(cur);
-  document.getElementById('bkGap').textContent=gap>0?fmt(gap):'?0 ?';
+  document.getElementById('bkGap').textContent=gap>0?fmt(gap):'₹0 ?';
   document.getElementById('bkGap').style.color=gap>0?'var(--orange)':'var(--green)';
   document.getElementById('bkMonthly').textContent=gap>0?fmt(Math.ceil(gap/12)):'Done ?';
   document.getElementById('bkMonthly').style.color=gap>0?'var(--blue)':'var(--green)';
