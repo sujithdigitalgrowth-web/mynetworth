@@ -373,7 +373,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
 <body>
 
 <!-- Login Screen -->
-<div class="login-screen" id="loginScreen" style="display:flex">
+<div class="login-screen" id="loginScreen" style="display:none">
   <div class="login-orb-mid"></div>
   <div class="login-box">
     <div class="login-icon">⚖️</div>
@@ -405,13 +405,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;
   </div>
 </div>
 
-<div class="mob-hdr" style="display:none">
+<div class="mob-hdr">
   <button class="ham" onclick="togSB()">?</button>
   <h2 id="mobTitle">Overview</h2>
 </div>
 <div class="sob" id="sbOverlay" onclick="togSB()"></div>
 
-<div class="app" id="app" style="display:none">
+<div class="app" id="app">
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">⚖️ WorthScale</div>
     <nav class="sidebar-nav">
@@ -2287,33 +2287,20 @@ applyTheme();
 document.getElementById('app').style.display='none';
 document.querySelector('.mob-hdr').style.display='none';
 
-async function initAuthGate(){
-  try{
-    // Keep auth in-memory only so /app opens the login screen on fresh loads.
-    await auth.setPersistence(firebase.auth.Auth.Persistence.NONE);
-  }catch(e){
-    // If persistence cannot be changed, continue with default behavior.
+auth.onAuthStateChanged(async function(user){
+  if(user){
+    // User already authenticated
+    const storedUser=getLoggedInUser();
+    const storedName=localStorage.getItem('nw_name_'+user.uid)||storedUser?.name||user.email.split('@')[0];
+    currentUser={name:storedName,email:user.email,uid:user.uid};
+    localStorage.setItem('nw_user',JSON.stringify(currentUser));
+    syncId=emailToDocId(user.email);
+    await startApp();
+  } else {
+    // Not logged in — show login screen
+    showLoginScreen();
   }
-
-  try{await auth.signOut()}catch(e){}
-
-  auth.onAuthStateChanged(async function(user){
-    if(user){
-      // User already authenticated in current in-memory session
-      const storedUser=getLoggedInUser();
-      const storedName=localStorage.getItem('nw_name_'+user.uid)||storedUser?.name||user.email.split('@')[0];
-      currentUser={name:storedName,email:user.email,uid:user.uid};
-      localStorage.setItem('nw_user',JSON.stringify(currentUser));
-      syncId=emailToDocId(user.email);
-      await startApp();
-    } else {
-      // Not logged in — show login screen
-      showLoginScreen();
-    }
-  });
-}
-
-initAuthGate();
+});
 </script>
 </body>
 </html>
