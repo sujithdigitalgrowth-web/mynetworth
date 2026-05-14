@@ -2287,20 +2287,33 @@ applyTheme();
 document.getElementById('app').style.display='none';
 document.querySelector('.mob-hdr').style.display='none';
 
-auth.onAuthStateChanged(async function(user){
-  if(user){
-    // User already authenticated
-    const storedUser=getLoggedInUser();
-    const storedName=localStorage.getItem('nw_name_'+user.uid)||storedUser?.name||user.email.split('@')[0];
-    currentUser={name:storedName,email:user.email,uid:user.uid};
-    localStorage.setItem('nw_user',JSON.stringify(currentUser));
-    syncId=emailToDocId(user.email);
-    await startApp();
-  } else {
-    // Not logged in — show login screen
-    showLoginScreen();
+async function initAuthGate(){
+  try{
+    // Keep auth in-memory only so /app opens the login screen on fresh loads.
+    await auth.setPersistence(firebase.auth.Auth.Persistence.NONE);
+  }catch(e){
+    // If persistence cannot be changed, continue with default behavior.
   }
-});
+
+  try{await auth.signOut()}catch(e){}
+
+  auth.onAuthStateChanged(async function(user){
+    if(user){
+      // User already authenticated in current in-memory session
+      const storedUser=getLoggedInUser();
+      const storedName=localStorage.getItem('nw_name_'+user.uid)||storedUser?.name||user.email.split('@')[0];
+      currentUser={name:storedName,email:user.email,uid:user.uid};
+      localStorage.setItem('nw_user',JSON.stringify(currentUser));
+      syncId=emailToDocId(user.email);
+      await startApp();
+    } else {
+      // Not logged in — show login screen
+      showLoginScreen();
+    }
+  });
+}
+
+initAuthGate();
 </script>
 </body>
 </html>
