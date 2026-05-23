@@ -1,0 +1,24 @@
+{
+  "name": "worthscale",
+  "version": "1.0.0",
+  "description": "A free personal finance platform for Indians — dashboard, SEO-optimized calculators, and blog content to help track net worth, manage assets, set goals, and plan your financial future.",
+  "main": "admin-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sujithdigitalgrowth-web/mynetworth.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sujithdigitalgrowth-web/mynetworth/issues"
+  },
+  "homepage": "https://github.com/sujithdigitalgrowth-web/mynetworth#readme",
+  "dependencies": {
+    "mammoth": "^1.12.0"
+  }
+}
