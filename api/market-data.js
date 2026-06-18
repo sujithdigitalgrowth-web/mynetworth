@@ -1,5 +1,11 @@
-// Vercel serverless function — fetches live market data and crypto prices.
-// CDN-cached for 5 minutes (s-maxage=300).
+// Vercel serverless — live market data via Yahoo Finance crumb-authenticated v7 API.
+// CDN-cached 5 minutes.
+
+const YF_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+  'Accept': 'application/json',
+  'Referer': 'https://finance.yahoo.com/',
+};
 
 const YF_SYMBOLS = [
   '^NSEI',      // Nifty 50
@@ -16,7 +22,23 @@ const YF_SYMBOLS = [
 
 const CG_IDS = 'bitcoin,ethereum,solana,binancecoin';
 
-// Troy oz → 10 grams conversion: 1 troy oz = 31.1035 g
+// Crumb cache — reused across warm Vercel invocations (valid ~30 min)
+let _crumb = null;
+let _crumbTs = 0;
+
+async function getCrumb() {
+  if (_crumb && Date.now() - _crumbTs < 25 * 60 * 1000) return _crumb;
+  const r = await fetch('https://query1.finance.yahoo.com/v1/test/getcrumb', {
+    headers: YF_HEADERS,
+    signal: AbortSignal.timeout(5000),
+  });
+  if (!r.ok) throw new Error(`crumb fetch failed: ${r.status}`);
+  _crumb = await r.text();
+  _crumbTs = Date.now();
+  return _crumb;
+}
+
+// Troy oz → 10 grams in INR
 function goldPer10g(usdPerOz, usdinr) {
   return Math.round((usdPerOz / 31.1035) * 10 * usdinr);
 }
@@ -26,44 +48,37 @@ module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=60');
 
   try {
+    const crumb = await getCrumb();
+
     const [yfRes, cgRes] = await Promise.all([
       fetch(
-        `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${YF_SYMBOLS.join(',')}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent`,
-        {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'application/json',
-          },
-          signal: AbortSignal.timeout(8000),
-        }
+        `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${YF_SYMBOLS.join(',')}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent&crumb=${encodeURIComponent(crumb)}`,
+        { headers: YF_HEADERS, signal: AbortSignal.timeout(8000) }
       ),
       fetch(
         `https://api.coingecko.com/api/v3/simple/price?ids=${CG_IDS}&vs_currencies=usd,inr&include_24hr_change=true`,
-        {
-          headers: { 'Accept': 'application/json' },
-          signal: AbortSignal.timeout(8000),
-        }
+        { headers: { 'Accept': 'application/json' }, signal: AbortSignal.timeout(8000) }
       ),
     ]);
 
     if (!yfRes.ok) throw new Error(`Market data source returned ${yfRes.status}`);
-    if (!cgRes.ok) throw new Error(`CoinGecko returned ${cgRes.status}`);
+    if (!cgRes.ok) throw new Error(`Crypto data returned ${cgRes.status}`);
 
     const [yfData, cgData] = await Promise.all([yfRes.json(), cgRes.json()]);
 
     const q = {};
     for (const item of yfData?.quoteResponse?.result ?? []) {
       q[item.symbol] = {
-        price: item.regularMarketPrice,
+        price:  item.regularMarketPrice,
         change: item.regularMarketChange,
-        pct: item.regularMarketChangePercent,
+        pct:    item.regularMarketChangePercent,
       };
     }
 
-    const usdinr = q['USDINR=X']?.price ?? 83.5;
+    const usdinr    = q['USDINR=X']?.price ?? 84;
     const goldUsdOz = q['GC=F']?.price;
 
-    const result = {
+    return res.json({
       indices: {
         nifty50:     q['^NSEI'],
         sensex:      q['^BSESN'],
@@ -89,9 +104,7 @@ module.exports = async function handler(req, res) {
         bnb:      cgData.binancecoin,
       },
       updatedAt: Date.now(),
-    };
-
-    return res.json(result);
+    });
   } catch (err) {
     return res.status(502).json({ error: err.message });
   }
