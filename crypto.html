@@ -1,0 +1,452 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-adsense-account" content="ca-pub-4837443132966026">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Watch — Cryptocurrency Guide for Indian Investors | WorthScale</title>
+<meta name="description" content="Bitcoin, Ethereum, and crypto investing explained for Indian investors. Learn about India's crypto tax rules, how to buy crypto legally, and digital asset basics.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://worthscale.in/crypto">
+<meta property="og:title" content="Crypto Watch — Cryptocurrency Guide for Indian Investors | WorthScale">
+<meta property="og:description" content="Understand Bitcoin, Ethereum, and crypto investing in India. Tax rules, how to buy legally, risks, and everything in between.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://worthscale.in/crypto">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Crypto Watch — Cryptocurrency Guide for Indian Investors","url":"https://worthscale.in/crypto","description":"Plain-language guide to cryptocurrency for Indian investors. Covers Bitcoin, Ethereum, India crypto tax, how to buy crypto legally, and digital asset basics.","isPartOf":{"@type":"WebSite","name":"WorthScale","url":"https://worthscale.in/"}}
+</script>
+<link rel="stylesheet" href="/styles.css">
+<style>
+.crypto-hero{padding:56px 0 44px;text-align:center}
+.crypto-hero h1{font-size:2.2rem;font-weight:800;line-height:1.25;margin-bottom:14px;max-width:680px;margin-left:auto;margin-right:auto;color:var(--text)}
+.crypto-hero h1 .grad{background:linear-gradient(135deg,#f97316,#eab308);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.crypto-hero p{font-size:1rem;color:var(--text2);max-width:520px;margin:0 auto 24px}
+.data-note{display:inline-block;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);color:#ea580c;font-size:.72rem;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:0;text-transform:uppercase;letter-spacing:.4px}
+
+/* Coin cards */
+.coin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.coin-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 18px;text-align:center;box-shadow:0 1px 4px rgba(15,23,42,.04)}
+.coin-card .coin-icon{font-size:1.8rem;margin-bottom:8px}
+.coin-card .coin-name{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:4px}
+.coin-card .coin-ticker{font-size:1.3rem;font-weight:800;color:var(--text)}
+.coin-card .coin-desc{font-size:.72rem;color:var(--text2);margin-top:6px;line-height:1.4}
+
+/* India crypto section */
+.india-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:24px}
+.india-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px}
+.india-card .ic-icon{font-size:1.4rem;margin-bottom:10px}
+.india-card h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.india-card p{font-size:.82rem;color:var(--text2);line-height:1.65;margin:0}
+
+/* How-to steps */
+.steps{display:flex;flex-direction:column;gap:14px;margin-top:20px}
+.step{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;gap:16px;align-items:flex-start}
+.step-num{background:linear-gradient(135deg,#f97316,#eab308);color:#fff;font-size:.72rem;font-weight:800;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step h4{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.step p{font-size:.8rem;color:var(--text2);line-height:1.55;margin:0}
+
+/* Crypto types grid */
+.crypto-type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+.crypto-type-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 20px}
+.crypto-type-card .ct-tag{display:inline-block;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:2px 8px;border-radius:4px;margin-bottom:10px}
+.tag-layer1{background:rgba(249,115,22,.1);color:#ea580c}
+.tag-defi{background:rgba(139,92,246,.1);color:var(--purple)}
+.tag-stable{background:rgba(22,163,74,.1);color:var(--green)}
+.tag-meme{background:rgba(234,179,8,.1);color:#a16207}
+.tag-infra{background:rgba(37,99,235,.1);color:var(--blue)}
+.crypto-type-card h3{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.crypto-type-card p{font-size:.8rem;color:var(--text2);line-height:1.55;margin:0}
+
+/* Tax table */
+.tax-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;margin-top:20px}
+.tax-box h3{font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--text)}
+.tax-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);gap:12px}
+.tax-row:last-child{border:none;padding-bottom:0}
+.tax-label{font-size:.84rem;color:var(--text2);font-weight:500}
+.tax-val{font-size:.84rem;font-weight:700;color:var(--text);text-align:right}
+.tax-note{font-size:.72rem;color:var(--muted);margin-top:14px;line-height:1.6}
+
+/* Risk cards */
+.risk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:24px}
+.risk-card{background:var(--card);border:1px solid rgba(220,38,38,.15);border-radius:14px;padding:22px 20px}
+.risk-card h3{font-size:.9rem;font-weight:700;color:var(--red);margin-bottom:8px}
+.risk-card p{font-size:.8rem;color:var(--text2);line-height:1.6;margin:0}
+
+/* Featured article */
+.featured-article{background:linear-gradient(135deg,rgba(249,115,22,.06),rgba(234,179,8,.06));border:1px solid rgba(249,115,22,.2);border-radius:16px;padding:28px 32px;display:flex;gap:24px;align-items:center;text-decoration:none;transition:all .2s;margin-top:24px}
+.featured-article:hover{border-color:#f97316;box-shadow:0 4px 16px rgba(249,115,22,.12);text-decoration:none}
+.featured-article .fa-icon{font-size:2.4rem;flex-shrink:0}
+.featured-article h3{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.featured-article p{font-size:.84rem;color:var(--text2);line-height:1.55;margin:0}
+.featured-article .fa-link{color:#ea580c;font-size:.82rem;font-weight:600;margin-top:10px;display:inline-block}
+
+/* Section heading */
+.sec-hd{text-align:center;font-size:1.35rem;font-weight:700;margin-bottom:6px;color:var(--text)}
+.sec-sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:0}
+.sec-label{display:inline-block;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:4px 14px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:14px}
+
+@media(max-width:900px){
+  .coin-grid{grid-template-columns:repeat(2,1fr)}
+  .crypto-type-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .crypto-hero h1{font-size:1.6rem}
+  .crypto-hero{padding:40px 0 30px}
+  .coin-grid{grid-template-columns:repeat(2,1fr)}
+  .india-grid{grid-template-columns:1fr}
+  .crypto-type-grid{grid-template-columns:1fr}
+  .risk-grid{grid-template-columns:1fr}
+  .featured-article{flex-direction:column;gap:12px}
+}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34VQNGQFDY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-34VQNGQFDY');</script>
+</head>
+<body>
+
+<nav class="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo">⚖️ WorthScale</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/markets">Markets</a>
+    <a href="/companies">Companies</a>
+    <div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Tools &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
+        <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
+        <a href="/house-down-payment-calculator">&#127968; Down Payment Calculator</a>
+        <a href="/richest-indians">&#127942; India Rich List 2026</a>
+      </div>
+    </div>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/app" class="nav-cta">Open Dashboard</a>
+  </div>
+  <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
+</div></nav>
+
+<main>
+
+<!-- Hero -->
+<section class="crypto-hero">
+<div class="container">
+  <h1>Crypto Watch<br><span class="grad">Digital Assets for Indian Investors</span></h1>
+  <p>Bitcoin, Ethereum, and everything in between — explained for Indian investors. Includes India's crypto tax rules, legal platforms, and how to get started safely.</p>
+  <span class="data-note">Educational content — not investment advice</span>
+</div>
+</section>
+
+<!-- Key Coins at a Glance -->
+<section class="section" style="padding-top:0">
+<div class="container">
+  <h2 class="sec-hd">Major Cryptocurrencies at a Glance</h2>
+  <p class="sec-sub">The most widely held digital assets — what they are and why they matter.</p>
+  <div class="coin-grid">
+    <div class="coin-card">
+      <div class="coin-icon">₿</div>
+      <div class="coin-name">Bitcoin</div>
+      <div class="coin-ticker">BTC</div>
+      <div class="coin-desc">The original cryptocurrency. Digital gold, fixed supply of 21 million coins, decentralised network.</div>
+    </div>
+    <div class="coin-card">
+      <div class="coin-icon">⟠</div>
+      <div class="coin-name">Ethereum</div>
+      <div class="coin-ticker">ETH</div>
+      <div class="coin-desc">Smart contract platform powering DeFi, NFTs, and most blockchain applications.</div>
+    </div>
+    <div class="coin-card">
+      <div class="coin-icon">◎</div>
+      <div class="coin-name">Solana</div>
+      <div class="coin-ticker">SOL</div>
+      <div class="coin-desc">High-speed, low-fee blockchain. Popular for NFTs and DeFi apps that need fast transactions.</div>
+    </div>
+    <div class="coin-card">
+      <div class="coin-icon">◆</div>
+      <div class="coin-name">BNB</div>
+      <div class="coin-ticker">BNB</div>
+      <div class="coin-desc">Binance's native token. Used for trading fee discounts and powering BNB Chain ecosystem.</div>
+    </div>
+  </div>
+  <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:14px">Crypto prices are highly volatile. Always verify with a live price tracker before making decisions. Nothing here is investment advice.</p>
+</div>
+</section>
+
+<!-- Crypto in India -->
+<section class="section" style="padding-top:8px">
+<div class="container">
+  <div class="sec-label">🇮🇳 India &amp; Crypto</div>
+  <h2 class="sec-hd">The State of Crypto in India</h2>
+  <p class="sec-sub">India's relationship with cryptocurrency is complex — regulated but not banned. Here's what you need to know.</p>
+  <div class="india-grid">
+    <div class="india-card">
+      <div class="ic-icon">⚖️</div>
+      <h3>Legal Status: Not Banned, But Regulated</h3>
+      <p>Cryptocurrency is not banned in India. The Supreme Court's 2020 ruling struck down the RBI's banking ban. However, crypto is heavily taxed and regulated. SEBI and RBI have separate oversight roles. Trading on registered platforms is legal; peer-to-peer trading carries higher risk.</p>
+    </div>
+    <div class="india-card">
+      <div class="ic-icon">🏦</div>
+      <h3>SEBI and RBI's Role</h3>
+      <p>RBI views crypto with caution, preferring its own Digital Rupee (CBDC). SEBI has stated that crypto trading platforms need to register and comply with anti-money laundering rules. Most major exchanges (WazirX, CoinDCX, Mudrex, Zebpay) are registered with the Financial Intelligence Unit (FIU).</p>
+    </div>
+    <div class="india-card">
+      <div class="ic-icon">📊</div>
+      <h3>India's Crypto Adoption</h3>
+      <p>India consistently ranks among the top nations for cryptocurrency adoption in Chainalysis's Global Crypto Adoption Index. An estimated 10–15 crore Indians have held or traded crypto at some point. Young urban investors are the primary demographic, attracted by high-return potential despite high risk.</p>
+    </div>
+    <div class="india-card">
+      <div class="ic-icon">💰</div>
+      <h3>Digital Rupee (CBDC)</h3>
+      <p>The Reserve Bank of India launched its Central Bank Digital Currency (e-Rupee or CBDC) in 2023. Unlike Bitcoin, it is government-issued, centrally controlled, and maintains the stability of the Indian Rupee. It is not a cryptocurrency in the decentralised sense — it is the digital form of the physical rupee.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Tax section -->
+<section class="section" style="padding-top:8px">
+<div class="container container-sm">
+  <div class="sec-label">💸 Crypto Tax India</div>
+  <h2 class="sec-hd">Crypto Tax Rules in India (2024–25)</h2>
+  <p class="sec-sub">India has some of the strictest crypto tax rules in the world. Know them before you trade.</p>
+  <div class="tax-box">
+    <h3>How crypto is taxed in India</h3>
+    <div class="tax-row">
+      <span class="tax-label">Tax on crypto gains (profit from selling crypto)</span>
+      <span class="tax-val">30% flat rate</span>
+    </div>
+    <div class="tax-row">
+      <span class="tax-label">Tax on crypto received as income, rewards, or gifts</span>
+      <span class="tax-val">30% flat rate</span>
+    </div>
+    <div class="tax-row">
+      <span class="tax-label">TDS on crypto transactions above ₹50,000/year</span>
+      <span class="tax-val">1% TDS deducted</span>
+    </div>
+    <div class="tax-row">
+      <span class="tax-label">Setting off crypto losses against other income</span>
+      <span class="tax-val">Not allowed</span>
+    </div>
+    <div class="tax-row">
+      <span class="tax-label">Setting off losses from one crypto against gains from another</span>
+      <span class="tax-val">Not allowed</span>
+    </div>
+    <div class="tax-row">
+      <span class="tax-label">Crypto-to-crypto trades (e.g., BTC → ETH)</span>
+      <span class="tax-val">Taxable event</span>
+    </div>
+    <p class="tax-note">Source: Finance Act 2022, Income Tax Act Section 115BBH. These rules apply to Virtual Digital Assets (VDAs). Consult a CA for your specific situation — crypto tax filing can be complex. Rules may change each budget.</p>
+  </div>
+</div>
+</section>
+
+<!-- How to buy crypto in India -->
+<section class="section" style="padding-top:8px">
+<div class="container container-sm">
+  <h2 class="sec-hd">How to Buy Crypto Legally in India</h2>
+  <p class="sec-sub">A step-by-step guide to getting started safely on a registered exchange.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h4>Choose a SEBI/FIU-registered exchange</h4>
+        <p>Use platforms registered with India's Financial Intelligence Unit (FIU-IND). Major options include CoinDCX, Mudrex, Zebpay, and WazirX. Check their registration status before depositing money. Avoid unregistered offshore exchanges as they offer no consumer protection under Indian law.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h4>Complete KYC (Know Your Customer)</h4>
+        <p>All registered Indian crypto exchanges require full KYC — Aadhaar, PAN, and a selfie. This is mandatory under India's Prevention of Money Laundering Act (PMLA). Without KYC you cannot withdraw funds to your bank account. Budget 10–30 minutes for the KYC process.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h4>Deposit INR from your bank account</h4>
+        <p>After KYC approval, link your bank account and deposit INR via NEFT, IMPS, or UPI. Processing time is usually instant to a few hours. Start small — deposit only what you can afford to lose completely. Crypto markets can drop 50–80% in bear markets.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h4>Buy a reputable coin — start with BTC or ETH</h4>
+        <p>For first-time investors, Bitcoin (BTC) and Ethereum (ETH) are the most established assets with the highest liquidity and longest track records. Avoid meme coins and unknown tokens until you understand the market. Never invest based on social media tips or WhatsApp forwards.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div>
+        <h4>Track your cost basis for tax filing</h4>
+        <p>Every crypto purchase, sale, and transfer is a taxable event in India. Keep a record of: date of purchase, amount paid in INR, amount sold, and gain or loss. Most exchanges provide a downloadable transaction history. Use this for your ITR filing — crypto gains go under Schedule VDA.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Types of crypto -->
+<section class="section" style="padding-top:8px">
+<div class="container">
+  <h2 class="sec-hd">Types of Cryptocurrencies Explained</h2>
+  <p class="sec-sub">Not all crypto is the same. Understanding the categories helps you assess risk.</p>
+  <div class="crypto-type-grid">
+    <div class="crypto-type-card">
+      <span class="ct-tag tag-layer1">Layer 1</span>
+      <h3>Base Blockchains</h3>
+      <p>Bitcoin, Ethereum, Solana, Avalanche. These are the foundational networks everything else is built on. Higher market caps, higher liquidity, lower rug-pull risk. The safest category to start with.</p>
+    </div>
+    <div class="crypto-type-card">
+      <span class="ct-tag tag-stable">Stablecoins</span>
+      <h3>Stablecoins</h3>
+      <p>USDT (Tether), USDC (Circle), DAI. Pegged 1:1 to the US Dollar. Used to park funds without converting back to INR and avoid crypto volatility. Note: India taxes stablecoin gains as VDA — check with your CA.</p>
+    </div>
+    <div class="crypto-type-card">
+      <span class="ct-tag tag-defi">DeFi</span>
+      <h3>DeFi Tokens</h3>
+      <p>Uniswap (UNI), Aave, Compound. These power decentralised lending, borrowing, and trading without banks. High potential but also high risk — many DeFi projects have been hacked or collapsed.</p>
+    </div>
+    <div class="crypto-type-card">
+      <span class="ct-tag tag-infra">Infrastructure</span>
+      <h3>Blockchain Infrastructure</h3>
+      <p>Chainlink (LINK), Polygon (MATIC), Filecoin. These provide services to other blockchain projects — data feeds, scaling solutions, storage. More niche but important for the ecosystem.</p>
+    </div>
+    <div class="crypto-type-card">
+      <span class="ct-tag tag-meme">Meme Coins</span>
+      <h3>Meme Coins</h3>
+      <p>Dogecoin (DOGE), Shiba Inu (SHIB), Pepe. Started as jokes, some gained massive followings. Extremely volatile, driven by sentiment not fundamentals. Never invest more than you can afford to lose entirely.</p>
+    </div>
+    <div class="crypto-type-card">
+      <span class="ct-tag tag-layer1">NFTs &amp; Gaming</span>
+      <h3>NFTs &amp; Gaming Tokens</h3>
+      <p>Axie Infinity (AXS), The Sandbox (SAND), Immutable (IMX). Tokenised in-game assets and play-to-earn economies. The 2021–22 NFT boom has cooled significantly. High-risk speculative category.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Risks -->
+<section class="section" style="padding-top:8px">
+<div class="container">
+  <h2 class="sec-hd">Crypto Risks Every Indian Investor Must Know</h2>
+  <p class="sec-sub">High potential returns come with significant risks that are often underestimated.</p>
+  <div class="risk-grid">
+    <div class="risk-card">
+      <h3>Extreme Volatility</h3>
+      <p>Bitcoin has fallen 80%+ multiple times in its history. A ₹1 lakh investment can become ₹20,000 in a bear market. Unlike stocks, there is no "fundamental floor" — crypto assets can go to zero. Only invest money you can genuinely afford to lose.</p>
+    </div>
+    <div class="risk-card">
+      <h3>Exchange Risk</h3>
+      <p>Indian exchanges have collapsed before (WazirX had a $230M hack in 2024). Exchanges are not insured like bank deposits. For large holdings, consider withdrawing to a hardware wallet (cold storage) rather than leaving crypto on an exchange.</p>
+    </div>
+    <div class="risk-card">
+      <h3>Regulatory Risk</h3>
+      <p>India's crypto laws are still evolving. The government could impose stricter regulations, higher taxes, or additional restrictions at any budget. Always stay updated with RBI and Finance Ministry announcements before making large crypto investments.</p>
+    </div>
+    <div class="risk-card">
+      <h3>Scams and Fraud</h3>
+      <p>Crypto is the most common vehicle for financial scams in India. Fake "doubling money" schemes, celebrity impersonation scams, phishing for wallet keys, and pump-and-dump tokens are widespread. Never share your seed phrase or private key with anyone — ever.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Featured article: Satoshi -->
+<section class="section" style="padding-top:8px">
+<div class="container container-sm">
+  <h2 class="sec-hd">Featured: The Creator of Bitcoin</h2>
+  <p class="sec-sub">Who is Satoshi Nakamoto — and what is his crypto net worth worth?</p>
+  <a href="/blog/satoshi-nakamoto-net-worth" class="featured-article">
+    <div class="fa-icon">₿</div>
+    <div>
+      <h3>Satoshi Nakamoto Net Worth: The Billion-Dollar Bitcoin Mystery</h3>
+      <p>The anonymous creator of Bitcoin is estimated to hold over 1 million BTC — making the unknown Satoshi one of the wealthiest individuals on Earth. We break down who they might be, how much BTC they hold, and why those coins have never moved.</p>
+      <span class="fa-link">Read full article →</span>
+    </div>
+  </a>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="padding-top:8px">
+<div class="container-sm">
+  <h2 class="sec-hd">Frequently Asked Questions</h2>
+  <div style="margin-top:20px" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Is crypto legal in India in 2025–26?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes, crypto trading is legal in India. The Supreme Court in 2020 struck down RBI's banking ban. However, it is subject to 30% flat tax on gains, 1% TDS on transactions, and must be traded on FIU-registered exchanges. It is regulated, not banned.</div></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">How much tax do I pay on crypto profits in India?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">A flat 30% tax applies to all gains from Virtual Digital Assets (VDAs), which includes cryptocurrency. Additionally, 1% TDS is deducted on transactions above ₹50,000 per year. You cannot set off crypto losses against other income or other crypto gains. Consult a CA for accurate filing under Schedule VDA in your ITR.</div></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Which is the best crypto exchange in India?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">The most established FIU-registered exchanges in India include CoinDCX, Zebpay, Mudrex, and BitBNS. Choose based on trading fees, coin availability, KYC speed, and customer support. Always verify an exchange's FIU registration before depositing funds. WorthScale does not endorse specific exchanges — do your own research.</div></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">What is the minimum amount to invest in crypto in India?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Most Indian exchanges allow crypto purchases starting from ₹100. You do not need to buy a full Bitcoin — you can buy fractions (called Satoshis). However, financial advisors generally recommend not allocating more than 5–10% of your investable portfolio to crypto given its high risk and volatility.</div></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Should I invest in crypto or stocks?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">These serve different risk profiles. Stocks (especially index funds) are regulated, taxed more favourably, and backed by real business earnings. Crypto offers higher potential returns but with significantly higher risk, no regulatory backing, and a 30% tax on gains. Most financial planners suggest building a strong equity and debt portfolio first, then considering a small crypto allocation if you understand the risks. Never invest borrowed money or your emergency fund in crypto.</div></div>
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:var(--muted);text-align:center;margin-top:20px;line-height:1.6">WorthScale is an informational and educational platform. Nothing on this page is financial or investment advice. Cryptocurrency is a high-risk asset class. Consult a SEBI-registered advisor and a CA before investing.</p>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="padding-top:8px;padding-bottom:60px">
+<div class="container">
+  <div class="cta-banner">
+    <h3>Know your full financial picture</h3>
+    <p>Track your crypto, stocks, gold, and real estate together. WorthScale's free net worth calculator includes all asset types.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="/net-worth-calculator" class="btn btn-primary btn-lg" style="background:#fff;color:#1e40af;font-weight:700">Net Worth Calculator →</a>
+      <a href="/markets" class="btn btn-lg" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.4)">View Market Pulse</a>
+    </div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<footer class="site-footer"><div class="footer-inner footer-grid">
+  <div class="footer-about">
+    <div class="footer-brand">⚖️ WorthScale</div>
+    <p class="footer-desc">Free personal finance platform for Indians. Track net worth, follow markets, and build wealth with simple tools and guides.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Free Tools</h4>
+    <a href="/net-worth-calculator">Net Worth Calculator</a>
+    <a href="/emergency-fund-calculator">Emergency Fund Calculator</a>
+    <a href="/house-down-payment-calculator">Down Payment Calculator</a>
+    <a href="/app">Dashboard</a>
+  </div>
+  <div class="footer-col">
+    <h4>Explore</h4>
+    <a href="/markets">Market Pulse</a>
+    <a href="/companies">Company Spotlight</a>
+    <a href="/crypto">Crypto Watch</a>
+    <a href="/blog">All Articles</a>
+    <a href="/blog/satoshi-nakamoto-net-worth">Satoshi Nakamoto Net Worth</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/about">About</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+    <a href="/sitemap">Sitemap</a>
+  </div>
+</div><div class="footer-bottom">
+  <p>&copy; 2026 WorthScale. All rights reserved. Built with &#10084;&#65039; in India.</p>
+</div></footer>
+
+<script src="/nav.js"></script>
+</body>
+</html>

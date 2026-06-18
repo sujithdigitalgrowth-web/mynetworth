@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-4837443132966026">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIP Calculator India 2026 — Calculate Mutual Fund Returns Free | WorthScale</title>
+<meta name="description" content="Free SIP calculator for Indian investors. Calculate monthly SIP returns, total corpus, and see how ₹5,000/month grows to ₹1 crore+ over 20 years. Includes step-up SIP and year-by-year table.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://worthscale.in/sip-calculator">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"SIP Calculator India 2026","url":"https://worthscale.in/sip-calculator","description":"Free SIP calculator for Indian investors — calculate monthly SIP corpus, step-up SIP, and year-by-year returns.","breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://worthscale.in/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://worthscale.in/net-worth-calculator"},{"@type":"ListItem","position":3,"name":"SIP Calculator","item":"https://worthscale.in/sip-calculator"}]}}
+</script>
+<link rel="stylesheet" href="/styles.css">
+<style>
+.tool-hero{background:linear-gradient(135deg,#0f172a,#1e3a5f);padding:40px 0 32px;color:#fff}
+.tool-hero h1{font-size:1.9rem;font-weight:800;color:#fff;margin-bottom:8px}
+.tool-hero p{font-size:.92rem;color:#94a3b8;max-width:580px;line-height:1.7}
+.tool-badge{display:inline-block;background:rgba(74,222,128,.15);color:#4ade80;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;padding:4px 10px;border-radius:4px;margin-bottom:12px}
+
+/* TABS */
+.mode-tabs{display:flex;gap:0;margin-bottom:24px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:4px;width:fit-content}
+.mode-tab{padding:8px 20px;border-radius:7px;font-size:.84rem;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;transition:all .2s}
+.mode-tab.active{background:var(--card);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+
+/* CALC LAYOUT */
+.calc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;margin-top:24px}
+.calc-inputs{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px}
+.calc-inputs h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:20px}
+.input-row{margin-bottom:18px}
+.input-row label{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:6px}
+.input-row .input-wrap{display:flex;align-items:center;gap:0;border:1.5px solid var(--border);border-radius:9px;overflow:hidden;transition:border-color .2s;background:var(--card)}
+.input-row .input-wrap:focus-within{border-color:var(--blue)}
+.input-row .input-prefix,.input-row .input-suffix{background:var(--bg2);padding:10px 13px;font-size:.82rem;font-weight:600;color:var(--muted);flex-shrink:0;border:none}
+.input-row input{border:none;outline:none;padding:10px 12px;font-size:.95rem;font-weight:700;color:var(--text);width:100%;background:transparent;font-family:inherit}
+.input-row input::-webkit-inner-spin-button{-webkit-appearance:none}
+.preset-pills{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.preset-pill{padding:4px 12px;border-radius:20px;font-size:.72rem;font-weight:600;border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;transition:all .15s}
+.preset-pill:hover,.preset-pill.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.input-hint{font-size:.66rem;color:var(--muted);margin-top:5px}
+
+/* RANGE SLIDER */
+.slider-wrap{margin-top:6px}
+.slider-wrap input[type=range]{width:100%;accent-color:var(--blue);height:4px}
+.slider-labels{display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:3px}
+
+/* RESULTS */
+.calc-results{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;position:sticky;top:80px}
+.result-main{text-align:center;padding:20px;background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(16,163,74,.06));border-radius:12px;margin-bottom:20px;border:1px solid rgba(37,99,235,.12)}
+.result-main .rm-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:6px}
+.result-main .rm-val{font-size:2.2rem;font-weight:800;color:var(--green);line-height:1}
+.result-main .rm-sub{font-size:.72rem;color:var(--muted);margin-top:6px}
+.result-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.result-row{display:flex;justify-content:space-between;align-items:center;font-size:.84rem}
+.result-row .rr-label{color:var(--text2)}
+.result-row .rr-val{font-weight:700;color:var(--text)}
+.result-row .rr-val.green{color:var(--green)}
+.result-row .rr-val.blue{color:var(--blue)}
+
+/* STACKED BAR */
+.stack-bar{height:10px;border-radius:5px;overflow:hidden;display:flex;margin-bottom:6px}
+.sb-inv{background:var(--blue);transition:width .4s ease}
+.sb-ret{background:var(--green);transition:width .4s ease}
+.stack-legend{display:flex;gap:16px;font-size:.68rem}
+.sl-dot{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
+.multiplier-badge{display:inline-block;background:rgba(22,163,74,.1);color:var(--green);font-size:.8rem;font-weight:800;padding:5px 12px;border-radius:6px;margin-top:8px}
+
+/* RATE COMPARISON */
+.rate-compare{margin-top:28px}
+.rate-compare h3{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:14px}
+.rate-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.rate-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.rate-card.highlight{background:rgba(22,163,74,.06);border-color:rgba(22,163,74,.25)}
+.rate-card .rc-rate{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.rate-card .rc-corpus{font-size:1.1rem;font-weight:800;color:var(--text)}
+.rate-card .rc-label{font-size:.65rem;color:var(--muted);margin-top:3px}
+
+/* YEAR TABLE */
+.year-table-wrap{margin-top:32px}
+.year-table-wrap h3{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:12px}
+.ytable{width:100%;border-collapse:collapse;font-size:.82rem}
+.ytable th{background:var(--bg2);padding:10px 14px;text-align:left;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border)}
+.ytable td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2)}
+.ytable tr:hover td{background:var(--bg2)}
+.ytable tr:last-child td{border-bottom:none;font-weight:700;color:var(--text)}
+.ytable .corpus-cell{color:var(--green);font-weight:700}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{padding:15px 0;font-weight:600;font-size:.9rem;cursor:pointer;color:var(--text);display:flex;justify-content:space-between;gap:12px}
+.faq-q::after{content:"+";font-size:1.1rem;color:var(--muted);flex-shrink:0}
+.faq-item.open .faq-q::after{content:"−"}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:14px}
+.faq-a p{font-size:.83rem;color:var(--text2);line-height:1.7;margin:0}
+
+.info-box{background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.15);border-radius:10px;padding:16px 20px;font-size:.8rem;color:var(--text2);line-height:1.65;margin-top:16px}
+
+@media(max-width:900px){.calc-wrap{grid-template-columns:1fr}.calc-results{position:static}.rate-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.rate-grid{grid-template-columns:1fr}}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34VQNGQFDY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-34VQNGQFDY');</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo">⚖️ WorthScale</a>
+  <div class="nav-links">
+    <a href="/">Home</a><a href="/markets">Markets</a><a href="/companies">Companies</a><a href="/crypto">Crypto</a>
+    <div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Tools &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
+        <a href="/sip-calculator">📈 SIP Calculator</a>
+        <a href="/income-tax-calculator">🧾 Income Tax Calculator</a>
+        <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
+        <a href="/house-down-payment-calculator">&#127968; Down Payment Calculator</a>
+        <a href="/richest-indians">&#127942; India Rich List 2026</a>
+      </div>
+    </div>
+    <a href="/blog">Blog</a><a href="/about">About</a><a href="/contact">Contact</a>
+    <a href="/app" class="nav-cta">Open Dashboard</a>
+  </div>
+  <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
+</div></nav>
+
+<main>
+<section class="tool-hero">
+<div class="container">
+  <div class="tool-badge">📈 Free Tool</div>
+  <h1>SIP Calculator</h1>
+  <p>Find out exactly how much your monthly SIP will grow into. Enter your investment amount, expected return, and duration — see your wealth grow.</p>
+  <div style="font-size:.72rem;color:#475569;margin-top:14px">
+    <a href="/" style="color:#64748b">Home</a> › <a href="/net-worth-calculator" style="color:#64748b">Tools</a> › SIP Calculator
+  </div>
+</div>
+</section>
+
+<section style="padding:36px 0 56px">
+<div class="container">
+
+  <!-- MODE TABS -->
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="setMode('sip',this)">Monthly SIP</button>
+    <button class="mode-tab" onclick="setMode('lumpsum',this)">Lump Sum</button>
+    <button class="mode-tab" onclick="setMode('stepup',this)">Step-Up SIP</button>
+  </div>
+
+  <div class="calc-wrap">
+    <!-- INPUTS -->
+    <div class="calc-inputs">
+      <h3 id="calc-title">📅 Monthly SIP Details</h3>
+
+      <div class="input-row" id="row-monthly">
+        <label id="lbl-amount">Monthly Investment</label>
+        <div class="input-wrap">
+          <span class="input-prefix">₹</span>
+          <input type="number" id="sip-monthly" value="10000" oninput="calc()" placeholder="10000">
+        </div>
+        <div class="preset-pills">
+          <span class="preset-pill" onclick="setVal('sip-monthly',5000)">₹5K</span>
+          <span class="preset-pill active" onclick="setVal('sip-monthly',10000)">₹10K</span>
+          <span class="preset-pill" onclick="setVal('sip-monthly',25000)">₹25K</span>
+          <span class="preset-pill" onclick="setVal('sip-monthly',50000)">₹50K</span>
+        </div>
+      </div>
+
+      <div class="input-row" id="row-lumpsum" style="display:none">
+        <label>Lump Sum Amount</label>
+        <div class="input-wrap">
+          <span class="input-prefix">₹</span>
+          <input type="number" id="lumpsum-amt" value="100000" oninput="calc()" placeholder="100000">
+        </div>
+        <div class="preset-pills">
+          <span class="preset-pill" onclick="setVal('lumpsum-amt',50000)">₹50K</span>
+          <span class="preset-pill active" onclick="setVal('lumpsum-amt',100000)">₹1L</span>
+          <span class="preset-pill" onclick="setVal('lumpsum-amt',500000)">₹5L</span>
+          <span class="preset-pill" onclick="setVal('lumpsum-amt',1000000)">₹10L</span>
+        </div>
+      </div>
+
+      <div class="input-row" id="row-stepup-monthly" style="display:none">
+        <label>Monthly SIP (Starting)</label>
+        <div class="input-wrap">
+          <span class="input-prefix">₹</span>
+          <input type="number" id="stepup-monthly" value="10000" oninput="calc()" placeholder="10000">
+        </div>
+      </div>
+
+      <div class="input-row" id="row-stepup-pct" style="display:none">
+        <label>Annual Step-Up %</label>
+        <div class="input-wrap">
+          <input type="number" id="stepup-pct" value="10" min="0" max="30" oninput="calc()">
+          <span class="input-suffix">%/yr</span>
+        </div>
+        <div class="preset-pills">
+          <span class="preset-pill" onclick="setVal('stepup-pct',5)">5%</span>
+          <span class="preset-pill active" onclick="setVal('stepup-pct',10)">10%</span>
+          <span class="preset-pill" onclick="setVal('stepup-pct',15)">15%</span>
+        </div>
+        <div class="input-hint">Increase your SIP by this % every year</div>
+      </div>
+
+      <div class="input-row">
+        <label>Expected Annual Return</label>
+        <div class="input-wrap">
+          <input type="number" id="sip-return" value="12" min="1" max="30" step="0.5" oninput="calc()">
+          <span class="input-suffix">% p.a.</span>
+        </div>
+        <div class="preset-pills">
+          <span class="preset-pill" onclick="setVal('sip-return',8)">8% — FD-like</span>
+          <span class="preset-pill active" onclick="setVal('sip-return',12)">12% — Avg Nifty</span>
+          <span class="preset-pill" onclick="setVal('sip-return',15)">15% — Aggressive</span>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <label>Investment Duration — <strong id="yr-display">10 years</strong></label>
+        <div class="slider-wrap">
+          <input type="range" id="sip-years" min="1" max="40" value="10" oninput="document.getElementById('yr-display').textContent=this.value+' year'+(this.value>1?'s':'');calc()">
+          <div class="slider-labels"><span>1 yr</span><span>10</span><span>20</span><span>30</span><span>40 yrs</span></div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        💡 <strong>Historical context:</strong> Nifty 50 has delivered ~12% CAGR over the last 20 years. Mid-cap funds average 14–16%. Debt funds average 7–8%. Past performance is not a guarantee of future returns.
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="calc-results">
+      <div class="result-main">
+        <div class="rm-label">Estimated Corpus</div>
+        <div class="rm-val" id="res-corpus">₹0</div>
+        <div class="rm-sub" id="res-sub">After <span id="res-years">10</span> years at <span id="res-rate">12</span>% p.a.</div>
+      </div>
+
+      <div class="result-rows">
+        <div class="result-row">
+          <span class="rr-label">💰 Total Invested</span>
+          <span class="rr-val blue" id="res-invested">₹0</span>
+        </div>
+        <div class="result-row">
+          <span class="rr-label">📈 Returns Earned</span>
+          <span class="rr-val green" id="res-returns">₹0</span>
+        </div>
+        <div class="result-row">
+          <span class="rr-label">🔢 Wealth Multiplier</span>
+          <span class="rr-val" id="res-mult">—</span>
+        </div>
+      </div>
+
+      <div class="stack-bar">
+        <div class="sb-inv" id="bar-inv" style="width:50%"></div>
+        <div class="sb-ret" id="bar-ret" style="width:50%"></div>
+      </div>
+      <div class="stack-legend">
+        <span><span class="sl-dot" style="background:var(--blue)"></span>Invested</span>
+        <span><span class="sl-dot" style="background:var(--green)"></span>Returns</span>
+        <span style="margin-left:auto;font-size:.68rem;color:var(--muted)" id="bar-pct"></span>
+      </div>
+
+      <div class="rate-compare" id="rate-compare-section">
+        <h3>Returns at Different Rates</h3>
+        <div class="rate-grid">
+          <div class="rate-card">
+            <div class="rc-rate">8% p.a.</div>
+            <div class="rc-corpus" id="cmp-8">—</div>
+            <div class="rc-label">Conservative</div>
+          </div>
+          <div class="rate-card highlight">
+            <div class="rc-rate">12% p.a.</div>
+            <div class="rc-corpus" id="cmp-12">—</div>
+            <div class="rc-label">Avg Nifty 50</div>
+          </div>
+          <div class="rate-card">
+            <div class="rc-rate">15% p.a.</div>
+            <div class="rc-corpus" id="cmp-15">—</div>
+            <div class="rc-label">Aggressive</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="/net-worth-calculator" style="display:block;text-align:center;margin-top:18px;font-size:.78rem;font-weight:600;color:var(--blue);text-decoration:none">Track your growing wealth → Net Worth Calculator</a>
+    </div>
+  </div>
+
+  <!-- GROWTH CHART -->
+  <div style="margin-top:32px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px">
+      <h3 style="font-size:.95rem;font-weight:700;color:var(--text);margin:0">📈 Wealth Growth Visualised</h3>
+      <div style="display:flex;gap:14px;font-size:.72rem;font-weight:600">
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:rgba(37,99,235,.8);display:inline-block"></span>Amount Invested</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:rgba(22,163,74,.8);display:inline-block"></span>Returns Earned</span>
+      </div>
+    </div>
+    <div style="position:relative;height:280px">
+      <canvas id="sip-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- YEAR TABLE -->
+  <div class="year-table-wrap">
+    <h3>📊 Year-by-Year Growth</h3>
+    <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
+      <table class="ytable">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Annual Investment</th>
+            <th>Total Invested</th>
+            <th>Returns So Far</th>
+            <th>Corpus Value</th>
+          </tr>
+        </thead>
+        <tbody id="year-table-body">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="margin-top:44px">
+  <div class="container-sm" style="padding:0" itemscope itemtype="https://schema.org/FAQPage">
+    <h2 style="font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:16px">SIP Calculator FAQs</h2>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">What is a SIP and how does it work?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">A Systematic Investment Plan (SIP) lets you invest a fixed amount in a mutual fund every month. Your money buys more units when the market falls (rupee cost averaging) and fewer when it rises — averaging out your purchase price over time. SIPs are the most popular way for Indian investors to grow wealth in equity mutual funds, with over ₹25,000 crore invested monthly as of 2026.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Is 12% return realistic for a SIP in India?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">The Nifty 50 has delivered approximately 12–13% CAGR over the last 20 years (2004–2024), making 12% a historically reasonable assumption for a large-cap index fund SIP. Mid-cap and small-cap funds have historically returned 14–18% over long periods but come with higher volatility. Debt funds return 7–8%. Use 12% for equity SIPs as the base case — but always note that past returns do not guarantee future performance.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">What is a Step-Up SIP?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">A Step-Up SIP (also called a Top-Up SIP) automatically increases your monthly investment by a fixed percentage each year. For example, starting with ₹10,000/month and stepping up 10% annually means investing ₹11,000 in year 2, ₹12,100 in year 3, and so on. This aligns with typical salary growth and dramatically increases your final corpus — often 1.5–2x vs a flat SIP at the same starting amount.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">How much SIP is needed to get ₹1 crore?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">At 12% annual returns: ₹5,500/month for 20 years, ₹14,000/month for 15 years, or ₹43,000/month for 10 years will roughly reach ₹1 crore. The earlier you start, the lower the monthly amount needed — because compounding does more of the heavy lifting. Use this calculator to find your exact number.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Is SIP income taxable in India?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Yes. Equity mutual fund SIP gains held for more than 1 year are taxed as Long-Term Capital Gains (LTCG) at 12.5% above ₹1.25 lakh per year (as of Budget 2024). Each SIP instalment is treated separately for the 1-year holding period. Short-term gains (held less than 1 year) are taxed at 20% (STCG). ELSS SIPs have a 3-year lock-in and offer 80C deduction up to ₹1.5 lakh — the most tax-efficient SIP option.</p></div>
+    </div>
+  </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="margin-top:32px;background:linear-gradient(135deg,#1e40af,#1d4ed8);border-radius:18px;padding:36px;text-align:center;color:#fff">
+    <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:8px;color:#fff">Track your SIP growth in the WorthScale Dashboard</h3>
+    <p style="font-size:.88rem;opacity:.85;margin-bottom:20px;color:#fff">Log your mutual fund investments, track actual returns, and see your net worth grow — all free.</p>
+    <a href="/app" style="display:inline-block;background:#fff;color:#1e40af;padding:12px 28px;border-radius:10px;font-weight:700;font-size:.92rem;text-decoration:none">Open Free Dashboard →</a>
+  </div>
+
+</div>
+</section>
+</main>
+
+<footer class="site-footer"><div class="footer-inner footer-grid">
+  <div class="footer-about"><div class="footer-brand">⚖️ WorthScale</div><p class="footer-desc">India's free finance hub — market insights, company valuations, and financial calculators.</p></div>
+  <div class="footer-col"><h4>Calculators</h4><a href="/sip-calculator">SIP Calculator</a><a href="/income-tax-calculator">Income Tax Calculator</a><a href="/net-worth-calculator">Net Worth Calculator</a><a href="/emergency-fund-calculator">Emergency Fund</a><a href="/house-down-payment-calculator">Down Payment</a></div>
+  <div class="footer-col"><h4>Explore</h4><a href="/markets">Markets</a><a href="/nifty-50">Nifty 50</a><a href="/companies">Companies</a><a href="/crypto">Crypto</a><a href="/richest-indians">Rich List 2026</a></div>
+  <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/contact">Contact</a><a href="/privacy-policy">Privacy Policy</a></div>
+</div><div class="footer-bottom"><p>&copy; 2026 WorthScale. This calculator is for educational and illustrative purposes only. Not financial advice.</p></div></footer>
+
+<script src="/nav.js"></script>
+<script>
+let mode = 'sip';
+
+function setMode(m, btn) {
+  mode = m;
+  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('row-monthly').style.display = m==='sip' ? '' : 'none';
+  document.getElementById('row-lumpsum').style.display = m==='lumpsum' ? '' : 'none';
+  document.getElementById('row-stepup-monthly').style.display = m==='stepup' ? '' : 'none';
+  document.getElementById('row-stepup-pct').style.display = m==='stepup' ? '' : 'none';
+  document.getElementById('rate-compare-section').style.display = m==='lumpsum' ? 'block' : 'block';
+  document.getElementById('calc-title').textContent = m==='sip' ? '📅 Monthly SIP Details' : m==='lumpsum' ? '💰 Lump Sum Details' : '📈 Step-Up SIP Details';
+  calc();
+}
+
+function setVal(id, val) {
+  document.getElementById(id).value = val;
+  // update active pill
+  const el = document.getElementById(id);
+  const pills = el.closest('.input-row').querySelectorAll('.preset-pill');
+  pills.forEach(p => { p.classList.remove('active'); if(parseFloat(p.textContent.replace(/[^0-9.]/g,'').replace('K','000').replace('L','00000')) == val || p.textContent.includes(val+'%')) p.classList.add('active'); });
+  calc();
+}
+
+function fmt(n) {
+  if(n >= 10000000) return '₹' + (n/10000000).toFixed(2) + ' Cr';
+  if(n >= 100000)   return '₹' + (n/100000).toFixed(2) + ' L';
+  return '₹' + Math.round(n).toLocaleString('en-IN');
+}
+function fmtShort(n) {
+  if(n >= 10000000) return '₹' + (n/10000000).toFixed(1) + 'Cr';
+  if(n >= 100000)   return '₹' + (n/100000).toFixed(1) + 'L';
+  return '₹' + Math.round(n).toLocaleString('en-IN');
+}
+
+function sipCorpus(monthly, rateAnnual, years) {
+  const r = rateAnnual / 12 / 100;
+  const n = years * 12;
+  return monthly * ((Math.pow(1+r, n) - 1) / r) * (1+r);
+}
+
+function lumpsumCorpus(amount, rateAnnual, years) {
+  return amount * Math.pow(1 + rateAnnual/100, years);
+}
+
+function stepupCorpus(monthly, rateAnnual, years, stepupPct) {
+  let corpus = 0;
+  const mr = rateAnnual / 12 / 100;
+  let current = monthly;
+  for (let y = 0; y < years; y++) {
+    if (y > 0) current *= (1 + stepupPct/100);
+    const n = (years - y) * 12;
+    corpus += current * ((Math.pow(1+mr, n) - 1) / mr) * (1+mr);
+  }
+  return corpus;
+}
+
+function stepupInvested(monthly, years, stepupPct) {
+  let total = 0, cur = monthly;
+  for (let y = 0; y < years; y++) {
+    if (y > 0) cur *= (1 + stepupPct/100);
+    total += cur * 12;
+  }
+  return total;
+}
+
+function calc() {
+  const rate = parseFloat(document.getElementById('sip-return').value) || 12;
+  const years = parseInt(document.getElementById('sip-years').value) || 10;
+  let corpus = 0, invested = 0;
+
+  if (mode === 'sip') {
+    const monthly = parseFloat(document.getElementById('sip-monthly').value) || 0;
+    corpus = sipCorpus(monthly, rate, years);
+    invested = monthly * years * 12;
+  } else if (mode === 'lumpsum') {
+    const amt = parseFloat(document.getElementById('lumpsum-amt').value) || 0;
+    corpus = lumpsumCorpus(amt, rate, years);
+    invested = amt;
+  } else {
+    const monthly = parseFloat(document.getElementById('stepup-monthly').value) || 0;
+    const sup = parseFloat(document.getElementById('stepup-pct').value) || 10;
+    corpus = stepupCorpus(monthly, rate, years, sup);
+    invested = stepupInvested(monthly, years, sup);
+  }
+
+  const returns = corpus - invested;
+  const pctInv = invested > 0 ? Math.round((invested/corpus)*100) : 50;
+
+  document.getElementById('res-corpus').textContent = fmt(corpus);
+  document.getElementById('res-invested').textContent = fmt(invested);
+  document.getElementById('res-returns').textContent = fmt(returns);
+  document.getElementById('res-mult').innerHTML = invested > 0 ? '<span style="color:var(--green);font-weight:800">' + (corpus/invested).toFixed(1) + 'x</span> your money' : '—';
+  document.getElementById('res-years').textContent = years;
+  document.getElementById('res-rate').textContent = rate;
+  document.getElementById('bar-inv').style.width = pctInv + '%';
+  document.getElementById('bar-ret').style.width = (100-pctInv) + '%';
+  document.getElementById('bar-pct').textContent = (100-pctInv) + '% returns';
+
+  // Comparison cards
+  [8, 12, 15].forEach(r => {
+    let c;
+    if (mode === 'sip') {
+      const m = parseFloat(document.getElementById('sip-monthly').value)||0;
+      c = sipCorpus(m, r, years);
+    } else if (mode === 'lumpsum') {
+      const a = parseFloat(document.getElementById('lumpsum-amt').value)||0;
+      c = lumpsumCorpus(a, r, years);
+    } else {
+      const m = parseFloat(document.getElementById('stepup-monthly').value)||0;
+      const sp = parseFloat(document.getElementById('stepup-pct').value)||10;
+      c = stepupCorpus(m, r, years, sp);
+    }
+    document.getElementById('cmp-'+r).textContent = fmtShort(c);
+  });
+
+  // Chart
+  updateChart(rate, years);
+
+  // Year table
+  buildYearTable(rate, years);
+}
+
+function buildYearTable(rate, totalYears) {
+  const monthly = mode==='sip' ? (parseFloat(document.getElementById('sip-monthly').value)||0) :
+                  mode==='lumpsum' ? 0 :
+                  (parseFloat(document.getElementById('stepup-monthly').value)||0);
+  const lumpAmt = mode==='lumpsum' ? (parseFloat(document.getElementById('lumpsum-amt').value)||0) : 0;
+  const sup = mode==='stepup' ? (parseFloat(document.getElementById('stepup-pct').value)||10) : 0;
+
+  let rows = '';
+  let cumInvested = lumpAmt;
+
+  for (let y = 1; y <= totalYears; y++) {
+    let corpusY = 0, invY = 0;
+
+    if (mode === 'lumpsum') {
+      corpusY = lumpsumCorpus(lumpAmt, rate, y);
+      invY = lumpAmt;
+    } else if (mode === 'sip') {
+      corpusY = sipCorpus(monthly, rate, y);
+      invY = monthly * y * 12;
+    } else {
+      corpusY = stepupCorpus(monthly, rate, y, sup);
+      invY = stepupInvested(monthly, y, sup);
+    }
+
+    const annualInv = mode==='lumpsum' ? (y===1?fmt(lumpAmt):'—') :
+                      mode==='sip' ? fmt(monthly*12) : fmt(monthly*Math.pow(1+sup/100,y-1)*12);
+    const returnsY = corpusY - invY;
+
+    rows += `<tr>
+      <td><strong>Year ${y}</strong></td>
+      <td>${annualInv}</td>
+      <td>${fmt(invY)}</td>
+      <td style="color:var(--green)">${fmt(returnsY)}</td>
+      <td class="corpus-cell">${fmt(corpusY)}</td>
+    </tr>`;
+  }
+  document.getElementById('year-table-body').innerHTML = rows;
+}
+
+// ── Chart ────────────────────────────────────────────────────────────────────
+let sipChart = null;
+
+function buildChartData(rate, totalYears) {
+  const monthly  = mode==='sip'     ? (parseFloat(document.getElementById('sip-monthly').value)||0)
+                 : mode==='lumpsum' ? 0
+                 : (parseFloat(document.getElementById('stepup-monthly').value)||0);
+  const lumpAmt  = mode==='lumpsum' ? (parseFloat(document.getElementById('lumpsum-amt').value)||0) : 0;
+  const sup      = mode==='stepup'  ? (parseFloat(document.getElementById('stepup-pct').value)||10) : 0;
+
+  const labels = [], invested = [], returns = [];
+  for (let y = 1; y <= totalYears; y++) {
+    let corpus = 0, inv = 0;
+    if (mode==='lumpsum') { corpus = lumpsumCorpus(lumpAmt, rate, y); inv = lumpAmt; }
+    else if (mode==='sip') { corpus = sipCorpus(monthly, rate, y); inv = monthly * y * 12; }
+    else { corpus = stepupCorpus(monthly, rate, y, sup); inv = stepupInvested(monthly, y, sup); }
+    labels.push('Yr ' + y);
+    invested.push(Math.round(inv));
+    returns.push(Math.round(corpus - inv));
+  }
+  return { labels, invested, returns };
+}
+
+function updateChart(rate, years) {
+  const { labels, invested, returns } = buildChartData(rate, years);
+  const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+  const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  const tickColor = isDark ? '#64748b' : '#94a3b8';
+
+  if (sipChart) {
+    sipChart.data.labels = labels;
+    sipChart.data.datasets[0].data = invested;
+    sipChart.data.datasets[1].data = returns;
+    sipChart.update('none');
+    return;
+  }
+
+  const ctx = document.getElementById('sip-chart');
+  if (!ctx) return;
+
+  sipChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Amount Invested',
+          data: invested,
+          backgroundColor: 'rgba(37,99,235,0.75)',
+          borderRadius: { topLeft: 0, topRight: 0, bottomLeft: 4, bottomRight: 4 },
+          borderSkipped: 'bottom',
+          stack: 's',
+        },
+        {
+          label: 'Returns Earned',
+          data: returns,
+          backgroundColor: 'rgba(22,163,74,0.8)',
+          borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 },
+          borderSkipped: 'bottom',
+          stack: 's',
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 400 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ' ' + ctx.dataset.label + ': ' + fmtShort(ctx.raw),
+            footer: items => {
+              const total = items.reduce((s, i) => s + i.raw, 0);
+              return 'Total corpus: ' + fmtShort(total);
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          stacked: true,
+          grid: { display: false },
+          ticks: { color: tickColor, font: { size: 10 }, maxTicksLimit: 10 },
+        },
+        y: {
+          stacked: true,
+          grid: { color: gridColor },
+          border: { dash: [4, 4] },
+          ticks: {
+            color: tickColor,
+            font: { size: 10 },
+            callback: v => fmtShort(v),
+          },
+        },
+      },
+    },
+  });
+}
+
+// Init
+calc();
+</script>
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-4837443132966026">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nifty 50 Companies List 2026 — All 50 Stocks with Market Cap, Weight & PE | WorthScale</title>
+<meta name="description" content="Complete Nifty 50 companies list 2026 — all 50 stocks with market cap, index weight, P/E ratio, and sector. Filter by sector, search by company, and sort by any column.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://worthscale.in/nifty-50">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Nifty 50 Companies List 2026","url":"https://worthscale.in/nifty-50","description":"All 50 Nifty companies with market cap, index weight, P/E ratio, and sector — sortable and filterable.","breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://worthscale.in/"},{"@type":"ListItem","position":2,"name":"Markets","item":"https://worthscale.in/markets"},{"@type":"ListItem","position":3,"name":"Nifty 50","item":"https://worthscale.in/nifty-50"}]}}
+</script>
+<link rel="stylesheet" href="/styles.css">
+<style>
+.page-hero{background:linear-gradient(135deg,#0f172a,#1e3a5f);padding:40px 0 32px;color:#fff}
+.page-hero h1{font-size:1.9rem;font-weight:800;color:#fff;margin-bottom:8px}
+.page-hero p{font-size:.92rem;color:#94a3b8;max-width:600px;line-height:1.7}
+.tool-badge{display:inline-block;background:rgba(74,222,128,.15);color:#4ade80;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;padding:4px 10px;border-radius:4px;margin-bottom:12px}
+.stats-bar{display:flex;gap:32px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap}
+.stat-item .si-n{font-size:1.35rem;font-weight:800;color:#60a5fa}
+.stat-item .si-l{font-size:.66rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+
+/* SEARCH + FILTER */
+.controls{display:flex;align-items:center;gap:12px;margin:24px 0 16px;flex-wrap:wrap}
+.search-box{flex:1;min-width:200px;max-width:320px;display:flex;align-items:center;border:1.5px solid var(--border);border-radius:9px;overflow:hidden;background:var(--card)}
+.search-box:focus-within{border-color:var(--blue)}
+.search-box input{border:none;outline:none;padding:9px 12px;font-size:.86rem;color:var(--text);width:100%;background:transparent;font-family:inherit}
+.search-box span{padding:0 12px;color:var(--muted);font-size:.9rem}
+.filter-pills{display:flex;gap:6px;flex-wrap:wrap}
+.filter-pill{padding:6px 14px;border-radius:20px;font-size:.74rem;font-weight:600;border:1.5px solid var(--border);background:var(--card);color:var(--text2);cursor:pointer;transition:all .15s;white-space:nowrap}
+.filter-pill:hover{border-color:var(--blue);color:var(--blue)}
+.filter-pill.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* TABLE */
+.n50-table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--border)}
+table.n50{width:100%;border-collapse:collapse;background:var(--card);font-size:.84rem}
+table.n50 th{background:var(--bg2);padding:11px 14px;text-align:left;font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);white-space:nowrap;border-bottom:2px solid var(--border);cursor:pointer;user-select:none;position:relative}
+table.n50 th:hover{color:var(--text)}
+table.n50 th.sort-asc::after{content:" ▲";font-size:.55rem}
+table.n50 th.sort-desc::after{content:" ▼";font-size:.55rem}
+table.n50 td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+table.n50 tr:last-child td{border-bottom:none}
+table.n50 tr:hover td{background:var(--bg2)}
+table.n50 tr.hidden{display:none}
+.rank-num{font-weight:800;color:var(--muted);font-size:.78rem}
+.co-name{font-weight:700;color:var(--text)}
+.co-ticker{font-size:.64rem;color:var(--muted)}
+.weight-bar-wrap{display:flex;align-items:center;gap:8px}
+.weight-bar{height:5px;background:var(--blue);border-radius:2px;min-width:2px}
+.weight-val{font-size:.8rem;font-weight:700;color:var(--text)}
+.mcap-val{font-weight:700;color:var(--text)}
+.pe-val{color:var(--text2)}
+.pe-high{color:var(--orange)}
+.pe-low{color:var(--green)}
+.sector-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.62rem;font-weight:700;white-space:nowrap}
+.chg-pos{color:var(--green);font-weight:700;font-size:.82rem}
+.chg-neg{color:var(--red);font-weight:700;font-size:.82rem}
+.no-results{text-align:center;padding:40px;color:var(--muted);font-size:.88rem}
+
+/* SECTOR TAGS */
+.s-banking{background:rgba(37,99,235,.1);color:#2563eb}
+.s-it{background:rgba(99,102,241,.1);color:#4f46e5}
+.s-energy{background:rgba(245,158,11,.1);color:#d97706}
+.s-fmcg{background:rgba(16,185,129,.1);color:#059669}
+.s-auto{background:rgba(239,68,68,.1);color:#dc2626}
+.s-pharma{background:rgba(139,92,246,.1);color:#7c3aed}
+.s-metals{background:rgba(100,116,139,.1);color:#475569}
+.s-infra{background:rgba(217,119,6,.1);color:#b45309}
+.s-consumer{background:rgba(236,72,153,.1);color:#db2777}
+.s-telecom{background:rgba(6,182,212,.1);color:#0891b2}
+.s-cement{background:rgba(161,161,170,.1);color:#71717a}
+.s-finance{background:rgba(52,211,153,.1);color:#059669}
+.s-healthcare{background:rgba(248,113,113,.1);color:#dc2626}
+.s-defense{background:rgba(75,85,99,.15);color:#374151}
+.s-tech{background:rgba(99,102,241,.08);color:#4f46e5}
+
+.result-count{font-size:.78rem;color:var(--muted);margin-left:auto}
+.disclaimer-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:13px 18px;font-size:.72rem;color:var(--text2);line-height:1.6;margin-top:14px}
+
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{padding:15px 0;font-weight:600;font-size:.9rem;cursor:pointer;color:var(--text);display:flex;justify-content:space-between;gap:12px}
+.faq-q::after{content:"+";font-size:1.1rem;color:var(--muted);flex-shrink:0}
+.faq-item.open .faq-q::after{content:"−"}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:14px}
+.faq-a p{font-size:.83rem;color:var(--text2);line-height:1.7;margin:0}
+
+@media(max-width:768px){.stats-bar{gap:16px}}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34VQNGQFDY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-34VQNGQFDY');</script>
+</head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo">⚖️ WorthScale</a>
+  <div class="nav-links">
+    <a href="/">Home</a><a href="/markets" class="active">Markets</a><a href="/companies">Companies</a><a href="/crypto">Crypto</a>
+    <div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Tools &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
+        <a href="/sip-calculator">📈 SIP Calculator</a>
+        <a href="/income-tax-calculator">🧾 Income Tax Calculator</a>
+        <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
+        <a href="/house-down-payment-calculator">&#127968; Down Payment Calculator</a>
+        <a href="/richest-indians">&#127942; India Rich List 2026</a>
+      </div>
+    </div>
+    <a href="/blog">Blog</a><a href="/about">About</a><a href="/contact">Contact</a>
+    <a href="/app" class="nav-cta">Open Dashboard</a>
+  </div>
+  <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
+</div></nav>
+
+<main>
+<section class="page-hero">
+<div class="container">
+  <div class="tool-badge">📊 Market Data</div>
+  <h1>Nifty 50 Companies List 2026</h1>
+  <p>All 50 companies in India's benchmark index — with market cap, index weight, P/E ratio, sector, and 52-week performance. Filter by sector or search by name.</p>
+  <div class="stats-bar">
+    <div class="stat-item"><div class="si-n">₹2.1 Lakh Cr</div><div class="si-l">Total Index Market Cap</div></div>
+    <div class="stat-item"><div class="si-n">50</div><div class="si-l">Companies</div></div>
+    <div class="stat-item"><div class="si-n">23x</div><div class="si-l">Avg Index P/E</div></div>
+    <div class="stat-item"><div class="si-n">~12%</div><div class="si-l">20-yr CAGR</div></div>
+  </div>
+  <div style="font-size:.72rem;color:#475569;margin-top:14px">
+    <a href="/" style="color:#64748b">Home</a> › <a href="/markets" style="color:#64748b">Markets</a> › Nifty 50
+  </div>
+</div>
+</section>
+
+<section style="padding:32px 0 56px">
+<div class="container">
+
+  <div class="controls">
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" id="search-input" placeholder="Search company or ticker..." oninput="filterTable()">
+    </div>
+    <div class="filter-pills">
+      <span class="filter-pill active" onclick="setFilter('all',this)">All 50</span>
+      <span class="filter-pill" onclick="setFilter('Banking',this)">🏦 Banking</span>
+      <span class="filter-pill" onclick="setFilter('IT',this)">💻 IT</span>
+      <span class="filter-pill" onclick="setFilter('Energy',this)">⚡ Energy</span>
+      <span class="filter-pill" onclick="setFilter('FMCG',this)">🛒 FMCG</span>
+      <span class="filter-pill" onclick="setFilter('Auto',this)">🚗 Auto</span>
+      <span class="filter-pill" onclick="setFilter('Pharma',this)">💊 Pharma</span>
+      <span class="filter-pill" onclick="setFilter('Metals',this)">🪨 Metals</span>
+    </div>
+    <span class="result-count" id="result-count">50 companies</span>
+  </div>
+
+  <div class="n50-table-wrap">
+    <table class="n50" id="n50-table">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">#</th>
+          <th onclick="sortTable(1)">Company</th>
+          <th onclick="sortTable(2)">Sector</th>
+          <th onclick="sortTable(3)">Nifty Weight</th>
+          <th onclick="sortTable(4)">Market Cap</th>
+          <th onclick="sortTable(5)">P/E Ratio</th>
+          <th onclick="sortTable(6)">52W Return</th>
+        </tr>
+      </thead>
+      <tbody id="n50-body">
+      </tbody>
+    </table>
+    <div class="no-results" id="no-results" style="display:none">No companies match your search.</div>
+  </div>
+  <div class="disclaimer-box">⚠️ <strong>Disclaimer:</strong> All data (market cap, P/E, weights, returns) are approximate reference figures for educational purposes only — not real-time or official NSE data. Nifty 50 constituents and weights change periodically. Visit <strong>nseindia.com</strong> for official, live index data. This is not investment advice.</div>
+
+  <!-- SECTOR BREAKDOWN -->
+  <div style="margin-top:36px">
+    <h2 style="font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:16px">Nifty 50 Sector Breakdown</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:1.2rem;font-weight:800;color:#2563eb">~30%</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:3px">Banking & Finance</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:1.2rem;font-weight:800;color:#4f46e5">~13%</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:3px">IT & Technology</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:1.2rem;font-weight:800;color:#d97706">~12%</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:3px">Energy & Oil</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:1.2rem;font-weight:800;color:#059669">~11%</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:3px">FMCG & Consumer</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:1.2rem;font-weight:800;color:#dc2626">~8%</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:3px">Automobile</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:1.2rem;font-weight:800;color:#475569">~8%</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:3px">Metals & Mining</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:1.2rem;font-weight:800;color:#7c3aed">~5%</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:3px">Pharma</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTOR PAGES -->
+  <div style="margin-top:28px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px">
+    <h3 style="font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:14px">🔍 Deep Dive by Sector — Top 10 Stocks + Long-Term View</h3>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="/sectors/it" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:.82rem;font-weight:600;color:var(--text2);text-decoration:none">💻 IT Stocks</a>
+      <a href="/sectors/banking" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:.82rem;font-weight:600;color:var(--text2);text-decoration:none">🏦 Banking Stocks</a>
+      <a href="/sectors/pharma" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:.82rem;font-weight:600;color:var(--text2);text-decoration:none">💊 Pharma Stocks</a>
+      <a href="/sectors/auto" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:.82rem;font-weight:600;color:var(--text2);text-decoration:none">🚗 Auto Stocks</a>
+      <a href="/sectors/fmcg" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:.82rem;font-weight:600;color:var(--text2);text-decoration:none">🛒 FMCG Stocks</a>
+      <a href="/sectors/energy" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:.82rem;font-weight:600;color:var(--text2);text-decoration:none">⚡ Energy Stocks</a>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="margin-top:36px" itemscope itemtype="https://schema.org/FAQPage">
+    <h2 style="font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:16px">Nifty 50 FAQs</h2>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">What is the Nifty 50 index?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">The Nifty 50 is India's benchmark stock market index, maintained by NSE (National Stock Exchange). It tracks the 50 largest and most liquid Indian companies by free-float market capitalisation. It represents about 65% of the total NSE listed market cap and is the most widely-followed measure of India's equity market performance. Most Indian index mutual funds and ETFs track the Nifty 50.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">What is the Nifty 50 historical return?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">The Nifty 50 Total Returns Index (including dividends) has delivered approximately 12–13% CAGR over the last 20 years (2004–2024). In some 10-year periods it delivered 15%+ CAGR; in others (like 2008–2018) it delivered 9–10%. The key insight: staying invested for 15+ years has historically never resulted in a negative return on the Nifty 50.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Which is the largest company in Nifty 50 by weight?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">HDFC Bank has the highest weight in the Nifty 50, typically between 12–14%, followed by Reliance Industries (~9–10%) and ICICI Bank (~7%). The top 5 companies together account for approximately 40–45% of the entire index — meaning the Nifty 50 is heavily concentrated in a few large companies.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">How are companies added to or removed from Nifty 50?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">NSE's Index Maintenance Sub-Committee (IMSC) reviews the Nifty 50 constituents semi-annually (typically in March and September). Companies are evaluated on free-float market cap, liquidity (daily turnover), listing history (minimum 6 months), and financial health. A company that falls below threshold rankings is replaced by the next eligible company. Recent additions include Zomato, Jio Financial Services, and BEL.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">How can I invest in the Nifty 50?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Three ways: (1) Nifty 50 Index Funds — mutual funds that mirror the index with very low expense ratios (0.1–0.2%). Popular ones: UTI Nifty 50, HDFC Index Fund Nifty 50, Nippon India Nifty 50. (2) Nifty ETFs — exchange-traded funds like Nifty BeES (Nippon) or HDFC Nifty 50 ETF, traded on NSE like stocks. (3) SIP into a Nifty 50 index fund — the most recommended approach for long-term wealth building. Use our <a href="/sip-calculator" style="color:var(--blue)">SIP calculator</a> to estimate corpus.</p></div>
+    </div>
+  </div>
+
+  <div style="margin-top:28px;background:linear-gradient(135deg,#1e40af,#1d4ed8);border-radius:18px;padding:36px;text-align:center;color:#fff">
+    <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:8px;color:#fff">Calculate how much a Nifty 50 SIP would grow</h3>
+    <p style="font-size:.85rem;opacity:.85;margin-bottom:18px;color:#fff">₹10,000/month SIP in a Nifty 50 index fund at 12% CAGR → ₹1 crore in ~17 years</p>
+    <a href="/sip-calculator" style="background:#fff;color:#1e40af;padding:12px 28px;border-radius:10px;font-weight:700;font-size:.92rem;text-decoration:none;display:inline-block">Open SIP Calculator →</a>
+  </div>
+
+</div>
+</section>
+</main>
+
+<footer class="site-footer"><div class="footer-inner footer-grid">
+  <div class="footer-about"><div class="footer-brand">⚖️ WorthScale</div><p class="footer-desc">India's free finance hub — market insights, company valuations, and financial calculators.</p></div>
+  <div class="footer-col"><h4>Calculators</h4><a href="/sip-calculator">SIP Calculator</a><a href="/income-tax-calculator">Income Tax Calculator</a><a href="/net-worth-calculator">Net Worth Calculator</a><a href="/emergency-fund-calculator">Emergency Fund</a></div>
+  <div class="footer-col"><h4>Markets</h4><a href="/nifty-50">Nifty 50</a><a href="/markets">Market Analysis</a><a href="/sectors/it">IT Sector</a><a href="/sectors/banking">Banking Sector</a></div>
+  <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/contact">Contact</a><a href="/privacy-policy">Privacy Policy</a></div>
+</div><div class="footer-bottom"><p>&copy; 2026 WorthScale. Reference data only — not official NSE data. Not investment advice.</p></div></footer>
+
+<script src="/nav.js"></script>
+<script>
+// All 50 Nifty companies data
+// Fields: [rank, name, ticker, sector, sectorKey, weight, mcap (cr), pe, w52change]
+const stocks = [
+  [1,"HDFC Bank","HDFCBANK","Banking","Banking",12.31,"12,50,000",17,"+11.4%","pos"],
+  [2,"Reliance Industries","RELIANCE","Energy","Energy",9.52,"19,50,000",24,"+12.6%","pos"],
+  [3,"ICICI Bank","ICICIBANK","Banking","Banking",7.15,"9,60,000",18,"+16.8%","pos"],
+  [4,"Infosys","INFY","IT","IT",6.38,"6,10,000",24,"+18.7%","pos"],
+  [5,"TCS","TCS","IT","IT",5.84,"14,50,000",29,"+14.2%","pos"],
+  [6,"Bharti Airtel","BHARTIARTL","Telecom","Telecom",4.12,"9,40,000",72,"+24.4%","pos"],
+  [7,"Larsen & Toubro","LT","Capital Goods","Infra",3.08,"4,80,000",34,"+8.6%","pos"],
+  [8,"ITC","ITC","FMCG","FMCG",3.21,"4,80,000",26,"+12.4%","pos"],
+  [9,"Kotak Mahindra Bank","KOTAKBANK","Banking","Banking",2.79,"3,80,000",20,"−8.4%","neg"],
+  [10,"Bajaj Finance","BAJFINANCE","Finance","Finance",2.58,"4,90,000",32,"+6.8%","pos"],
+  [11,"HUL","HINDUNILVR","FMCG","FMCG",2.42,"5,20,000",54,"−6.4%","neg"],
+  [12,"Mahindra & Mahindra","M&M","Auto","Auto",2.12,"3,50,000",31,"+34.2%","pos"],
+  [13,"HCL Technologies","HCLTECH","IT","IT",2.06,"4,30,000",27,"+9.5%","pos"],
+  [14,"State Bank of India","SBIN","Banking","Banking",2.48,"7,50,000",10,"+6.2%","pos"],
+  [15,"Axis Bank","AXISBANK","Banking","Banking",2.08,"3,50,000",13,"+8.7%","pos"],
+  [16,"Maruti Suzuki","MARUTI","Auto","Auto",1.88,"3,90,000",26,"+10.8%","pos"],
+  [17,"Sun Pharma","SUNPHARMA","Pharma","Pharma",1.82,"3,80,000",40,"+19.8%","pos"],
+  [18,"NTPC","NTPC","Energy","Energy",1.62,"3,40,000",16,"+14.8%","pos"],
+  [19,"Bajaj Auto","BAJAJ-AUTO","Auto","Auto",1.72,"3,00,000",28,"+14.6%","pos"],
+  [20,"Titan Company","TITAN","Consumer","Consumer",1.18,"3,20,000",82,"+12.4%","pos"],
+  [21,"UltraTech Cement","ULTRACEMCO","Cement","Cement",1.52,"3,30,000",34,"+6.4%","pos"],
+  [22,"Adani Enterprises","ADANIENT","Conglomerate","Energy",1.24,"3,20,000",82,"+18.6%","pos"],
+  [23,"ONGC","ONGC","Energy","Energy",1.52,"3,20,000",8,"−6.8%","neg"],
+  [24,"Power Grid","POWERGRID","Energy","Energy",1.34,"2,80,000",18,"+10.4%","pos"],
+  [25,"Wipro","WIPRO","IT","IT",1.24,"2,60,000",21,"−2.3%","neg"],
+  [26,"Asian Paints","ASIANPAINT","Chemicals","Consumer",1.18,"2,20,000",52,"−14.2%","neg"],
+  [27,"Nestle India","NESTLEIND","FMCG","FMCG",1.01,"2,10,000",64,"−11.4%","neg"],
+  [28,"Tata Motors","TATAMOTORS","Auto","Auto",1.19,"2,50,000",8,"−18.2%","neg"],
+  [29,"Coal India","COALINDIA","Energy","Energy",1.14,"2,40,000",9,"−12.4%","neg"],
+  [30,"JSW Steel","JSWSTEEL","Metals","Metals",0.86,"2,10,000",18,"+8.4%","pos"],
+  [31,"Adani Ports","ADANIPORTS","Infrastructure","Infra",0.82,"2,40,000",28,"+16.2%","pos"],
+  [32,"Zomato","ZOMATO","Consumer Tech","Tech",0.88,"2,40,000",92,"+38.4%","pos"],
+  [33,"Tech Mahindra","TECHM","IT","IT",0.72,"1,50,000",32,"+28.4%","pos"],
+  [34,"Eicher Motors","EICHERMOT","Auto","Auto",0.62,"1,30,000",32,"+18.4%","pos"],
+  [35,"Tata Steel","TATASTEEL","Metals","Metals",0.76,"1,70,000",22,"+4.2%","pos"],
+  [36,"Hindalco","HINDALCO","Metals","Metals",0.72,"1,50,000",14,"+12.8%","pos"],
+  [37,"Grasim Industries","GRASIM","Diversified","Infra",0.88,"1,60,000",18,"+6.4%","pos"],
+  [38,"Shriram Finance","SHRIRAMFIN","Finance","Finance",0.64,"1,20,000",14,"+22.4%","pos"],
+  [39,"LTIMindtree","LTIM","IT","IT",0.68,"1,40,000",34,"+22.1%","pos"],
+  [40,"Dr Reddy's","DRREDDY","Pharma","Pharma",0.58,"1,20,000",22,"+8.6%","pos"],
+  [41,"Apollo Hospitals","APOLLOHOSP","Healthcare","Healthcare",0.72,"1,70,000",82,"+28.4%","pos"],
+  [42,"Tata Consumer","TATACONSUM","FMCG","FMCG",0.48,"1,00,000",58,"+9.8%","pos"],
+  [43,"Bharat Electronics","BEL","Defense","Defense",0.58,"1,30,000",44,"+32.4%","pos"],
+  [44,"Cipla","CIPLA","Pharma","Pharma",0.46,"95,000",28,"+11.2%","pos"],
+  [45,"Divi's Labs","DIVISLAB","Pharma","Pharma",0.52,"1,10,000",55,"+34.6%","pos"],
+  [46,"IndusInd Bank","INDUSINDBK","Banking","Banking",0.42,"88,000",11,"−28.6%","neg"],
+  [47,"Jio Financial","JIOFIN","Finance","Finance",0.68,"1,50,000",38,"+18.2%","pos"],
+  [48,"Hero MotoCorp","HEROMOTOCO","Auto","Auto",0.48,"1,00,000",22,"−6.4%","neg"],
+  [49,"Vedanta","VEDL","Metals","Metals",0.34,"1,10,000",8,"+4.8%","pos"],
+  [50,"Bajaj Finserv","BAJAJFINSV","Finance","Finance",0.58,"1,40,000",26,"+8.6%","pos"]
+];
+
+let activeFilter = 'all';
+let sortCol = 0, sortDir = 1;
+
+function sectorClass(key) {
+  const map = {Banking:'s-banking',IT:'s-it',Energy:'s-energy',FMCG:'s-fmcg',Auto:'s-auto',Pharma:'s-pharma',Metals:'s-metals',Infra:'s-infra',Consumer:'s-consumer',Telecom:'s-telecom',Cement:'s-cement',Finance:'s-finance',Healthcare:'s-healthcare',Defense:'s-defense',Tech:'s-tech'};
+  return map[key] || 's-it';
+}
+
+function peClass(pe) {
+  if(pe < 15) return 'pe-low';
+  if(pe > 50) return 'pe-high';
+  return 'pe-val';
+}
+
+function weightBar(w) {
+  const maxW = 14;
+  const width = Math.max(4, Math.round((w / maxW) * 80));
+  return `<div class="weight-bar-wrap"><div class="weight-bar" style="width:${width}px"></div><span class="weight-val">${w}%</span></div>`;
+}
+
+function renderTable(data) {
+  const body = document.getElementById('n50-body');
+  body.innerHTML = data.map(s => `
+    <tr data-sector="${s[4]}">
+      <td class="rank-num">${s[0]}</td>
+      <td><div class="co-name">${s[1]}</div><div class="co-ticker">${s[2]}</div></td>
+      <td><span class="sector-tag ${sectorClass(s[4])}">${s[3]}</span></td>
+      <td>${weightBar(s[6])}</td>
+      <td class="mcap-val">₹${s[7]} Cr</td>
+      <td class="${peClass(s[8])}">${s[8]}x</td>
+      <td class="${s[9]==='pos'?'chg-pos':'chg-neg'}">${s[9]==='pos'?'▲':'▼'} ${s[9]==='pos'?s[10]:s[10].replace('−','')}</td>
+    </tr>
+  `).join('');
+}
+
+function filterTable() {
+  const query = document.getElementById('search-input').value.toLowerCase();
+  let filtered = stocks.filter(s => {
+    const matchSector = activeFilter === 'all' || s[4] === activeFilter;
+    const matchSearch = !query || s[1].toLowerCase().includes(query) || s[2].toLowerCase().includes(query) || s[3].toLowerCase().includes(query);
+    return matchSector && matchSearch;
+  });
+  renderTable(filtered);
+  document.getElementById('result-count').textContent = filtered.length + ' companies';
+  document.getElementById('no-results').style.display = filtered.length === 0 ? 'block' : 'none';
+  document.querySelector('.n50-table-wrap').style.display = filtered.length === 0 ? 'none' : '';
+}
+
+function setFilter(filter, btn) {
+  activeFilter = filter;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  filterTable();
+}
+
+function sortTable(col) {
+  if(sortCol === col) sortDir *= -1; else { sortCol = col; sortDir = 1; }
+  document.querySelectorAll('.n50 th').forEach((th,i) => {
+    th.classList.remove('sort-asc','sort-desc');
+    if(i===col) th.classList.add(sortDir===1?'sort-asc':'sort-desc');
+  });
+  stocks.sort((a,b) => {
+    let av = a[col], bv = b[col];
+    // For numeric columns
+    if(col === 0) { av = a[0]; bv = b[0]; }
+    if(col === 3) { av = parseFloat(a[6]); bv = parseFloat(b[6]); }
+    if(col === 4) { av = parseInt(a[7].replace(/,/g,'')); bv = parseInt(b[7].replace(/,/g,'')); }
+    if(col === 5) { av = a[8]; bv = b[8]; }
+    if(col === 6) { av = parseFloat(a[10].replace(/[^0-9.−-]/g,'').replace('−','-')); bv = parseFloat(b[10].replace(/[^0-9.−-]/g,'').replace('−','-')); }
+    if(col === 1) { av = a[1]; bv = b[1]; }
+    if(col === 2) { av = a[3]; bv = b[3]; }
+    if(typeof av === 'string') return av.localeCompare(bv) * sortDir;
+    return (av - bv) * sortDir;
+  });
+  filterTable();
+}
+
+renderTable(stocks);
+</script>
+</body>
+</html>

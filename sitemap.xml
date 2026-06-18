@@ -713,4 +713,38 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://worthscale.in/markets</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/companies</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/crypto</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/richest-indians</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url><loc>https://worthscale.in/sip-calculator</loc><lastmod>2026-06-14</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://worthscale.in/income-tax-calculator</loc><lastmod>2026-06-14</lastmod><changefreq>yearly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://worthscale.in/nifty-50</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://worthscale.in/sectors/it</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://worthscale.in/sectors/banking</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://worthscale.in/sectors/pharma</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://worthscale.in/sectors/auto</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://worthscale.in/sectors/fmcg</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://worthscale.in/sectors/energy</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
 </urlset>

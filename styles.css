@@ -289,3 +289,166 @@ ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;height:0!impor
   .calc-result-value{font-size:1.6rem}
   .container-sm{padding:0 16px}
 }
+
+/* ═══════════════════════════════════════════════════════════
+   ANIMATIONS & MICRO-INTERACTIONS
+   ═══════════════════════════════════════════════════════════ */
+
+/* Page fade-in */
+@keyframes ws-pageIn {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:none; }
+}
+body { animation: ws-pageIn 0.38s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* Scroll reveal base state */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1),
+              transform 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity:1; transform:none; }
+
+/* Grid stagger delays */
+.snap-grid .reveal:nth-child(2)  { transition-delay:.07s }
+.snap-grid .reveal:nth-child(3)  { transition-delay:.14s }
+.snap-grid .reveal:nth-child(4)  { transition-delay:.21s }
+
+.crypto-row .reveal:nth-child(2) { transition-delay:.07s }
+.crypto-row .reveal:nth-child(3) { transition-delay:.14s }
+.crypto-row .reveal:nth-child(4) { transition-delay:.21s }
+
+.reads-grid .reveal:nth-child(2) { transition-delay:.07s }
+.reads-grid .reveal:nth-child(3) { transition-delay:.14s }
+.reads-grid .reveal:nth-child(4) { transition-delay:.04s }
+.reads-grid .reveal:nth-child(5) { transition-delay:.11s }
+.reads-grid .reveal:nth-child(6) { transition-delay:.18s }
+
+.tools-grid .reveal:nth-child(2) { transition-delay:.07s }
+.tools-grid .reveal:nth-child(3) { transition-delay:.14s }
+
+.heatmap .reveal:nth-child(2)    { transition-delay:.05s }
+.heatmap .reveal:nth-child(3)    { transition-delay:.10s }
+.heatmap .reveal:nth-child(4)    { transition-delay:.15s }
+.heatmap .reveal:nth-child(5)    { transition-delay:.20s }
+.heatmap .reveal:nth-child(6)    { transition-delay:.25s }
+
+.lb-list .reveal:nth-child(2)    { transition-delay:.06s }
+.lb-list .reveal:nth-child(3)    { transition-delay:.12s }
+.lb-list .reveal:nth-child(4)    { transition-delay:.18s }
+.lb-list .reveal:nth-child(5)    { transition-delay:.24s }
+.lb-list .reveal:nth-child(6)    { transition-delay:.30s }
+
+/* Skeleton shimmer */
+@keyframes ws-shimmer {
+  0%   { background-position: -700px 0 }
+  100% { background-position:  700px 0 }
+}
+.skel {
+  background: linear-gradient(90deg, var(--border) 25%, var(--bg2) 50%, var(--border) 75%);
+  background-size: 1400px 100%;
+  animation: ws-shimmer 1.6s infinite linear;
+  border-radius: 6px;
+  color: transparent !important;
+  -webkit-user-select:none; user-select:none;
+  pointer-events: none;
+  display: inline-block;
+  min-width: 80px;
+  min-height: 1em;
+  vertical-align: middle;
+}
+
+/* ── Enhanced card hover micro-interactions ── */
+.snap-card {
+  transition: transform 0.24s cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 0.24s ease, border-color 0.24s ease !important;
+}
+.snap-card:hover {
+  transform: translateY(-5px) scale(1.015) !important;
+  box-shadow: 0 14px 36px rgba(0,0,0,.10) !important;
+  z-index: 1;
+}
+
+.lb-row {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+.lb-row:hover {
+  transform: translateX(5px) !important;
+}
+
+.coin-tile {
+  transition: transform 0.24s cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 0.24s ease, border-color 0.24s ease !important;
+}
+.coin-tile:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 14px 36px rgba(37,99,235,.13) !important;
+}
+
+.read-card {
+  transition: transform 0.24s cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 0.24s ease, border-color 0.24s ease !important;
+}
+.read-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 18px 44px rgba(37,99,235,.11) !important;
+}
+
+.tool-tile {
+  transition: transform 0.24s cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 0.24s ease, border-color 0.24s ease !important;
+}
+.tool-tile:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 18px 44px rgba(37,99,235,.11) !important;
+}
+
+.hm-cell {
+  transition: transform 0.24s cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 0.24s ease !important;
+}
+.hm-cell:hover {
+  transform: translateY(-5px) scale(1.05) !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,.13) !important;
+}
+
+.tr-pill {
+  transition: transform 0.18s ease, border-color 0.18s ease,
+              color 0.18s ease, background 0.18s ease !important;
+}
+.tr-pill:hover { transform: translateY(-2px) !important; }
+
+/* Skeleton overlay for snap-grid loading state */
+.snap-grid.loading .sn-val,
+.snap-grid.loading .sn-pts,
+.snap-grid.loading .sn-badge {
+  color: transparent !important;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.snap-grid.loading .sn-val::after,
+.snap-grid.loading .sn-pts::after,
+.snap-grid.loading .sn-badge::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--border) 25%, var(--bg2) 50%, var(--border) 75%);
+  background-size: 1400px 100%;
+  animation: ws-shimmer 1.6s infinite linear;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  .reveal { opacity:1; transform:none; transition:none; }
+  .snap-card, .lb-row, .coin-tile, .read-card,
+  .tool-tile, .hm-cell, .tr-pill {
+    transition: border-color 0.2s ease !important;
+  }
+  .snap-card:hover, .coin-tile:hover, .read-card:hover,
+  .tool-tile:hover, .hm-cell:hover, .tr-pill:hover { transform:none !important; }
+  .lb-row:hover { transform:none !important; }
+}

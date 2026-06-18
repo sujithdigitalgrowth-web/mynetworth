@@ -1,0 +1,98 @@
+// Vercel serverless function — fetches live market data and crypto prices.
+// CDN-cached for 5 minutes (s-maxage=300).
+
+const YF_SYMBOLS = [
+  '^NSEI',      // Nifty 50
+  '^BSESN',     // Sensex
+  '^NSEBANK',   // Bank Nifty
+  '^CNXIT',     // Nifty IT
+  '^NIFPHARMA', // Nifty Pharma
+  '^CNXAUTO',   // Nifty Auto
+  '^CNXFMCG',   // Nifty FMCG
+  '^CNXENERGY', // Nifty Energy
+  'USDINR=X',   // USD/INR
+  'GC=F',       // Gold futures (USD/troy oz)
+];
+
+const CG_IDS = 'bitcoin,ethereum,solana,binancecoin';
+
+// Troy oz → 10 grams conversion: 1 troy oz = 31.1035 g
+function goldPer10g(usdPerOz, usdinr) {
+  return Math.round((usdPerOz / 31.1035) * 10 * usdinr);
+}
+
+module.exports = async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=60');
+
+  try {
+    const [yfRes, cgRes] = await Promise.all([
+      fetch(
+        `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${YF_SYMBOLS.join(',')}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent`,
+        {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'application/json',
+          },
+          signal: AbortSignal.timeout(8000),
+        }
+      ),
+      fetch(
+        `https://api.coingecko.com/api/v3/simple/price?ids=${CG_IDS}&vs_currencies=usd,inr&include_24hr_change=true`,
+        {
+          headers: { 'Accept': 'application/json' },
+          signal: AbortSignal.timeout(8000),
+        }
+      ),
+    ]);
+
+    if (!yfRes.ok) throw new Error(`Market data source returned ${yfRes.status}`);
+    if (!cgRes.ok) throw new Error(`CoinGecko returned ${cgRes.status}`);
+
+    const [yfData, cgData] = await Promise.all([yfRes.json(), cgRes.json()]);
+
+    const q = {};
+    for (const item of yfData?.quoteResponse?.result ?? []) {
+      q[item.symbol] = {
+        price: item.regularMarketPrice,
+        change: item.regularMarketChange,
+        pct: item.regularMarketChangePercent,
+      };
+    }
+
+    const usdinr = q['USDINR=X']?.price ?? 83.5;
+    const goldUsdOz = q['GC=F']?.price;
+
+    const result = {
+      indices: {
+        nifty50:     q['^NSEI'],
+        sensex:      q['^BSESN'],
+        bankNifty:   q['^NSEBANK'],
+        niftyIT:     q['^CNXIT'],
+        niftyPharma: q['^NIFPHARMA'],
+        niftyAuto:   q['^CNXAUTO'],
+        niftyFMCG:   q['^CNXFMCG'],
+        niftyEnergy: q['^CNXENERGY'],
+      },
+      forex: {
+        usdinr: { price: usdinr, pct: q['USDINR=X']?.pct ?? 0 },
+      },
+      commodities: {
+        gold: goldUsdOz
+          ? { price10g: goldPer10g(goldUsdOz, usdinr), pct: q['GC=F']?.pct ?? 0 }
+          : null,
+      },
+      crypto: {
+        bitcoin:  cgData.bitcoin,
+        ethereum: cgData.ethereum,
+        solana:   cgData.solana,
+        bnb:      cgData.binancecoin,
+      },
+      updatedAt: Date.now(),
+    };
+
+    return res.json(result);
+  } catch (err) {
+    return res.status(502).json({ error: err.message });
+  }
+};

@@ -1,0 +1,646 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-adsense-account" content="ca-pub-4837443132966026">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Pulse — Indian Stock Market Insights | WorthScale</title>
+<meta name="description" content="Follow the Indian stock market with WorthScale. Track Nifty 50, Sensex, Bank Nifty, sector trends, and get plain-language analysis for Indian investors.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://worthscale.in/markets">
+<meta property="og:title" content="Market Pulse — Indian Stock Market Insights | WorthScale">
+<meta property="og:description" content="Nifty 50, Sensex, sector analysis, and company highlights — Indian markets explained simply for everyday investors.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://worthscale.in/markets">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Market Pulse — Indian Stock Market Insights","url":"https://worthscale.in/markets","description":"Indian stock market analysis covering Nifty 50, Sensex, sector trends, and company insights for retail investors.","isPartOf":{"@type":"WebSite","name":"WorthScale","url":"https://worthscale.in/"}}
+</script>
+<link rel="stylesheet" href="/styles.css">
+<style>
+/* === Page-specific styles === */
+
+/* Hero — dark command-center */
+.mkts-hero{background:#090f1d;padding:52px 0 44px;position:relative;overflow:hidden}
+.mkts-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 380px at 6% 60%,rgba(37,99,235,.22) 0%,transparent 65%),radial-gradient(ellipse 420px 300px at 88% 20%,rgba(16,185,129,.10) 0%,transparent 60%);animation:mkts-orb 16s ease-in-out infinite alternate;pointer-events:none}
+@keyframes mkts-orb{from{transform:translate(0,0)}to{transform:translate(18px,-12px)}}
+.mkts-hero-grid{display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:center;position:relative;z-index:1}
+.mkts-live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.22);color:#4ade80;font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:18px;text-transform:uppercase;letter-spacing:.5px}
+.mkts-live-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;animation:mdot 2s ease-in-out infinite}
+@keyframes mdot{0%,100%{opacity:1}50%{opacity:.3}}
+.mkts-hero h1{font-size:2.3rem;font-weight:800;line-height:1.2;margin-bottom:14px;color:#f1f5f9}
+.mkts-hero h1 .grad{background:linear-gradient(90deg,#4ade80,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.mkts-hero .hero-desc{font-size:.95rem;color:#94a3b8;line-height:1.65;margin-bottom:26px;max-width:400px}
+.mkts-hero .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hero-btn-p{background:#2563eb;color:#fff;font-size:.85rem;padding:10px 22px;border-radius:8px;font-weight:600;text-decoration:none;transition:background .2s}
+.hero-btn-p:hover{background:#1d4ed8;text-decoration:none;color:#fff}
+.hero-btn-g{background:rgba(255,255,255,.07);color:#cbd5e1;border:1px solid rgba(255,255,255,.14);font-size:.85rem;padding:10px 22px;border-radius:8px;font-weight:600;text-decoration:none;transition:all .2s}
+.hero-btn-g:hover{background:rgba(255,255,255,.13);color:#fff;text-decoration:none}
+
+/* Mini index cards inside hero */
+.mkts-hero-idx{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hic{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px}
+.hic-name{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#64748b;margin-bottom:4px}
+.hic-val{font-size:1.2rem;font-weight:800;color:#f1f5f9;line-height:1.1}
+.hic-chg{font-size:.68rem;font-weight:600;margin-top:4px}
+.hic-up{color:#4ade80}
+.hic-dn{color:#f87171}
+
+/* Index cards */
+.index-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.index-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 18px 18px 20px;text-align:left;box-shadow:0 1px 4px rgba(15,23,42,.04);position:relative;overflow:hidden}
+.index-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green);border-radius:14px 0 0 14px}
+.index-card .idx-name{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:6px}
+.index-card .idx-val{font-size:1.5rem;font-weight:800;color:var(--text);line-height:1.1}
+.index-card .idx-chg{font-size:.78rem;font-weight:600;margin-top:5px}
+.idx-up{color:var(--green)}
+.idx-dn{color:var(--red)}
+.index-card .idx-sub{font-size:.65rem;color:var(--muted);margin-top:4px}
+
+
+/* Sector grid */
+.sector-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+.sector-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 20px;transition:all .2s}
+.sector-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 4px 14px rgba(37,99,235,.10)}
+.sector-card h3{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.sector-card p{font-size:.8rem;color:var(--text2);line-height:1.55;margin:0}
+.sector-card .sc-tag{display:inline-block;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:2px 8px;border-radius:4px;margin-top:10px}
+.tag-bull{background:rgba(22,163,74,.1);color:var(--green)}
+.tag-watch{background:rgba(217,119,6,.1);color:var(--orange)}
+.tag-neutral{background:rgba(100,116,139,.1);color:var(--muted)}
+.sc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.sc-icon-wrap{font-size:1.5rem;flex-shrink:0}
+.sc-live{text-align:right;flex-shrink:0}
+.sc-idx{font-size:1.05rem;font-weight:800;color:var(--text);line-height:1.1}
+.sc-chg{font-size:.72rem;font-weight:700;margin-top:3px}
+.sc-up{color:var(--green)}
+.sc-dn{color:var(--red)}
+.sc-meta{display:flex;align-items:center;justify-content:space-between;margin-top:12px;flex-wrap:wrap;gap:6px}
+.sc-pe{font-size:.63rem;color:var(--muted);font-weight:600;background:var(--bg2);padding:2px 8px;border-radius:4px;border:1px solid var(--border)}
+.sc-perf-bar{height:3px;background:rgba(100,116,139,.12);border-radius:2px;margin-top:14px;overflow:hidden}
+.sc-perf-fill{height:100%;background:var(--green);border-radius:2px;transition:width .8s ease;width:0}
+.sc-perf-fill.fill-dn{background:var(--red)}
+
+/* What to watch grid */
+.watch-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:20px}
+.watch-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 20px}
+.wc-top{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.wc-icon{font-size:1.4rem;flex-shrink:0}
+.wc-badge{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:2px 8px;border-radius:4px}
+.wc-blue{background:rgba(37,99,235,.1);color:#3b82f6}
+.wc-orange{background:rgba(217,119,6,.1);color:#d97706}
+.wc-green{background:rgba(22,163,74,.1);color:var(--green)}
+.wc-purple{background:rgba(124,58,237,.1);color:#7c3aed}
+.wc-teal{background:rgba(20,184,166,.1);color:#0d9488}
+.watch-card h4{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:7px}
+.watch-card p{font-size:.8rem;color:var(--text2);line-height:1.6;margin:0}
+
+/* Company analysis cards */
+.company-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+.company-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 20px;text-decoration:none;display:block;transition:all .2s}
+.company-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 4px 14px rgba(37,99,235,.10);text-decoration:none}
+.company-card .cc-sector{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:8px}
+.company-card h3{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.company-card p{font-size:.78rem;color:var(--text2);line-height:1.5;margin:0}
+.company-card .cc-link{color:var(--blue);font-size:.78rem;font-weight:600;margin-top:12px;display:inline-block}
+
+/* Education cards */
+.edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:24px}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px}
+.edu-card h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:10px}
+.edu-card p{font-size:.82rem;color:var(--text2);line-height:1.65;margin:0}
+
+/* Section heading */
+.sec-hd{text-align:center;font-size:1.35rem;font-weight:700;margin-bottom:6px;color:var(--text)}
+.sec-sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:0}
+
+@media(max-width:960px){
+  .mkts-hero-grid{grid-template-columns:1fr;gap:28px}
+  .mkts-hero-idx{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:900px){
+  .index-grid{grid-template-columns:repeat(2,1fr)}
+  .sector-grid{grid-template-columns:repeat(2,1fr)}
+  .company-grid{grid-template-columns:repeat(2,1fr)}
+  .watch-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .mkts-hero{padding:36px 0 30px}
+  .mkts-hero h1{font-size:1.8rem}
+  .mkts-hero-idx{grid-template-columns:repeat(2,1fr)}
+  .index-grid{grid-template-columns:repeat(2,1fr)}
+  .sector-grid{grid-template-columns:1fr}
+  .company-grid{grid-template-columns:1fr}
+  .edu-grid{grid-template-columns:1fr}
+}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34VQNGQFDY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-34VQNGQFDY');
+</script>
+</head>
+<body>
+
+<nav class="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo">⚖️ WorthScale</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/markets" class="active">Markets</a>
+    <a href="/companies">Companies</a>
+    <a href="/crypto">Crypto</a>
+    <div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Tools &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
+        <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
+        <a href="/house-down-payment-calculator">&#127968; Down Payment Calculator</a>
+        <a href="/richest-indians">&#127942; India Rich List 2026</a>
+      </div>
+    </div>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/app" class="nav-cta">Open Dashboard</a>
+  </div>
+  <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
+</div></nav>
+
+<main>
+
+<!-- Hero -->
+<section class="mkts-hero">
+<div class="container">
+  <div class="mkts-hero-grid">
+    <div>
+      <div class="mkts-live-badge"><span class="mkts-live-dot"></span> Live Market Data</div>
+      <h1>India's Markets,<br><span class="grad">Live &amp; Explained</span></h1>
+      <p class="hero-desc">Track Nifty 50, Sensex, sector indices, Gold, and macro signals — all updated every 5 minutes from live sources.</p>
+      <div class="hero-btns">
+        <a href="#sectors" class="hero-btn-p">Explore Sectors ↓</a>
+        <a href="/app" class="hero-btn-g">Open Dashboard</a>
+      </div>
+    </div>
+    <div class="mkts-hero-idx">
+      <div class="hic">
+        <div class="hic-name">Nifty 50</div>
+        <div class="hic-val" id="hm-nifty50">24,502</div>
+        <div class="hic-chg hic-up" id="hmc-nifty50">▲ +0.42%</div>
+      </div>
+      <div class="hic">
+        <div class="hic-name">Sensex</div>
+        <div class="hic-val" id="hm-sensex">80,613</div>
+        <div class="hic-chg hic-up" id="hmc-sensex">▲ +0.38%</div>
+      </div>
+      <div class="hic">
+        <div class="hic-name">Bank Nifty</div>
+        <div class="hic-val" id="hm-banknifty">52,184</div>
+        <div class="hic-chg hic-dn" id="hmc-banknifty">▼ −0.12%</div>
+      </div>
+      <div class="hic">
+        <div class="hic-name">Nifty IT</div>
+        <div class="hic-val" id="hm-niftyit">35,720</div>
+        <div class="hic-chg hic-up" id="hmc-niftyit">▲ +1.04%</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Index Snapshot -->
+<section class="section" style="padding-top:0">
+<div class="container">
+  <h2 class="sec-hd">Key Indices at a Glance</h2>
+  <p class="sec-sub">India's major benchmark indices track the health of the stock market and economy.</p>
+  <div class="index-grid">
+    <div class="index-card">
+      <div class="idx-name">Nifty 50</div>
+      <div class="idx-val" id="mv-nifty50">24,502</div>
+      <div class="idx-chg" id="mc-nifty50" style="color:var(--green)">▲ +0.42% · India's top 50 large-cap stocks</div>
+      <div class="idx-sub">NSE flagship index</div>
+    </div>
+    <div class="index-card">
+      <div class="idx-name">Sensex</div>
+      <div class="idx-val" id="mv-sensex">80,613</div>
+      <div class="idx-chg" id="mc-sensex" style="color:var(--green)">▲ +0.38% · Top 30 BSE-listed companies</div>
+      <div class="idx-sub">BSE flagship index</div>
+    </div>
+    <div class="index-card">
+      <div class="idx-name">Bank Nifty</div>
+      <div class="idx-val" id="mv-banknifty">52,184</div>
+      <div class="idx-chg" id="mc-banknifty" style="color:var(--red)">▼ −0.12% · India's 12 largest banks</div>
+      <div class="idx-sub">Tracks banking sector health</div>
+    </div>
+    <div class="index-card">
+      <div class="idx-name">Nifty IT</div>
+      <div class="idx-val" id="mv-niftyit">35,720</div>
+      <div class="idx-chg" id="mc-niftyit" style="color:var(--green)">▲ +1.04% · Top IT companies on NSE</div>
+      <div class="idx-sub">Tech sector barometer</div>
+    </div>
+  </div>
+  <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:14px" id="mkts-updated">Live data · refreshes every 5 min</p>
+</div>
+</section>
+
+
+<!-- Sector Spotlight -->
+<section class="section" style="padding-top:8px">
+<div class="container">
+  <h2 class="sec-hd">Sector Spotlight</h2>
+  <p class="sec-sub">Each sector tells a different story. Here is what is shaping the six biggest themes in Indian markets.</p>
+  <div class="sector-grid" id="sectors">
+    <a href="/sectors/it" class="sector-card" style="text-decoration:none;display:block">
+      <div class="sc-header">
+        <div class="sc-icon-wrap">💻</div>
+        <div class="sc-live">
+          <div class="sc-idx" id="sci-it">35,720</div>
+          <div class="sc-chg sc-up" id="scc-it">▲ +1.04%</div>
+        </div>
+      </div>
+      <h3 style="margin-bottom:6px">IT &amp; Technology</h3>
+      <p>TCS, Infosys, Wipro navigating an AI-led services shift. US demand recovery and H-1B policy are key watch points.</p>
+      <div class="sc-meta">
+        <span class="sc-pe">P/E: 27–34x</span>
+        <span class="sc-tag tag-watch">Watch closely</span>
+      </div>
+      <div class="sc-perf-bar"><div class="sc-perf-fill" id="scb-it"></div></div>
+    </a>
+    <a href="/sectors/banking" class="sector-card" style="text-decoration:none;display:block">
+      <div class="sc-header">
+        <div class="sc-icon-wrap">🏦</div>
+        <div class="sc-live">
+          <div class="sc-idx" id="sci-banking">52,184</div>
+          <div class="sc-chg sc-dn" id="scc-banking">▼ −0.12%</div>
+        </div>
+      </div>
+      <h3 style="margin-bottom:6px">Banking &amp; Finance</h3>
+      <p>Strong credit growth and NPA cleanup done. RBI rate decisions directly shape NIMs and stock performance.</p>
+      <div class="sc-meta">
+        <span class="sc-pe">P/E: 10–16x</span>
+        <span class="sc-tag tag-bull">Long-term positive</span>
+      </div>
+      <div class="sc-perf-bar"><div class="sc-perf-fill fill-dn" id="scb-banking"></div></div>
+    </a>
+    <a href="/sectors/auto" class="sector-card" style="text-decoration:none;display:block">
+      <div class="sc-header">
+        <div class="sc-icon-wrap">🚗</div>
+        <div class="sc-live">
+          <div class="sc-idx" id="sci-auto">22,890</div>
+          <div class="sc-chg sc-up" id="scc-auto">▲ +0.51%</div>
+        </div>
+      </div>
+      <h3 style="margin-bottom:6px">Auto &amp; EV</h3>
+      <p>Maruti, Tata Motors, Bajaj investing in EVs. PLI scheme and domestic demand reshaping the sector's future.</p>
+      <div class="sc-meta">
+        <span class="sc-pe">P/E: 26–34x</span>
+        <span class="sc-tag tag-bull">Growth theme</span>
+      </div>
+      <div class="sc-perf-bar"><div class="sc-perf-fill" id="scb-auto"></div></div>
+    </a>
+    <a href="/sectors/pharma" class="sector-card" style="text-decoration:none;display:block">
+      <div class="sc-header">
+        <div class="sc-icon-wrap">💊</div>
+        <div class="sc-live">
+          <div class="sc-idx" id="sci-pharma">21,340</div>
+          <div class="sc-chg sc-up" id="scc-pharma">▲ +0.66%</div>
+        </div>
+      </div>
+      <h3 style="margin-bottom:6px">Pharma &amp; Healthcare</h3>
+      <p>India is the world's pharmacy. US/EU exports and domestic hospital expansion keep this defensively attractive.</p>
+      <div class="sc-meta">
+        <span class="sc-pe">P/E: 28–42x</span>
+        <span class="sc-tag tag-bull">Defensive buy</span>
+      </div>
+      <div class="sc-perf-bar"><div class="sc-perf-fill" id="scb-pharma"></div></div>
+    </a>
+    <a href="/sectors/fmcg" class="sector-card" style="text-decoration:none;display:block">
+      <div class="sc-header">
+        <div class="sc-icon-wrap">🛒</div>
+        <div class="sc-live">
+          <div class="sc-idx" id="sci-fmcg">57,120</div>
+          <div class="sc-chg sc-up" id="scc-fmcg">▲ +0.09%</div>
+        </div>
+      </div>
+      <h3 style="margin-bottom:6px">FMCG &amp; Consumer</h3>
+      <p>Rural demand recovery and urban consumption drive ITC, Nestle, HUL. Tracks India's income growth story closely.</p>
+      <div class="sc-meta">
+        <span class="sc-pe">P/E: 50–65x</span>
+        <span class="sc-tag tag-neutral">Steady compounder</span>
+      </div>
+      <div class="sc-perf-bar"><div class="sc-perf-fill" id="scb-fmcg"></div></div>
+    </a>
+    <a href="/sectors/energy" class="sector-card" style="text-decoration:none;display:block">
+      <div class="sc-header">
+        <div class="sc-icon-wrap">⚡</div>
+        <div class="sc-live">
+          <div class="sc-idx" id="sci-energy">38,450</div>
+          <div class="sc-chg sc-up" id="scc-energy">▲ +0.88%</div>
+        </div>
+      </div>
+      <h3 style="margin-bottom:6px">Energy &amp; Infrastructure</h3>
+      <p>Govt capex and renewable energy targets fuelling power, roads, and infra stocks. Adani and NTPC are key names.</p>
+      <div class="sc-meta">
+        <span class="sc-pe">P/E: 8–18x</span>
+        <span class="sc-tag tag-bull">Policy tailwind</span>
+      </div>
+      <div class="sc-perf-bar"><div class="sc-perf-fill" id="scb-energy"></div></div>
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- What to watch -->
+<section class="section" style="padding-top:8px">
+<div class="container container-sm">
+  <h2 class="sec-hd">What Investors Should Watch</h2>
+  <p class="sec-sub">Macro and market themes that matter most for Indian stock investors right now.</p>
+  <div class="watch-grid">
+    <div class="watch-card">
+      <div class="wc-top">
+        <span class="wc-icon">🏦</span>
+        <span class="wc-badge wc-blue">Monetary Policy</span>
+      </div>
+      <h4>RBI Monetary Policy</h4>
+      <p>Interest rate decisions by the Reserve Bank of India directly affect banking margins, home loan demand, and overall market sentiment. Rate cuts typically boost equities; rate hikes put pressure on valuations.</p>
+    </div>
+    <div class="watch-card">
+      <div class="wc-top">
+        <span class="wc-icon">🌊</span>
+        <span class="wc-badge wc-orange">Capital Flows</span>
+      </div>
+      <h4>FII and DII Flow Trends</h4>
+      <p>Foreign Institutional Investors (FII) and Domestic Institutional Investors (DII) are the two biggest market movers. When FIIs sell, DIIs (mutual funds, insurance companies) often absorb the pressure — and vice versa.</p>
+    </div>
+    <div class="watch-card">
+      <div class="wc-top">
+        <span class="wc-icon">💱</span>
+        <span class="wc-badge wc-teal">Currency</span>
+      </div>
+      <h4>US Dollar and INR Strength</h4>
+      <p>A weaker rupee benefits IT exporters and pharma companies (earnings in USD), but hurts importers and raises inflation risk. Watching the USD/INR rate is essential for sector rotation decisions.</p>
+    </div>
+    <div class="watch-card">
+      <div class="wc-top">
+        <span class="wc-icon">🏗️</span>
+        <span class="wc-badge wc-purple">Policy</span>
+      </div>
+      <h4>Government Capex and Budget Signals</h4>
+      <p>India's capital expenditure budget signals which sectors get policy priority. Infrastructure, defence, and renewable energy have been the big winners of recent budgets — and that shapes where money flows.</p>
+    </div>
+    <div class="watch-card">
+      <div class="wc-top">
+        <span class="wc-icon">📈</span>
+        <span class="wc-badge wc-green">Earnings</span>
+      </div>
+      <h4>Quarterly Earnings Season</h4>
+      <p>Every three months, listed companies report results. Strong revenue growth and margin expansion drive stock gains; disappointments cause sharp selloffs. The Q1 (Apr–Jun) and Q3 (Oct–Dec) results are especially watched.</p>
+    </div>
+    <div class="watch-card">
+      <div class="wc-top">
+        <span class="wc-icon">🌐</span>
+        <span class="wc-badge wc-teal">Global Cues</span>
+      </div>
+      <h4>US Fed and Global Markets</h4>
+      <p>US Federal Reserve rate decisions, crude oil price swings, and sharp moves in US/European markets ripple into Indian markets within hours. Tracking global cues helps anticipate opening-bell sentiment shifts.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Company Analysis -->
+<section class="section" style="padding-top:8px">
+<div class="container">
+  <h2 class="sec-hd">Indian Company Deep Dives</h2>
+  <p class="sec-sub">Understand the businesses that drive India's stock market — in plain language.</p>
+  <div class="company-grid">
+    <a href="/blog/reliance-net-worth" class="company-card">
+      <div class="cc-sector">Energy &amp; Telecom</div>
+      <h3>Reliance Industries</h3>
+      <p>India's largest company by market cap. From oil &amp; gas to Jio telecom and Reliance Retail — understand the conglomerate.</p>
+      <span class="cc-link">Read analysis →</span>
+    </a>
+    <a href="/blog/hdfc-net-worth" class="company-card">
+      <div class="cc-sector">Banking</div>
+      <h3>HDFC Bank</h3>
+      <p>India's largest private-sector bank by assets. Post-merger with HDFC Ltd, its loan book, NIMs, and deposit franchise explained.</p>
+      <span class="cc-link">Read analysis →</span>
+    </a>
+    <a href="/blog/icici-bank-net-worth" class="company-card">
+      <div class="cc-sector">Banking</div>
+      <h3>ICICI Bank</h3>
+      <p>India's second largest private bank with a strong retail focus. Key metrics, recent performance, and why it matters for investors.</p>
+      <span class="cc-link">Read analysis →</span>
+    </a>
+    <a href="/blog/itc-net-worth" class="company-card">
+      <div class="cc-sector">FMCG &amp; Consumer</div>
+      <h3>ITC Limited</h3>
+      <p>From cigarettes to biscuits to hotels. ITC's diversification strategy, dividend track record, and valuation story in one place.</p>
+      <span class="cc-link">Read analysis →</span>
+    </a>
+    <a href="/blog/asian-paints-net-worth" class="company-card">
+      <div class="cc-sector">Consumer</div>
+      <h3>Asian Paints</h3>
+      <p>India's largest decorative paint company. How it built a moat through distribution, brand equity, and backward integration.</p>
+      <span class="cc-link">Read analysis →</span>
+    </a>
+    <a href="/blog/maruti-suzuki-net-worth" class="company-card">
+      <div class="cc-sector">Auto</div>
+      <h3>Maruti Suzuki</h3>
+      <p>India's top passenger vehicle seller. Market share, EV transition plans, and how it stacks up in the changing auto landscape.</p>
+      <span class="cc-link">Read analysis →</span>
+    </a>
+  </div>
+  <div style="text-align:center;margin-top:22px">
+    <a href="/companies" class="btn btn-outline">View All Company Analyses</a>
+  </div>
+</div>
+</section>
+
+<!-- Market Education -->
+<section class="section" style="padding-top:8px">
+<div class="container">
+  <h2 class="sec-hd">Market Basics for Indian Investors</h2>
+  <p class="sec-sub">Not sure where to start? These explainers cover the concepts every investor should know.</p>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <h3>What is Nifty 50?</h3>
+      <p>The Nifty 50 is an index of 50 large-cap companies listed on the National Stock Exchange (NSE). It is rebalanced every six months. When people say "the market is up today," they almost always mean Nifty is up. It is the most-tracked benchmark for Indian equity performance.</p>
+    </div>
+    <div class="edu-card">
+      <h3>Sensex vs Nifty: What's the Difference?</h3>
+      <p>Both measure market performance, but Sensex tracks 30 companies on BSE while Nifty tracks 50 on NSE. NSE has higher trading volumes and is more used for derivatives. Most mutual funds benchmark against Nifty 50 or Nifty 500 rather than Sensex.</p>
+    </div>
+    <div class="edu-card">
+      <h3>SIP vs Lump Sum Investing</h3>
+      <p>A Systematic Investment Plan (SIP) means investing a fixed amount monthly — you benefit from rupee cost averaging and avoid timing the market. A lump sum is investing a large amount at once, which works well when markets are low. For most retail investors in India, SIP into a Nifty 50 index fund is the recommended starting point.</p>
+    </div>
+    <div class="edu-card">
+      <h3>What Moves Indian Markets?</h3>
+      <p>Indian markets are moved by: (1) RBI rate decisions, (2) quarterly earnings results, (3) FII/DII activity, (4) global cues (US Fed, crude oil prices), (5) government policy and budget announcements, and (6) domestic macro data like inflation, GDP growth, and GST collections. Understanding these drivers helps you interpret daily market moves.</p>
+    </div>
+    <div class="edu-card">
+      <h3>What is P/E Ratio and Why It Matters</h3>
+      <p>The Price-to-Earnings (P/E) ratio compares a stock's price to its annual earnings per share. A high P/E means investors expect high future growth; a low P/E may signal value or slow growth. Nifty's historical average P/E is around 20–22. When it goes above 25, markets are often considered expensive.</p>
+    </div>
+    <div class="edu-card">
+      <h3>How Do Index Funds Work?</h3>
+      <p>An index fund simply buys all stocks in an index in the same proportion. If Nifty 50 goes up 12%, a Nifty 50 index fund returns roughly 12% minus a small expense ratio. They are low-cost, tax-efficient, and outperform most actively managed funds over 10+ year horizons. SEBI data shows that most large-cap funds underperform the index after fees.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="padding-top:8px">
+<div class="container-sm">
+  <h2 class="sec-hd">Frequently Asked Questions</h2>
+  <div style="margin-top:20px" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">How do I start investing in the Indian stock market?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">You need a Demat and trading account. Open one with a SEBI-registered broker (Zerodha, Groww, Upstox, Angel One are popular choices). After KYC verification, you can start buying stocks or mutual funds. For beginners, starting with a Nifty 50 index fund via SIP is the simplest, lowest-risk entry point.</div></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">What time does the Indian stock market open?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">NSE and BSE are open Monday to Friday. Regular trading hours are 9:15 AM to 3:30 PM IST. A pre-market session runs from 9:00 AM to 9:15 AM for price discovery. Markets are closed on national holidays as declared by NSE/BSE each year.</div></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Is the stock market safe for long-term investing?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Over long periods (10+ years), equity markets have historically delivered real returns above inflation. The Nifty 50 has compounded at roughly 12–14% annually over the past 20 years. Short-term volatility is normal and expected. Investing in diversified index funds and holding for the long term reduces individual stock risk significantly.</div></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">What is the difference between NSE and BSE?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">NSE (National Stock Exchange) and BSE (Bombay Stock Exchange) are India's two main stock exchanges. BSE, founded in 1875, is the world's oldest in Asia. NSE, started in 1992, has higher trading volumes and is more popular for derivatives. Most stocks are listed on both exchanges and trade at nearly identical prices. Nifty 50 is NSE's benchmark; Sensex is BSE's.</div></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Does WorthScale provide live market data?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Yes. WorthScale displays live index prices refreshed automatically every 5 minutes. You can see live Nifty 50, Sensex, Bank Nifty, Nifty IT, sector indices, Gold prices, and USD/INR on this page. For tick-by-tick prices and order execution, use your broker app or NSE/BSE's official websites (nseindia.com, bseindia.com).</div></div>
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:var(--muted);text-align:center;margin-top:20px;line-height:1.6">WorthScale is an informational and educational platform. Nothing on this page is investment advice. Please consult a SEBI-registered financial advisor before making investment decisions.</p>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="padding-top:8px;padding-bottom:60px">
+<div class="container">
+  <div class="cta-banner">
+    <h3>Track your wealth alongside the markets</h3>
+    <p>Use WorthScale's free dashboard to log your portfolio, calculate your net worth, and plan your financial goals — all in one place.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="/app" class="btn btn-primary btn-lg" style="background:#fff;color:#1e40af;font-weight:700">Open Dashboard — Free →</a>
+      <a href="/net-worth-calculator" class="btn btn-lg" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.4)">Net Worth Calculator</a>
+    </div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<footer class="site-footer"><div class="footer-inner footer-grid">
+  <div class="footer-about">
+    <div class="footer-brand">⚖️ WorthScale</div>
+    <p class="footer-desc">Free personal finance platform for Indians. Track net worth, follow markets, and build wealth with simple tools.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Free Tools</h4>
+    <a href="/net-worth-calculator">Net Worth Calculator</a>
+    <a href="/emergency-fund-calculator">Emergency Fund Calculator</a>
+    <a href="/house-down-payment-calculator">Down Payment Calculator</a>
+    <a href="/app">Dashboard</a>
+  </div>
+  <div class="footer-col">
+    <h4>Explore</h4>
+    <a href="/markets">Market Pulse</a>
+    <a href="/companies">Company Spotlight</a>
+    <a href="/blog">All Articles</a>
+    <a href="/blog/how-to-calculate-net-worth">How to Calculate Net Worth</a>
+    <a href="/blog/net-worth-vs-salary">Net Worth vs Salary</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/about">About</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+    <a href="/sitemap">Sitemap</a>
+  </div>
+</div><div class="footer-bottom">
+  <p>&copy; 2026 WorthScale. All rights reserved. Built with &#10084;&#65039; in India.</p>
+</div></footer>
+
+<script src="/nav.js"></script>
+<script>
+function fmtNum(n, dec) {
+  if (n == null || isNaN(n)) return '--';
+  return n.toLocaleString('en-IN', { maximumFractionDigits: dec ?? 0, minimumFractionDigits: dec ?? 0 });
+}
+function arw(pct) { return (pct ?? 0) >= 0 ? '▲' : '▼'; }
+
+function setIdx(id, data) {
+  if (!data || data.price == null) return;
+  const up = (data.pct ?? 0) >= 0;
+  const chgText = arw(data.pct) + ' ' + (up ? '+' : '−') + Math.abs(data.pct ?? 0).toFixed(2) + '%';
+  // Index section cards
+  const val = document.getElementById('mv-' + id);
+  const chg = document.getElementById('mc-' + id);
+  if (val) val.textContent = fmtNum(data.price, 0);
+  if (chg) { chg.style.color = up ? 'var(--green)' : 'var(--red)'; chg.textContent = chgText; }
+  // Hero mini cards
+  const hv = document.getElementById('hm-' + id);
+  const hc = document.getElementById('hmc-' + id);
+  if (hv) hv.textContent = fmtNum(data.price, 0);
+  if (hc) { hc.className = up ? 'hic-chg hic-up' : 'hic-chg hic-dn'; hc.textContent = chgText; }
+}
+
+function setSector(id, data) {
+  if (!data || data.price == null) return;
+  const idx = document.getElementById('sci-' + id);
+  const chg = document.getElementById('scc-' + id);
+  if (!idx || !chg) return;
+  const up = (data.pct ?? 0) >= 0;
+  idx.textContent = fmtNum(data.price, 0);
+  chg.className = 'sc-chg ' + (up ? 'sc-up' : 'sc-dn');
+  chg.textContent = arw(data.pct) + ' ' + (up ? '+' : '−') + Math.abs(data.pct ?? 0).toFixed(2) + '%';
+  // Performance bar
+  const bar = document.getElementById('scb-' + id);
+  if (bar) {
+    const w = Math.min(Math.abs(data.pct ?? 0) / 3 * 100, 100);
+    bar.style.width = w + '%';
+    bar.className = 'sc-perf-fill' + (up ? '' : ' fill-dn');
+  }
+}
+
+async function loadMarketData() {
+  try {
+    const res = await fetch('/api/market-data');
+    if (!res.ok) return;
+    const d = await res.json();
+    if (d.error) return;
+    const ix = d.indices;
+
+    setIdx('nifty50',   ix.nifty50);
+    setIdx('sensex',    ix.sensex);
+    setIdx('banknifty', ix.bankNifty);
+    setIdx('niftyit',   ix.niftyIT);
+
+    setSector('it',      ix.niftyIT);
+    setSector('banking', ix.bankNifty);
+    setSector('auto',    ix.niftyAuto);
+    setSector('pharma',  ix.niftyPharma);
+    setSector('fmcg',    ix.niftyFMCG);
+    setSector('energy',  ix.niftyEnergy);
+
+    const el = document.getElementById('mkts-updated');
+    if (el && d.updatedAt) {
+      const t = new Date(d.updatedAt);
+      el.textContent = 'Live data · last updated ' + t.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+    }
+  } catch (e) {}
+}
+loadMarketData();
+</script>
+</body>
+</html>
