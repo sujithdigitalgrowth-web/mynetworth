@@ -163,7 +163,6 @@ table.n50 tr.hidden{display:none}
           <th onclick="sortTable(3)">Nifty Weight</th>
           <th onclick="sortTable(4)">Market Cap</th>
           <th onclick="sortTable(5)">P/E Ratio</th>
-          <th onclick="sortTable(6)">52W Return</th>
         </tr>
       </thead>
       <tbody id="n50-body">
@@ -350,7 +349,6 @@ function renderTable(data) {
       <td>${weightBar(s[6])}</td>
       <td class="mcap-val">₹${s[7]} Cr</td>
       <td class="${peClass(s[8])}">${s[8]}x</td>
-      <td class="${s[9]==='pos'?'chg-pos':'chg-neg'}">${s[9]==='pos'?'▲':'▼'} ${s[9]==='pos'?s[10]:s[10].replace('−','')}</td>
     </tr>
   `).join('');
 }
@@ -388,7 +386,6 @@ function sortTable(col) {
     if(col === 3) { av = parseFloat(a[6]); bv = parseFloat(b[6]); }
     if(col === 4) { av = parseInt(a[7].replace(/,/g,'')); bv = parseInt(b[7].replace(/,/g,'')); }
     if(col === 5) { av = a[8]; bv = b[8]; }
-    if(col === 6) { av = parseFloat(a[10].replace(/[^0-9.−-]/g,'').replace('−','-')); bv = parseFloat(b[10].replace(/[^0-9.−-]/g,'').replace('−','-')); }
     if(col === 1) { av = a[1]; bv = b[1]; }
     if(col === 2) { av = a[3]; bv = b[3]; }
     if(typeof av === 'string') return av.localeCompare(bv) * sortDir;
