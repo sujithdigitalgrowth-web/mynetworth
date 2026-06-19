@@ -68,6 +68,10 @@ tr:hover td{background:var(--bg2)}
 .faq-a p{font-size:.83rem;color:var(--text2);line-height:1.7;margin:0}
 .disclaimer{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:14px 18px;font-size:.72rem;color:var(--text2);line-height:1.6;margin-top:20px}
 @media(max-width:768px){.analysis-grid,.outlook-cols{grid-template-columns:1fr}.sh-stats{gap:20px}}
+
+.ltp-cell{min-width:88px}
+.ltp-v{font-weight:700;color:var(--text);font-size:.85rem}
+.ltp-c{font-size:.68rem;margin-top:1px;font-weight:600}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-34VQNGQFDY"></script>
@@ -120,19 +124,19 @@ tr:hover td{background:var(--bg2)}
   <div class="table-wrap">
     <table>
       <thead>
-        <tr><th>#</th><th>Company</th><th>Market Cap</th><th>P/E Ratio</th><th>Long-term View</th></tr>
+        <tr><th>#</th><th>Company</th><th>LTP</th><th>Market Cap</th><th>P/E Ratio</th><th>Long-term View</th></tr>
       </thead>
       <tbody>
-        <tr><td class="rank-cell">1</td><td class="company-cell"><div class="cn">Hindustan Unilever (HUL)</div><div class="ct">HINDUNILVR · NSE/BSE</div></td><td class="mcap-cell">₹5.2 L Cr</td><td class="pe-cell">54x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
-        <tr><td class="rank-cell">2</td><td class="company-cell"><div class="cn">ITC Limited</div><div class="ct">ITC · NSE/BSE</div></td><td class="mcap-cell">₹4.8 L Cr</td><td class="pe-cell">26x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">3</td><td class="company-cell"><div class="cn">Nestle India</div><div class="ct">NESTLEIND · NSE/BSE</div></td><td class="mcap-cell">₹2.1 L Cr</td><td class="pe-cell">64x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
-        <tr><td class="rank-cell">4</td><td class="company-cell"><div class="cn">Tata Consumer Products</div><div class="ct">TATACONSUM · NSE/BSE</div></td><td class="mcap-cell">₹1.0 L Cr</td><td class="pe-cell">58x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">5</td><td class="company-cell"><div class="cn">Godrej Consumer Products</div><div class="ct">GODREJCP · NSE/BSE</div></td><td class="mcap-cell">₹1.0 L Cr</td><td class="pe-cell">46x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">6</td><td class="company-cell"><div class="cn">Britannia Industries</div><div class="ct">BRITANNIA · NSE/BSE</div></td><td class="mcap-cell">₹1.1 L Cr</td><td class="pe-cell">48x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
-        <tr><td class="rank-cell">7</td><td class="company-cell"><div class="cn">Dabur India</div><div class="ct">DABUR · NSE/BSE</div></td><td class="mcap-cell">₹85,000 Cr</td><td class="pe-cell">44x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">8</td><td class="company-cell"><div class="cn">Marico</div><div class="ct">MARICO · NSE/BSE</div></td><td class="mcap-cell">₹80,000 Cr</td><td class="pe-cell">46x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">9</td><td class="company-cell"><div class="cn">Colgate-Palmolive India</div><div class="ct">COLPAL · NSE/BSE</div></td><td class="mcap-cell">₹60,000 Cr</td><td class="pe-cell">52x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
-        <tr><td class="rank-cell">10</td><td class="company-cell"><div class="cn">Emami</div><div class="ct">EMAMILTD · NSE/BSE</div></td><td class="mcap-cell">₹35,000 Cr</td><td class="pe-cell">38x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="HINDUNILVR"><td class="rank-cell">1</td><td class="company-cell"><div class="cn">Hindustan Unilever (HUL)</div><div class="ct">HINDUNILVR · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹5.2 L Cr</td><td class="pe-cell">54x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
+        <tr data-sym="ITC"><td class="rank-cell">2</td><td class="company-cell"><div class="cn">ITC Limited</div><div class="ct">ITC · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹4.8 L Cr</td><td class="pe-cell">26x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="NESTLEIND"><td class="rank-cell">3</td><td class="company-cell"><div class="cn">Nestle India</div><div class="ct">NESTLEIND · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹2.1 L Cr</td><td class="pe-cell">64x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
+        <tr data-sym="TATACONSUM"><td class="rank-cell">4</td><td class="company-cell"><div class="cn">Tata Consumer Products</div><div class="ct">TATACONSUM · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹1.0 L Cr</td><td class="pe-cell">58x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="GODREJCP"><td class="rank-cell">5</td><td class="company-cell"><div class="cn">Godrej Consumer Products</div><div class="ct">GODREJCP · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹1.0 L Cr</td><td class="pe-cell">46x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="BRITANNIA"><td class="rank-cell">6</td><td class="company-cell"><div class="cn">Britannia Industries</div><div class="ct">BRITANNIA · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹1.1 L Cr</td><td class="pe-cell">48x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
+        <tr data-sym="DABUR"><td class="rank-cell">7</td><td class="company-cell"><div class="cn">Dabur India</div><div class="ct">DABUR · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹85,000 Cr</td><td class="pe-cell">44x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="MARICO"><td class="rank-cell">8</td><td class="company-cell"><div class="cn">Marico</div><div class="ct">MARICO · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹80,000 Cr</td><td class="pe-cell">46x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="COLPAL"><td class="rank-cell">9</td><td class="company-cell"><div class="cn">Colgate-Palmolive India</div><div class="ct">COLPAL · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹60,000 Cr</td><td class="pe-cell">52x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
+        <tr data-sym="EMAMILTD"><td class="rank-cell">10</td><td class="company-cell"><div class="cn">Emami</div><div class="ct">EMAMILTD · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹35,000 Cr</td><td class="pe-cell">38x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -260,6 +264,20 @@ tr:hover td{background:var(--bg2)}
 </div><div class="footer-bottom"><p>&copy; 2026 WorthScale. Educational content only — not investment advice.</p></div></footer>
 <script src="/nav.js"></script>
 
+<script>
+fetch('/data/stocks.json').then(r=>r.json()).then(d=>{
+  document.querySelectorAll('tr[data-sym]').forEach(function(row){
+    var s=d.stocks&&d.stocks[row.dataset.sym];
+    if(!s)return;
+    var up=s.changePct>=0;
+    var price='₹'+Math.round(s.ltp).toLocaleString('en-IN');
+    var pct=(up?'+':'')+s.changePct+'%';
+    row.querySelector('.ltp-cell').innerHTML=
+      '<div class="ltp-v">'+price+'</div>'+
+      '<div class="ltp-c '+(up?'chg-pos':'chg-neg')+'">'+(up?'▲':'▼')+' '+pct+'</div>';
+  });
+}).catch(function(){});
+</script>
 </body>
 </html>
 

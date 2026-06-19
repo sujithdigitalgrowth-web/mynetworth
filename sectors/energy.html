@@ -68,6 +68,10 @@ tr:hover td{background:var(--bg2)}
 .faq-a p{font-size:.83rem;color:var(--text2);line-height:1.7;margin:0}
 .disclaimer{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:14px 18px;font-size:.72rem;color:var(--text2);line-height:1.6;margin-top:20px}
 @media(max-width:768px){.analysis-grid,.outlook-cols{grid-template-columns:1fr}.sh-stats{gap:20px}}
+
+.ltp-cell{min-width:88px}
+.ltp-v{font-weight:700;color:var(--text);font-size:.85rem}
+.ltp-c{font-size:.68rem;margin-top:1px;font-weight:600}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-34VQNGQFDY"></script>
@@ -120,19 +124,19 @@ tr:hover td{background:var(--bg2)}
   <div class="table-wrap">
     <table>
       <thead>
-        <tr><th>#</th><th>Company</th><th>Market Cap</th><th>P/E Ratio</th><th>Long-term View</th></tr>
+        <tr><th>#</th><th>Company</th><th>LTP</th><th>Market Cap</th><th>P/E Ratio</th><th>Long-term View</th></tr>
       </thead>
       <tbody>
-        <tr><td class="rank-cell">1</td><td class="company-cell"><div class="cn">Reliance Industries</div><div class="ct">RELIANCE · NSE/BSE</div></td><td class="mcap-cell">₹19.5 L Cr</td><td class="pe-cell">24x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">2</td><td class="company-cell"><div class="cn">NTPC</div><div class="ct">NTPC · NSE/BSE</div></td><td class="mcap-cell">₹3.4 L Cr</td><td class="pe-cell">16x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">3</td><td class="company-cell"><div class="cn">Power Grid Corporation</div><div class="ct">POWERGRID · NSE/BSE</div></td><td class="mcap-cell">₹2.8 L Cr</td><td class="pe-cell">18x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">4</td><td class="company-cell"><div class="cn">ONGC</div><div class="ct">ONGC · NSE/BSE</div></td><td class="mcap-cell">₹3.2 L Cr</td><td class="pe-cell">8x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
-        <tr><td class="rank-cell">5</td><td class="company-cell"><div class="cn">Coal India</div><div class="ct">COALINDIA · NSE/BSE</div></td><td class="mcap-cell">₹2.4 L Cr</td><td class="pe-cell">9x</td><td><span class="view-badge vb-caut">Cautious</span></td></tr>
-        <tr><td class="rank-cell">6</td><td class="company-cell"><div class="cn">Adani Green Energy</div><div class="ct">ADANIGREEN · NSE/BSE</div></td><td class="mcap-cell">₹2.4 L Cr</td><td class="pe-cell">172x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
-        <tr><td class="rank-cell">7</td><td class="company-cell"><div class="cn">Adani Power</div><div class="ct">ADANIPOWER · NSE/BSE</div></td><td class="mcap-cell">₹1.8 L Cr</td><td class="pe-cell">14x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
-        <tr><td class="rank-cell">8</td><td class="company-cell"><div class="cn">Indian Oil Corporation</div><div class="ct">IOC · NSE/BSE</div></td><td class="mcap-cell">₹1.6 L Cr</td><td class="pe-cell">6x</td><td><span class="view-badge vb-caut">Cautious</span></td></tr>
-        <tr><td class="rank-cell">9</td><td class="company-cell"><div class="cn">Tata Power</div><div class="ct">TATAPOWER · NSE/BSE</div></td><td class="mcap-cell">₹1.1 L Cr</td><td class="pe-cell">32x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">10</td><td class="company-cell"><div class="cn">BPCL</div><div class="ct">BPCL · NSE/BSE</div></td><td class="mcap-cell">₹1.1 L Cr</td><td class="pe-cell">7x</td><td><span class="view-badge vb-caut">Cautious</span></td></tr>
+        <tr data-sym="RELIANCE"><td class="rank-cell">1</td><td class="company-cell"><div class="cn">Reliance Industries</div><div class="ct">RELIANCE · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹19.5 L Cr</td><td class="pe-cell">24x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="NTPC"><td class="rank-cell">2</td><td class="company-cell"><div class="cn">NTPC</div><div class="ct">NTPC · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹3.4 L Cr</td><td class="pe-cell">16x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="POWERGRID"><td class="rank-cell">3</td><td class="company-cell"><div class="cn">Power Grid Corporation</div><div class="ct">POWERGRID · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹2.8 L Cr</td><td class="pe-cell">18x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="ONGC"><td class="rank-cell">4</td><td class="company-cell"><div class="cn">ONGC</div><div class="ct">ONGC · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹3.2 L Cr</td><td class="pe-cell">8x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
+        <tr data-sym="COALINDIA"><td class="rank-cell">5</td><td class="company-cell"><div class="cn">Coal India</div><div class="ct">COALINDIA · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹2.4 L Cr</td><td class="pe-cell">9x</td><td><span class="view-badge vb-caut">Cautious</span></td></tr>
+        <tr data-sym="ADANIGREEN"><td class="rank-cell">6</td><td class="company-cell"><div class="cn">Adani Green Energy</div><div class="ct">ADANIGREEN · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹2.4 L Cr</td><td class="pe-cell">172x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
+        <tr data-sym="ADANIPOWER"><td class="rank-cell">7</td><td class="company-cell"><div class="cn">Adani Power</div><div class="ct">ADANIPOWER · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹1.8 L Cr</td><td class="pe-cell">14x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
+        <tr data-sym="IOC"><td class="rank-cell">8</td><td class="company-cell"><div class="cn">Indian Oil Corporation</div><div class="ct">IOC · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹1.6 L Cr</td><td class="pe-cell">6x</td><td><span class="view-badge vb-caut">Cautious</span></td></tr>
+        <tr data-sym="TATAPOWER"><td class="rank-cell">9</td><td class="company-cell"><div class="cn">Tata Power</div><div class="ct">TATAPOWER · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹1.1 L Cr</td><td class="pe-cell">32x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="BPCL"><td class="rank-cell">10</td><td class="company-cell"><div class="cn">BPCL</div><div class="ct">BPCL · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹1.1 L Cr</td><td class="pe-cell">7x</td><td><span class="view-badge vb-caut">Cautious</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -260,6 +264,20 @@ tr:hover td{background:var(--bg2)}
 </div><div class="footer-bottom"><p>&copy; 2026 WorthScale. Educational content only — not investment advice.</p></div></footer>
 <script src="/nav.js"></script>
 
+<script>
+fetch('/data/stocks.json').then(r=>r.json()).then(d=>{
+  document.querySelectorAll('tr[data-sym]').forEach(function(row){
+    var s=d.stocks&&d.stocks[row.dataset.sym];
+    if(!s)return;
+    var up=s.changePct>=0;
+    var price='₹'+Math.round(s.ltp).toLocaleString('en-IN');
+    var pct=(up?'+':'')+s.changePct+'%';
+    row.querySelector('.ltp-cell').innerHTML=
+      '<div class="ltp-v">'+price+'</div>'+
+      '<div class="ltp-c '+(up?'chg-pos':'chg-neg')+'">'+(up?'▲':'▼')+' '+pct+'</div>';
+  });
+}).catch(function(){});
+</script>
 </body>
 </html>
 

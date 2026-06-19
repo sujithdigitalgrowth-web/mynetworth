@@ -80,6 +80,10 @@ tr:hover td{background:var(--bg2)}
 .faq-a p{font-size:.83rem;color:var(--text2);line-height:1.7;margin:0}
 .disclaimer{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:14px 18px;font-size:.72rem;color:var(--text2);line-height:1.6;margin-top:20px}
 @media(max-width:768px){.analysis-grid,.outlook-cols,.feat-grid{grid-template-columns:1fr}.sh-stats{gap:20px}}
+
+.ltp-cell{min-width:88px}
+.ltp-v{font-weight:700;color:var(--text);font-size:.85rem}
+.ltp-c{font-size:.68rem;margin-top:1px;font-weight:600}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-34VQNGQFDY"></script>
@@ -143,7 +147,7 @@ tr:hover td{background:var(--bg2)}
         <tr>
           <th>#</th>
           <th>Company</th>
-          <th>Market Cap</th>
+          <th>LTP</th><th>Market Cap</th>
           <th>P/E Ratio</th>
           
           
@@ -151,72 +155,82 @@ tr:hover td{background:var(--bg2)}
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr data-sym="HDFCBANK">
           <td class="rank-cell">1</td>
           <td class="company-cell"><div class="cn">HDFC Bank</div><div class="ct">HDFCBANK · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹12.5 L Cr</td>
           <td class="pe-cell">17x</td>
           <td><span class="view-badge vb-bull">Bullish</span></td>
         </tr>
-        <tr>
+        <tr data-sym="ICICIBANK">
           <td class="rank-cell">2</td>
           <td class="company-cell"><div class="cn">ICICI Bank</div><div class="ct">ICICIBANK · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹9.6 L Cr</td>
           <td class="pe-cell">18x</td>
           <td><span class="view-badge vb-bull">Bullish</span></td>
         </tr>
-        <tr>
+        <tr data-sym="SBIN">
           <td class="rank-cell">3</td>
           <td class="company-cell"><div class="cn">State Bank of India</div><div class="ct">SBIN · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹7.5 L Cr</td>
           <td class="pe-cell">10x</td>
           <td><span class="view-badge vb-hold">Hold</span></td>
         </tr>
-        <tr>
+        <tr data-sym="KOTAKBANK">
           <td class="rank-cell">4</td>
           <td class="company-cell"><div class="cn">Kotak Mahindra Bank</div><div class="ct">KOTAKBANK · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹3.8 L Cr</td>
           <td class="pe-cell">20x</td>
           <td><span class="view-badge vb-hold">Hold</span></td>
         </tr>
-        <tr>
+        <tr data-sym="AXISBANK">
           <td class="rank-cell">5</td>
           <td class="company-cell"><div class="cn">Axis Bank</div><div class="ct">AXISBANK · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹3.5 L Cr</td>
           <td class="pe-cell">13x</td>
           <td><span class="view-badge vb-bull">Bullish</span></td>
         </tr>
-        <tr>
+        <tr data-sym="BANKBARODA">
           <td class="rank-cell">6</td>
           <td class="company-cell"><div class="cn">Bank of Baroda</div><div class="ct">BANKBARODA · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹1.3 L Cr</td>
           <td class="pe-cell">7x</td>
           <td><span class="view-badge vb-hold">Hold</span></td>
         </tr>
-        <tr>
+        <tr data-sym="PNB">
           <td class="rank-cell">7</td>
           <td class="company-cell"><div class="cn">Punjab National Bank</div><div class="ct">PNB · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹1.1 L Cr</td>
           <td class="pe-cell">9x</td>
           <td><span class="view-badge vb-caut">Cautious</span></td>
         </tr>
-        <tr>
+        <tr data-sym="CANBK">
           <td class="rank-cell">8</td>
           <td class="company-cell"><div class="cn">Canara Bank</div><div class="ct">CANBK · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹98,000 Cr</td>
           <td class="pe-cell">8x</td>
           <td><span class="view-badge vb-caut">Cautious</span></td>
         </tr>
-        <tr>
+        <tr data-sym="INDUSINDBK">
           <td class="rank-cell">9</td>
           <td class="company-cell"><div class="cn">IndusInd Bank</div><div class="ct">INDUSINDBK · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹88,000 Cr</td>
           <td class="pe-cell">11x</td>
           <td><span class="view-badge vb-caut">Cautious</span></td>
         </tr>
-        <tr>
+        <tr data-sym="FEDERALBNK">
           <td class="rank-cell">10</td>
           <td class="company-cell"><div class="cn">Federal Bank</div><div class="ct">FEDERALBNK · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹52,000 Cr</td>
           <td class="pe-cell">12x</td>
           <td><span class="view-badge vb-bull">Bullish</span></td>
@@ -376,6 +390,20 @@ tr:hover td{background:var(--bg2)}
 </div><div class="footer-bottom"><p>&copy; 2026 WorthScale. Educational content only — not investment advice.</p></div></footer>
 <script src="/nav.js"></script>
 
+<script>
+fetch('/data/stocks.json').then(r=>r.json()).then(d=>{
+  document.querySelectorAll('tr[data-sym]').forEach(function(row){
+    var s=d.stocks&&d.stocks[row.dataset.sym];
+    if(!s)return;
+    var up=s.changePct>=0;
+    var price='₹'+Math.round(s.ltp).toLocaleString('en-IN');
+    var pct=(up?'+':'')+s.changePct+'%';
+    row.querySelector('.ltp-cell').innerHTML=
+      '<div class="ltp-v">'+price+'</div>'+
+      '<div class="ltp-c '+(up?'chg-pos':'chg-neg')+'">'+(up?'▲':'▼')+' '+pct+'</div>';
+  });
+}).catch(function(){});
+</script>
 </body>
 </html>
 

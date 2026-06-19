@@ -68,6 +68,10 @@ tr:hover td{background:var(--bg2)}
 .faq-a p{font-size:.83rem;color:var(--text2);line-height:1.7;margin:0}
 .disclaimer{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:14px 18px;font-size:.72rem;color:var(--text2);line-height:1.6;margin-top:20px}
 @media(max-width:768px){.analysis-grid,.outlook-cols{grid-template-columns:1fr}.sh-stats{gap:20px}}
+
+.ltp-cell{min-width:88px}
+.ltp-v{font-weight:700;color:var(--text);font-size:.85rem}
+.ltp-c{font-size:.68rem;margin-top:1px;font-weight:600}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-34VQNGQFDY"></script>
@@ -120,19 +124,19 @@ tr:hover td{background:var(--bg2)}
   <div class="table-wrap">
     <table>
       <thead>
-        <tr><th>#</th><th>Company</th><th>Market Cap</th><th>P/E Ratio</th><th>Long-term View</th></tr>
+        <tr><th>#</th><th>Company</th><th>LTP</th><th>Market Cap</th><th>P/E Ratio</th><th>Long-term View</th></tr>
       </thead>
       <tbody>
-        <tr><td class="rank-cell">1</td><td class="company-cell"><div class="cn">Sun Pharmaceutical</div><div class="ct">SUNPHARMA · NSE/BSE</div></td><td class="mcap-cell">₹3.8 L Cr</td><td class="pe-cell">40x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">2</td><td class="company-cell"><div class="cn">Dr Reddy's Laboratories</div><div class="ct">DRREDDY · NSE/BSE/NYSE</div></td><td class="mcap-cell">₹1.2 L Cr</td><td class="pe-cell">22x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">3</td><td class="company-cell"><div class="cn">Torrent Pharmaceuticals</div><div class="ct">TORNTPHARM · NSE/BSE</div></td><td class="mcap-cell">₹1.2 L Cr</td><td class="pe-cell">48x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">4</td><td class="company-cell"><div class="cn">Divi's Laboratories</div><div class="ct">DIVISLAB · NSE/BSE</div></td><td class="mcap-cell">₹1.1 L Cr</td><td class="pe-cell">55x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">5</td><td class="company-cell"><div class="cn">Cipla</div><div class="ct">CIPLA · NSE/BSE</div></td><td class="mcap-cell">₹95,000 Cr</td><td class="pe-cell">28x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">6</td><td class="company-cell"><div class="cn">Lupin</div><div class="ct">LUPIN · NSE/BSE</div></td><td class="mcap-cell">₹85,000 Cr</td><td class="pe-cell">32x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
-        <tr><td class="rank-cell">7</td><td class="company-cell"><div class="cn">Abbott India</div><div class="ct">ABBOTINDIA · NSE/BSE</div></td><td class="mcap-cell">₹68,000 Cr</td><td class="pe-cell">44x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
-        <tr><td class="rank-cell">8</td><td class="company-cell"><div class="cn">Aurobindo Pharma</div><div class="ct">AUROPHARMA · NSE/BSE</div></td><td class="mcap-cell">₹55,000 Cr</td><td class="pe-cell">18x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
-        <tr><td class="rank-cell">9</td><td class="company-cell"><div class="cn">Alkem Laboratories</div><div class="ct">ALKEM · NSE/BSE</div></td><td class="mcap-cell">₹55,000 Cr</td><td class="pe-cell">26x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
-        <tr><td class="rank-cell">10</td><td class="company-cell"><div class="cn">Ipca Laboratories</div><div class="ct">IPCALAB · NSE/BSE</div></td><td class="mcap-cell">₹35,000 Cr</td><td class="pe-cell">38x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="SUNPHARMA"><td class="rank-cell">1</td><td class="company-cell"><div class="cn">Sun Pharmaceutical</div><div class="ct">SUNPHARMA · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹3.8 L Cr</td><td class="pe-cell">40x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="DRREDDY"><td class="rank-cell">2</td><td class="company-cell"><div class="cn">Dr Reddy's Laboratories</div><div class="ct">DRREDDY · NSE/BSE/NYSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹1.2 L Cr</td><td class="pe-cell">22x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="TORNTPHARM"><td class="rank-cell">3</td><td class="company-cell"><div class="cn">Torrent Pharmaceuticals</div><div class="ct">TORNTPHARM · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹1.2 L Cr</td><td class="pe-cell">48x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="DIVISLAB"><td class="rank-cell">4</td><td class="company-cell"><div class="cn">Divi's Laboratories</div><div class="ct">DIVISLAB · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹1.1 L Cr</td><td class="pe-cell">55x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="CIPLA"><td class="rank-cell">5</td><td class="company-cell"><div class="cn">Cipla</div><div class="ct">CIPLA · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹95,000 Cr</td><td class="pe-cell">28x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="LUPIN"><td class="rank-cell">6</td><td class="company-cell"><div class="cn">Lupin</div><div class="ct">LUPIN · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹85,000 Cr</td><td class="pe-cell">32x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
+        <tr data-sym="ABBOTINDIA"><td class="rank-cell">7</td><td class="company-cell"><div class="cn">Abbott India</div><div class="ct">ABBOTINDIA · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹68,000 Cr</td><td class="pe-cell">44x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
+        <tr data-sym="AUROPHARMA"><td class="rank-cell">8</td><td class="company-cell"><div class="cn">Aurobindo Pharma</div><div class="ct">AUROPHARMA · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹55,000 Cr</td><td class="pe-cell">18x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
+        <tr data-sym="ALKEM"><td class="rank-cell">9</td><td class="company-cell"><div class="cn">Alkem Laboratories</div><div class="ct">ALKEM · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹55,000 Cr</td><td class="pe-cell">26x</td><td><span class="view-badge vb-hold">Hold</span></td></tr>
+        <tr data-sym="IPCALAB"><td class="rank-cell">10</td><td class="company-cell"><div class="cn">Ipca Laboratories</div><div class="ct">IPCALAB · NSE/BSE</div></td><td class="ltp-cell">—</td><td class="mcap-cell">₹35,000 Cr</td><td class="pe-cell">38x</td><td><span class="view-badge vb-bull">Bullish</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -260,6 +264,20 @@ tr:hover td{background:var(--bg2)}
 </div><div class="footer-bottom"><p>&copy; 2026 WorthScale. Educational content only — not investment advice.</p></div></footer>
 <script src="/nav.js"></script>
 
+<script>
+fetch('/data/stocks.json').then(r=>r.json()).then(d=>{
+  document.querySelectorAll('tr[data-sym]').forEach(function(row){
+    var s=d.stocks&&d.stocks[row.dataset.sym];
+    if(!s)return;
+    var up=s.changePct>=0;
+    var price='₹'+Math.round(s.ltp).toLocaleString('en-IN');
+    var pct=(up?'+':'')+s.changePct+'%';
+    row.querySelector('.ltp-cell').innerHTML=
+      '<div class="ltp-v">'+price+'</div>'+
+      '<div class="ltp-c '+(up?'chg-pos':'chg-neg')+'">'+(up?'▲':'▼')+' '+pct+'</div>';
+  });
+}).catch(function(){});
+</script>
 </body>
 </html>
 

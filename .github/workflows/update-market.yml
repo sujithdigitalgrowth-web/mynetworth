@@ -24,10 +24,13 @@ jobs:
       - name: Fetch market indices (NSE India archive CSV)
         run: node scripts/fetch-indices.js
 
+      - name: Fetch stock closing prices (NSE sec_bhavdata_full CSV)
+        run: node scripts/fetch-stocks.js
+
       - name: Commit and push updated data
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/market.json
+          git add data/market.json data/stocks.json
           git diff --staged --quiet || git commit -m "chore: market data $(date -u +'%Y-%m-%d')"
           git push

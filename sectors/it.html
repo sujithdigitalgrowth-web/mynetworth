@@ -95,6 +95,10 @@ tr:hover td{background:var(--bg2)}
   .analysis-grid,.outlook-cols,.feat-grid{grid-template-columns:1fr}
   .sh-stats{gap:20px}
 }
+
+.ltp-cell{min-width:88px}
+.ltp-v{font-weight:700;color:var(--text);font-size:.85rem}
+.ltp-c{font-size:.68rem;margin-top:1px;font-weight:600}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-34VQNGQFDY"></script>
@@ -159,7 +163,7 @@ tr:hover td{background:var(--bg2)}
         <tr>
           <th>#</th>
           <th>Company</th>
-          <th>Market Cap</th>
+          <th>LTP</th><th>Market Cap</th>
           <th>P/E Ratio</th>
           
           
@@ -167,72 +171,82 @@ tr:hover td{background:var(--bg2)}
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr data-sym="TCS">
           <td class="rank-cell">1</td>
           <td class="company-cell"><div class="cn">Tata Consultancy Services</div><div class="ct">TCS · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹14.5 L Cr</td>
           <td class="pe-cell">29x</td>
           <td><span class="view-badge vb-bull">Bullish</span></td>
         </tr>
-        <tr>
+        <tr data-sym="INFY">
           <td class="rank-cell">2</td>
           <td class="company-cell"><div class="cn">Infosys</div><div class="ct">INFY · NSE/BSE/NYSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹6.1 L Cr</td>
           <td class="pe-cell">24x</td>
           <td><span class="view-badge vb-bull">Bullish</span></td>
         </tr>
-        <tr>
+        <tr data-sym="HCLTECH">
           <td class="rank-cell">3</td>
           <td class="company-cell"><div class="cn">HCL Technologies</div><div class="ct">HCLTECH · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹4.3 L Cr</td>
           <td class="pe-cell">27x</td>
           <td><span class="view-badge vb-bull">Bullish</span></td>
         </tr>
-        <tr>
+        <tr data-sym="WIPRO">
           <td class="rank-cell">4</td>
           <td class="company-cell"><div class="cn">Wipro</div><div class="ct">WIPRO · NSE/BSE/NYSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹2.6 L Cr</td>
           <td class="pe-cell">21x</td>
           <td><span class="view-badge vb-hold">Hold</span></td>
         </tr>
-        <tr>
+        <tr data-sym="LTIM">
           <td class="rank-cell">5</td>
           <td class="company-cell"><div class="cn">LTIMindtree</div><div class="ct">LTIM · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹1.4 L Cr</td>
           <td class="pe-cell">34x</td>
           <td><span class="view-badge vb-bull">Bullish</span></td>
         </tr>
-        <tr>
+        <tr data-sym="TECHM">
           <td class="rank-cell">6</td>
           <td class="company-cell"><div class="cn">Tech Mahindra</div><div class="ct">TECHM · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹1.5 L Cr</td>
           <td class="pe-cell">32x</td>
           <td><span class="view-badge vb-bull">Bullish</span></td>
         </tr>
-        <tr>
+        <tr data-sym="PERSISTENT">
           <td class="rank-cell">7</td>
           <td class="company-cell"><div class="cn">Persistent Systems</div><div class="ct">PERSISTENT · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹95,000 Cr</td>
           <td class="pe-cell">58x</td>
           <td><span class="view-badge vb-bull">Bullish</span></td>
         </tr>
-        <tr>
+        <tr data-sym="MPHASIS">
           <td class="rank-cell">8</td>
           <td class="company-cell"><div class="cn">Mphasis</div><div class="ct">MPHASIS · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹45,000 Cr</td>
           <td class="pe-cell">31x</td>
           <td><span class="view-badge vb-hold">Hold</span></td>
         </tr>
-        <tr>
+        <tr data-sym="COFORGE">
           <td class="rank-cell">9</td>
           <td class="company-cell"><div class="cn">Coforge</div><div class="ct">COFORGE · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹40,000 Cr</td>
           <td class="pe-cell">43x</td>
           <td><span class="view-badge vb-bull">Bullish</span></td>
         </tr>
-        <tr>
+        <tr data-sym="HEXAWARE">
           <td class="rank-cell">10</td>
           <td class="company-cell"><div class="cn">Hexaware Technologies</div><div class="ct">HEXAWARE · NSE/BSE</div></td>
+          <td class="ltp-cell">—</td>
           <td class="mcap-cell">₹38,000 Cr</td>
           <td class="pe-cell">38x</td>
           <td><span class="view-badge vb-hold">Hold</span></td>
@@ -407,6 +421,20 @@ tr:hover td{background:var(--bg2)}
 </div><div class="footer-bottom"><p>&copy; 2026 WorthScale. Educational content only — not investment advice.</p></div></footer>
 <script src="/nav.js"></script>
 
+<script>
+fetch('/data/stocks.json').then(r=>r.json()).then(d=>{
+  document.querySelectorAll('tr[data-sym]').forEach(function(row){
+    var s=d.stocks&&d.stocks[row.dataset.sym];
+    if(!s)return;
+    var up=s.changePct>=0;
+    var price='₹'+Math.round(s.ltp).toLocaleString('en-IN');
+    var pct=(up?'+':'')+s.changePct+'%';
+    row.querySelector('.ltp-cell').innerHTML=
+      '<div class="ltp-v">'+price+'</div>'+
+      '<div class="ltp-c '+(up?'chg-pos':'chg-neg')+'">'+(up?'▲':'▼')+' '+pct+'</div>';
+  });
+}).catch(function(){});
+</script>
 </body>
 </html>
 
