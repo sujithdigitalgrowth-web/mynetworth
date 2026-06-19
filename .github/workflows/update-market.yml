@@ -1,0 +1,34 @@
+name: Update Market Data
+
+on:
+  schedule:
+    # 4:00 PM IST = 10:30 UTC — runs after NSE closes at 3:30 PM IST, Mon–Fri
+    - cron: '30 10 * * 1-5'
+  workflow_dispatch: # allow manual trigger from GitHub Actions tab
+
+jobs:
+  update-market:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to commit data/market.json back to the repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch market indices from Yahoo Finance
+        run: node scripts/fetch-indices.js
+
+      - name: Commit and push updated data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/market.json
+          # Only commit if data actually changed
+          git diff --staged --quiet || git commit -m "chore: market data $(date -u +'%Y-%m-%d')"
+          git push

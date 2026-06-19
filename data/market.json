@@ -1,0 +1,15 @@
+{
+  "updated": "2026-06-19",
+  "indices": {
+    "nifty50":     { "label": "Nifty 50",        "value": 24502,  "change": 102,   "changePct": 0.42  },
+    "sensex":      { "label": "Sensex",           "value": 80613,  "change": 304,   "changePct": 0.38  },
+    "banknifty":   { "label": "Bank Nifty",       "value": 52184,  "change": -63,   "changePct": -0.12 },
+    "niftyit":     { "label": "Nifty IT",         "value": 35720,  "change": 369,   "changePct": 1.04  },
+    "niftymidcap": { "label": "Nifty Midcap 100", "value": 54180,  "change": 352,   "changePct": 0.65  },
+    "niftyauto":   { "label": "Nifty Auto",       "value": 24618,  "change": 134,   "changePct": 0.55  },
+    "niftypharma": { "label": "Nifty Pharma",     "value": 22108,  "change": -27,   "changePct": -0.12 },
+    "indiavix":    { "label": "India VIX",        "value": 13.24,  "change": -0.62, "changePct": -4.47 },
+    "niftyfmcg":   { "label": "Nifty FMCG",       "value": 19842,  "change": 55,    "changePct": 0.28  },
+    "niftyenergy": { "label": "Nifty Energy",     "value": 40524,  "change": 289,   "changePct": 0.72  }
+  }
+}

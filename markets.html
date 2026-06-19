@@ -23,7 +23,7 @@
 .mkts-hero{background:#090f1d;padding:52px 0 44px;position:relative;overflow:hidden}
 .mkts-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 380px at 6% 60%,rgba(37,99,235,.22) 0%,transparent 65%),radial-gradient(ellipse 420px 300px at 88% 20%,rgba(16,185,129,.10) 0%,transparent 60%);animation:mkts-orb 16s ease-in-out infinite alternate;pointer-events:none}
 @keyframes mkts-orb{from{transform:translate(0,0)}to{transform:translate(18px,-12px)}}
-.mkts-hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;position:relative;z-index:1;max-width:680px}
+.mkts-hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center;position:relative;z-index:1}
 .mkts-live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.22);color:#4ade80;font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:18px;text-transform:uppercase;letter-spacing:.5px}
 .mkts-live-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;animation:mdot 2s ease-in-out infinite}
 @keyframes mdot{0%,100%{opacity:1}50%{opacity:.3}}
@@ -38,17 +38,18 @@
 
 /* Mini index cards inside hero */
 .mkts-hero-idx{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.hic{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px}
-.hic-name{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#64748b;margin-bottom:4px}
-.hic-val{font-size:1.2rem;font-weight:800;color:#f1f5f9;line-height:1.1}
-.hic-chg{font-size:.68rem;font-weight:600;margin-top:4px}
+.hic{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:18px 16px}
+.hic-name{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#64748b;margin-bottom:6px}
+.hic-val{font-size:1.45rem;font-weight:800;color:#f1f5f9;line-height:1.1;letter-spacing:-.3px}
+.hic-chg{font-size:.72rem;font-weight:600;margin-top:5px}
 .hic-up{color:#4ade80}
 .hic-dn{color:#f87171}
 
 /* Index cards */
 .index-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
 .index-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 18px 18px 20px;text-align:left;box-shadow:0 1px 4px rgba(15,23,42,.04);position:relative;overflow:hidden}
-.index-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green);border-radius:14px 0 0 14px}
+.index-card{--ic-color:var(--green)}
+.index-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ic-color);border-radius:14px 0 0 14px}
 .index-card .idx-name{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:6px}
 .index-card .idx-val{font-size:1.5rem;font-weight:800;color:var(--text);line-height:1.1}
 .index-card .idx-chg{font-size:.78rem;font-weight:600;margin-top:5px}
@@ -113,9 +114,9 @@
 .sec-hd{text-align:center;font-size:1.35rem;font-weight:700;margin-bottom:6px;color:var(--text)}
 .sec-sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:0}
 
-@media(max-width:960px){
+@media(max-width:768px){
   .mkts-hero-grid{grid-template-columns:1fr;gap:28px}
-  .mkts-hero-idx{grid-template-columns:repeat(4,1fr)}
+  .mkts-hero-idx{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:900px){
   .index-grid{grid-template-columns:repeat(2,1fr)}
@@ -184,11 +185,100 @@
         <a href="/app" class="hero-btn-g">Open Dashboard</a>
       </div>
     </div>
+    <div class="mkts-hero-idx">
+      <div class="hic" data-idx="nifty50">
+        <div class="hic-name">Nifty 50</div>
+        <div class="hic-val">24,502</div>
+        <div class="hic-chg hic-up">▲ +102 pts &nbsp;(+0.42%)</div>
+      </div>
+      <div class="hic" data-idx="sensex">
+        <div class="hic-name">Sensex</div>
+        <div class="hic-val">80,613</div>
+        <div class="hic-chg hic-up">▲ +304 pts &nbsp;(+0.38%)</div>
+      </div>
+      <div class="hic" data-idx="banknifty">
+        <div class="hic-name">Bank Nifty</div>
+        <div class="hic-val">52,184</div>
+        <div class="hic-chg hic-dn">▼ -63 pts &nbsp;(-0.12%)</div>
+      </div>
+      <div class="hic" data-idx="niftyit">
+        <div class="hic-name">Nifty IT</div>
+        <div class="hic-val">35,720</div>
+        <div class="hic-chg hic-up">▲ +369 pts &nbsp;(+1.04%)</div>
+      </div>
+    </div>
   </div>
 </div>
 </section>
 
 
+
+<!-- Index Dashboard -->
+<section class="section" style="padding-top:40px;padding-bottom:8px">
+<div class="container">
+  <h2 class="sec-hd">Indian Market Indices</h2>
+  <p class="sec-sub">End-of-day closing values &middot; NSE &amp; BSE &middot; Last updated 19 Jun 2026</p>
+  <div class="index-grid">
+
+    <div class="index-card" data-idx="nifty50">
+      <div class="idx-name">Nifty 50</div>
+      <div class="idx-val">24,502</div>
+      <div class="idx-chg idx-up">▲ +102 pts &nbsp;(+0.42%)</div>
+      <div class="idx-sub">NSE · 50 large-cap stocks</div>
+    </div>
+
+    <div class="index-card" data-idx="sensex">
+      <div class="idx-name">Sensex</div>
+      <div class="idx-val">80,613</div>
+      <div class="idx-chg idx-up">▲ +304 pts &nbsp;(+0.38%)</div>
+      <div class="idx-sub">BSE · 30 blue-chip stocks</div>
+    </div>
+
+    <div class="index-card" data-idx="banknifty" style="--ic-color:var(--red)">
+      <div class="idx-name">Bank Nifty</div>
+      <div class="idx-val">52,184</div>
+      <div class="idx-chg idx-dn">▼ -63 pts &nbsp;(-0.12%)</div>
+      <div class="idx-sub">NSE · Banking sector</div>
+    </div>
+
+    <div class="index-card" data-idx="niftyit">
+      <div class="idx-name">Nifty IT</div>
+      <div class="idx-val">35,720</div>
+      <div class="idx-chg idx-up">▲ +369 pts &nbsp;(+1.04%)</div>
+      <div class="idx-sub">NSE · Technology sector</div>
+    </div>
+
+    <div class="index-card" data-idx="niftymidcap">
+      <div class="idx-name">Nifty Midcap 100</div>
+      <div class="idx-val">54,180</div>
+      <div class="idx-chg idx-up">▲ +352 pts &nbsp;(+0.65%)</div>
+      <div class="idx-sub">NSE · Mid-cap companies</div>
+    </div>
+
+    <div class="index-card" data-idx="niftyauto">
+      <div class="idx-name">Nifty Auto</div>
+      <div class="idx-val">24,618</div>
+      <div class="idx-chg idx-up">▲ +134 pts &nbsp;(+0.55%)</div>
+      <div class="idx-sub">NSE · Auto &amp; EV sector</div>
+    </div>
+
+    <div class="index-card" data-idx="niftypharma" style="--ic-color:var(--red)">
+      <div class="idx-name">Nifty Pharma</div>
+      <div class="idx-val">22,108</div>
+      <div class="idx-chg idx-dn">▼ -27 pts &nbsp;(-0.12%)</div>
+      <div class="idx-sub">NSE · Pharma &amp; Healthcare</div>
+    </div>
+
+    <div class="index-card" data-idx="indiavix">
+      <div class="idx-name">India VIX</div>
+      <div class="idx-val">13.24</div>
+      <div class="idx-chg idx-dn" style="color:var(--green)">▼ -0.62 &nbsp;(-4.47%)</div>
+      <div class="idx-sub">NSE · Volatility index · lower = calmer</div>
+    </div>
+
+  </div>
+</div>
+</section>
 
 <!-- Sector Spotlight -->
 <section class="section" style="padding-top:8px">
@@ -199,6 +289,10 @@
     <a href="/sectors/it" class="sector-card" style="text-decoration:none;display:block">
       <div class="sc-header">
         <div class="sc-icon-wrap">💻</div>
+        <div class="sc-live">
+          <div class="sc-idx">35,720</div>
+          <div class="sc-chg sc-up">▲ +1.04%</div>
+        </div>
       </div>
       <h3 style="margin-bottom:6px">IT &amp; Technology</h3>
       <p>TCS, Infosys, Wipro navigating an AI-led services shift. US demand recovery and H-1B policy are key watch points.</p>
@@ -210,6 +304,10 @@
     <a href="/sectors/banking" class="sector-card" style="text-decoration:none;display:block">
       <div class="sc-header">
         <div class="sc-icon-wrap">🏦</div>
+        <div class="sc-live">
+          <div class="sc-idx">52,184</div>
+          <div class="sc-chg sc-dn">▼ -0.12%</div>
+        </div>
       </div>
       <h3 style="margin-bottom:6px">Banking &amp; Finance</h3>
       <p>Strong credit growth and NPA cleanup done. RBI rate decisions directly shape NIMs and stock performance.</p>
@@ -221,6 +319,10 @@
     <a href="/sectors/auto" class="sector-card" style="text-decoration:none;display:block">
       <div class="sc-header">
         <div class="sc-icon-wrap">🚗</div>
+        <div class="sc-live">
+          <div class="sc-idx">24,618</div>
+          <div class="sc-chg sc-up">▲ +0.55%</div>
+        </div>
       </div>
       <h3 style="margin-bottom:6px">Auto &amp; EV</h3>
       <p>Maruti, Tata Motors, Bajaj investing in EVs. PLI scheme and domestic demand reshaping the sector's future.</p>
@@ -232,6 +334,10 @@
     <a href="/sectors/pharma" class="sector-card" style="text-decoration:none;display:block">
       <div class="sc-header">
         <div class="sc-icon-wrap">💊</div>
+        <div class="sc-live">
+          <div class="sc-idx">22,108</div>
+          <div class="sc-chg sc-dn">▼ -0.12%</div>
+        </div>
       </div>
       <h3 style="margin-bottom:6px">Pharma &amp; Healthcare</h3>
       <p>India is the world's pharmacy. US/EU exports and domestic hospital expansion keep this defensively attractive.</p>
@@ -243,6 +349,10 @@
     <a href="/sectors/fmcg" class="sector-card" style="text-decoration:none;display:block">
       <div class="sc-header">
         <div class="sc-icon-wrap">🛒</div>
+        <div class="sc-live">
+          <div class="sc-idx">19,842</div>
+          <div class="sc-chg sc-up">▲ +0.28%</div>
+        </div>
       </div>
       <h3 style="margin-bottom:6px">FMCG &amp; Consumer</h3>
       <p>Rural demand recovery and urban consumption drive ITC, Nestle, HUL. Tracks India's income growth story closely.</p>
@@ -254,6 +364,10 @@
     <a href="/sectors/energy" class="sector-card" style="text-decoration:none;display:block">
       <div class="sc-header">
         <div class="sc-icon-wrap">⚡</div>
+        <div class="sc-live">
+          <div class="sc-idx">40,524</div>
+          <div class="sc-chg sc-up">▲ +0.72%</div>
+        </div>
       </div>
       <h3 style="margin-bottom:6px">Energy &amp; Infrastructure</h3>
       <p>Govt capex and renewable energy targets fuelling power, roads, and infra stocks. Adani and NTPC are key names.</p>
@@ -486,6 +600,75 @@
 </div></footer>
 
 <script src="/nav.js"></script>
+<script>
+// ── Market data updater — reads from /data/market.json (updated daily by GitHub Actions)
+(function () {
+  function fmtVal(v) {
+    return (+v).toLocaleString('en-IN', { maximumFractionDigits: 2 });
+  }
+  function fmtChgPts(change, changePct) {
+    var up = changePct >= 0;
+    var sign = up ? '+' : '';
+    return (up ? '▲ ' : '▼ ') + sign + change.toFixed(2) + ' pts (' + sign + changePct.toFixed(2) + '%)';
+  }
+  function fmtPct(changePct) {
+    var up = changePct >= 0;
+    return (up ? '▲ +' : '▼ ') + Math.abs(changePct).toFixed(2) + '%';
+  }
+
+  fetch('/data/market.json').then(function (r) { return r.json(); }).then(function (data) {
+    var idx = data.indices;
+
+    // Hero mini cards (.hic[data-idx])
+    document.querySelectorAll('.hic[data-idx]').forEach(function (el) {
+      var d = idx[el.dataset.idx]; if (!d) return;
+      var up = d.changePct >= 0;
+      el.querySelector('.hic-val').textContent = fmtVal(d.value);
+      var chgEl = el.querySelector('.hic-chg');
+      if (chgEl) { chgEl.className = 'hic-chg ' + (up ? 'hic-up' : 'hic-dn'); chgEl.textContent = fmtChgPts(d.change, d.changePct); }
+    });
+
+    // Full index grid (.index-card[data-idx])
+    document.querySelectorAll('.index-card[data-idx]').forEach(function (el) {
+      var d = idx[el.dataset.idx]; if (!d) return;
+      var up = d.changePct >= 0;
+      el.querySelector('.idx-val').textContent = fmtVal(d.value);
+      var chgEl = el.querySelector('.idx-chg');
+      if (chgEl) {
+        if (el.dataset.idx === 'indiavix') {
+          chgEl.className = 'idx-chg idx-dn'; chgEl.style.color = 'var(--green)';
+          chgEl.textContent = (up ? '▲ +' : '▼ ') + Math.abs(d.change).toFixed(2) + ' (' + (up?'+':'') + d.changePct.toFixed(2) + '%)';
+        } else {
+          chgEl.className = 'idx-chg ' + (up ? 'idx-up' : 'idx-dn');
+          chgEl.removeAttribute('style');
+          el.style.setProperty('--ic-color', up ? 'var(--green)' : 'var(--red)');
+          chgEl.textContent = fmtChgPts(d.change, d.changePct);
+        }
+      }
+    });
+
+    // Sector cards sc-live values
+    var sectorMap = { it: 'niftyit', banking: 'banknifty', auto: 'niftyauto', pharma: 'niftypharma', fmcg: 'niftyfmcg', energy: 'niftyenergy' };
+    document.querySelectorAll('.sector-card[href]').forEach(function (el) {
+      var slug = el.getAttribute('href').replace('/sectors/', '');
+      var key = sectorMap[slug]; if (!key || !idx[key]) return;
+      var d = idx[key];
+      var up = d.changePct >= 0;
+      var idxEl = el.querySelector('.sc-idx');
+      var chgEl = el.querySelector('.sc-chg');
+      if (idxEl) idxEl.textContent = fmtVal(d.value);
+      if (chgEl) { chgEl.className = 'sc-chg ' + (up ? 'sc-up' : 'sc-dn'); chgEl.textContent = fmtPct(d.changePct); }
+    });
+
+    // Update date in section subtitle
+    var sub = document.querySelector('.index-grid + * .sec-sub, .sec-sub');
+    document.querySelectorAll('.sec-sub').forEach(function(el){
+      if(el.textContent.includes('Last updated')) el.textContent = 'End-of-day closing values · NSE & BSE · Last updated ' + data.updated;
+    });
+
+  }).catch(function () { /* silently keep hardcoded fallback values */ });
+})();
+</script>
 </body>
 </html>
 

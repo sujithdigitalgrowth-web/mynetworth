@@ -32,7 +32,15 @@
 .hero-wrap{background:#090f1d;padding:44px 0 40px;color:#fff;position:relative;overflow:hidden}
 .hero-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 700px 500px at 8% 60%,rgba(37,99,235,.2) 0%,transparent 65%),radial-gradient(ellipse 500px 380px at 92% 15%,rgba(124,58,237,.14) 0%,transparent 65%),radial-gradient(ellipse 380px 280px at 58% 95%,rgba(6,182,212,.1) 0%,transparent 65%);animation:orbdrift 14s ease-in-out infinite alternate;pointer-events:none}
 @keyframes orbdrift{from{transform:translate(0,0) scale(1)}to{transform:translate(20px,-14px) scale(1.05)}}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:40px;align-items:center;position:relative;z-index:1;max-width:720px}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;z-index:1}
+.hero-idx{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hidx{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px 16px}
+.hidx-name{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#64748b;margin-bottom:6px}
+.hidx-val{font-size:1.5rem;font-weight:800;color:#f1f5f9;line-height:1.1;letter-spacing:-.3px}
+.hidx-chg{font-size:.72rem;font-weight:600;margin-top:5px}
+.hidx-up{color:#4ade80}
+.hidx-dn{color:#f87171}
+@media(max-width:768px){.hero-grid{grid-template-columns:1fr}.hero-idx{grid-template-columns:repeat(2,1fr)}}
 .hero-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(99,102,241,.13);border:1px solid rgba(99,102,241,.28);color:#a5b4fc;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;padding:5px 14px;border-radius:20px;margin-bottom:20px}
 .hero-left h1{font-size:2.5rem;font-weight:800;line-height:1.16;margin-bottom:14px;color:#fff}
 #hero-word{display:inline-block;background:linear-gradient(90deg,#4ade80,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;transition:opacity .28s,transform .28s}
@@ -265,6 +273,32 @@
   <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
 </div></nav>
 
+<!-- ── TICKER BAR ── -->
+<div class="ticker-bar">
+  <div class="ticker-inner">
+    <span class="t-item" data-idx="nifty50"><span class="t-name">Nifty 50</span><span class="t-val">24,502</span><span class="t-up">▲ +0.42%</span></span>
+    <span class="t-item" data-idx="sensex"><span class="t-name">Sensex</span><span class="t-val">80,613</span><span class="t-up">▲ +0.38%</span></span>
+    <span class="t-item" data-idx="banknifty"><span class="t-name">Bank Nifty</span><span class="t-val">52,184</span><span class="t-dn">▼ -0.12%</span></span>
+    <span class="t-item" data-idx="niftyit"><span class="t-name">Nifty IT</span><span class="t-val">35,720</span><span class="t-up">▲ +1.04%</span></span>
+    <span class="t-item" data-idx="niftymidcap"><span class="t-name">Nifty Midcap 100</span><span class="t-val">54,180</span><span class="t-up">▲ +0.65%</span></span>
+    <span class="t-item" data-idx="niftyauto"><span class="t-name">Nifty Auto</span><span class="t-val">24,618</span><span class="t-up">▲ +0.55%</span></span>
+    <span class="t-item" data-idx="niftypharma"><span class="t-name">Nifty Pharma</span><span class="t-val">22,108</span><span class="t-dn">▼ -0.12%</span></span>
+    <span class="t-item" data-idx="indiavix"><span class="t-name">India VIX</span><span class="t-val">13.24</span><span class="t-dn">▼ -4.47%</span></span>
+    <span class="t-item" data-idx="niftyfmcg"><span class="t-name">Nifty FMCG</span><span class="t-val">19,842</span><span class="t-up">▲ +0.28%</span></span>
+    <span class="t-item" data-idx="niftyenergy"><span class="t-name">Nifty Energy</span><span class="t-val">40,524</span><span class="t-up">▲ +0.72%</span></span>
+    <span class="t-item" data-idx="nifty50"><span class="t-name">Nifty 50</span><span class="t-val">24,502</span><span class="t-up">▲ +0.42%</span></span>
+    <span class="t-item" data-idx="sensex"><span class="t-name">Sensex</span><span class="t-val">80,613</span><span class="t-up">▲ +0.38%</span></span>
+    <span class="t-item" data-idx="banknifty"><span class="t-name">Bank Nifty</span><span class="t-val">52,184</span><span class="t-dn">▼ -0.12%</span></span>
+    <span class="t-item" data-idx="niftyit"><span class="t-name">Nifty IT</span><span class="t-val">35,720</span><span class="t-up">▲ +1.04%</span></span>
+    <span class="t-item" data-idx="niftymidcap"><span class="t-name">Nifty Midcap 100</span><span class="t-val">54,180</span><span class="t-up">▲ +0.65%</span></span>
+    <span class="t-item" data-idx="niftyauto"><span class="t-name">Nifty Auto</span><span class="t-val">24,618</span><span class="t-up">▲ +0.55%</span></span>
+    <span class="t-item" data-idx="niftypharma"><span class="t-name">Nifty Pharma</span><span class="t-val">22,108</span><span class="t-dn">▼ -0.12%</span></span>
+    <span class="t-item" data-idx="indiavix"><span class="t-name">India VIX</span><span class="t-val">13.24</span><span class="t-dn">▼ -4.47%</span></span>
+    <span class="t-item" data-idx="niftyfmcg"><span class="t-name">Nifty FMCG</span><span class="t-val">19,842</span><span class="t-up">▲ +0.28%</span></span>
+    <span class="t-item" data-idx="niftyenergy"><span class="t-name">Nifty Energy</span><span class="t-val">40,524</span><span class="t-up">▲ +0.72%</span></span>
+  </div>
+</div>
+
 <main>
 
 <!-- ── HERO ── -->
@@ -276,9 +310,41 @@
     <h1>India's <span id="hero-word">Smartest</span><br>Finance Hub</h1>
     <p>Markets, company valuations, crypto, and free calculators — everything you need to track and grow your wealth.</p>
     <div class="hero-btns">
-      <a href="/app" class="btn-hero-primary">Open Dashboard →</a>
+      <a href="/net-worth-calculator" class="btn-hero-primary">Calculate Net Worth →</a>
       <a href="/markets" class="btn-hero-ghost">Market Pulse</a>
       <a href="/richest-indians" class="btn-hero-ghost">Rich List 2026</a>
+    </div>
+  </div>
+  <div class="hero-idx">
+    <div class="hidx" data-idx="nifty50">
+      <div class="hidx-name">Nifty 50</div>
+      <div class="hidx-val">24,502</div>
+      <div class="hidx-chg hidx-up">▲ +102 pts (+0.42%)</div>
+    </div>
+    <div class="hidx" data-idx="sensex">
+      <div class="hidx-name">Sensex</div>
+      <div class="hidx-val">80,613</div>
+      <div class="hidx-chg hidx-up">▲ +304 pts (+0.38%)</div>
+    </div>
+    <div class="hidx" data-idx="banknifty">
+      <div class="hidx-name">Bank Nifty</div>
+      <div class="hidx-val">52,184</div>
+      <div class="hidx-chg hidx-dn">▼ -63 pts (-0.12%)</div>
+    </div>
+    <div class="hidx" data-idx="niftyit">
+      <div class="hidx-name">Nifty IT</div>
+      <div class="hidx-val">35,720</div>
+      <div class="hidx-chg hidx-up">▲ +369 pts (+1.04%)</div>
+    </div>
+    <div class="hidx" data-idx="niftymidcap">
+      <div class="hidx-name">Nifty Midcap 100</div>
+      <div class="hidx-val">54,180</div>
+      <div class="hidx-chg hidx-up">▲ +352 pts (+0.65%)</div>
+    </div>
+    <div class="hidx" data-idx="indiavix">
+      <div class="hidx-name">India VIX</div>
+      <div class="hidx-val">13.24</div>
+      <div class="hidx-chg hidx-dn" style="color:#4ade80">▼ -0.62 (-4.47%)</div>
     </div>
   </div>
 </div>
@@ -303,10 +369,16 @@
 </div>
 </div>
 
-<!-- ── MARKET SNAPSHOT (removed: live prices hidden) ── -->
-<section class="ws-section" style="display:none">
+<!-- ── MARKET SNAPSHOT ── -->
+<section class="ws-section">
 <div class="container">
-  <div class="ws-head"><div></div></div>
+  <div class="ws-head">
+    <div>
+      <h2>Market Snapshot <span class="ws-badge badge-live">EOD</span></h2>
+      <p>End-of-day closing values &middot; NSE &amp; BSE</p>
+    </div>
+    <a href="/markets" class="view-all">Full market data →</a>
+  </div>
   <div class="snap-grid">
 
     <div class="snap-card snap-up" id="scard-nifty50">
@@ -340,7 +412,7 @@
     <div class="snap-card snap-dn" id="scard-banknifty">
       <div class="snap-top">
         <div class="sn-label">Bank Nifty</div>
-        <span class="sn-badge sn-badge-dn" id="sc-banknifty">▼ +0.66%</span>
+        <span class="sn-badge sn-badge-dn" id="sc-banknifty">▼ -0.12%</span>
       </div>
       <div class="sn-val" id="sv-banknifty">52,184</div>
       <div class="sn-pts" id="sp-banknifty">-63 pts · NSE Banking</div>
@@ -354,7 +426,7 @@
     <div class="snap-card snap-up" id="scard-niftyit">
       <div class="snap-top">
         <div class="sn-label">Nifty IT</div>
-        <span class="sn-badge sn-badge-up" id="sc-niftyit">▲ -1.19%</span>
+        <span class="sn-badge sn-badge-up" id="sc-niftyit">▲ +1.04%</span>
       </div>
       <div class="sn-val" id="sv-niftyit">35,720</div>
       <div class="sn-pts" id="sp-niftyit">+369 pts · NSE Tech</div>
@@ -366,7 +438,7 @@
     </div>
 
   </div>
-  <p style="font-size:.67rem;color:var(--muted);text-align:right;margin-top:10px" id="snap-updated">Fetching live data…</p>
+  <p style="font-size:.67rem;color:var(--muted);text-align:right;margin-top:10px">Last updated: 19 Jun 2026 &middot; NSE/BSE EOD &middot; <a href="/markets" style="color:var(--muted)">Full data →</a></p>
 </div>
 </section>
 
@@ -623,7 +695,7 @@
     <h3>Start tracking your wealth today</h3>
     <p>Open the free WorthScale dashboard — log your assets, liabilities, and goals. See your net worth grow over time.</p>
     <div class="cta-btns">
-      <a href="/app" class="btn btn-primary btn-lg" style="background:#fff;color:#1e40af;font-weight:700">Open Dashboard — Free →</a>
+      <a href="/net-worth-calculator" class="btn btn-primary btn-lg" style="background:#fff;color:#1e40af;font-weight:700">Calculate Net Worth — Free →</a>
       <a href="/net-worth-calculator" class="btn btn-lg" style="background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.3)">Net Worth Calculator</a>
     </div>
   </div>
@@ -665,6 +737,74 @@
 </div></footer>
 
 <script src="/nav.js"></script>
+<script>
+// ── Market data updater — reads from /data/market.json (updated daily by GitHub Actions)
+(function () {
+  function fmtVal(v) {
+    return (+v).toLocaleString('en-IN', { maximumFractionDigits: 2 });
+  }
+  function fmtChg(change, changePct) {
+    var up = changePct >= 0;
+    var arrow = up ? '▲' : '▼';
+    var sign = up ? '+' : '';
+    return arrow + ' ' + sign + Math.abs(change).toFixed(2) + ' pts (' + sign + changePct.toFixed(2) + '%)';
+  }
+  function fmtPct(changePct) {
+    var up = changePct >= 0;
+    return (up ? '▲ +' : '▼ ') + Math.abs(changePct).toFixed(2) + '%';
+  }
+
+  fetch('/data/market.json').then(function (r) { return r.json(); }).then(function (data) {
+    var idx = data.indices;
+
+    // Ticker bar
+    document.querySelectorAll('.t-item[data-idx]').forEach(function (el) {
+      var d = idx[el.dataset.idx]; if (!d) return;
+      var up = d.changePct >= 0;
+      el.querySelector('.t-val').textContent = fmtVal(d.value);
+      var chgEl = el.querySelector('.t-up,.t-dn');
+      if (chgEl) { chgEl.className = up ? 't-up' : 't-dn'; chgEl.textContent = fmtPct(d.changePct); }
+    });
+
+    // Hero index cards
+    document.querySelectorAll('.hidx[data-idx]').forEach(function (el) {
+      var d = idx[el.dataset.idx]; if (!d) return;
+      var up = d.changePct >= 0;
+      el.querySelector('.hidx-val').textContent = fmtVal(d.value);
+      var chgEl = el.querySelector('.hidx-chg');
+      if (chgEl) {
+        chgEl.className = 'hidx-chg ' + (up ? 'hidx-up' : 'hidx-dn');
+        chgEl.removeAttribute('style');
+        // VIX: lower = calmer, show green even when negative
+        if (el.dataset.idx === 'indiavix' && !up) chgEl.style.color = '#4ade80';
+        chgEl.textContent = fmtChg(d.change, d.changePct);
+      }
+    });
+
+    // Market snapshot cards (existing IDs: sv-*, sc-*, sp-*)
+    var snapMap = { nifty50: 'nifty50', sensex: 'sensex', banknifty: 'banknifty', niftyit: 'niftyit' };
+    Object.keys(snapMap).forEach(function (k) {
+      var d = idx[k]; if (!d) return;
+      var up = d.changePct >= 0;
+      var valEl = document.getElementById('sv-' + k);
+      var badgeEl = document.getElementById('sc-' + k);
+      var ptsEl = document.getElementById('sp-' + k);
+      var card = document.getElementById('scard-' + k);
+      if (valEl) valEl.textContent = fmtVal(d.value);
+      if (badgeEl) {
+        badgeEl.className = 'sn-badge ' + (up ? 'sn-badge-up' : 'sn-badge-dn');
+        badgeEl.textContent = fmtPct(d.changePct);
+      }
+      if (card) { card.className = 'snap-card ' + (up ? 'snap-up' : 'snap-dn'); }
+    });
+
+    // Updated date note
+    var note = document.querySelector('.ws-section p[style*="text-align:right"]');
+    if (note) note.innerHTML = 'Last updated: ' + data.updated + ' &middot; NSE/BSE EOD &middot; <a href="/markets" style="color:var(--muted)">Full data →</a>';
+
+  }).catch(function () { /* silently keep hardcoded fallback values */ });
+})();
+</script>
 <script>
 // Hero net worth calculator
 function fmt(n){
