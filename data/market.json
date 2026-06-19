@@ -9,9 +9,9 @@
     },
     "sensex": {
       "label": "Sensex",
-      "value": 76630.92,
-      "change": -779.06,
-      "changePct": -1.01
+      "value": 76663.22,
+      "change": -746.76,
+      "changePct": -0.96
     },
     "banknifty": {
       "label": "Bank Nifty",
