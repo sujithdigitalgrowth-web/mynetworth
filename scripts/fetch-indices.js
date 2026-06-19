@@ -20,7 +20,7 @@ const NSE_MAP = {
   'Nifty Pharma':     { key: 'niftypharma', label: 'Nifty Pharma'     },
   'Nifty Auto':       { key: 'niftyauto',   label: 'Nifty Auto'       },
   'Nifty FMCG':       { key: 'niftyfmcg',   label: 'Nifty FMCG'       },
-  'Nifty Midcap 100': { key: 'niftymidcap', label: 'Nifty Midcap 100' },
+  'NIFTY Midcap 100': { key: 'niftymidcap', label: 'Nifty Midcap 100' },
   'India VIX':        { key: 'indiavix',    label: 'India VIX'        },
   'Nifty Energy':     { key: 'niftyenergy', label: 'Nifty Energy'     },
 };

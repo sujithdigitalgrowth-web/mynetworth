@@ -1,15 +1,65 @@
 {
   "updated": "2026-06-19",
   "indices": {
-    "nifty50":     { "label": "Nifty 50",        "value": 24502,  "change": 102,   "changePct": 0.42  },
-    "sensex":      { "label": "Sensex",           "value": 80613,  "change": 304,   "changePct": 0.38  },
-    "banknifty":   { "label": "Bank Nifty",       "value": 52184,  "change": -63,   "changePct": -0.12 },
-    "niftyit":     { "label": "Nifty IT",         "value": 35720,  "change": 369,   "changePct": 1.04  },
-    "niftymidcap": { "label": "Nifty Midcap 100", "value": 54180,  "change": 352,   "changePct": 0.65  },
-    "niftyauto":   { "label": "Nifty Auto",       "value": 24618,  "change": 134,   "changePct": 0.55  },
-    "niftypharma": { "label": "Nifty Pharma",     "value": 22108,  "change": -27,   "changePct": -0.12 },
-    "indiavix":    { "label": "India VIX",        "value": 13.24,  "change": -0.62, "changePct": -4.47 },
-    "niftyfmcg":   { "label": "Nifty FMCG",       "value": 19842,  "change": 55,    "changePct": 0.28  },
-    "niftyenergy": { "label": "Nifty Energy",     "value": 40524,  "change": 289,   "changePct": 0.72  }
+    "nifty50": {
+      "label": "Nifty 50",
+      "value": 24168,
+      "change": 82.3,
+      "changePct": 0.34
+    },
+    "sensex": {
+      "label": "Sensex",
+      "value": 76630.92,
+      "change": -779.06,
+      "changePct": -1.01
+    },
+    "banknifty": {
+      "label": "Bank Nifty",
+      "value": 57963.8,
+      "change": 378.75,
+      "changePct": 0.66
+    },
+    "niftyit": {
+      "label": "Nifty IT",
+      "value": 28466.45,
+      "change": -343.1,
+      "changePct": -1.19
+    },
+    "niftymidcap": {
+      "label": "Nifty Midcap 100",
+      "value": 62379.25,
+      "change": 255.9,
+      "changePct": 0.41
+    },
+    "niftyauto": {
+      "label": "Nifty Auto",
+      "value": 26746.4,
+      "change": 22,
+      "changePct": 0.08
+    },
+    "niftypharma": {
+      "label": "Nifty Pharma",
+      "value": 24282.2,
+      "change": 135.65,
+      "changePct": 0.56
+    },
+    "indiavix": {
+      "label": "India VIX",
+      "value": 12.67,
+      "change": -0.52,
+      "changePct": -3.91
+    },
+    "niftyfmcg": {
+      "label": "Nifty FMCG",
+      "value": 49654.5,
+      "change": 98.45,
+      "changePct": 0.2
+    },
+    "niftyenergy": {
+      "label": "Nifty Energy",
+      "value": 40457.3,
+      "change": 218.85,
+      "changePct": 0.54
+    }
   }
 }
