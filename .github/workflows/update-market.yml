@@ -2,8 +2,8 @@ name: Update Market Data
 
 on:
   schedule:
-    # 4:00 PM IST = 10:30 UTC — after NSE closes at 3:30 PM IST, Mon–Fri
-    - cron: '30 10 * * 1-5'
+    # 6:00 PM IST = 12:30 UTC — after NSE publishes archive CSV, Mon–Fri
+    - cron: '30 12 * * 1-5'
   workflow_dispatch:
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Fetch market indices (Yahoo Finance v7 + crumb)
+      - name: Fetch market indices (NSE India archive CSV)
         run: node scripts/fetch-indices.js
 
       - name: Commit and push updated data

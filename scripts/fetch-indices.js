@@ -1,143 +1,182 @@
 /**
- * Fetches EOD closing values for Indian market indices from Yahoo Finance.
- * Uses the crumb-authenticated v7 quote API (all symbols in one request).
- * Run by GitHub Actions daily at 4:00 PM IST after NSE closes.
- * Writes to data/market.json — committed so Vercel redeploys.
+ * Fetches EOD index data from NSE India's official archive CSV.
+ * NSE publishes ind_close_all_DDMMYYYY.csv after every market session.
+ * No API key, no auth, no rate limiting — just a plain HTTPS download.
+ * Sensex (BSE) is fetched separately via Yahoo Finance as a bonus; if that
+ * fails, the last known value is kept.
  */
 
 const https = require('https');
 const fs    = require('fs');
 const path  = require('path');
 
-const SYMBOLS = [
-  { key: 'nifty50',     symbol: '^NSEI',            label: 'Nifty 50'         },
-  { key: 'sensex',      symbol: '^BSESN',            label: 'Sensex'           },
-  { key: 'banknifty',   symbol: '^NSEBANK',          label: 'Bank Nifty'       },
-  { key: 'niftyit',     symbol: '^CNXIT',            label: 'Nifty IT'         },
-  { key: 'niftymidcap', symbol: 'NIFTYMIDCAP100.NS', label: 'Nifty Midcap 100' },
-  { key: 'niftyauto',   symbol: '^CNXAUTO',          label: 'Nifty Auto'       },
-  { key: 'niftypharma', symbol: '^CNXPHARMA',        label: 'Nifty Pharma'     },
-  { key: 'indiavix',    symbol: '^INDIAVIX',         label: 'India VIX'        },
-  { key: 'niftyfmcg',   symbol: '^CNXFMCG',          label: 'Nifty FMCG'       },
-  { key: 'niftyenergy', symbol: '^CNXENERGY',        label: 'Nifty Energy'     },
-];
-
 const OUT_PATH = path.join(__dirname, '..', 'data', 'market.json');
 
-const BASE_HEADERS = {
-  'User-Agent'      : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
-  'Accept-Language' : 'en-US,en;q=0.9',
-  'Accept-Encoding' : 'identity',
+// NSE CSV "Index Name" column → our key + label
+const NSE_MAP = {
+  'Nifty 50':         { key: 'nifty50',     label: 'Nifty 50'         },
+  'Nifty Bank':       { key: 'banknifty',   label: 'Bank Nifty'       },
+  'Nifty IT':         { key: 'niftyit',     label: 'Nifty IT'         },
+  'Nifty Pharma':     { key: 'niftypharma', label: 'Nifty Pharma'     },
+  'Nifty Auto':       { key: 'niftyauto',   label: 'Nifty Auto'       },
+  'Nifty FMCG':       { key: 'niftyfmcg',   label: 'Nifty FMCG'       },
+  'Nifty Midcap 100': { key: 'niftymidcap', label: 'Nifty Midcap 100' },
+  'India VIX':        { key: 'indiavix',    label: 'India VIX'        },
+  'Nifty Energy':     { key: 'niftyenergy', label: 'Nifty Energy'     },
 };
 
-function get(url, extra = {}) {
+// ── helpers ────────────────────────────────────────────────────────────────
+
+function get(url, headers = {}) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers: { ...BASE_HEADERS, ...extra }, timeout: 20000 }, (res) => {
-      const cookies = (res.headers['set-cookie'] || []).map(c => c.split(';')[0]).join('; ');
+    const req = https.get(url, {
+      headers: {
+        'User-Agent'    : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36',
+        'Accept'        : '*/*',
+        'Accept-Language': 'en-US,en;q=0.9',
+        ...headers,
+      },
+      timeout: 20000,
+    }, (res) => {
       let body = '';
       res.on('data', c => body += c);
-      res.on('end', () => resolve({ status: res.statusCode, body, cookies }));
+      res.on('end', () => resolve({ status: res.statusCode, body }));
     });
     req.on('error', reject);
-    req.on('timeout', () => { req.destroy(); reject(new Error('Request timed out')); });
+    req.on('timeout', () => { req.destroy(); reject(new Error('Timeout')); });
   });
 }
 
-async function getSession() {
-  // Step 1 — hit the Yahoo Finance homepage to get a valid session cookie
-  const r1 = await get('https://finance.yahoo.com/', {
-    'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-  });
-  const cookies = r1.cookies;
-  if (!cookies) throw new Error('No cookies from finance.yahoo.com');
-  console.log('Session cookie obtained.');
+function toDateStr(d) {
+  const dd   = String(d.getDate()).padStart(2, '0');
+  const mm   = String(d.getMonth() + 1).padStart(2, '0');
+  const yyyy = d.getFullYear();
+  return `${dd}${mm}${yyyy}`;             // DDMMYYYY — NSE archive format
+}
 
-  // Step 2 — exchange cookie for a crumb
-  const r2 = await get('https://query2.finance.yahoo.com/v1/finance/getCrumb', {
-    'Accept'  : 'text/plain, */*',
-    'Cookie'  : cookies,
-    'Referer' : 'https://finance.yahoo.com/',
-  });
-  if (r2.status !== 200 || !r2.body.trim()) {
-    throw new Error(`getCrumb returned HTTP ${r2.status}: "${r2.body.slice(0, 120)}"`);
+function prevBusinessDay(d) {
+  const prev = new Date(d);
+  do { prev.setDate(prev.getDate() - 1); } while ([0, 6].includes(prev.getDay()));
+  return prev;
+}
+
+// ── NSE archive CSV ────────────────────────────────────────────────────────
+
+async function fetchNseCSV() {
+  // Try today, then previous business day (in case today's file isn't out yet)
+  const candidates = [new Date(), prevBusinessDay(new Date())];
+
+  for (const d of candidates) {
+    const dateStr = toDateStr(d);
+    const url = `https://archives.nseindia.com/content/indices/ind_close_all_${dateStr}.csv`;
+    console.log(`Trying NSE archive: ${url}`);
+    try {
+      const r = await get(url);
+      if (r.status === 200 && r.body.includes('Index Name')) {
+        console.log(`  ✓ Got NSE CSV for ${dateStr}`);
+        return r.body;
+      }
+      console.log(`  ✗ HTTP ${r.status}`);
+    } catch (e) {
+      console.log(`  ✗ ${e.message}`);
+    }
   }
-  const crumb = r2.body.trim();
-  console.log(`Crumb: ${crumb}`);
-  return { cookies, crumb };
+  return null;
 }
 
-async function fetchQuotes(session) {
-  // Fetch all symbols in a single v7 batch call
-  const symbolList = SYMBOLS.map(s => encodeURIComponent(s.symbol)).join('%2C');
-  const url = `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${symbolList}&crumb=${encodeURIComponent(session.crumb)}`;
+function parseNseCSV(csv) {
+  const lines  = csv.trim().split('\n');
+  const results = {};
 
-  const r = await get(url, {
-    'Accept'  : 'application/json',
-    'Cookie'  : session.cookies,
-    'Referer' : 'https://finance.yahoo.com/',
-  });
-  if (r.status !== 200) throw new Error(`Quote API returned HTTP ${r.status}`);
+  // Columns: Index Name, Index Date, Open, High, Low, Close, Points Change, Change(%), ...
+  for (let i = 1; i < lines.length; i++) {
+    const cols = lines[i].split(',');
+    if (cols.length < 8) continue;
 
-  const json = JSON.parse(r.body);
-  return json.quoteResponse?.result || [];
+    const name   = cols[0].trim();
+    const entry  = NSE_MAP[name];
+    if (!entry) continue;
+
+    const close     = parseFloat(cols[5]);
+    const change    = parseFloat(cols[6]);
+    const changePct = parseFloat(cols[7]);
+    if (isNaN(close)) continue;
+
+    results[entry.key] = {
+      label     : entry.label,
+      value     : +close.toFixed(2),
+      change    : +change.toFixed(2),
+      changePct : +changePct.toFixed(2),
+    };
+  }
+  return results;
 }
+
+// ── Sensex via Yahoo Finance (bonus — keep last known if blocked) ──────────
+
+async function fetchSensex(fallback) {
+  try {
+    const r = await get(
+      'https://query2.finance.yahoo.com/v8/finance/chart/%5EBSESN?interval=1d&range=1d',
+      { Referer: 'https://finance.yahoo.com/' }
+    );
+    if (r.status !== 200) throw new Error(`HTTP ${r.status}`);
+    const meta  = JSON.parse(r.body).chart?.result?.[0]?.meta;
+    if (!meta)  throw new Error('Empty response');
+    const price = meta.regularMarketPrice;
+    const prev  = meta.chartPreviousClose ?? meta.previousClose ?? price;
+    const chg   = +(price - prev).toFixed(2);
+    const pct   = +((chg / prev) * 100).toFixed(2);
+    console.log(`✓  Sensex               ${price}  ${pct >= 0 ? '▲' : '▼'} ${pct}%`);
+    return { label: 'Sensex', value: +price.toFixed(2), change: chg, changePct: pct };
+  } catch (e) {
+    console.log(`  Sensex Yahoo fallback (${e.message})`);
+    return fallback || null;
+  }
+}
+
+// ── main ───────────────────────────────────────────────────────────────────
 
 async function main() {
-  // Load existing file as fallback so stale data is better than empty
+  // Load existing data so we always have fallback values
   let existing = {};
   if (fs.existsSync(OUT_PATH)) {
     try { existing = JSON.parse(fs.readFileSync(OUT_PATH, 'utf8')).indices || {}; } catch {}
   }
 
-  const today = new Date().toISOString().split('T')[0];
-  const out = { updated: today, indices: {} };
+  const out = {
+    updated : new Date().toISOString().split('T')[0],
+    indices : { ...existing },                          // start with fallback
+  };
 
-  // Pre-fill with existing (fallback) values
-  for (const s of SYMBOLS) {
-    if (existing[s.key]) out.indices[s.key] = { ...existing[s.key], label: s.label };
-  }
-
-  let successCount = 0;
-
-  try {
-    const session = await getSession();
-    const quotes  = await fetchQuotes(session);
-
-    for (const q of quotes) {
-      const sym = SYMBOLS.find(s => s.symbol.toUpperCase() === q.symbol.toUpperCase());
-      if (!sym || q.regularMarketPrice == null) continue;
-
-      out.indices[sym.key] = {
-        label     : sym.label,
-        value     : +q.regularMarketPrice.toFixed(2),
-        change    : +q.regularMarketChange.toFixed(2),
-        changePct : +q.regularMarketChangePercent.toFixed(2),
-      };
-      successCount++;
-      const arrow = q.regularMarketChangePercent >= 0 ? '▲' : '▼';
-      console.log(`✓  ${sym.label.padEnd(20)} ${q.regularMarketPrice}  ${arrow} ${q.regularMarketChangePercent.toFixed(2)}%`);
+  // ── Step 1: NSE CSV (9 indices)
+  let nseCount = 0;
+  const csv = await fetchNseCSV();
+  if (csv) {
+    const parsed = parseNseCSV(csv);
+    for (const [key, data] of Object.entries(parsed)) {
+      out.indices[key] = data;
+      nseCount++;
+      const arrow = data.changePct >= 0 ? '▲' : '▼';
+      console.log(`✓  ${data.label.padEnd(20)} ${data.value}  ${arrow} ${data.changePct}%`);
     }
-
-    if (successCount === 0) console.warn('\nWarning: quote API returned 0 matching symbols.');
-
-  } catch (e) {
-    console.error(`\nFetch error: ${e.message}`);
-    console.log('Falling back to last-known values from existing data/market.json.');
+    console.log(`\nNSE: ${nseCount}/${Object.keys(NSE_MAP).length} indices parsed.`);
+  } else {
+    console.log('\nNSE CSV unavailable — using cached values for NSE indices.');
   }
 
-  // Always write — if fetch failed we still commit fallback so Vercel doesn't break
+  // ── Step 2: Sensex (BSE — not in NSE CSV)
+  out.indices.sensex = await fetchSensex(existing.sensex) || out.indices.sensex;
+
+  // ── Write
   if (Object.keys(out.indices).length === 0) {
-    console.error('Fatal: no existing data and fetch failed. Cannot write market.json.');
+    console.error('No data at all. Aborting.');
     process.exit(1);
   }
 
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
   fs.writeFileSync(OUT_PATH, JSON.stringify(out, null, 2));
-
-  const src = successCount > 0
-    ? `${successCount}/${SYMBOLS.length} live values`
-    : 'all fallback — check logs above';
-  console.log(`\nWrote ${OUT_PATH}  (${src})`);
+  console.log(`\nWrote ${OUT_PATH}`);
 }
 
 main().catch(e => { console.error('Fatal:', e.message); process.exit(1); });
