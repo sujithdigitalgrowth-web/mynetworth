@@ -346,9 +346,9 @@ function renderTable(data) {
       <td class="rank-num">${s[0]}</td>
       <td><div class="co-name">${s[1]}</div><div class="co-ticker">${s[2]}</div></td>
       <td><span class="sector-tag ${sectorClass(s[4])}">${s[3]}</span></td>
-      <td>${weightBar(s[6])}</td>
-      <td class="mcap-val">₹${s[7]} Cr</td>
-      <td class="${peClass(s[8])}">${s[8]}x</td>
+      <td>${weightBar(s[5])}</td>
+      <td class="mcap-val">₹${s[6]} Cr</td>
+      <td class="${peClass(s[7])}">${s[7]}x</td>
     </tr>
   `).join('');
 }
@@ -383,9 +383,9 @@ function sortTable(col) {
     let av = a[col], bv = b[col];
     // For numeric columns
     if(col === 0) { av = a[0]; bv = b[0]; }
-    if(col === 3) { av = parseFloat(a[6]); bv = parseFloat(b[6]); }
-    if(col === 4) { av = parseInt(a[7].replace(/,/g,'')); bv = parseInt(b[7].replace(/,/g,'')); }
-    if(col === 5) { av = a[8]; bv = b[8]; }
+    if(col === 3) { av = parseFloat(a[5]); bv = parseFloat(b[5]); }
+    if(col === 4) { av = parseInt(a[6].replace(/,/g,'')); bv = parseInt(b[6].replace(/,/g,'')); }
+    if(col === 5) { av = a[7]; bv = b[7]; }
     if(col === 1) { av = a[1]; bv = b[1]; }
     if(col === 2) { av = a[3]; bv = b[3]; }
     if(typeof av === 'string') return av.localeCompare(bv) * sortDir;
