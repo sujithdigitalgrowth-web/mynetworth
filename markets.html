@@ -165,7 +165,7 @@
     <a href="/blog">Blog</a>
     <a href="/about">About</a>
     <a href="/contact">Contact</a>
-    <a href="/app" class="nav-cta">Open Dashboard</a>
+    <a href="/net-worth-calculator" class="nav-cta">Calculate Net Worth</a>
   </div>
   <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
 </div></nav>
@@ -182,29 +182,29 @@
       <p class="hero-desc">Understand Indian sectors, company valuations, and the macro signals that drive stock market performance.</p>
       <div class="hero-btns">
         <a href="#sectors" class="hero-btn-p">Explore Sectors ↓</a>
-        <a href="/app" class="hero-btn-g">Open Dashboard</a>
+        <a href="/net-worth-calculator" class="hero-btn-g">Calculate Net Worth</a>
       </div>
     </div>
     <div class="mkts-hero-idx">
       <div class="hic" data-idx="nifty50">
         <div class="hic-name">Nifty 50</div>
-        <div class="hic-val">24,502</div>
-        <div class="hic-chg hic-up">▲ +102 pts &nbsp;(+0.42%)</div>
+        <div class="hic-val">24,013</div>
+        <div class="hic-chg hic-dn">▼ -155 pts &nbsp;(-0.64%)</div>
       </div>
       <div class="hic" data-idx="sensex">
         <div class="hic-name">Sensex</div>
-        <div class="hic-val">80,613</div>
-        <div class="hic-chg hic-up">▲ +304 pts &nbsp;(+0.38%)</div>
+        <div class="hic-val">76,803</div>
+        <div class="hic-chg hic-dn">▼ -607 pts &nbsp;(-0.78%)</div>
       </div>
       <div class="hic" data-idx="banknifty">
         <div class="hic-name">Bank Nifty</div>
-        <div class="hic-val">52,184</div>
-        <div class="hic-chg hic-dn">▼ -63 pts &nbsp;(-0.12%)</div>
+        <div class="hic-val">57,686</div>
+        <div class="hic-chg hic-dn">▼ -278 pts &nbsp;(-0.48%)</div>
       </div>
       <div class="hic" data-idx="niftyit">
         <div class="hic-name">Nifty IT</div>
-        <div class="hic-val">35,720</div>
-        <div class="hic-chg hic-up">▲ +369 pts &nbsp;(+1.04%)</div>
+        <div class="hic-val">27,427</div>
+        <div class="hic-chg hic-dn">▼ -1,040 pts &nbsp;(-3.65%)</div>
       </div>
     </div>
   </div>
@@ -222,57 +222,57 @@
 
     <div class="index-card" data-idx="nifty50">
       <div class="idx-name">Nifty 50</div>
-      <div class="idx-val">24,502</div>
-      <div class="idx-chg idx-up">▲ +102 pts &nbsp;(+0.42%)</div>
+      <div class="idx-val">24,013</div>
+      <div class="idx-chg idx-dn">▼ -155 pts &nbsp;(-0.64%)</div>
       <div class="idx-sub">NSE · 50 large-cap stocks</div>
     </div>
 
     <div class="index-card" data-idx="sensex">
       <div class="idx-name">Sensex</div>
-      <div class="idx-val">80,613</div>
-      <div class="idx-chg idx-up">▲ +304 pts &nbsp;(+0.38%)</div>
+      <div class="idx-val">76,803</div>
+      <div class="idx-chg idx-dn">▼ -607 pts &nbsp;(-0.78%)</div>
       <div class="idx-sub">BSE · 30 blue-chip stocks</div>
     </div>
 
-    <div class="index-card" data-idx="banknifty" style="--ic-color:var(--red)">
+    <div class="index-card" data-idx="banknifty">
       <div class="idx-name">Bank Nifty</div>
-      <div class="idx-val">52,184</div>
-      <div class="idx-chg idx-dn">▼ -63 pts &nbsp;(-0.12%)</div>
+      <div class="idx-val">57,686</div>
+      <div class="idx-chg idx-dn">▼ -278 pts &nbsp;(-0.48%)</div>
       <div class="idx-sub">NSE · Banking sector</div>
     </div>
 
-    <div class="index-card" data-idx="niftyit">
+    <div class="index-card" data-idx="niftyit" style="--ic-color:var(--red)">
       <div class="idx-name">Nifty IT</div>
-      <div class="idx-val">35,720</div>
-      <div class="idx-chg idx-up">▲ +369 pts &nbsp;(+1.04%)</div>
+      <div class="idx-val">27,427</div>
+      <div class="idx-chg idx-dn">▼ -1,040 pts &nbsp;(-3.65%)</div>
       <div class="idx-sub">NSE · Technology sector</div>
     </div>
 
     <div class="index-card" data-idx="niftymidcap">
       <div class="idx-name">Nifty Midcap 100</div>
-      <div class="idx-val">54,180</div>
-      <div class="idx-chg idx-up">▲ +352 pts &nbsp;(+0.65%)</div>
+      <div class="idx-val">62,517</div>
+      <div class="idx-chg idx-up">▲ +138 pts &nbsp;(+0.22%)</div>
       <div class="idx-sub">NSE · Mid-cap companies</div>
     </div>
 
-    <div class="index-card" data-idx="niftyauto">
+    <div class="index-card" data-idx="niftyauto" style="--ic-color:var(--red)">
       <div class="idx-name">Nifty Auto</div>
-      <div class="idx-val">24,618</div>
-      <div class="idx-chg idx-up">▲ +134 pts &nbsp;(+0.55%)</div>
+      <div class="idx-val">26,583</div>
+      <div class="idx-chg idx-dn">▼ -163 pts &nbsp;(-0.61%)</div>
       <div class="idx-sub">NSE · Auto &amp; EV sector</div>
     </div>
 
-    <div class="index-card" data-idx="niftypharma" style="--ic-color:var(--red)">
+    <div class="index-card" data-idx="niftypharma">
       <div class="idx-name">Nifty Pharma</div>
-      <div class="idx-val">22,108</div>
-      <div class="idx-chg idx-dn">▼ -27 pts &nbsp;(-0.12%)</div>
+      <div class="idx-val">24,460</div>
+      <div class="idx-chg idx-up">▲ +178 pts &nbsp;(+0.73%)</div>
       <div class="idx-sub">NSE · Pharma &amp; Healthcare</div>
     </div>
 
     <div class="index-card" data-idx="indiavix">
       <div class="idx-name">India VIX</div>
-      <div class="idx-val">13.24</div>
-      <div class="idx-chg idx-dn" style="color:var(--green)">▼ -0.62 &nbsp;(-4.47%)</div>
+      <div class="idx-val">12.97</div>
+      <div class="idx-chg idx-up">▲ +0.30 &nbsp;(+2.35%)</div>
       <div class="idx-sub">NSE · Volatility index · lower = calmer</div>
     </div>
 
@@ -290,8 +290,8 @@
       <div class="sc-header">
         <div class="sc-icon-wrap">💻</div>
         <div class="sc-live">
-          <div class="sc-idx">35,720</div>
-          <div class="sc-chg sc-up">▲ +1.04%</div>
+          <div class="sc-idx" data-idx="niftyit">27,427</div>
+          <div class="sc-chg sc-dn">▼ -3.65%</div>
         </div>
       </div>
       <h3 style="margin-bottom:6px">IT &amp; Technology</h3>
@@ -305,8 +305,8 @@
       <div class="sc-header">
         <div class="sc-icon-wrap">🏦</div>
         <div class="sc-live">
-          <div class="sc-idx">52,184</div>
-          <div class="sc-chg sc-dn">▼ -0.12%</div>
+          <div class="sc-idx" data-idx="banknifty">57,686</div>
+          <div class="sc-chg sc-dn">▼ -0.48%</div>
         </div>
       </div>
       <h3 style="margin-bottom:6px">Banking &amp; Finance</h3>
@@ -320,8 +320,8 @@
       <div class="sc-header">
         <div class="sc-icon-wrap">🚗</div>
         <div class="sc-live">
-          <div class="sc-idx">24,618</div>
-          <div class="sc-chg sc-up">▲ +0.55%</div>
+          <div class="sc-idx" data-idx="niftyauto">26,583</div>
+          <div class="sc-chg sc-dn">▼ -0.61%</div>
         </div>
       </div>
       <h3 style="margin-bottom:6px">Auto &amp; EV</h3>
@@ -335,8 +335,8 @@
       <div class="sc-header">
         <div class="sc-icon-wrap">💊</div>
         <div class="sc-live">
-          <div class="sc-idx">22,108</div>
-          <div class="sc-chg sc-dn">▼ -0.12%</div>
+          <div class="sc-idx" data-idx="niftypharma">24,460</div>
+          <div class="sc-chg sc-up">▲ +0.73%</div>
         </div>
       </div>
       <h3 style="margin-bottom:6px">Pharma &amp; Healthcare</h3>
@@ -350,8 +350,8 @@
       <div class="sc-header">
         <div class="sc-icon-wrap">🛒</div>
         <div class="sc-live">
-          <div class="sc-idx">19,842</div>
-          <div class="sc-chg sc-up">▲ +0.28%</div>
+          <div class="sc-idx" data-idx="niftyfmcg">49,559</div>
+          <div class="sc-chg sc-dn">▼ -0.19%</div>
         </div>
       </div>
       <h3 style="margin-bottom:6px">FMCG &amp; Consumer</h3>
@@ -365,8 +365,8 @@
       <div class="sc-header">
         <div class="sc-icon-wrap">⚡</div>
         <div class="sc-live">
-          <div class="sc-idx">40,524</div>
-          <div class="sc-chg sc-up">▲ +0.72%</div>
+          <div class="sc-idx" data-idx="niftyenergy">40,548</div>
+          <div class="sc-chg sc-up">▲ +0.22%</div>
         </div>
       </div>
       <h3 style="margin-bottom:6px">Energy &amp; Infrastructure</h3>
@@ -558,7 +558,7 @@
     <h3>Track your wealth alongside the markets</h3>
     <p>Use WorthScale's free dashboard to log your portfolio, calculate your net worth, and plan your financial goals — all in one place.</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a href="/app" class="btn btn-primary btn-lg" style="background:#fff;color:#1e40af;font-weight:700">Open Dashboard — Free →</a>
+      <a href="/net-worth-calculator" class="btn btn-primary btn-lg" style="background:#fff;color:#1e40af;font-weight:700">Calculate Net Worth — Free →</a>
       <a href="/net-worth-calculator" class="btn btn-lg" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.4)">Net Worth Calculator</a>
     </div>
   </div>
