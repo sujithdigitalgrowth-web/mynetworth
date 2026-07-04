@@ -351,7 +351,18 @@
   <div class="cta-banner">
     <h3>Turn this into a real financial goal</h3>
     <p>Track your down payment progress, monthly savings, emergency fund, and net worth together inside the dashboard.</p>
-    <a href="/app" class="btn btn-primary">Open Dashboard ?</a>
+    <a href="/app" class="btn btn-primary">Open Dashboard →</a>
+  </div>
+
+  <!-- Horizontal Ads -->
+  <div class="ad-wrap" style="text-align:center; padding: 16px 0;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4837443132966026"
+         data-ad-slot="6196347060"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
   <div class="content-section">
@@ -474,7 +485,7 @@
   <div class="cta-banner">
     <h3>Track all your financial goals in one place</h3>
     <p>House, retirement, emergency fund, investments, and net worth — manage everything inside the free dashboard.</p>
-    <a href="/app" class="btn btn-primary">Start Tracking for Free ?</a>
+    <a href="/app" class="btn btn-primary">Start Tracking for Free →</a>
   </div>
 
   <div class="disclaimer">
@@ -484,19 +495,8 @@
 </div>
 </main>
 
-<!-- Horizontal Ads -->
-<div style="text-align:center; padding: 16px 0;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-4837443132966026"
-       data-ad-slot="6196347060"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
 <!-- Autorelaxed Ad -->
-<div style="text-align:center; padding: 8px 0 16px;">
+<div class="ad-wrap" style="text-align:center; padding: 8px 0 16px;">
   <ins class="adsbygoogle"
        style="display:block"
        data-ad-format="autorelaxed"
@@ -544,9 +544,9 @@ function fmt(n){
   if(n==null||isNaN(n)) return '₹0';
   const a=Math.abs(n);
   let s;
-  if(a>=1e7) s='?'+(a/1e7).toFixed(2)+' Cr';
-  else if(a>=1e5) s='?'+(a/1e5).toFixed(2)+' L';
-  else s='?'+Math.round(a).toLocaleString('en-IN');
+  if(a>=1e7) s='₹'+(a/1e7).toFixed(2)+' Cr';
+  else if(a>=1e5) s='₹'+(a/1e5).toFixed(2)+' L';
+  else s='₹'+Math.round(a).toLocaleString('en-IN');
   return n<0?'-'+s:s;
 }
 

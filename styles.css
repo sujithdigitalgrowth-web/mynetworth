@@ -257,9 +257,19 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:10px}
 .example-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin:14px 0;font-size:.85rem;color:var(--text);line-height:1.7}
 .example-box strong{color:var(--green)}
 
+/* === ADS: reserve space up front so the page doesn't jump when the slot fills (CLS) === */
+ins.adsbygoogle{max-width:100%}
+.ad-wrap{min-height:280px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ad-wrap ins.adsbygoogle{width:100%}
+ins.adsbygoogle[data-ad-layout="in-article"]{display:block;min-height:250px;margin:20px auto;overflow:hidden}
+@media(max-width:768px){
+  .ad-wrap{min-height:250px}
+  ins.adsbygoogle[data-ad-layout="in-article"]{min-height:220px}
+}
+
 /* === ADS: collapse unfilled slots so no blank space === */
 ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;height:0!important;min-height:0!important}
-.ad-wrap:has(ins.adsbygoogle[data-ad-status="unfilled"]){display:none!important;padding:0!important;margin:0!important}
+.ad-wrap:has(ins.adsbygoogle[data-ad-status="unfilled"]){display:none!important;padding:0!important;margin:0!important;min-height:0!important}
 
 /* === TIPS GRID === */
 .tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
