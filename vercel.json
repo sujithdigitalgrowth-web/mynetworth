@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node generate-sitemap.js",
+  "buildCommand": "node generate-sitemap.js && node generate-og-images.js",
   "outputDirectory": ".",
   "cleanUrls": true,
   "headers": [

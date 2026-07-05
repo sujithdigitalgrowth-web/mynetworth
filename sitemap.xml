@@ -4,747 +4,793 @@
   <!-- Main Pages -->
   <url>
     <loc>https://worthscale.in/</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://worthscale.in/markets</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/companies</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/crypto</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/nifty-50</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/richest-indians</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://worthscale.in/app</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://worthscale.in/net-worth-calculator</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://worthscale.in/emergency-fund-calculator</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://worthscale.in/house-down-payment-calculator</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://worthscale.in/sip-calculator</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/income-tax-calculator</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://worthscale.in/about</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://worthscale.in/contact</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://worthscale.in/share</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-05-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://worthscale.in/privacy-policy</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://worthscale.in/terms</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://worthscale.in/sitemap</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sector Pages -->
+  <url>
+    <loc>https://worthscale.in/sectors/auto</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/sectors/banking</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/sectors/energy</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/sectors/fmcg</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/sectors/it</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worthscale.in/sectors/pharma</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Blog Pages -->
   <url>
     <loc>https://worthscale.in/blog/abdu-rozik-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/accenture-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/adani-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/airtel-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/alakh-pandey-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/allu-arjun-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/aman-gupta-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/amber-heard-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/anil-ambani-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/apple-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/arijit-singh-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/ashneer-grover-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/asian-paints-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/axis-bank-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/bajaj-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/berkshire-hathaway-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/bharatpe-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/blackrock-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/boat-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/carryminati-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/coca-cola-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/cristiano-ronaldo-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/deepika-padukone-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/elon-musk-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/elvish-yadav-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/emergency-fund-guide</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/falguni-nayar-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/financial-freedom-steps</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/flipkart-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/gautam-adani-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/goldman-sachs-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/hardik-pandya-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/hdfc-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/how-to-calculate-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/hrithik-roshan-net-worth</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/ibm-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/icici-bank-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/infosys-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/ishowspeed-net-worth</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/itc-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/jeff-bezos-net-worth</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/jio-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/jpmorgan-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/kapil-sharma-net-worth</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/kfc-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/khan-sir-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/kkr-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/kotak-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/kriti-sanon-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/kylie-jenner-net-worth</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/lenskart-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/lic-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/lionel-messi-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/mamaearth-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/mark-zuckerberg-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/maruti-suzuki-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/meta-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/mi-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/microsoft-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/mrbeast-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/ms-dhoni-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/nestle-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/net-worth-vs-salary</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/netflix-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/nikhil-kamath-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/nykaa-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/ola-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/palash-muchhal-net-worth</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/patanjali-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/paytm-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/peyush-bansal-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/phonepe-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/physics-wallah-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/prabhas-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/prashant-kirad-net-worth</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/radhika-gupta-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/raj-shamani-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/ratan-tata-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/reliance-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/ritesh-agarwal-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/rohit-sharma-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/sachin-tendulkar-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/saif-ali-khan-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/salesforce-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/salman-khan-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/satoshi-nakamoto-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/satya-nadella-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/shah-rukh-khan-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/shilpa-shirodkar-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/sourav-joshi-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/srikanth-bolla-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/starbucks-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/sundar-pichai-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/swiggy-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/tata-group-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/taylor-swift-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/uber-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/vedanta-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/vicky-jain-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/vijay-mallya-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/virat-kohli-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/vivek-oberoi-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/zaheer-iqbal-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/zepto-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/zerodha-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://worthscale.in/blog/zomato-net-worth</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <url>
-    <loc>https://worthscale.in/markets</loc>
-    <lastmod>2026-06-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://worthscale.in/companies</loc>
-    <lastmod>2026-06-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://worthscale.in/crypto</loc>
-    <lastmod>2026-06-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://worthscale.in/richest-indians</loc>
-    <lastmod>2026-06-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url><loc>https://worthscale.in/sip-calculator</loc><lastmod>2026-06-14</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://worthscale.in/income-tax-calculator</loc><lastmod>2026-06-14</lastmod><changefreq>yearly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://worthscale.in/nifty-50</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://worthscale.in/sectors/it</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://worthscale.in/sectors/banking</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://worthscale.in/sectors/pharma</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://worthscale.in/sectors/auto</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://worthscale.in/sectors/fmcg</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://worthscale.in/sectors/energy</loc><lastmod>2026-06-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 
 </urlset>
