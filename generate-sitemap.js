@@ -17,6 +17,8 @@ const mainPages = [
   { route: '/house-down-payment-calculator', file: 'house-down-payment-calculator.html', changefreq: 'monthly', priority: '0.9' },
   { route: '/sip-calculator', file: 'sip-calculator.html', changefreq: 'monthly', priority: '0.9' },
   { route: '/income-tax-calculator', file: 'income-tax-calculator.html', changefreq: 'yearly', priority: '0.9' },
+  { route: '/new-tax-regime-calculator', file: 'new-tax-regime-calculator.html', changefreq: 'yearly', priority: '0.9' },
+  { route: '/home-loan-emi-calculator', file: 'home-loan-emi-calculator.html', changefreq: 'monthly', priority: '0.9' },
   { route: '/about', file: 'about.html', changefreq: 'monthly', priority: '0.6' },
   { route: '/contact', file: 'contact.html', changefreq: 'monthly', priority: '0.5' },
   { route: '/share', file: 'share.html', changefreq: 'monthly', priority: '0.5' },

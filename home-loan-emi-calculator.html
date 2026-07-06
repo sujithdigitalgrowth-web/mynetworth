@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-4837443132966026">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Loan EMI Calculator (Free) | WorthScale</title>
+<meta name="description" content="Free Home Loan EMI Calculator for India. Get your monthly EMI, total interest, and see how many years you save by paying extra every month.">
+<meta name="keywords" content="home loan emi calculator, home loan calculator india, loan prepayment calculator, emi calculator with prepayment, home loan tenure calculator, housing loan calculator">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://worthscale.in/home-loan-emi-calculator">
+
+<meta property="og:title" content="Home Loan EMI Calculator">
+<meta property="og:description" content="Calculate your home loan EMI and see exactly how many years and how much interest you save by paying extra every month.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://worthscale.in/home-loan-emi-calculator">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Home Loan EMI Calculator",
+      "description": "Free online Home Loan EMI Calculator for India. Calculate monthly EMI, total interest payable, and see how extra monthly payments reduce your loan tenure and interest cost.",
+      "url": "https://worthscale.in/home-loan-emi-calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is home loan EMI calculated?",
+          "acceptedAnswer": { "@type": "Answer", "text": "EMI = P × r × (1+r)^n / ((1+r)^n − 1), where P is the loan principal, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the total number of monthly instalments. For example, a ₹40 lakh loan at 8.5% for 20 years works out to an EMI of about ₹34,700 per month." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does prepayment reduce my EMI or my tenure?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Most Indian banks let you choose. Reducing tenure (keeping EMI the same, paying off faster) saves far more interest than reducing EMI (keeping tenure the same, lowering the monthly payment) for the same prepayment amount. This calculator assumes you keep your EMI fixed and pay extra every month, which maximizes interest savings." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a penalty for prepaying a home loan in India?",
+          "acceptedAnswer": { "@type": "Answer", "text": "As per RBI rules, banks and NBFCs cannot charge foreclosure or prepayment penalties on floating-rate home loans taken by individual borrowers. Fixed-rate loans may still carry prepayment charges, typically 2-4% of the prepaid amount — check your loan agreement before prepaying a fixed-rate loan." }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I prepay my home loan or invest the extra money in SIP?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Compare your loan interest rate to your expected investment return. If your home loan rate is 8-9% and you can realistically earn 12%+ from an equity SIP over the long term, investing may build more wealth. But prepayment is a guaranteed, risk-free return equal to your loan rate, while SIP returns are market-linked and not guaranteed. Many people do both — prepay a portion and invest the rest." }
+        },
+        {
+          "@type": "Question",
+          "name": "What tax benefits are available on a home loan?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Under the Old Tax Regime: Section 24(b) allows up to ₹2 lakh deduction on home loan interest for a self-occupied property, and Section 80C allows up to ₹1.5 lakh deduction on principal repayment. The New Tax Regime does not allow either deduction for a self-occupied property, though interest on a let-out (rented) property remains deductible under both regimes." }
+        },
+        {
+          "@type": "Question",
+          "name": "Fixed vs floating home loan interest rate — which is better?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Floating rates move with RBI's repo rate and are usually lower to start, with no prepayment penalty — better if you plan to prepay or rates may fall. Fixed rates stay constant for a set period, offering predictability but usually at a higher starting rate, and may carry prepayment charges. Most home loans in India today are floating-rate (repo-linked)." }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://worthscale.in/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://worthscale.in/net-worth-calculator" },
+        { "@type": "ListItem", "position": 3, "name": "Home Loan EMI Calculator", "item": "https://worthscale.in/home-loan-emi-calculator" }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/styles.css">
+<style>
+.tool-hero{background:linear-gradient(135deg,#0f172a,#1e3a5f);padding:40px 0 32px;color:#fff}
+.tool-hero h1{font-size:1.9rem;font-weight:800;color:#fff;margin-bottom:8px}
+.tool-hero p{font-size:.92rem;color:#94a3b8;max-width:600px;line-height:1.7}
+.tool-badge{display:inline-block;background:rgba(74,222,128,.15);color:#4ade80;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;padding:4px 10px;border-radius:4px;margin-bottom:12px}
+
+.calc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;margin-top:24px}
+.calc-inputs{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px}
+.calc-inputs h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:20px}
+.input-row{margin-bottom:18px}
+.input-row label{display:flex;justify-content:space-between;align-items:center;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:6px}
+.input-row label span{font-size:.64rem;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0}
+.input-row .input-wrap{display:flex;align-items:center;gap:0;border:1.5px solid var(--border);border-radius:9px;overflow:hidden;transition:border-color .2s;background:var(--card)}
+.input-row .input-wrap:focus-within{border-color:var(--blue)}
+.input-row .input-prefix,.input-row .input-suffix{background:var(--bg2);padding:10px 13px;font-size:.82rem;font-weight:600;color:var(--muted);flex-shrink:0;border:none}
+.input-row input{border:none;outline:none;padding:10px 12px;font-size:.95rem;font-weight:700;color:var(--text);width:100%;background:transparent;font-family:inherit}
+.input-row input::-webkit-inner-spin-button{-webkit-appearance:none}
+.preset-pills{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.preset-pill{padding:4px 12px;border-radius:20px;font-size:.72rem;font-weight:600;border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;transition:all .15s}
+.preset-pill:hover,.preset-pill.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.input-hint{font-size:.66rem;color:var(--muted);margin-top:5px}
+
+.slider-wrap{margin-top:6px}
+.slider-wrap input[type=range]{width:100%;accent-color:var(--blue);height:4px}
+.slider-labels{display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:3px}
+
+.calc-results{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;position:sticky;top:80px}
+.result-main{text-align:center;padding:20px;background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(16,163,74,.06));border-radius:12px;margin-bottom:20px;border:1px solid rgba(37,99,235,.12)}
+.result-main .rm-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:6px}
+.result-main .rm-val{font-size:2.2rem;font-weight:800;color:var(--blue);line-height:1}
+.result-main .rm-sub{font-size:.72rem;color:var(--muted);margin-top:6px}
+.result-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.result-row{display:flex;justify-content:space-between;align-items:center;font-size:.84rem}
+.result-row .rr-label{color:var(--text2)}
+.result-row .rr-val{font-weight:700;color:var(--text)}
+.result-row .rr-val.green{color:var(--green)}
+.result-row .rr-val.red{color:var(--red)}
+
+.stack-bar{height:10px;border-radius:5px;overflow:hidden;display:flex;margin-bottom:6px}
+.sb-p{background:var(--blue);transition:width .4s ease}
+.sb-i{background:var(--orange);transition:width .4s ease}
+.stack-legend{display:flex;gap:16px;font-size:.68rem}
+.sl-dot{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
+
+.prepay-banner{border-radius:12px;padding:18px 20px;margin:18px 0;text-align:center;background:rgba(22,163,74,.08);border:1.5px solid rgba(22,163,74,.25);display:none}
+.prepay-banner.show{display:block}
+.prepay-banner .pb-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--green);margin-bottom:4px}
+.prepay-banner .pb-main{font-size:1.15rem;font-weight:800;color:var(--green);line-height:1.3}
+.prepay-compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.pc-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center}
+.pc-card .pcc-label{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.pc-card .pcc-val{font-size:1rem;font-weight:800;color:var(--text)}
+
+.info-box{background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.15);border-radius:10px;padding:16px 20px;font-size:.8rem;color:var(--text2);line-height:1.65;margin-top:16px}
+
+.year-table-wrap{margin-top:32px}
+.year-table-wrap h3{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:12px}
+.ytable{width:100%;border-collapse:collapse;font-size:.82rem}
+.ytable th{background:var(--bg2);padding:10px 14px;text-align:left;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border)}
+.ytable td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2)}
+.ytable tr:hover td{background:var(--bg2)}
+.ytable tr:last-child td{border-bottom:none;font-weight:700;color:var(--text)}
+.ytable .balance-cell{color:var(--blue);font-weight:700}
+
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{padding:15px 0;font-weight:600;font-size:.9rem;cursor:pointer;color:var(--text);display:flex;justify-content:space-between;gap:12px}
+.faq-q::after{content:"+";font-size:1.1rem;color:var(--muted);flex-shrink:0}
+.faq-item.open .faq-q::after{content:"−"}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-a{max-height:420px;padding-bottom:14px}
+.faq-a p{font-size:.83rem;color:var(--text2);line-height:1.7;margin:0}
+
+@media(max-width:900px){.calc-wrap,.prepay-compare{grid-template-columns:1fr}.calc-results{position:static}}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34VQNGQFDY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-34VQNGQFDY');</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo">⚖️ WorthScale</a>
+  <div class="nav-links">
+    <a href="/">Home</a><a href="/markets">Markets</a><a href="/companies">Companies</a><a href="/crypto">Crypto</a>
+    <div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Tools &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
+        <a href="/sip-calculator">📈 SIP Calculator</a>
+        <a href="/income-tax-calculator">🧾 Income Tax Calculator</a>
+        <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
+        <a href="/house-down-payment-calculator">&#127968; Down Payment Calculator</a>
+        <a href="/new-tax-regime-calculator">🆕 New Tax Regime Calculator</a>
+        <a href="/home-loan-emi-calculator">🏦 Home Loan EMI Calculator</a>
+        <a href="/richest-indians">&#127942; India Rich List 2026</a>
+      </div>
+    </div>
+    <a href="/blog">Blog</a><a href="/about">About</a><a href="/contact">Contact</a>
+    <a href="/app" class="nav-cta">Open Dashboard</a>
+  </div>
+  <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
+</div></nav>
+
+<main>
+<section class="tool-hero">
+<div class="container">
+  <div class="tool-badge">🏦 Free Tool</div>
+  <h1>Home Loan EMI Calculator</h1>
+  <p>Calculate your monthly EMI and total interest — then see exactly how many years and how much interest you save by paying extra every month.</p>
+  <div style="font-size:.72rem;color:#475569;margin-top:14px">
+    <a href="/" style="color:#64748b">Home</a> › <a href="/net-worth-calculator" style="color:#64748b">Tools</a> › Home Loan EMI Calculator
+  </div>
+</div>
+</section>
+
+<section style="padding:36px 0 56px">
+<div class="container">
+
+  <div class="calc-wrap">
+    <!-- INPUTS -->
+    <div class="calc-inputs">
+      <h3>🏦 Loan Details</h3>
+
+      <div class="input-row">
+        <label>Loan Amount</label>
+        <div class="input-wrap">
+          <span class="input-prefix">₹</span>
+          <input type="number" id="loan-amount" value="4000000" oninput="calc()" placeholder="4000000">
+        </div>
+        <div class="preset-pills">
+          <span class="preset-pill" onclick="setVal('loan-amount',2000000)">₹20L</span>
+          <span class="preset-pill" onclick="setVal('loan-amount',4000000)">₹40L</span>
+          <span class="preset-pill" onclick="setVal('loan-amount',6000000)">₹60L</span>
+          <span class="preset-pill" onclick="setVal('loan-amount',10000000)">₹1Cr</span>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <label>Interest Rate</label>
+        <div class="input-wrap">
+          <input type="number" id="loan-rate" value="8.5" min="1" max="20" step="0.05" oninput="calc()">
+          <span class="input-suffix">% p.a.</span>
+        </div>
+        <div class="preset-pills">
+          <span class="preset-pill" onclick="setVal('loan-rate',8)">8%</span>
+          <span class="preset-pill" onclick="setVal('loan-rate',8.5)">8.5%</span>
+          <span class="preset-pill" onclick="setVal('loan-rate',9.5)">9.5%</span>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <label>Loan Tenure — <strong id="tenure-display">20 years</strong></label>
+        <div class="slider-wrap">
+          <input type="range" id="loan-years" min="1" max="30" value="20" oninput="document.getElementById('tenure-display').textContent=this.value+' year'+(this.value>1?'s':'');calc()">
+          <div class="slider-labels"><span>1 yr</span><span>10</span><span>20</span><span>30 yrs</span></div>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <label>Extra Monthly Payment <span>(Optional — prepayment)</span></label>
+        <div class="input-wrap">
+          <span class="input-prefix">₹</span>
+          <input type="number" id="extra-payment" value="0" oninput="calc()" placeholder="0">
+        </div>
+        <div class="preset-pills">
+          <span class="preset-pill" onclick="setVal('extra-payment',0)">₹0</span>
+          <span class="preset-pill" onclick="setVal('extra-payment',5000)">+₹5K</span>
+          <span class="preset-pill" onclick="setVal('extra-payment',10000)">+₹10K</span>
+          <span class="preset-pill" onclick="setVal('extra-payment',20000)">+₹20K</span>
+        </div>
+        <div class="input-hint">Pay this much extra every month on top of your EMI — see how much sooner you finish the loan.</div>
+      </div>
+
+      <div class="info-box">
+        💡 <strong>No prepayment penalty:</strong> RBI rules mean banks cannot charge foreclosure or prepayment penalties on floating-rate home loans for individual borrowers. Extra payments go entirely toward reducing your principal.
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="calc-results">
+      <div class="result-main">
+        <div class="rm-label">Monthly EMI</div>
+        <div class="rm-val" id="res-emi">₹0</div>
+        <div class="rm-sub">For <span id="res-years">20</span> years at <span id="res-rate">8.5</span>% p.a.</div>
+      </div>
+
+      <div class="result-rows">
+        <div class="result-row">
+          <span class="rr-label">🏠 Principal Amount</span>
+          <span class="rr-val" id="res-principal">₹0</span>
+        </div>
+        <div class="result-row">
+          <span class="rr-label">📈 Total Interest Payable</span>
+          <span class="rr-val red" id="res-interest">₹0</span>
+        </div>
+        <div class="result-row">
+          <span class="rr-label">💰 Total Payment</span>
+          <span class="rr-val" id="res-total">₹0</span>
+        </div>
+      </div>
+
+      <div class="stack-bar">
+        <div class="sb-p" id="bar-p" style="width:50%"></div>
+        <div class="sb-i" id="bar-i" style="width:50%"></div>
+      </div>
+      <div class="stack-legend">
+        <span><span class="sl-dot" style="background:var(--blue)"></span>Principal</span>
+        <span><span class="sl-dot" style="background:var(--orange)"></span>Interest</span>
+        <span style="margin-left:auto;font-size:.68rem;color:var(--muted)" id="bar-pct"></span>
+      </div>
+
+      <div class="prepay-banner" id="prepay-banner">
+        <div class="pb-title">🎉 With Extra Payments</div>
+        <div class="pb-main" id="prepay-headline">—</div>
+        <div class="prepay-compare">
+          <div class="pc-card">
+            <div class="pcc-label">New Tenure</div>
+            <div class="pcc-val" id="prepay-tenure">—</div>
+          </div>
+          <div class="pc-card">
+            <div class="pcc-label">Interest Saved</div>
+            <div class="pcc-val" id="prepay-saved" style="color:var(--green)">—</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="/sip-calculator" style="display:block;text-align:center;margin-top:18px;font-size:.78rem;font-weight:600;color:var(--blue);text-decoration:none">Thinking of investing instead? → SIP Calculator</a>
+    </div>
+  </div>
+
+  <!-- CHART -->
+  <div style="margin-top:32px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px">
+      <h3 style="font-size:.95rem;font-weight:700;color:var(--text);margin:0">📉 Outstanding Balance Over Time</h3>
+      <div style="display:flex;gap:14px;font-size:.72rem;font-weight:600">
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:rgba(37,99,235,.8);display:inline-block"></span>Regular EMI</span>
+        <span style="display:flex;align-items:center;gap:5px" id="legend-extra"><span style="width:10px;height:10px;border-radius:2px;background:rgba(22,163,74,.8);display:inline-block"></span>With Extra Payment</span>
+      </div>
+    </div>
+    <div style="position:relative;height:280px">
+      <canvas id="loan-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- YEAR TABLE -->
+  <div class="year-table-wrap">
+    <h3>📊 Year-by-Year Amortization</h3>
+    <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
+      <table class="ytable">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Principal Paid</th>
+            <th>Interest Paid</th>
+            <th>Total Paid</th>
+            <th>Balance Remaining</th>
+          </tr>
+        </thead>
+        <tbody id="year-table-body">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="margin-top:44px">
+  <div class="container-sm" style="padding:0" itemscope itemtype="https://schema.org/FAQPage">
+    <h2 style="font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:16px">Home Loan EMI Calculator FAQs</h2>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">How is home loan EMI calculated?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">EMI = P × r × (1+r)^n / ((1+r)^n − 1), where P is the loan principal, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the total number of monthly instalments. For example, a ₹40 lakh loan at 8.5% for 20 years works out to an EMI of about ₹34,700 per month.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Does prepayment reduce my EMI or my tenure?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Most Indian banks let you choose. Reducing tenure (keeping EMI the same, paying off faster) saves far more interest than reducing EMI (keeping tenure the same, lowering the monthly payment) for the same prepayment amount. This calculator assumes you keep your EMI fixed and pay extra every month, which maximizes interest savings.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Is there a penalty for prepaying a home loan in India?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">As per RBI rules, banks and NBFCs cannot charge foreclosure or prepayment penalties on floating-rate home loans taken by individual borrowers. Fixed-rate loans may still carry prepayment charges, typically 2-4% of the prepaid amount — check your loan agreement before prepaying a fixed-rate loan.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Should I prepay my home loan or invest the extra money in SIP?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Compare your loan interest rate to your expected investment return. If your home loan rate is 8-9% and you can realistically earn 12%+ from an equity SIP over the long term, investing may build more wealth. But prepayment is a guaranteed, risk-free return equal to your loan rate, while SIP returns are market-linked and not guaranteed. Many people do both — prepay a portion and invest the rest.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">What tax benefits are available on a home loan?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Under the Old Tax Regime: Section 24(b) allows up to ₹2 lakh deduction on home loan interest for a self-occupied property, and Section 80C allows up to ₹1.5 lakh deduction on principal repayment. The New Tax Regime does not allow either deduction for a self-occupied property, though interest on a let-out (rented) property remains deductible under both regimes.</p></div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">Fixed vs floating home loan interest rate — which is better?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Floating rates move with RBI's repo rate and are usually lower to start, with no prepayment penalty — better if you plan to prepay or rates may fall. Fixed rates stay constant for a set period, offering predictability but usually at a higher starting rate, and may carry prepayment charges. Most home loans in India today are floating-rate (repo-linked).</p></div>
+    </div>
+  </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="margin-top:32px;background:linear-gradient(135deg,#1e40af,#1d4ed8);border-radius:18px;padding:36px;text-align:center;color:#fff">
+    <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:8px;color:#fff">Planning to buy a home?</h3>
+    <p style="font-size:.85rem;opacity:.85;margin-bottom:18px;color:#fff">Check how much down payment you need to save before you take this loan, and see how home loan interest affects your taxes.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="/house-down-payment-calculator" style="background:#fff;color:#1e40af;padding:11px 24px;border-radius:9px;font-weight:700;font-size:.88rem;text-decoration:none">Down Payment Calculator</a>
+      <a href="/income-tax-calculator" style="background:rgba(255,255,255,.15);color:#fff;padding:11px 24px;border-radius:9px;font-weight:700;font-size:.88rem;text-decoration:none;border:1.5px solid rgba(255,255,255,.3)">Old vs New Tax Regime</a>
+    </div>
+  </div>
+
+</div>
+</section>
+</main>
+
+<footer class="site-footer"><div class="footer-inner footer-grid">
+  <div class="footer-about"><div class="footer-brand">⚖️ WorthScale</div><p class="footer-desc">India's free finance hub — market insights, company valuations, and financial calculators.</p></div>
+  <div class="footer-col"><h4>Calculators</h4><a href="/sip-calculator">SIP Calculator</a><a href="/income-tax-calculator">Income Tax Calculator</a><a href="/new-tax-regime-calculator">New Tax Regime Calculator</a><a href="/home-loan-emi-calculator">Home Loan EMI Calculator</a><a href="/net-worth-calculator">Net Worth Calculator</a><a href="/emergency-fund-calculator">Emergency Fund</a><a href="/house-down-payment-calculator">Down Payment</a></div>
+  <div class="footer-col"><h4>Explore</h4><a href="/markets">Markets</a><a href="/nifty-50">Nifty 50</a><a href="/companies">Companies</a><a href="/crypto">Crypto</a><a href="/richest-indians">Rich List 2026</a></div>
+  <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/contact">Contact</a><a href="/privacy-policy">Privacy Policy</a></div>
+</div><div class="footer-bottom"><p>&copy; 2026 WorthScale. This calculator is for educational and illustrative purposes only. Not financial advice.</p></div></footer>
+
+<script src="/nav.js"></script>
+<script>
+function setVal(id, val) {
+  document.getElementById(id).value = val;
+  const el = document.getElementById(id);
+  const pills = el.closest('.input-row').querySelectorAll('.preset-pill');
+  pills.forEach(p => p.classList.remove('active'));
+  calc();
+}
+
+function fmt(n) {
+  if(n >= 10000000) return '₹' + (n/10000000).toFixed(2) + ' Cr';
+  if(n >= 100000)   return '₹' + (n/100000).toFixed(2) + ' L';
+  return '₹' + Math.round(n).toLocaleString('en-IN');
+}
+function fmtShort(n) {
+  if(n >= 10000000) return '₹' + (n/10000000).toFixed(1) + 'Cr';
+  if(n >= 100000)   return '₹' + (n/100000).toFixed(1) + 'L';
+  return '₹' + Math.round(n).toLocaleString('en-IN');
+}
+
+function calcEmi(P, annualRate, years) {
+  var r = annualRate / 12 / 100;
+  var n = years * 12;
+  var emi = r === 0 ? P / n : P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+  return { emi: emi, n: n, r: r };
+}
+
+// Simulates paying (EMI + extra) every month, tracking balance, interest, and
+// per-year totals so the amortization table works for both plain and prepaid schedules.
+function amortize(P, annualRate, years, extra) {
+  var base = calcEmi(P, annualRate, years);
+  var emi = base.emi, r = base.r;
+  var balance = P, month = 0, totalInterest = 0;
+  var yearly = [];
+  var yPrincipal = 0, yInterest = 0;
+  var balancesByYear = [P];
+
+  while (balance > 1 && month < 720) {
+    var interest = balance * r;
+    var principalComp = emi - interest + extra;
+    if (principalComp > balance) principalComp = balance;
+    balance -= principalComp;
+    totalInterest += interest;
+    yPrincipal += principalComp;
+    yInterest += interest;
+    month++;
+
+    if (month % 12 === 0 || balance <= 1) {
+      yearly.push({ year: yearly.length + 1, principal: yPrincipal, interest: yInterest, balance: Math.max(0, balance) });
+      balancesByYear.push(Math.max(0, balance));
+      yPrincipal = 0; yInterest = 0;
+    }
+  }
+
+  return { emi: emi, months: month, totalInterest: totalInterest, totalPayment: P + totalInterest, yearly: yearly, balancesByYear: balancesByYear };
+}
+
+function calc() {
+  var P = parseFloat(document.getElementById('loan-amount').value) || 0;
+  var rate = parseFloat(document.getElementById('loan-rate').value) || 0;
+  var years = parseInt(document.getElementById('loan-years').value) || 1;
+  var extra = parseFloat(document.getElementById('extra-payment').value) || 0;
+
+  var base = amortize(P, rate, years, 0);
+  var withExtra = extra > 0 ? amortize(P, rate, years, extra) : null;
+
+  document.getElementById('res-emi').textContent = fmt(base.emi);
+  document.getElementById('res-years').textContent = years;
+  document.getElementById('res-rate').textContent = rate;
+  document.getElementById('res-principal').textContent = fmt(P);
+  document.getElementById('res-interest').textContent = fmt(base.totalInterest);
+  document.getElementById('res-total').textContent = fmt(base.totalPayment);
+
+  var pctP = base.totalPayment > 0 ? Math.round((P / base.totalPayment) * 100) : 50;
+  document.getElementById('bar-p').style.width = pctP + '%';
+  document.getElementById('bar-i').style.width = (100 - pctP) + '%';
+  document.getElementById('bar-pct').textContent = (100 - pctP) + '% interest';
+
+  var banner = document.getElementById('prepay-banner');
+  var legendExtra = document.getElementById('legend-extra');
+  if (withExtra && withExtra.months < base.months) {
+    banner.classList.add('show');
+    legendExtra.style.display = 'flex';
+    var monthsSaved = base.months - withExtra.months;
+    var ySaved = Math.floor(monthsSaved / 12), mSaved = monthsSaved % 12;
+    var savedText = (ySaved > 0 ? ySaved + ' yr ' : '') + (mSaved > 0 ? mSaved + ' mo' : '');
+    if (!savedText.trim()) savedText = 'a few weeks';
+    document.getElementById('prepay-headline').textContent = 'Pay off ' + savedText + ' sooner';
+    var newYears = Math.floor(withExtra.months / 12), newMonths = withExtra.months % 12;
+    document.getElementById('prepay-tenure').textContent = newYears + 'y ' + newMonths + 'm';
+    document.getElementById('prepay-saved').textContent = fmt(base.totalInterest - withExtra.totalInterest);
+  } else {
+    banner.classList.remove('show');
+    legendExtra.style.display = 'none';
+  }
+
+  buildYearTable(withExtra || base);
+  updateChart(base, withExtra);
+}
+
+function buildYearTable(schedule) {
+  var rows = '';
+  schedule.yearly.forEach(function(y) {
+    rows += '<tr>' +
+      '<td><strong>Year ' + y.year + '</strong></td>' +
+      '<td>' + fmt(y.principal) + '</td>' +
+      '<td style="color:var(--orange)">' + fmt(y.interest) + '</td>' +
+      '<td>' + fmt(y.principal + y.interest) + '</td>' +
+      '<td class="balance-cell">' + fmt(y.balance) + '</td>' +
+      '</tr>';
+  });
+  document.getElementById('year-table-body').innerHTML = rows;
+}
+
+var loanChart = null;
+function updateChart(base, withExtra) {
+  var labels = base.balancesByYear.map(function(_, i) { return 'Yr ' + i; });
+  var baseData = base.balancesByYear.map(function(v) { return Math.round(v); });
+  var extraData = withExtra ? withExtra.balancesByYear.map(function(v) { return Math.round(v); }) : null;
+
+  var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+  var gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  var tickColor = isDark ? '#64748b' : '#94a3b8';
+
+  var datasets = [{
+    label: 'Regular EMI',
+    data: baseData,
+    borderColor: 'rgba(37,99,235,0.9)',
+    backgroundColor: 'rgba(37,99,235,0.08)',
+    fill: true,
+    tension: 0.25,
+    pointRadius: 0,
+  }];
+  if (extraData) {
+    datasets.push({
+      label: 'With Extra Payment',
+      data: extraData,
+      borderColor: 'rgba(22,163,74,0.9)',
+      backgroundColor: 'rgba(22,163,74,0.08)',
+      fill: true,
+      tension: 0.25,
+      pointRadius: 0,
+    });
+  }
+
+  if (loanChart) {
+    loanChart.data.labels = labels;
+    loanChart.data.datasets = datasets;
+    loanChart.update('none');
+    return;
+  }
+
+  var ctx = document.getElementById('loan-chart');
+  if (!ctx) return;
+
+  loanChart = new Chart(ctx, {
+    type: 'line',
+    data: { labels: labels, datasets: datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 300 },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: function(c) { return ' ' + c.dataset.label + ': ' + fmtShort(c.raw); } } },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: tickColor, font: { size: 10 }, maxTicksLimit: 10 } },
+        y: { grid: { color: gridColor }, border: { dash: [4, 4] }, ticks: { color: tickColor, font: { size: 10 }, callback: function(v) { return fmtShort(v); } } },
+      },
+    },
+  });
+}
+
+calc();
+</script>
+</body>
+</html>
