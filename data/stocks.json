@@ -1,290 +1,290 @@
 {
-  "updated": "2026-07-21",
+  "updated": "2026-07-22",
   "stocks": {
     "ABBOTINDIA": {
-      "ltp": 28800,
-      "change": 525,
-      "changePct": 1.86
+      "ltp": 28900,
+      "change": 100,
+      "changePct": 0.35
     },
     "ADANIGREEN": {
-      "ltp": 1541.9,
-      "change": 11.9,
-      "changePct": 0.78
+      "ltp": 1472.3,
+      "change": -69.6,
+      "changePct": -4.51
     },
     "ADANIPOWER": {
-      "ltp": 220.37,
-      "change": 0.4,
-      "changePct": 0.18
+      "ltp": 216.95,
+      "change": -3.42,
+      "changePct": -1.55
     },
     "ALKEM": {
-      "ltp": 5681.5,
-      "change": 28,
-      "changePct": 0.5
+      "ltp": 5585,
+      "change": -96.5,
+      "changePct": -1.7
     },
     "ASHOKLEY": {
-      "ltp": 153.94,
-      "change": -0.86,
-      "changePct": -0.56
+      "ltp": 152.49,
+      "change": -1.45,
+      "changePct": -0.94
     },
     "AUROPHARMA": {
-      "ltp": 1579.7,
-      "change": 20.1,
-      "changePct": 1.29
+      "ltp": 1533.6,
+      "change": -46.1,
+      "changePct": -2.92
     },
     "AXISBANK": {
-      "ltp": 1258.2,
-      "change": 2.2,
-      "changePct": 0.18
+      "ltp": 1238.4,
+      "change": -19.8,
+      "changePct": -1.57
     },
     "BANKBARODA": {
-      "ltp": 247.7,
-      "change": -7.15,
-      "changePct": -2.81
+      "ltp": 245.75,
+      "change": -1.95,
+      "changePct": -0.79
     },
     "BOSCHLTD": {
-      "ltp": 40870,
-      "change": -90,
-      "changePct": -0.22
+      "ltp": 41560,
+      "change": 690,
+      "changePct": 1.69
     },
     "BPCL": {
-      "ltp": 319.35,
-      "change": 1.75,
-      "changePct": 0.55
+      "ltp": 314,
+      "change": -5.35,
+      "changePct": -1.68
     },
     "BRITANNIA": {
-      "ltp": 5482,
-      "change": 12,
-      "changePct": 0.22
+      "ltp": 5485.5,
+      "change": 3.5,
+      "changePct": 0.06
     },
     "CANBK": {
-      "ltp": 127.52,
-      "change": -1.3,
-      "changePct": -1.01
+      "ltp": 126.46,
+      "change": -1.06,
+      "changePct": -0.83
     },
     "CIPLA": {
-      "ltp": 1432.5,
-      "change": -9.1,
-      "changePct": -0.63
+      "ltp": 1415.1,
+      "change": -17.4,
+      "changePct": -1.21
     },
     "COALINDIA": {
-      "ltp": 431.25,
-      "change": 1.85,
-      "changePct": 0.43
+      "ltp": 428.4,
+      "change": -2.85,
+      "changePct": -0.66
     },
     "COFORGE": {
-      "ltp": 1494,
-      "change": -13.4,
-      "changePct": -0.89
+      "ltp": 1471.4,
+      "change": -22.6,
+      "changePct": -1.51
     },
     "COLPAL": {
-      "ltp": 2092.9,
-      "change": -20.2,
-      "changePct": -0.96
+      "ltp": 2107.1,
+      "change": 14.2,
+      "changePct": 0.68
     },
     "DABUR": {
-      "ltp": 426.1,
-      "change": -0.4,
-      "changePct": -0.09
+      "ltp": 426.5,
+      "change": 0.4,
+      "changePct": 0.09
     },
     "DIVISLAB": {
-      "ltp": 7330,
-      "change": 12,
-      "changePct": 0.16
+      "ltp": 7386.5,
+      "change": 56.5,
+      "changePct": 0.77
     },
     "DRREDDY": {
-      "ltp": 1206,
-      "change": -17.1,
-      "changePct": -1.4
+      "ltp": 1182.8,
+      "change": -23.2,
+      "changePct": -1.92
     },
     "EICHERMOT": {
-      "ltp": 7689.5,
-      "change": 126,
-      "changePct": 1.67
+      "ltp": 7632,
+      "change": -57.5,
+      "changePct": -0.75
     },
     "EMAMILTD": {
-      "ltp": 401,
-      "change": -4.15,
-      "changePct": -1.02
+      "ltp": 413.9,
+      "change": 12.9,
+      "changePct": 3.22
     },
     "FEDERALBNK": {
-      "ltp": 356.05,
-      "change": 5.3,
-      "changePct": 1.51
+      "ltp": 353.25,
+      "change": -2.8,
+      "changePct": -0.79
     },
     "GODREJCP": {
-      "ltp": 1054.2,
-      "change": -10.6,
-      "changePct": -1
+      "ltp": 1068.8,
+      "change": 14.6,
+      "changePct": 1.38
     },
     "HCLTECH": {
-      "ltp": 1239.5,
-      "change": 18.2,
-      "changePct": 1.49
+      "ltp": 1237.3,
+      "change": -2.2,
+      "changePct": -0.18
     },
     "HDFCBANK": {
-      "ltp": 761.45,
-      "change": -16.15,
-      "changePct": -2.08
+      "ltp": 753.15,
+      "change": -8.3,
+      "changePct": -1.09
     },
     "HEROMOTOCO": {
-      "ltp": 5034.1,
-      "change": 56.4,
-      "changePct": 1.13
+      "ltp": 4987.1,
+      "change": -47,
+      "changePct": -0.93
     },
     "HINDUNILVR": {
-      "ltp": 2142.5,
-      "change": 2.8,
-      "changePct": 0.13
+      "ltp": 2154.6,
+      "change": 12.1,
+      "changePct": 0.56
     },
     "HYUNDAI": {
-      "ltp": 1958.6,
-      "change": -13.7,
-      "changePct": -0.69
+      "ltp": 1945.6,
+      "change": -13,
+      "changePct": -0.66
     },
     "ICICIBANK": {
-      "ltp": 1463.1,
-      "change": 2.9,
-      "changePct": 0.2
+      "ltp": 1440.7,
+      "change": -22.4,
+      "changePct": -1.53
     },
     "INDUSINDBK": {
-      "ltp": 1063.45,
-      "change": 30.6,
-      "changePct": 2.96
+      "ltp": 1069.3,
+      "change": 5.85,
+      "changePct": 0.55
     },
     "INFY": {
-      "ltp": 1073.5,
-      "change": -13.6,
-      "changePct": -1.25
+      "ltp": 1052.1,
+      "change": -21.4,
+      "changePct": -1.99
     },
     "IOC": {
-      "ltp": 143.3,
-      "change": 0.89,
-      "changePct": 0.62
+      "ltp": 142.03,
+      "change": -1.27,
+      "changePct": -0.89
     },
     "IPCALAB": {
-      "ltp": 1799,
-      "change": -39.6,
-      "changePct": -2.15
+      "ltp": 1788.5,
+      "change": -10.5,
+      "changePct": -0.58
     },
     "ITC": {
-      "ltp": 281,
-      "change": -1.7,
-      "changePct": -0.6
+      "ltp": 280.8,
+      "change": -0.2,
+      "changePct": -0.07
     },
     "KOTAKBANK": {
-      "ltp": 385.95,
-      "change": 3.9,
-      "changePct": 1.02
+      "ltp": 381.15,
+      "change": -4.8,
+      "changePct": -1.24
     },
     "LUPIN": {
-      "ltp": 2514.8,
-      "change": 36.3,
-      "changePct": 1.46
+      "ltp": 2406.9,
+      "change": -107.9,
+      "changePct": -4.29
     },
     "MARICO": {
-      "ltp": 853.55,
-      "change": -1.75,
-      "changePct": -0.2
+      "ltp": 862.65,
+      "change": 9.1,
+      "changePct": 1.07
     },
     "MARUTI": {
-      "ltp": 13597,
-      "change": 83,
-      "changePct": 0.61
+      "ltp": 13545,
+      "change": -52,
+      "changePct": -0.38
     },
     "MPHASIS": {
-      "ltp": 2380.1,
-      "change": -33.3,
-      "changePct": -1.38
+      "ltp": 2273.8,
+      "change": -106.3,
+      "changePct": -4.47
     },
     "NESTLEIND": {
-      "ltp": 1451.9,
-      "change": 5.6,
-      "changePct": 0.39
+      "ltp": 1493.6,
+      "change": 41.7,
+      "changePct": 2.87
     },
     "NTPC": {
-      "ltp": 348.55,
-      "change": 1.3,
-      "changePct": 0.37
+      "ltp": 350.5,
+      "change": 1.95,
+      "changePct": 0.56
     },
     "ONGC": {
-      "ltp": 249.89,
-      "change": 0.31,
-      "changePct": 0.12
+      "ltp": 251.9,
+      "change": 2.01,
+      "changePct": 0.8
     },
     "PERSISTENT": {
-      "ltp": 5219,
-      "change": 30.3,
-      "changePct": 0.58
+      "ltp": 5098.8,
+      "change": -120.2,
+      "changePct": -2.3
     },
     "PNB": {
-      "ltp": 112.08,
-      "change": 0.32,
-      "changePct": 0.29
+      "ltp": 110.73,
+      "change": -1.35,
+      "changePct": -1.2
     },
     "POWERGRID": {
-      "ltp": 286.7,
-      "change": -2,
-      "changePct": -0.69
+      "ltp": 289.3,
+      "change": 2.6,
+      "changePct": 0.91
     },
     "RELIANCE": {
-      "ltp": 1303.7,
-      "change": -19.4,
-      "changePct": -1.47
+      "ltp": 1288.6,
+      "change": -15.1,
+      "changePct": -1.16
     },
     "SBIN": {
-      "ltp": 1044.4,
-      "change": -15.6,
-      "changePct": -1.47
+      "ltp": 1025,
+      "change": -19.4,
+      "changePct": -1.86
     },
     "SUNPHARMA": {
-      "ltp": 1961.9,
-      "change": 5.5,
-      "changePct": 0.28
+      "ltp": 1943,
+      "change": -18.9,
+      "changePct": -0.96
     },
     "TATACONSUM": {
-      "ltp": 1081.5,
-      "change": -10.4,
-      "changePct": -0.95
+      "ltp": 1094.9,
+      "change": 13.4,
+      "changePct": 1.24
     },
     "TATAPOWER": {
-      "ltp": 381.45,
-      "change": -2.85,
-      "changePct": -0.74
+      "ltp": 378.55,
+      "change": -2.9,
+      "changePct": -0.76
     },
     "TCS": {
-      "ltp": 2221.1,
-      "change": -30,
-      "changePct": -1.33
+      "ltp": 2208.3,
+      "change": -12.8,
+      "changePct": -0.58
     },
     "TECHM": {
-      "ltp": 1576.3,
-      "change": -0.1,
-      "changePct": -0.01
+      "ltp": 1560.6,
+      "change": -15.7,
+      "changePct": -1
     },
     "TORNTPHARM": {
-      "ltp": 5040.7,
-      "change": 35.3,
-      "changePct": 0.71
+      "ltp": 5033.4,
+      "change": -7.3,
+      "changePct": -0.14
     },
     "TVSMOTOR": {
-      "ltp": 3792,
-      "change": 201.8,
-      "changePct": 5.62
+      "ltp": 3907.6,
+      "change": 115.6,
+      "changePct": 3.05
     },
     "WIPRO": {
-      "ltp": 174.97,
-      "change": -1.41,
-      "changePct": -0.8
+      "ltp": 174.44,
+      "change": -0.53,
+      "changePct": -0.3
     },
     "BAJAJ-AUTO": {
-      "ltp": 10403.5,
-      "change": -119,
-      "changePct": -1.13
+      "ltp": 10998.5,
+      "change": 595,
+      "changePct": 5.72
     },
     "M&M": {
-      "ltp": 3201.7,
-      "change": 36.2,
-      "changePct": 1.14
+      "ltp": 3175.3,
+      "change": -26.4,
+      "changePct": -0.82
     }
   }
 }
