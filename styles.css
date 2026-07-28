@@ -257,19 +257,53 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:10px}
 .example-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin:14px 0;font-size:.85rem;color:var(--text);line-height:1.7}
 .example-box strong{color:var(--green)}
 
-/* === ADS: reserve space up front so the page doesn't jump when the slot fills (CLS) === */
+/* === ADS: contained, labeled Display placements (2026-07 redesign) === */
 ins.adsbygoogle{max-width:100%}
-.ad-wrap{min-height:280px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.ad-wrap ins.adsbygoogle{width:100%}
-ins.adsbygoogle[data-ad-layout="in-article"]{display:block;min-height:250px;margin:20px auto;overflow:hidden}
+.ad-container{
+  margin:32px 0;
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--bg2);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.ad-container ins.adsbygoogle{width:100%}
+.ad-label{
+  font-size:.68rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--muted);
+  margin-bottom:6px;
+  align-self:flex-start;
+}
+/* top-of-page / in-content auto unit — height matches its historical fill size to avoid CLS regressions */
+.ad-container--top{min-height:280px}
+/* native in-article fluid unit — flows with text width */
+.ad-container--in-article{min-height:250px;margin:24px auto}
+/* skyscraper-style unit in the blog post sidebar */
+.ad-container--vertical{min-height:600px}
 @media(max-width:768px){
-  .ad-wrap{min-height:250px}
-  ins.adsbygoogle[data-ad-layout="in-article"]{min-height:220px}
+  .ad-container--top{min-height:250px}
+  .ad-container--in-article{min-height:220px}
 }
 
 /* === ADS: collapse unfilled slots so no blank space === */
 ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;height:0!important;min-height:0!important}
-.ad-wrap:has(ins.adsbygoogle[data-ad-status="unfilled"]){display:none!important;padding:0!important;margin:0!important;min-height:0!important}
+.ad-container:has(ins.adsbygoogle[data-ad-status="unfilled"]){display:none!important;padding:0!important;margin:0!important;min-height:0!important;border:none!important}
+
+/* === Blog post sidebar layout (desktop only — Vertical ad rail) === */
+.content-with-sidebar{display:flex;gap:32px;align-items:flex-start}
+.content-with-sidebar .main-column{flex:1;min-width:0}
+.content-with-sidebar .ad-sidebar{width:300px;flex-shrink:0;position:sticky;top:24px}
+@media(max-width:1024px){
+  .content-with-sidebar{display:block}
+  .content-with-sidebar .ad-sidebar{display:none}
+}
 
 /* === TIPS GRID === */
 .tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}

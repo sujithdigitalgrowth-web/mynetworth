@@ -159,19 +159,34 @@ function generateBlogHTML(b) {
       <p style="font-size:.85rem;color:var(--muted);margin-top:8px">Updated ${dateDisplay} &middot; ${esc(b.readTime)}</p>
       ${b.intro ? `<p>${b.intro}</p>` : ''}
     </div>
-    <div class="article-content">
-      <div class="ad-wrap" style="text-align:center;padding:8px 0 20px">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4837443132966026" data-ad-slot="7020661960" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </div>
+    <div class="content-with-sidebar">
+      <div class="main-column">
+        <div class="article-content">
+          <div class="ad-container ad-container--top">
+            <span class="ad-label">Advertisement</span>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4837443132966026" data-ad-slot="7020661960" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
 ${sectionsHTML}
-      <ins class="adsbygoogle" style="display:block;text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-4837443132966026" data-ad-slot="1004776314"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-accordion" itemscope itemtype="https://schema.org/FAQPage">
+          <div class="ad-container ad-container--in-article">
+            <span class="ad-label">Advertisement</span>
+            <ins class="adsbygoogle" style="display:block;text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-4837443132966026" data-ad-slot="1004776314"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-accordion" itemscope itemtype="https://schema.org/FAQPage">
 ${faqsHTML}
-      </div>
+          </div>
 ${disclaimerHTML}
+        </div>
+      </div>
+      <div class="ad-sidebar">
+        <div class="ad-container ad-container--vertical">
+          <span class="ad-label">Advertisement</span>
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4837443132966026" data-ad-slot="7576504580" data-ad-format="auto" data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+      </div>
     </div>
     <div class="cta-banner" style="margin-top:40px">
       <h3>Calculate your own net worth for free</h3>
@@ -285,12 +300,12 @@ function parseBlogHTML(html, slug) {
   if (bcM) r.cardTitle = strip(bcM[1]);
   r.cardTitle = r.cardTitle || r.h1 || r.metaTitle;
   r.cardDesc = r.metaDesc;
-  const introM = html.match(/&middot;[^<]+<\/p>\s*<p>([\s\S]*?)<\/p>\s*<\/div>\s*<div class="article-content"/i);
+  const introM = html.match(/&middot;[^<]+<\/p>\s*<p>([\s\S]*?)<\/p>\s*<\/div>\s*(?:<div class="content-with-sidebar">\s*<div class="main-column">\s*)?<div class="article-content"/i);
   if (introM) r.intro = introM[1].trim();
   if (!r.date) r.date = isoDate();
-  const contentM = html.match(/<div class="article-content">([\s\S]*?)(?:<div class="cta-banner"|<\/article>)/i);
+  const contentM = html.match(/<div class="article-content">([\s\S]*?)(?:<div class="ad-sidebar"|<div class="cta-banner"|<\/article>)/i);
   if (contentM) {
-    let content = contentM[1].replace(/<div class="ad-wrap"[\s\S]*?<\/script>\s*<\/div>/gi, '').replace(/<ins\b[\s\S]*?<\/ins>/gi, '').replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+    let content = contentM[1].replace(/<div class="ad-container[\s\S]*?<\/script>\s*<\/div>/gi, '').replace(/<div class="ad-wrap"[\s\S]*?<\/script>\s*<\/div>/gi, '').replace(/<ins\b[\s\S]*?<\/ins>/gi, '').replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
     for (const part of content.split(/(?=<h2[\s>])/i)) {
       const h2M = part.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
       if (!h2M) continue;
