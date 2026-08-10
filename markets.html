@@ -147,11 +147,18 @@
 <body>
 
 <nav class="site-nav"><div class="nav-inner">
-  <a href="/" class="nav-logo">⚖️ WorthScale</a>
+  <a href="/" class="nav-logo"><span class="nav-logo-chip"><img src="/assets/logos/worthscale-logo.png" alt="WorthScale" class="nav-logo-img"></span></a>
   <div class="nav-links">
     <a href="/">Home</a>
     <a href="/markets" class="active">Markets</a>
     <a href="/companies">Companies</a>
+    <div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Startups &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/startups">&#128640; All Startups</a>
+        <a href="/startups/failure-stories">&#128201; Failure Stories</a>
+      </div>
+    </div>
     <a href="/crypto">Crypto</a>
     <div class="nav-dropdown">
       <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Tools &#9662;</button>
@@ -164,9 +171,6 @@
         <a href="/richest-indians">&#127942; India Rich List 2026</a>
       </div>
     </div>
-    <a href="/blog">Blog</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
     <a href="/net-worth-calculator" class="nav-cta">Calculate Net Worth</a>
   </div>
   <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
@@ -569,9 +573,15 @@
 
 </main>
 
+<div class="ad-container ad-container--top" style="margin:32px auto">
+  <span class="ad-label">Advertisement</span>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4837443132966026" data-ad-slot="7020661960" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
 <footer class="site-footer"><div class="footer-inner footer-grid">
   <div class="footer-about">
-    <div class="footer-brand">⚖️ WorthScale</div>
+    <div class="footer-brand"><span class="footer-logo-chip"><img src="/assets/logos/worthscale-logo.png" alt="WorthScale" class="footer-logo-img"></span></div>
     <p class="footer-desc">Free personal finance platform for Indians. Track net worth, follow markets, and build wealth with simple tools.</p>
   </div>
   <div class="footer-col">

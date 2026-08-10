@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-adsense-account" content="ca-pub-4837443132966026">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Startup Failure Stories — What Went Wrong and Why | WorthScale</title>
+<meta name="description" content="Startups and companies that shut down, ran out of funding, or failed to scale — honest post-mortems on what went wrong, why, and what founders can learn.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://worthscale.in/startups/failure-stories">
+<meta property="og:title" content="Startup Failure Stories — What Went Wrong and Why | WorthScale">
+<meta property="og:description" content="Startups and companies that shut down, ran out of funding, or failed to scale — honest post-mortems on what went wrong, why, and what founders can learn.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://worthscale.in/startups/failure-stories">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Startup Failure Stories — What Went Wrong and Why","url":"https://worthscale.in/startups/failure-stories","description":"Startups and companies that shut down, ran out of funding, or failed to scale — honest post-mortems on what went wrong, why, and what founders can learn.","isPartOf":{"@type":"WebSite","name":"WorthScale","url":"https://worthscale.in/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://worthscale.in/"},{"@type":"ListItem","position":2,"name":"Startups","item":"https://worthscale.in/startups"},{"@type":"ListItem","position":3,"name":"Failure Stories","item":"https://worthscale.in/startups/failure-stories"}]}
+</script>
+<link rel="stylesheet" href="/styles.css">
+<style>
+.co-hero{padding:56px 0 40px;text-align:center}
+.co-hero h1{font-size:2.2rem;font-weight:800;line-height:1.25;margin-bottom:14px;max-width:680px;margin-left:auto;margin-right:auto;color:var(--text)}
+.co-hero h1 .grad{background:linear-gradient(135deg,#dc2626,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.co-hero p{font-size:1rem;color:var(--text2);max-width:520px;margin:0 auto 24px}
+
+/* Cards — same system as /startups and /companies, ready for entries */
+.co-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.co-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:0;text-decoration:none;display:flex;flex-direction:column;transition:all .2s;box-shadow:0 1px 3px rgba(15,23,42,.04);overflow:hidden}
+.co-card:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 4px 14px rgba(220,38,38,.10);text-decoration:none}
+.co-card-img{width:100%;height:120px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;flex-shrink:0;background:linear-gradient(135deg,rgba(220,38,38,.18),rgba(220,38,38,.36))}
+.co-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.co-card-body{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1}
+.co-card .co-sector{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:6px}
+.co-card h3{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3}
+.co-card .co-val{font-size:.8rem;color:var(--red);font-weight:600;margin-bottom:4px}
+.co-card p{font-size:.75rem;color:var(--text2);line-height:1.45;margin:0}
+.co-card .co-byline{font-size:.66rem;color:var(--muted);margin-top:10px}
+.co-card .co-link{color:var(--blue);font-size:.72rem;font-weight:600;margin-top:6px;display:inline-block}
+
+.empty-state{text-align:center;padding:56px 24px;border:1.5px dashed var(--border);border-radius:16px;margin-top:24px}
+.empty-state .es-icon{font-size:2.4rem;margin-bottom:12px}
+.empty-state h3{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.empty-state p{font-size:.88rem;color:var(--muted);max-width:420px;margin:0 auto}
+
+@media(max-width:1024px){.co-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){
+  .co-hero h1{font-size:1.65rem}
+  .co-hero{padding:40px 0 30px}
+  .co-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){.co-grid{grid-template-columns:1fr}}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837443132966026" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34VQNGQFDY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-34VQNGQFDY');</script>
+</head>
+<body>
+
+<nav class="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo"><span class="nav-logo-chip"><img src="/assets/logos/worthscale-logo.png" alt="WorthScale" class="nav-logo-img"></span></a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/markets">Markets</a>
+    <a href="/companies">Companies</a>
+    <div class="nav-dropdown active">
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Startups &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/startups">&#128640; All Startups</a>
+        <a href="/startups/failure-stories">&#128201; Failure Stories</a>
+      </div>
+    </div>
+    <a href="/crypto">Crypto</a>
+    <div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Tools &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/net-worth-calculator">&#129518; Net Worth Calculator</a>
+        <a href="/emergency-fund-calculator">&#128735; Emergency Fund Calculator</a>
+        <a href="/house-down-payment-calculator">&#127968; Down Payment Calculator</a>
+        <a href="/new-tax-regime-calculator">🆕 New Tax Regime Calculator</a>
+        <a href="/home-loan-emi-calculator">🏦 Home Loan EMI Calculator</a>
+        <a href="/richest-indians">&#127942; India Rich List 2026</a>
+      </div>
+    </div>
+    <a href="https://www.instagram.com/worthscale_/" target="_blank" rel="noopener noreferrer" class="nav-instagram" aria-label="WorthScale on Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 1.966c-3.148 0-3.501.012-4.737.068-2.605.119-3.808 1.335-3.927 3.927-.056 1.235-.067 1.587-.067 4.737 0 3.148.011 3.501.067 4.737.119 2.59 1.32 3.808 3.927 3.927 1.236.056 1.588.068 4.737.068 3.148 0 3.502-.012 4.737-.068 2.603-.119 3.809-1.34 3.927-3.927.056-1.236.068-1.589.068-4.737 0-3.15-.012-3.502-.068-4.737-.119-2.594-1.324-3.808-3.927-3.927-1.235-.056-1.589-.068-4.737-.068zm0 5.007a5.038 5.038 0 110 10.076 5.038 5.038 0 010-10.076zm0 1.802a3.236 3.236 0 100 6.472 3.236 3.236 0 000-6.472zm5.239-3.203a1.176 1.176 0 110 2.352 1.176 1.176 0 010-2.352z"/></svg></a>
+    <a href="/app" class="nav-cta">Open Dashboard</a>
+  </div>
+  <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
+</div></nav>
+
+<main>
+
+<!-- Hero -->
+<section class="co-hero">
+<div class="container">
+  <h1>Startup <span class="grad">Failure Stories</span></h1>
+  <p>Honest post-mortems on startups and companies that shut down, ran out of runway, or failed to scale — what went wrong, why, and what founders can actually learn from it.</p>
+</div>
+</section>
+
+<!-- Stories -->
+<section class="section" style="padding-top:0">
+<div class="container">
+  <div class="co-grid">
+    <a href="/startups/failure-stories/nokia" class="co-card">
+      <div class="co-card-img"><img src="/assets/banners/nokia.jpg" alt="Nokia" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
+        <div class="co-sector">Consumer Electronics</div>
+        <h3>Nokia</h3>
+        <div class="co-val">Exited smartphones 2014</div>
+        <p>From 40%+ global market share in 1998 to selling its mobile division to Microsoft &mdash; how the iPhone and Android caught Nokia flat-footed.</p>
+        <span class="co-link">Read the story →</span>
+        <p class="co-byline">By WorthScale Research Desk &mdash; 10 Aug 2026</p>
+      </div>
+    </a>
+    <a href="/startups/failure-stories/sustainkart" class="co-card">
+      <div class="co-card-img"><img src="/assets/banners/sustainkart.jpg" alt="SustainKart" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
+        <div class="co-sector">D2C &middot; Sustainability</div>
+        <h3>SustainKart</h3>
+        <div class="co-val">Shut down 2025</div>
+        <p>A $500K seed round, an EOW fraud investigation, and a founder facing a forgery FIR &mdash; how India's sustainable e-commerce bet unraveled.</p>
+        <span class="co-link">Read the story →</span>
+        <p class="co-byline">By WorthScale Research Desk &mdash; 10 Aug 2026</p>
+      </div>
+    </a>
+    <a href="/startups/failure-stories/blusmart" class="co-card">
+      <div class="co-card-img"><img src="/assets/banners/blusmart.jpg" alt="BluSmart" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
+        <div class="co-sector">Mobility &middot; EV</div>
+        <h3>BluSmart</h3>
+        <div class="co-val">Insolvency 2025</div>
+        <p>A SEBI fraud finding against its founders, a collapsing fleet supplier, and an app that just stopped working &mdash; then its own domain went up for sale.</p>
+        <span class="co-link">Read the story →</span>
+        <p class="co-byline">By WorthScale Research Desk &mdash; 10 Aug 2026</p>
+      </div>
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+<div class="container">
+  <div class="cta-banner">
+    <h3>Explore What's Working Instead</h3>
+    <p>For every startup that shuts down, others are scaling. See the full directory of active Indian startups.</p>
+    <a href="/startups" style="display:inline-block;background:#fff;color:#1e40af;font-weight:700;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:.95rem">Browse Startups &rarr;</a>
+  </div>
+</div>
+</section>
+
+</main>
+
+<footer class="site-footer"><div class="footer-inner footer-grid">
+  <div class="footer-about">
+    <div class="footer-brand"><span class="footer-logo-chip"><img src="/assets/logos/worthscale-logo.png" alt="WorthScale" class="footer-logo-img"></span></div>
+    <p class="footer-desc">Free personal finance platform for Indians. Track net worth, follow markets, and build wealth with simple tools and guides.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Free Tools</h4>
+    <a href="/net-worth-calculator">Net Worth Calculator</a>
+    <a href="/emergency-fund-calculator">Emergency Fund Calculator</a>
+    <a href="/house-down-payment-calculator">Down Payment Calculator</a>
+    <a href="/app">Dashboard</a>
+  </div>
+  <div class="footer-col">
+    <h4>Explore</h4>
+    <a href="/markets">Market Pulse</a>
+    <a href="/companies">Company Spotlight</a>
+    <a href="/startups">Startups</a>
+    <a href="/startups/failure-stories">Failure Stories</a>
+    <a href="/crypto">Crypto Watch</a>
+    <a href="/blog">All Articles</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/about">About</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+    <a href="/sitemap">Sitemap</a>
+  </div>
+</div><div class="footer-bottom">
+  <p>&copy; 2026 WorthScale. All rights reserved. Built with &#10084;&#65039; in India.</p>
+</div></footer>
+
+<script src="/nav.js"></script>
+</body>
+</html>

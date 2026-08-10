@@ -26,11 +26,18 @@
 </head>
 <body>
 <nav class="site-nav"><div class="nav-inner">
-  <a href="/" class="nav-logo">⚖️ WorthScale</a>
+  <a href="/" class="nav-logo"><span class="nav-logo-chip"><img src="/assets/logos/worthscale-logo.png" alt="WorthScale" class="nav-logo-img"></span></a>
   <div class="nav-links">
     <a href="/">Home</a>
     <a href="/markets">Markets</a>
     <a href="/companies">Companies</a>
+    <div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Startups &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/startups">&#128640; All Startups</a>
+        <a href="/startups/failure-stories">&#128201; Failure Stories</a>
+      </div>
+    </div>
     <a href="/crypto">Crypto</a>
     <div class="nav-dropdown">
       <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Tools &#9662;</button>
@@ -43,9 +50,7 @@
         <a href="/richest-indians">&#127942; India Rich List 2026</a>
       </div>
     </div>
-    <a href="/blog" class="active">Blog</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
+    <a href="https://www.instagram.com/worthscale_/" target="_blank" rel="noopener noreferrer" class="nav-instagram" aria-label="WorthScale on Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 1.966c-3.148 0-3.501.012-4.737.068-2.605.119-3.808 1.335-3.927 3.927-.056 1.235-.067 1.587-.067 4.737 0 3.148.011 3.501.067 4.737.119 2.59 1.32 3.808 3.927 3.927 1.236.056 1.588.068 4.737.068 3.148 0 3.502-.012 4.737-.068 2.603-.119 3.809-1.34 3.927-3.927.056-1.236.068-1.589.068-4.737 0-3.15-.012-3.502-.068-4.737-.119-2.594-1.324-3.808-3.927-3.927-1.235-.056-1.589-.068-4.737-.068zm0 5.007a5.038 5.038 0 110 10.076 5.038 5.038 0 010-10.076zm0 1.802a3.236 3.236 0 100 6.472 3.236 3.236 0 000-6.472zm5.239-3.203a1.176 1.176 0 110 2.352 1.176 1.176 0 010-2.352z"/></svg></a>
     <a href="/app" class="nav-cta">Open Dashboard</a>
   </div>
   <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
@@ -63,11 +68,10 @@
       <p style="font-size:.85rem;color:var(--muted);margin-top:8px">Updated May 2026 &middot; 8 min read</p>
       <p>Mark Zuckerberg's net worth in May 2026 is approximately $216 billion (₹18.4 lakh crore at ₹85 per dollar) per Bloomberg's Billionaires Index. Forbes tracked him near $220 billion in late 2025. He ranks third globally behind Elon Musk and Larry Ellison. The wealth flows through his ~13 percent economic stake in Meta Platforms plus majority Class B voting control, with Meta's 2026 capex guidance of $125–145 billion signalling an all-in bet on AI infrastructure.</p>
     </div>
+    <div class="content-with-sidebar">
+  <div class="main-column">
     <div class="article-content">
-      <div class="ad-wrap" style="text-align:center;padding:8px 0 20px">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4837443132966026" data-ad-slot="7020661960" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </div>
+
       <h2>Mark Zuckerberg Net Worth at a Glance</h2>
       <div class="stat-grid">
         <div class="stat-card"><div class="stat-val">$216B</div><div class="stat-label">Net Worth (₹18.4 lakh Cr, Bloomberg May 2026)</div></div>
@@ -96,8 +100,11 @@
       <h2>Real Estate and Property Holdings</h2>
       <p>Zuckerberg's real estate portfolio spans four primary locations and totals over $600 million in known acquisitions. Koolau Ranch on Kauai, Hawaii, is the flagship: 2,300-plus acres acquired for $300 million-plus, with a 57,000 square foot main residence featuring 30 bedrooms and an underground self-contained shelter. The compound includes its own food production facilities and a diesel backup system designed for extended off-grid operation.</p>
       <p>In Palo Alto, he has assembled a cluster of properties in Crescent Park totalling $43 million-plus. The Lake Tahoe estate cost approximately $59 million. The newest addition is the Indian Creek Island property in Miami-Dade, purchased in February 2026 for $170 million — the single largest residential real estate transaction in Miami-Dade County history, breaking the previous record set by Jeff Bezos on the same island.</p>
-      <ins class="adsbygoogle" style="display:block;text-align:center" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-4837443132966026" data-ad-slot="1004776314"></ins>
+      <div class="ad-container ad-container--in-article mobile-ad-fallback">
+  <span class="ad-label">Advertisement</span>
+  <ins class="adsbygoogle" style="display:block;text-align:center" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-4837443132966026" data-ad-slot="1004776314"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
       <h2>Launchpad Yacht and Notable Assets</h2>
       <p>Launchpad, Zuckerberg's superyacht valued at approximately $400 million, was one of the most-discussed celebrity assets of 2024–2025. The vessel includes a helipad, multiple swimming pools, and a support vessel. It joins the Kauai compound as the two most conspicuous lifestyle assets in his portfolio. Both are large enough to merit their own security infrastructure.</p>
       <p>Zuckerberg trained extensively in MMA under professional coaches from 2023 onwards, eventually challenging Elon Musk to a publicly discussed cage match in 2023 (the match never materialised). His personal wellness and training setup at Kauai includes professional-grade facilities. The combination of MMA training, martial arts, and CrossFit-style workouts has been documented extensively on his personal social accounts.</p>
@@ -157,14 +164,23 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="ad-sidebar">
+    <div class="ad-container ad-container--vertical">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4837443132966026" data-ad-slot="7576504580" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+</div>
   </article>
 </div>
 </main>
-<div class="ad-wrap" style="text-align:center;padding:12px 0;max-width:900px;margin:0 auto">
-  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4837443132966026" data-ad-slot="2014605657" data-ad-format="autorelaxed"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-<footer class="site-footer"><div class="footer-inner"><p>— 2026 WorthScale — <a href="/sitemap" style="color:inherit;opacity:.65">Sitemap</a></p></div></footer>
+<footer class="site-footer footer-minimal"><div class="footer-inner">
+  <span class="footer-logo-chip"><img src="/assets/logos/worthscale-logo.png" alt="WorthScale" class="footer-logo-img"></span>
+  <p class="footer-links-row"><a href="/blog">Blog</a> &middot; <a href="/about">About</a> &middot; <a href="/contact">Contact</a> &middot; <a href="/sitemap">Sitemap</a></p>
+  <p>&copy; 2026 WorthScale. All rights reserved.</p>
+</div></footer>
 <script src="/nav.js"></script>
 </body>
 </html>

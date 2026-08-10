@@ -8,6 +8,8 @@ const mainPages = [
   { route: '/', file: 'index.html', changefreq: 'weekly', priority: '1.0' },
   { route: '/markets', file: 'markets.html', changefreq: 'weekly', priority: '0.9' },
   { route: '/companies', file: 'companies.html', changefreq: 'weekly', priority: '0.9' },
+  { route: '/startups', file: path.join('startups', 'index.html'), changefreq: 'weekly', priority: '0.9' },
+  { route: '/startups/failure-stories', file: path.join('startups', 'failure-stories', 'index.html'), changefreq: 'weekly', priority: '0.8' },
   { route: '/crypto', file: 'crypto.html', changefreq: 'weekly', priority: '0.9' },
   { route: '/nifty-50', file: 'nifty-50.html', changefreq: 'weekly', priority: '0.9' },
   { route: '/richest-indians', file: 'richest-indians.html', changefreq: 'weekly', priority: '0.9' },
@@ -107,38 +109,111 @@ function generateSitemap() {
   }
 
   lines.push('');
+  lines.push('  <!-- Startup Pages -->');
+
+  const startupsDir = path.join(root, 'startups');
+  const startupEntries = fs.existsSync(startupsDir)
+    ? fs
+        .readdirSync(startupsDir)
+        .filter((name) => name.endsWith('.html') && name !== 'index.html')
+        .map((file) => {
+          const slug = file.replace(/\.html$/, '');
+          const filePath = path.join(startupsDir, file);
+          const canonicalPath = getCanonicalPath(filePath);
+          const isCanonical = !canonicalPath || canonicalPath === `/startups/${slug}`;
+          return { file, slug, filePath, isCanonical };
+        })
+        .filter((entry) => entry.isCanonical)
+        .sort((a, b) => a.slug.localeCompare(b.slug))
+    : [];
+
+  for (const entry of startupEntries) {
+    const stat = fs.statSync(entry.filePath);
+    lines.push(pageXml(`${domain}/startups/${entry.slug}`, toDateString(stat.mtimeMs), 'monthly', '0.7'));
+  }
+
+  lines.push('');
+  lines.push('  <!-- Startup Failure Story Pages -->');
+
+  const failureStoriesDir = path.join(root, 'startups', 'failure-stories');
+  const failureEntries = fs.existsSync(failureStoriesDir)
+    ? fs
+        .readdirSync(failureStoriesDir)
+        .filter((name) => name.endsWith('.html') && name !== 'index.html')
+        .map((file) => {
+          const slug = file.replace(/\.html$/, '');
+          const filePath = path.join(failureStoriesDir, file);
+          const canonicalPath = getCanonicalPath(filePath);
+          const isCanonical = !canonicalPath || canonicalPath === `/startups/failure-stories/${slug}`;
+          return { file, slug, filePath, isCanonical };
+        })
+        .filter((entry) => entry.isCanonical)
+        .sort((a, b) => a.slug.localeCompare(b.slug))
+    : [];
+
+  for (const entry of failureEntries) {
+    const stat = fs.statSync(entry.filePath);
+    lines.push(pageXml(`${domain}/startups/failure-stories/${entry.slug}`, toDateString(stat.mtimeMs), 'monthly', '0.7'));
+  }
+
+  lines.push('');
   lines.push('</urlset>');
 
   fs.writeFileSync(path.join(root, 'sitemap.xml'), `${lines.join('\n')}\n`, 'utf8');
-  console.log(`sitemap.xml regenerated: ${mainPages.length} main pages, ${sectorFiles.length} sector pages, ${blogEntries.length} blog posts.`);
+  console.log(`sitemap.xml regenerated: ${mainPages.length} main pages, ${sectorFiles.length} sector pages, ${blogEntries.length} blog posts, ${startupEntries.length} startup pages, ${failureEntries.length} failure stories.`);
 
-  return blogEntries;
+  return { blogEntries, startupEntries, failureEntries };
 }
 
-function updateSitemapPage(blogEntries) {
+function titleCase(slug) {
+  return slug.replace(/-/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase());
+}
+
+function updateSitemapPage({ blogEntries, startupEntries, failureEntries }) {
   const sitemapPagePath = path.join(root, 'sitemap.html');
   if (!fs.existsSync(sitemapPagePath)) return;
   let html = fs.readFileSync(sitemapPagePath, 'utf8');
 
-  const linksHtml = blogEntries
-    .map((entry) => {
-      const title = entry.slug.replace(/-/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase());
-      return `        <li><a href="/blog/${entry.slug}">${title}</a></li>`;
-    })
+  const blogLinksHtml = blogEntries
+    .map((entry) => `        <li><a href="/blog/${entry.slug}">${titleCase(entry.slug)}</a></li>`)
     .join('\n');
 
   html = html.replace(
     /<!-- BLOG_LINKS_START -->[\s\S]*?<!-- BLOG_LINKS_END -->/,
-    `<!-- BLOG_LINKS_START -->\n${linksHtml}\n        <!-- BLOG_LINKS_END -->`
+    `<!-- BLOG_LINKS_START -->\n${blogLinksHtml}\n        <!-- BLOG_LINKS_END -->`
   );
   html = html.replace(
     /<!-- BLOG_COUNT_START -->[\s\S]*?<!-- BLOG_COUNT_END -->/,
     `<!-- BLOG_COUNT_START -->${blogEntries.length} articles<!-- BLOG_COUNT_END -->`
   );
 
+  const startupLinks = startupEntries.map((entry) => ({
+    route: `/startups/${entry.slug}`,
+    title: titleCase(entry.slug),
+  }));
+  const failureLinks = failureEntries.map((entry) => ({
+    route: `/startups/failure-stories/${entry.slug}`,
+    title: `${titleCase(entry.slug)} (Failure Story)`,
+  }));
+  const allStartupLinks = [...startupLinks, ...failureLinks].sort((a, b) => a.title.localeCompare(b.title));
+
+  const startupLinksHtml = allStartupLinks
+    .map((entry) => `        <li><a href="${entry.route}">${entry.title}</a></li>`)
+    .join('\n');
+  const startupCount = allStartupLinks.length;
+
+  html = html.replace(
+    /<!-- STARTUP_LINKS_START -->[\s\S]*?<!-- STARTUP_LINKS_END -->/,
+    `<!-- STARTUP_LINKS_START -->\n${startupLinksHtml}\n        <!-- STARTUP_LINKS_END -->`
+  );
+  html = html.replace(
+    /<!-- STARTUP_COUNT_START -->[\s\S]*?<!-- STARTUP_COUNT_END -->/,
+    `<!-- STARTUP_COUNT_START -->${startupCount} pages<!-- STARTUP_COUNT_END -->`
+  );
+
   fs.writeFileSync(sitemapPagePath, html, 'utf8');
-  console.log(`sitemap.html updated with ${blogEntries.length} static blog links.`);
+  console.log(`sitemap.html updated with ${blogEntries.length} static blog links and ${startupCount} startup links.`);
 }
 
-const blogEntries = generateSitemap();
-updateSitemapPage(blogEntries);
+const { blogEntries, startupEntries, failureEntries } = generateSitemap();
+updateSitemapPage({ blogEntries, startupEntries, failureEntries });
