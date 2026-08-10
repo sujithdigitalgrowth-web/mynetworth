@@ -322,6 +322,16 @@ ins.adsbygoogle{max-width:100%}
 ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important;height:0!important;min-height:0!important}
 .ad-container:has(ins.adsbygoogle[data-ad-status="unfilled"]){display:none!important;padding:0!important;margin:0!important;min-height:0!important;border:none!important}
 
+/* === Outer rail ads — hub/landing pages only (Home, Markets, Crypto, Companies, /startups) ===
+   Only shown where genuine empty margin exists outside .container (max-width:1100px). */
+.page-rail{position:fixed;top:50%;transform:translateY(-50%);width:160px;z-index:10;display:none}
+.page-rail--left{left:20px}
+.page-rail--right{right:20px}
+@media(min-width:1600px){
+  .page-rail{display:block}
+}
+.page-rail .ad-container{min-height:600px;margin:0}
+
 /* === Blog post sidebar layout (desktop only — Vertical ad rail) === */
 .content-with-sidebar{display:flex;gap:32px;align-items:flex-start}
 .content-with-sidebar .main-column{flex:1;min-width:0}
