@@ -109,6 +109,38 @@ function generateSitemap() {
   }
 
   lines.push('');
+  lines.push('  <!-- Blog Sub-section Pages -->');
+
+  const blogSubDirs = fs
+    .readdirSync(blogDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort();
+
+  const blogSubEntries = [];
+  for (const subDir of blogSubDirs) {
+    const subDirPath = path.join(blogDir, subDir);
+    const subEntries = fs
+      .readdirSync(subDirPath)
+      .filter((name) => name.endsWith('.html') && name !== 'index.html')
+      .map((file) => {
+        const slug = file.replace(/\.html$/, '');
+        const filePath = path.join(subDirPath, file);
+        const canonicalPath = getCanonicalPath(filePath);
+        const isCanonical = !canonicalPath || canonicalPath === `/blog/${subDir}/${slug}`;
+        return { file, slug, filePath, isCanonical, route: `/blog/${subDir}/${slug}` };
+      })
+      .filter((entry) => entry.isCanonical)
+      .sort((a, b) => a.slug.localeCompare(b.slug));
+
+    for (const entry of subEntries) {
+      const stat = fs.statSync(entry.filePath);
+      lines.push(pageXml(`${domain}${entry.route}`, toDateString(stat.mtimeMs), 'monthly', '0.7'));
+      blogSubEntries.push(entry);
+    }
+  }
+
+  lines.push('');
   lines.push('  <!-- Startup Pages -->');
 
   const startupsDir = path.join(root, 'startups');
@@ -160,22 +192,27 @@ function generateSitemap() {
   lines.push('</urlset>');
 
   fs.writeFileSync(path.join(root, 'sitemap.xml'), `${lines.join('\n')}\n`, 'utf8');
-  console.log(`sitemap.xml regenerated: ${mainPages.length} main pages, ${sectorFiles.length} sector pages, ${blogEntries.length} blog posts, ${startupEntries.length} startup pages, ${failureEntries.length} failure stories.`);
+  console.log(`sitemap.xml regenerated: ${mainPages.length} main pages, ${sectorFiles.length} sector pages, ${blogEntries.length + blogSubEntries.length} blog posts, ${startupEntries.length} startup pages, ${failureEntries.length} failure stories.`);
 
-  return { blogEntries, startupEntries, failureEntries };
+  return { blogEntries, blogSubEntries, startupEntries, failureEntries };
 }
 
 function titleCase(slug) {
   return slug.replace(/-/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase());
 }
 
-function updateSitemapPage({ blogEntries, startupEntries, failureEntries }) {
+function updateSitemapPage({ blogEntries, blogSubEntries, startupEntries, failureEntries }) {
   const sitemapPagePath = path.join(root, 'sitemap.html');
   if (!fs.existsSync(sitemapPagePath)) return;
   let html = fs.readFileSync(sitemapPagePath, 'utf8');
 
-  const blogLinksHtml = blogEntries
-    .map((entry) => `        <li><a href="/blog/${entry.slug}">${titleCase(entry.slug)}</a></li>`)
+  const allBlogLinks = [
+    ...blogEntries.map((entry) => ({ route: `/blog/${entry.slug}`, title: titleCase(entry.slug) })),
+    ...blogSubEntries.map((entry) => ({ route: entry.route, title: titleCase(entry.slug) })),
+  ].sort((a, b) => a.title.localeCompare(b.title));
+
+  const blogLinksHtml = allBlogLinks
+    .map((entry) => `        <li><a href="${entry.route}">${entry.title}</a></li>`)
     .join('\n');
 
   html = html.replace(
@@ -184,7 +221,7 @@ function updateSitemapPage({ blogEntries, startupEntries, failureEntries }) {
   );
   html = html.replace(
     /<!-- BLOG_COUNT_START -->[\s\S]*?<!-- BLOG_COUNT_END -->/,
-    `<!-- BLOG_COUNT_START -->${blogEntries.length} articles<!-- BLOG_COUNT_END -->`
+    `<!-- BLOG_COUNT_START -->${allBlogLinks.length} articles<!-- BLOG_COUNT_END -->`
   );
 
   const startupLinks = startupEntries.map((entry) => ({
@@ -212,8 +249,8 @@ function updateSitemapPage({ blogEntries, startupEntries, failureEntries }) {
   );
 
   fs.writeFileSync(sitemapPagePath, html, 'utf8');
-  console.log(`sitemap.html updated with ${blogEntries.length} static blog links and ${startupCount} startup links.`);
+  console.log(`sitemap.html updated with ${allBlogLinks.length} static blog links and ${startupCount} startup links.`);
 }
 
-const { blogEntries, startupEntries, failureEntries } = generateSitemap();
-updateSitemapPage({ blogEntries, startupEntries, failureEntries });
+const { blogEntries, blogSubEntries, startupEntries, failureEntries } = generateSitemap();
+updateSitemapPage({ blogEntries, blogSubEntries, startupEntries, failureEntries });
