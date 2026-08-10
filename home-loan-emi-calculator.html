@@ -156,9 +156,15 @@
 </head>
 <body>
 <nav class="site-nav"><div class="nav-inner">
-  <a href="/" class="nav-logo">⚖️ WorthScale</a>
+  <a href="/" class="nav-logo"><span class="nav-logo-chip"><img src="/assets/logos/worthscale-logo.png" alt="WorthScale" class="nav-logo-img"></span></a>
   <div class="nav-links">
-    <a href="/">Home</a><a href="/markets">Markets</a><a href="/companies">Companies</a><a href="/crypto">Crypto</a>
+    <a href="/">Home</a><a href="/markets">Markets</a><a href="/companies">Companies</a><div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Startups &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/startups">&#128640; All Startups</a>
+        <a href="/startups/failure-stories">&#128201; Failure Stories</a>
+      </div>
+    </div><a href="/crypto">Crypto</a>
     <div class="nav-dropdown">
       <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Tools &#9662;</button>
       <div class="nav-drop-menu">
@@ -172,7 +178,7 @@
         <a href="/richest-indians">&#127942; India Rich List 2026</a>
       </div>
     </div>
-    <a href="/blog">Blog</a><a href="/about">About</a><a href="/contact">Contact</a>
+    <a href="https://www.instagram.com/worthscale_/" target="_blank" rel="noopener noreferrer" class="nav-instagram" aria-label="WorthScale on Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 1.966c-3.148 0-3.501.012-4.737.068-2.605.119-3.808 1.335-3.927 3.927-.056 1.235-.067 1.587-.067 4.737 0 3.148.011 3.501.067 4.737.119 2.59 1.32 3.808 3.927 3.927 1.236.056 1.588.068 4.737.068 3.148 0 3.502-.012 4.737-.068 2.603-.119 3.809-1.34 3.927-3.927.056-1.236.068-1.589.068-4.737 0-3.15-.012-3.502-.068-4.737-.119-2.594-1.324-3.808-3.927-3.927-1.235-.056-1.589-.068-4.737-.068zm0 5.007a5.038 5.038 0 110 10.076 5.038 5.038 0 010-10.076zm0 1.802a3.236 3.236 0 100 6.472 3.236 3.236 0 000-6.472zm5.239-3.203a1.176 1.176 0 110 2.352 1.176 1.176 0 010-2.352z"/></svg></a>
     <a href="/app" class="nav-cta">Open Dashboard</a>
   </div>
   <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
@@ -391,7 +397,7 @@
 </div>
 
 <footer class="site-footer"><div class="footer-inner footer-grid">
-  <div class="footer-about"><div class="footer-brand">⚖️ WorthScale</div><p class="footer-desc">India's free finance hub — market insights, company valuations, and financial calculators.</p></div>
+  <div class="footer-about"><div class="footer-brand"><span class="footer-logo-chip"><img src="/assets/logos/worthscale-logo.png" alt="WorthScale" class="footer-logo-img"></span></div><p class="footer-desc">India's free finance hub — market insights, company valuations, and financial calculators.</p></div>
   <div class="footer-col"><h4>Calculators</h4><a href="/sip-calculator">SIP Calculator</a><a href="/income-tax-calculator">Income Tax Calculator</a><a href="/new-tax-regime-calculator">New Tax Regime Calculator</a><a href="/home-loan-emi-calculator">Home Loan EMI Calculator</a><a href="/net-worth-calculator">Net Worth Calculator</a><a href="/emergency-fund-calculator">Emergency Fund</a><a href="/house-down-payment-calculator">Down Payment</a></div>
   <div class="footer-col"><h4>Explore</h4><a href="/markets">Markets</a><a href="/nifty-50">Nifty 50</a><a href="/companies">Companies</a><a href="/crypto">Crypto</a><a href="/richest-indians">Rich List 2026</a></div>
   <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/contact">Contact</a><a href="/privacy-policy">Privacy Policy</a></div>

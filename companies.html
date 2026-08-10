@@ -28,13 +28,25 @@
 
 /* Company cards */
 .co-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
-.co-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;text-decoration:none;display:block;transition:all .2s;box-shadow:0 1px 3px rgba(15,23,42,.04)}
+.co-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:0;text-decoration:none;display:flex;flex-direction:column;transition:all .2s;box-shadow:0 1px 3px rgba(15,23,42,.04);overflow:hidden}
 .co-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 4px 14px rgba(37,99,235,.10);text-decoration:none}
+.co-card-img{width:100%;height:120px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;flex-shrink:0}
+.co-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.co-card-body{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1}
 .co-card .co-sector{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:6px}
 .co-card h3{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3}
 .co-card .co-val{font-size:.8rem;color:var(--green);font-weight:600;margin-bottom:4px}
 .co-card p{font-size:.75rem;color:var(--text2);line-height:1.45;margin:0}
-.co-card .co-link{color:var(--blue);font-size:.72rem;font-weight:600;margin-top:10px;display:inline-block}
+.co-card .co-byline{font-size:.66rem;color:var(--muted);margin-top:10px}
+.co-card .co-link{color:var(--blue);font-size:.72rem;font-weight:600;margin-top:6px;display:inline-block}
+
+/* Category placeholder image colours — swap each -img's contents for a real <img> as photos are added */
+.cc-conglomerates{background:linear-gradient(135deg,rgba(124,58,237,.22),rgba(124,58,237,.42))}
+.cc-banking{background:linear-gradient(135deg,rgba(37,99,235,.22),rgba(37,99,235,.42))}
+.cc-startups{background:linear-gradient(135deg,rgba(249,115,22,.22),rgba(249,115,22,.42))}
+.cc-global{background:linear-gradient(135deg,rgba(45,212,191,.25),rgba(45,212,191,.45))}
+.cc-leaders{background:linear-gradient(135deg,rgba(217,119,6,.22),rgba(217,119,6,.42))}
+.cc-wealth{background:linear-gradient(135deg,rgba(22,163,74,.22),rgba(22,163,74,.42))}
 
 /* Search */
 .co-search-box{position:relative;margin:20px 0 14px}
@@ -45,13 +57,17 @@
 
 /* People cards */
 .ppl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
-.ppl-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;text-decoration:none;display:block;transition:all .2s}
+.ppl-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:0;text-decoration:none;display:flex;flex-direction:column;transition:all .2s;overflow:hidden}
 .ppl-card:hover{border-color:var(--purple);transform:translateY(-2px);box-shadow:0 4px 14px rgba(124,58,237,.08);text-decoration:none}
+.ppl-card-img{width:100%;height:120px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;flex-shrink:0}
+.ppl-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.ppl-card-body{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1}
 .ppl-card .pp-role{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:6px}
 .ppl-card h3{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px}
 .ppl-card .pp-nw{font-size:.8rem;color:var(--purple);font-weight:600;margin-bottom:4px}
 .ppl-card p{font-size:.75rem;color:var(--text2);line-height:1.45;margin:0}
-.ppl-card .pp-link{color:var(--blue);font-size:.72rem;font-weight:600;margin-top:10px;display:inline-block}
+.ppl-card .pp-byline{font-size:.66rem;color:var(--muted);margin-top:10px}
+.ppl-card .pp-link{color:var(--blue);font-size:.72rem;font-weight:600;margin-top:6px;display:inline-block}
 
 /* Section heading */
 .sec-hd{font-size:1.3rem;font-weight:700;margin-bottom:6px;color:var(--text)}
@@ -92,11 +108,18 @@
 <body>
 
 <nav class="site-nav"><div class="nav-inner">
-  <a href="/" class="nav-logo">⚖️ WorthScale</a>
+  <a href="/" class="nav-logo"><span class="nav-logo-chip"><img src="/assets/logos/worthscale-logo.png" alt="WorthScale" class="nav-logo-img"></span></a>
   <div class="nav-links">
     <a href="/">Home</a>
     <a href="/markets">Markets</a>
     <a href="/companies" class="active">Companies</a>
+    <div class="nav-dropdown">
+      <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Startups &#9662;</button>
+      <div class="nav-drop-menu">
+        <a href="/startups">&#128640; All Startups</a>
+        <a href="/startups/failure-stories">&#128201; Failure Stories</a>
+      </div>
+    </div>
     <a href="/crypto">Crypto</a>
     <div class="nav-dropdown">
       <button class="nav-drop-trigger" onclick="event.stopPropagation();this.closest('.nav-dropdown').classList.toggle('open')">Tools &#9662;</button>
@@ -109,9 +132,7 @@
         <a href="/richest-indians">&#127942; India Rich List 2026</a>
       </div>
     </div>
-    <a href="/blog">Blog</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
+    <a href="https://www.instagram.com/worthscale_/" target="_blank" rel="noopener noreferrer" class="nav-instagram" aria-label="WorthScale on Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 1.966c-3.148 0-3.501.012-4.737.068-2.605.119-3.808 1.335-3.927 3.927-.056 1.235-.067 1.587-.067 4.737 0 3.148.011 3.501.067 4.737.119 2.59 1.32 3.808 3.927 3.927 1.236.056 1.588.068 4.737.068 3.148 0 3.502-.012 4.737-.068 2.603-.119 3.809-1.34 3.927-3.927.056-1.236.068-1.589.068-4.737 0-3.15-.012-3.502-.068-4.737-.119-2.594-1.324-3.808-3.927-3.927-1.235-.056-1.589-.068-4.737-.068zm0 5.007a5.038 5.038 0 110 10.076 5.038 5.038 0 010-10.076zm0 1.802a3.236 3.236 0 100 6.472 3.236 3.236 0 000-6.472zm5.239-3.203a1.176 1.176 0 110 2.352 1.176 1.176 0 010-2.352z"/></svg></a>
     <a href="/app" class="nav-cta">Open Dashboard</a>
   </div>
   <button class="nav-toggle" onclick="this.closest('.nav-inner').classList.toggle('open')">&#9776;</button>
@@ -151,88 +172,148 @@
   <p class="sec-sub">The conglomerates and large-caps that define the Indian economy.</p>
   <div class="co-grid">
     <a href="/blog/reliance-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/reliance.jpg" alt="Reliance Industries" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Energy · Telecom · Retail</div>
       <h3>Reliance Industries</h3>
       <div class="co-val">~₹19.77 Lakh Crore</div>
       <p>India's largest company. From Jamnagar refinery to Jio and Reliance Retail.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/adani-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/adani.jpg" alt="Adani Group" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Infrastructure · Energy · Ports</div>
       <h3>Adani Group</h3>
       <div class="co-val">Multi-sector conglomerate</div>
       <p>Ports, airports, power, green energy, and cement — Adani's empire explained.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/airtel-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/airtel.jpg" alt="Bharti Airtel" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Telecom</div>
       <h3>Bharti Airtel</h3>
       <div class="co-val">India's #2 telecom</div>
       <p>Mobile subscribers, Africa operations, and the race to 5G in India.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/itc-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/itc.jpg" alt="ITC Limited" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">FMCG · Hotels · Agri</div>
       <h3>ITC Limited</h3>
       <div class="co-val">Diversified FMCG giant</div>
       <p>From cigarettes to biscuits and hotels — ITC's diversification story.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/bajaj-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/bajaj.jpg" alt="Bajaj Group" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Auto · Finance</div>
       <h3>Bajaj Group</h3>
       <div class="co-val">Auto and finance leader</div>
       <p>Two-wheelers, EVs, and Bajaj Finance's massive consumer lending business.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/maruti-suzuki-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/maruti-suzuki.jpg" alt="Maruti Suzuki" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Automobile</div>
       <h3>Maruti Suzuki</h3>
       <div class="co-val">India's top car seller</div>
       <p>Market share, EV transition plans, and the passenger vehicle landscape.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/asian-paints-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/asian-paints.jpg" alt="Asian Paints" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Consumer · Paints</div>
       <h3>Asian Paints</h3>
       <div class="co-val">India's #1 paint company</div>
       <p>Distribution moat, brand equity, and its expansion into home décor.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/vedanta-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/vedanta.jpg" alt="Vedanta" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Mining · Metals · Energy</div>
       <h3>Vedanta</h3>
       <div class="co-val">Natural resources giant</div>
       <p>Zinc, aluminium, oil & gas, and Anil Agarwal's global mining empire.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/patanjali-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/patanjali.jpg" alt="Patanjali" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">FMCG · Ayurveda</div>
       <h3>Patanjali</h3>
       <div class="co-val">Baba Ramdev's FMCG brand</div>
       <p>How Patanjali disrupted India's FMCG sector and where it stands today.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/jio-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/jio.jpg" alt="Jio Platforms" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Telecom · Digital</div>
       <h3>Jio Platforms</h3>
       <div class="co-val">India's largest telco</div>
       <p>The data revolution, 5G rollout, and JioCinema's media ambitions.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/lic-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/lic.jpg" alt="LIC of India" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Insurance · Finance</div>
       <h3>LIC of India</h3>
       <div class="co-val">India's largest insurer</div>
       <p>After the mega IPO, how LIC's AUM and market position stack up.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/nestle-net-worth" class="co-card">
+      <div class="co-card-img cc-conglomerates"><img src="/assets/banners/nestle.jpg" alt="Nestlé India" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">FMCG · Food</div>
       <h3>Nestlé India</h3>
       <div class="co-val">Maggi, KitKat &amp; more</div>
       <p>Pricing power, rural penetration, and Nestlé India's premium valuation.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
   </div>
 </div>
@@ -246,46 +327,76 @@
   <p class="sec-sub">The lenders, insurers, and financial services companies that power India's economy.</p>
   <div class="co-grid">
     <a href="/blog/hdfc-net-worth" class="co-card">
+      <div class="co-card-img cc-banking"><img src="/assets/banners/hdfc.jpg" alt="HDFC Bank" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Private Banking</div>
       <h3>HDFC Bank</h3>
       <div class="co-val">India's largest private bank</div>
       <p>Post-merger loan book, NIMs, and HDFC Bank's dominance in retail lending.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/icici-bank-net-worth" class="co-card">
+      <div class="co-card-img cc-banking"><img src="/assets/banners/icici-bank.jpg" alt="ICICI Bank" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Private Banking</div>
       <h3>ICICI Bank</h3>
       <div class="co-val">2nd largest private bank</div>
       <p>Retail credit growth, digital banking leadership, and investor appeal.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/axis-bank-net-worth" class="co-card">
+      <div class="co-card-img cc-banking"><img src="/assets/banners/axis-bank.jpg" alt="Axis Bank" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Private Banking</div>
       <h3>Axis Bank</h3>
       <div class="co-val">3rd largest private bank</div>
       <p>Rebuilding after bad loans — how Axis turned its NPA story around.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/kotak-net-worth" class="co-card">
+      <div class="co-card-img cc-banking"><img src="/assets/banners/kotak.jpg" alt="Kotak Mahindra Bank" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Banking · Wealth Mgmt</div>
       <h3>Kotak Mahindra Bank</h3>
       <div class="co-val">Premium private bank</div>
       <p>Uday Kotak's legacy, high CASA ratio, and Kotak's affluent customer focus.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/zerodha-net-worth" class="co-card">
+      <div class="co-card-img cc-banking"><img src="/assets/banners/zerodha.jpg" alt="Zerodha" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Fintech · Broking</div>
       <h3>Zerodha</h3>
       <div class="co-val">India's #1 discount broker</div>
       <p>No commissions, the Kite platform, and Nithin Kamath's bootstrapped empire.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/lic-net-worth" class="co-card">
+      <div class="co-card-img cc-banking"><img src="/assets/banners/lic.jpg" alt="LIC of India" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Public Insurance</div>
       <h3>LIC of India</h3>
       <div class="co-val">₹40+ Lakh Crore AUM</div>
       <p>India's largest institutional investor — policies, market impact, and more.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
   </div>
 </div>
@@ -299,95 +410,49 @@
   <p class="sec-sub">From unicorns to publicly listed new-age companies — the startups reshaping Indian business.</p>
   <div class="co-grid">
     <a href="/blog/zomato-net-worth" class="co-card">
+      <div class="co-card-img cc-startups"><img src="/assets/banners/zomato.jpg" alt="Zomato" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Food Delivery · Quick Commerce</div>
       <h3>Zomato</h3>
       <div class="co-val">Listed on NSE/BSE</div>
       <p>Food delivery to Blinkit quick commerce — how Zomato found its profitable path.</p>
       <span class="co-link">Read analysis →</span>
-    </a>
-    <a href="/blog/swiggy-net-worth" class="co-card">
-      <div class="co-sector">Food Delivery · Quick Commerce</div>
-      <h3>Swiggy</h3>
-      <div class="co-val">Listed in Nov 2024</div>
-      <p>Instamart, Snacc, and Swiggy's fight to catch Zomato after its IPO.</p>
-      <span class="co-link">Read analysis →</span>
-    </a>
-    <a href="/blog/paytm-net-worth" class="co-card">
-      <div class="co-sector">Payments · Fintech</div>
-      <h3>Paytm</h3>
-      <div class="co-val">India's payments pioneer</div>
-      <p>Post-RBI crackdown recovery, profitability path, and Vijay Shekhar Sharma's vision.</p>
-      <span class="co-link">Read analysis →</span>
-    </a>
-    <a href="/blog/phonepe-net-worth" class="co-card">
-      <div class="co-sector">Payments · Super App</div>
-      <h3>PhonePe</h3>
-      <div class="co-val">India's #1 UPI app</div>
-      <p>Dominating UPI volumes, insurance, mutual funds, and the super-app ambition.</p>
-      <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/zepto-net-worth" class="co-card">
+      <div class="co-card-img cc-startups"><img src="/assets/banners/zepto.jpg" alt="Zepto" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Quick Commerce</div>
       <h3>Zepto</h3>
       <div class="co-val">10-minute grocery delivery</div>
       <p>How two 19-year-olds built India's fastest-growing quick commerce startup.</p>
       <span class="co-link">Read analysis →</span>
-    </a>
-    <a href="/blog/ola-net-worth" class="co-card">
-      <div class="co-sector">Mobility · EV</div>
-      <h3>OLA</h3>
-      <div class="co-val">Ride-hailing to EVs</div>
-      <p>Bhavish Aggarwal's pivot from cab aggregator to electric scooter manufacturer.</p>
-      <span class="co-link">Read analysis →</span>
-    </a>
-    <a href="/blog/flipkart-net-worth" class="co-card">
-      <div class="co-sector">E-commerce</div>
-      <h3>Flipkart</h3>
-      <div class="co-val">Walmart-backed unicorn</div>
-      <p>India's e-commerce battle with Amazon, Big Billion Day, and IPO plans.</p>
-      <span class="co-link">Read analysis →</span>
-    </a>
-    <a href="/blog/lenskart-net-worth" class="co-card">
-      <div class="co-sector">Retail · D2C</div>
-      <h3>Lenskart</h3>
-      <div class="co-val">Eyewear unicorn</div>
-      <p>From online glasses to 2,000+ stores — Peyush Bansal's global expansion.</p>
-      <span class="co-link">Read analysis →</span>
-    </a>
-    <a href="/blog/bharatpe-net-worth" class="co-card">
-      <div class="co-sector">Fintech · Payments</div>
-      <h3>BharatPe</h3>
-      <div class="co-val">Merchant payments unicorn</div>
-      <p>Post-Ashneer Grover drama, new leadership, and BharatPe's recovery story.</p>
-      <span class="co-link">Read analysis →</span>
-    </a>
-    <a href="/blog/nykaa-net-worth" class="co-card">
-      <div class="co-sector">Beauty · Fashion</div>
-      <h3>Nykaa</h3>
-      <div class="co-val">Beauty commerce leader</div>
-      <p>Falguni Nayar's IPO journey, Nykaa Fashion, and premium beauty market growth.</p>
-      <span class="co-link">Read analysis →</span>
-    </a>
-    <a href="/blog/mamaearth-net-worth" class="co-card">
-      <div class="co-sector">D2C · FMCG</div>
-      <h3>MamaEarth</h3>
-      <div class="co-val">Natural beauty brand</div>
-      <p>D2C to offline expansion, IPO listing, and the natural beauty market in India.</p>
-      <span class="co-link">Read analysis →</span>
-    </a>
-    <a href="/blog/boat-net-worth" class="co-card">
-      <div class="co-sector">Consumer Electronics</div>
-      <h3>BoAt</h3>
-      <div class="co-val">India's audio brand</div>
-      <p>How BoAt made Indian youth ditch Chinese headphones and built a homegrown brand.</p>
-      <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/physics-wallah-net-worth" class="co-card">
+      <div class="co-card-img cc-startups"><img src="/assets/banners/physics-wallah.jpg" alt="Physics Wallah" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">EdTech</div>
       <h3>Physics Wallah</h3>
       <div class="co-val">India's affordable EdTech</div>
       <p>Alakh Pandey's mission to make quality education affordable for every Indian student.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
+    </a>
+    <a href="/startups" class="co-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--bg2)">
+      <div class="co-card-img cc-startups">🚀</div>
+      <div class="co-card-body">
+      <div class="co-sector">13 Startups &amp; Counting</div>
+      <h3>View All Startups →</h3>
+      <p>The full directory of India's startup net worth breakdowns.</p>
+    
+      </div>
     </a>
   </div>
 </div>
@@ -401,102 +466,172 @@
   <p class="sec-sub">The global corporations that every investor and business student should understand.</p>
   <div class="co-grid">
     <a href="/blog/apple-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/apple.jpg" alt="Apple Inc." loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Technology</div>
       <h3>Apple Inc.</h3>
       <div class="co-val">~$3 Trillion Market Cap</div>
       <p>World's most valuable brand. iPhone, services, and Tim Cook's supply chain empire.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/meta-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/meta.jpg" alt="Meta Platforms" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Social Media · AI</div>
       <h3>Meta Platforms</h3>
       <div class="co-val">Facebook, Instagram, WhatsApp</div>
       <p>Ad revenue dominance, the metaverse pivot, and Zuckerberg's AI-first strategy.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/goldman-sachs-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/goldman-sachs.jpg" alt="Goldman Sachs" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Investment Banking</div>
       <h3>Goldman Sachs</h3>
       <div class="co-val">~$267 Billion valuation</div>
       <p>Wall Street's most elite bank — M&amp;A, trading, and global deal-making explained.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/jpmorgan-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/jpmorgan.jpg" alt="JPMorgan Chase" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Banking · Finance</div>
       <h3>JPMorgan Chase</h3>
       <div class="co-val">World's largest bank</div>
       <p>Jamie Dimon's fortress bank — consumer banking, investment banking, and global reach.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/blackrock-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/blackrock.jpg" alt="BlackRock" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Asset Management</div>
       <h3>BlackRock</h3>
       <div class="co-val">$10+ Trillion AUM</div>
       <p>The world's largest asset manager, the Aladdin platform, and iShares ETFs.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/kkr-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/kkr.jpg" alt="KKR" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Private Equity</div>
       <h3>KKR &amp; Co.</h3>
       <div class="co-val">Private equity powerhouse</div>
       <p>How KKR buys, transforms, and exits companies — the private equity model explained.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/berkshire-hathaway-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/berkshire-hathaway.jpg" alt="Berkshire Hathaway" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Holding · Insurance</div>
       <h3>Berkshire Hathaway</h3>
       <div class="co-val">Warren Buffett's empire</div>
       <p>From textile mill to $900B conglomerate — Buffett's value investing blueprint.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/ibm-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/ibm.jpg" alt="IBM" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Technology · AI</div>
       <h3>IBM</h3>
       <div class="co-val">AI &amp; cloud reinvention</div>
       <p>From mainframes to hybrid cloud and Watson AI — IBM's century-long transformation.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/salesforce-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/salesforce.jpg" alt="Salesforce" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Enterprise SaaS</div>
       <h3>Salesforce</h3>
       <div class="co-val">CRM market leader</div>
       <p>Marc Benioff's SaaS empire — CRM, Slack, and the enterprise AI opportunity.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/uber-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/uber.jpg" alt="Uber" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Mobility · Delivery</div>
       <h3>Uber</h3>
       <div class="co-val">Global ride-hailing leader</div>
       <p>From loss-making to profitable — how Uber finally cracked the unit economics puzzle.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/coca-cola-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/coca-cola.jpg" alt="Coca-Cola" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">FMCG · Beverages</div>
       <h3>Coca-Cola</h3>
       <div class="co-val">$250B+ brand value</div>
       <p>The world's most recognised brand — pricing power, India operations, and dividends.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/starbucks-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/starbucks.jpg" alt="Starbucks" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">F&amp;B · Retail</div>
       <h3>Starbucks</h3>
       <div class="co-val">Global coffee empire</div>
       <p>Loyalty programme, China challenges, and why Starbucks India is growing fast.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/kfc-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/kfc.jpg" alt="KFC" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">QSR · Food</div>
       <h3>KFC</h3>
       <div class="co-val">Yum! Brands subsidiary</div>
       <p>Colonel Sanders' legacy — how KFC became one of the world's largest restaurant chains.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
     <a href="/blog/mi-net-worth" class="co-card">
+      <div class="co-card-img cc-global"><img src="/assets/banners/mi.jpg" alt="Xiaomi (Mi)" loading="lazy" width="1200" height="630"></div>
+      <div class="co-card-body">
       <div class="co-sector">Consumer Electronics</div>
       <h3>Xiaomi (Mi)</h3>
       <div class="co-val">China's global tech brand</div>
       <p>Smartphones, smart home, and why Xiaomi is one of India's top-selling phone brands.</p>
       <span class="co-link">Read analysis →</span>
+    
+      <p class="co-byline">By WorthScale Research Desk &mdash; 9 May 2026</p>
+      </div>
     </a>
   </div>
 </div>
@@ -510,88 +645,148 @@
   <p class="sec-sub">The founders, CEOs, and investors shaping India's corporate story.</p>
   <div class="ppl-grid">
     <a href="/blog/gautam-adani-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/gautam-adani.jpg" alt="Gautam Adani" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Founder, Adani Group</div>
       <h3>Gautam Adani</h3>
       <div class="pp-nw">~$60–70 Billion net worth</div>
       <p>From diamond trading to Asia's largest port operator and renewable energy pioneer.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/ratan-tata-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/ratan-tata.jpg" alt="Ratan Tata" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Former Chairman, Tata Group</div>
       <h3>Ratan Tata</h3>
       <div class="pp-nw">India's most respected industrialist</div>
       <p>The man who took Tata global — Jaguar, Corus, and a legacy beyond profits.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/nikhil-kamath-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/nikhil-kamath.jpg" alt="Nikhil Kamath" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Co-founder, Zerodha &amp; True Beacon</div>
       <h3>Nikhil Kamath</h3>
       <div class="pp-nw">India's youngest billionaire</div>
       <p>Self-made trader to fintech co-founder — India's most candid young billionaire.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 10 May 2026</p>
+      </div>
     </a>
     <a href="/blog/radhika-gupta-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/radhika-gupta.jpg" alt="Radhika Gupta" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">CEO, Edelweiss AMC</div>
       <h3>Radhika Gupta</h3>
       <div class="pp-nw">India's top fund manager</div>
       <p>From rejection letters to running one of India's leading mutual fund houses.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 10 May 2026</p>
+      </div>
     </a>
     <a href="/blog/ashneer-grover-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/ashneer-grover.jpg" alt="Ashneer Grover" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Co-founder, BharatPe</div>
       <h3>Ashneer Grover</h3>
       <div class="pp-nw">Shark Tank India judge</div>
       <p>Rise, controversy, and what comes next for India's most outspoken entrepreneur.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 10 May 2026</p>
+      </div>
     </a>
     <a href="/blog/aman-gupta-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/aman-gupta.jpg" alt="Aman Gupta" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Co-founder, BoAt</div>
       <h3>Aman Gupta</h3>
       <div class="pp-nw">Shark Tank India star</div>
       <p>How Aman Gupta built BoAt into India's most popular consumer electronics brand.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 10 May 2026</p>
+      </div>
     </a>
     <a href="/blog/peyush-bansal-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/peyush-bansal.jpg" alt="Peyush Bansal" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Founder &amp; CEO, Lenskart</div>
       <h3>Peyush Bansal</h3>
       <div class="pp-nw">Lenskart founder</div>
       <p>The IIT Delhi grad who built a global eyewear unicorn from a small online store.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 10 May 2026</p>
+      </div>
     </a>
     <a href="/blog/falguni-nayar-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/falguni-nayar.jpg" alt="Falguni Nayar" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Founder &amp; CEO, Nykaa</div>
       <h3>Falguni Nayar</h3>
       <div class="pp-nw">India's self-made woman billionaire</div>
       <p>Quit banking at 50 to start Nykaa — India's most inspiring entrepreneurial story.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/ritesh-agarwal-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/ritesh-agarwal.jpg" alt="Ritesh Agarwal" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Founder &amp; CEO, OYO</div>
       <h3>Ritesh Agarwal</h3>
       <div class="pp-nw">OYO founder</div>
       <p>India's hotel aggregator pioneer — from Thiel Fellow to global hospitality operator.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/anil-ambani-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/anil-ambani.jpg" alt="Anil Ambani" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Chairman, ADAG Group</div>
       <h3>Anil Ambani</h3>
       <div class="pp-nw">ADAG Group</div>
       <p>The rise, fall, and attempted comeback of the younger Ambani brother's business empire.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 10 May 2026</p>
+      </div>
     </a>
     <a href="/blog/satya-nadella-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/satya-nadella.jpg" alt="Satya Nadella" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">CEO, Microsoft</div>
       <h3>Satya Nadella</h3>
       <div class="pp-nw">~$1 Billion net worth</div>
       <p>The Hyderabad engineer who turned Microsoft into the world's most valuable company.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
     <a href="/blog/sundar-pichai-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-leaders"><img src="/assets/banners/sundar-pichai.jpg" alt="Sundar Pichai" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">CEO, Alphabet &amp; Google</div>
       <h3>Sundar Pichai</h3>
       <div class="pp-nw">~$600M net worth</div>
       <p>Chennai to the corner office at Google — the IIT Kharagpur alumnus running the internet.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 5 May 2026</p>
+      </div>
     </a>
   </div>
 </div>
@@ -605,32 +800,52 @@
   <p class="sec-sub">The billionaires whose decisions move markets and define industries.</p>
   <div class="ppl-grid">
     <a href="/blog/elon-musk-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-wealth"><img src="/assets/banners/elon-musk.jpg" alt="Elon Musk" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Tesla · SpaceX · xAI · X</div>
       <h3>Elon Musk</h3>
       <div class="pp-nw">World's richest person</div>
       <p>EVs, rockets, AI, and social media — the most consequential entrepreneur of our era.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 10 May 2026</p>
+      </div>
     </a>
     <a href="/blog/jeff-bezos-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-wealth"><img src="/assets/banners/jeff-bezos.jpg" alt="Jeff Bezos" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Founder, Amazon</div>
       <h3>Jeff Bezos</h3>
       <div class="pp-nw">~$200+ Billion</div>
       <p>From garage bookstore to AWS and Blue Origin — Bezos's relentless empire.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 6 May 2026</p>
+      </div>
     </a>
     <a href="/blog/mark-zuckerberg-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-wealth"><img src="/assets/banners/mark-zuckerberg.jpg" alt="Mark Zuckerberg" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">CEO, Meta Platforms</div>
       <h3>Mark Zuckerberg</h3>
       <div class="pp-nw">~$180+ Billion</div>
       <p>Facebook to the metaverse to AI — the Harvard dropout still shaping global social media.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 10 May 2026</p>
+      </div>
     </a>
     <a href="/blog/kylie-jenner-net-worth" class="ppl-card">
+      <div class="ppl-card-img cc-wealth"><img src="/assets/banners/kylie-jenner.jpg" alt="Kylie Jenner" loading="lazy" width="1200" height="630"></div>
+      <div class="ppl-card-body">
       <div class="pp-role">Founder, Kylie Cosmetics</div>
       <h3>Kylie Jenner</h3>
       <div class="pp-nw">~$700M net worth</div>
       <p>How social media stardom became a billion-dollar beauty brand — and what really happened.</p>
       <span class="pp-link">Read profile →</span>
+    
+      <p class="pp-byline">By WorthScale Research Desk &mdash; 6 May 2026</p>
+      </div>
     </a>
   </div>
   <p style="font-size:.65rem;color:var(--muted);margin-top:14px;text-align:center">Net worth &amp; valuation figures are approximate estimates sourced from Forbes, Bloomberg, and public filings &middot; as of 2026 &middot; subject to change</p>
@@ -695,7 +910,7 @@
 
 <footer class="site-footer"><div class="footer-inner footer-grid">
   <div class="footer-about">
-    <div class="footer-brand">⚖️ WorthScale</div>
+    <div class="footer-brand"><span class="footer-logo-chip"><img src="/assets/logos/worthscale-logo.png" alt="WorthScale" class="footer-logo-img"></span></div>
     <p class="footer-desc">Free personal finance platform for Indians. Track net worth, follow markets, and build wealth with simple tools and guides.</p>
   </div>
   <div class="footer-col">

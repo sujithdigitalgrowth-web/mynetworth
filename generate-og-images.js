@@ -21,6 +21,8 @@ const path = require('path');
 const sharp = require('sharp');
 
 const BLOG_DIR = path.join(__dirname, 'blog');
+const STARTUPS_DIR = path.join(__dirname, 'startups');
+const FAILURE_STORIES_DIR = path.join(STARTUPS_DIR, 'failure-stories');
 const OUTPUT_DIR = path.join(__dirname, 'assets', 'og');
 const SITE_URL = 'https://worthscale.in';
 const FORCE = process.argv.includes('--force');
@@ -32,6 +34,8 @@ const TEMPLATES = {
   company: { accent: '#4F7CFF', badge: 'COMPANY VALUATION' },
   celebrity: { accent: '#B266FF', badge: 'CELEBRITY NET WORTH' },
   guide: { accent: '#2DD4BF', badge: 'FINANCE GUIDE' },
+  startup: { accent: '#F97316', badge: 'STARTUP ANALYSIS' },
+  failure: { accent: '#DC2626', badge: 'FAILURE STORY' },
 };
 
 function escapeXml(str) {
@@ -106,11 +110,13 @@ function extractCategory(html) {
   // character — so skip any non-letter prefix rather than whitelisting
   // specific emoji. Also covers "Individual Net Worth" and "Content Creator
   // Net Worth", both of which are filed under "celebrity" site-wide.
-  const badgeMatch = heroHtml.match(/>[^A-Za-z<]{0,12}(Company|Celebrity|Individual|Content Creator)[^<]{0,20}</i);
+  const badgeMatch = heroHtml.match(/>[^A-Za-z<]{0,12}(Company|Celebrity|Individual|Content Creator|Startup|Failure)[^<]{0,20}</i);
   if (badgeMatch) {
     const word = badgeMatch[1].toLowerCase();
     if (word === 'company') return 'company';
     if (word === 'celebrity' || word === 'individual' || word === 'content creator') return 'celebrity';
+    if (word === 'startup') return 'startup';
+    if (word === 'failure') return 'failure';
   }
   return 'guide';
 }
@@ -132,7 +138,10 @@ function extractNameAndFigure(title, category) {
   // "<Entity> Net Worth" header. Matching against that pattern there produces
   // garbage ("How to Calculate", "Why"), so use the plain title/prefix for
   // guides and skip figure extraction — there's no single figure to show.
-  if (category === 'guide') {
+  // Startup analysis pages ("Groww: India's Largest Retail Investing App")
+  // follow the same "<Name>: <positioning>" title shape as guides, and like
+  // guides don't have a single net-worth-style figure to headline.
+  if (category === 'guide' || category === 'startup' || category === 'failure') {
     const name = clean.split(':')[0].trim() || clean;
     return { name: name || 'WorthScale', figure: null };
   }
@@ -229,6 +238,11 @@ function loadIndexCategoryMap() {
 }
 
 // ---------- Main ----------
+// Source directories to scan for postable pages. Each entry's index.html
+// (the listing/hub page for that section) is excluded from image generation.
+// blog/index.html additionally supplies the curated category map used below.
+const SOURCE_DIRS = [BLOG_DIR, STARTUPS_DIR, FAILURE_STORIES_DIR].filter((dir) => fs.existsSync(dir));
+
 async function run() {
   if (!fs.existsSync(BLOG_DIR)) {
     console.error(`Blog directory not found at ${BLOG_DIR}. Update BLOG_DIR at the top of this script.`);
@@ -237,37 +251,40 @@ async function run() {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
   const indexCategoryMap = loadIndexCategoryMap();
-  const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith('.html') && f !== 'index.html');
-  console.log(`Found ${files.length} post files.\n`);
 
   let generated = 0;
   let skipped = 0;
 
-  for (const file of files) {
-    const slug = file.replace(/\.html$/, '');
-    const filePath = path.join(BLOG_DIR, file);
-    const outputPath = path.join(OUTPUT_DIR, `${slug}.png`);
-    const imageUrl = `${SITE_URL}/assets/og/${slug}.png`;
+  for (const dir of SOURCE_DIRS) {
+    const files = fs.readdirSync(dir).filter((f) => f.endsWith('.html') && f !== 'index.html');
+    console.log(`Found ${files.length} post files in ${path.basename(dir)}/.\n`);
 
-    if (fs.existsSync(outputPath) && !FORCE) {
-      skipped++;
-      continue;
+    for (const file of files) {
+      const slug = file.replace(/\.html$/, '');
+      const filePath = path.join(dir, file);
+      const outputPath = path.join(OUTPUT_DIR, `${slug}.png`);
+      const imageUrl = `${SITE_URL}/assets/og/${slug}.png`;
+
+      if (fs.existsSync(outputPath) && !FORCE) {
+        skipped++;
+        continue;
+      }
+
+      const html = fs.readFileSync(filePath, 'utf8');
+      const category = indexCategoryMap[slug] || extractCategory(html);
+      const title = extractTitle(html);
+      const { name, figure } = extractNameAndFigure(title, category);
+
+      const svg = buildSvg({ name, figure, category });
+
+      await sharp(Buffer.from(svg)).png().toFile(outputPath);
+
+      const updatedHtml = injectImageTags(html, imageUrl);
+      fs.writeFileSync(filePath, updatedHtml, 'utf8');
+
+      generated++;
+      console.log(`✓ ${slug}  [${category}]  ${name}${figure ? ' — ' + figure : ''}`);
     }
-
-    const html = fs.readFileSync(filePath, 'utf8');
-    const category = indexCategoryMap[slug] || extractCategory(html);
-    const title = extractTitle(html);
-    const { name, figure } = extractNameAndFigure(title, category);
-
-    const svg = buildSvg({ name, figure, category });
-
-    await sharp(Buffer.from(svg)).png().toFile(outputPath);
-
-    const updatedHtml = injectImageTags(html, imageUrl);
-    fs.writeFileSync(filePath, updatedHtml, 'utf8');
-
-    generated++;
-    console.log(`✓ ${slug}  [${category}]  ${name}${figure ? ' — ' + figure : ''}`);
   }
 
   console.log(`\nDone. Generated: ${generated}, skipped (already had image): ${skipped}.`);
