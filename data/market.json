@@ -1,65 +1,65 @@
 {
-  "updated": "2026-09-28",
+  "updated": "2026-09-29",
   "indices": {
     "nifty50": {
       "label": "Nifty 50",
-      "value": 22780.25,
-      "change": -360.25,
-      "changePct": -1.56
+      "value": 22716.2,
+      "change": -64.05,
+      "changePct": -0.28
     },
     "sensex": {
       "label": "Sensex",
-      "value": 72771.72,
-      "change": -1124.02,
-      "changePct": -1.52
+      "value": 72529.07,
+      "change": -1366.63,
+      "changePct": -1.85
     },
     "banknifty": {
       "label": "Bank Nifty",
-      "value": 54471.65,
-      "change": -1108.75,
-      "changePct": -1.99
+      "value": 54259.95,
+      "change": -211.7,
+      "changePct": -0.39
     },
     "niftyit": {
       "label": "Nifty IT",
-      "value": 28086.5,
-      "change": -74.4,
-      "changePct": -0.26
+      "value": 27670,
+      "change": -416.5,
+      "changePct": -1.48
     },
     "niftymidcap": {
       "label": "Nifty Midcap 100",
-      "value": 59914.2,
-      "change": -991.8,
-      "changePct": -1.63
+      "value": 59319.4,
+      "change": -594.8,
+      "changePct": -0.99
     },
     "niftyauto": {
       "label": "Nifty Auto",
-      "value": 26525.05,
-      "change": -442.85,
-      "changePct": -1.64
+      "value": 26173.35,
+      "change": -351.7,
+      "changePct": -1.33
     },
     "niftypharma": {
       "label": "Nifty Pharma",
-      "value": 26761.65,
-      "change": -241.35,
-      "changePct": -0.89
+      "value": 26933.65,
+      "change": 172,
+      "changePct": 0.64
     },
     "indiavix": {
       "label": "India VIX",
-      "value": 13.64,
-      "change": 1.48,
-      "changePct": 12.15
+      "value": 13.41,
+      "change": -0.23,
+      "changePct": -1.65
     },
     "niftyfmcg": {
       "label": "Nifty FMCG",
-      "value": 45264.35,
-      "change": -676.95,
-      "changePct": -1.47
+      "value": 44790.3,
+      "change": -474.05,
+      "changePct": -1.05
     },
     "niftyenergy": {
       "label": "Nifty Energy",
-      "value": 36693.2,
-      "change": -747.15,
-      "changePct": -2
+      "value": 36509.75,
+      "change": -183.45,
+      "changePct": -0.5
     }
   }
 }
