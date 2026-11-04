@@ -1,65 +1,65 @@
 {
-  "updated": "2026-11-03",
+  "updated": "2026-11-04",
   "indices": {
     "nifty50": {
       "label": "Nifty 50",
-      "value": 23810.85,
-      "change": 370.05,
-      "changePct": 1.58
+      "value": 23960.6,
+      "change": 149.75,
+      "changePct": 0.63
     },
     "sensex": {
       "label": "Sensex",
-      "value": 76917.85,
-      "change": 1225.07,
-      "changePct": 1.62
+      "value": 77301.4,
+      "change": 1608.6,
+      "changePct": 2.13
     },
     "banknifty": {
       "label": "Bank Nifty",
-      "value": 55540.05,
-      "change": 537.85,
-      "changePct": 0.98
+      "value": 55913.6,
+      "change": 373.55,
+      "changePct": 0.67
     },
     "niftyit": {
       "label": "Nifty IT",
-      "value": 32551.6,
-      "change": 109.1,
-      "changePct": 0.34
+      "value": 32061.9,
+      "change": -489.7,
+      "changePct": -1.5
     },
     "niftymidcap": {
       "label": "Nifty Midcap 100",
-      "value": 58596.25,
-      "change": 612.85,
-      "changePct": 1.06
+      "value": 59505.5,
+      "change": 909.25,
+      "changePct": 1.55
     },
     "niftyauto": {
       "label": "Nifty Auto",
-      "value": 26201.95,
-      "change": 440.95,
-      "changePct": 1.71
+      "value": 26504.8,
+      "change": 302.85,
+      "changePct": 1.16
     },
     "niftypharma": {
       "label": "Nifty Pharma",
-      "value": 27218.5,
-      "change": 113.5,
+      "value": 27333.45,
+      "change": 114.95,
       "changePct": 0.42
     },
     "indiavix": {
       "label": "India VIX",
-      "value": 15.72,
-      "change": 0.22,
-      "changePct": 1.44
+      "value": 15.19,
+      "change": -0.54,
+      "changePct": -3.4
     },
     "niftyfmcg": {
       "label": "Nifty FMCG",
-      "value": 45580,
-      "change": 1605.35,
-      "changePct": 3.65
+      "value": 46264.05,
+      "change": 684.05,
+      "changePct": 1.5
     },
     "niftyenergy": {
       "label": "Nifty Energy",
-      "value": 36290.7,
-      "change": -39.15,
-      "changePct": -0.11
+      "value": 37078.85,
+      "change": 788.15,
+      "changePct": 2.17
     }
   }
 }
