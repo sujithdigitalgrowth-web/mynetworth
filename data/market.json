@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-09",
+  "updated": "2026-11-10",
   "indices": {
     "nifty50": {
       "label": "Nifty 50",
@@ -10,8 +10,8 @@
     "sensex": {
       "label": "Sensex",
       "value": 81106.65,
-      "change": 107.25,
-      "changePct": 0.13
+      "change": 78.65,
+      "changePct": 0.1
     },
     "banknifty": {
       "label": "Bank Nifty",
